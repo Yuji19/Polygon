@@ -25,15 +25,20 @@ public class Anounce {
 
     @NotNull(message = "下发日期不能为空")
     private String issueDate;
+
+    @NotNull(message = "科室不能为空")
     private String editOffice;
+
+    @NotNull(message = "编辑者不能为空")
     private String editPerson;
+
     private String oldFileNo;
-    private String major;
+
     private String note;
+
+    @NotNull(message = "文档路径不能为空")
     private String filePath;
+
     private String newVersion ;
-    private String category;
-    private String plate;
-    private String status;
-    private String pdmNo;
+
 }
