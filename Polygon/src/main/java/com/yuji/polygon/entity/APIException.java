@@ -1,6 +1,4 @@
-package com.yuji.polygon.entity;/**
- * Created by Enzo Cotter on 2020/8/5.
- */
+package com.yuji.polygon.entity;
 
 /**
  * @program: polygon

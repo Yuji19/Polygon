@@ -4,14 +4,14 @@ package com.yuji.polygon.entity;
 import javax.validation.constraints.NotNull;
 
 /**
- * @ClassName Anounce
+ * @ClassName Archive
  * @Description TODO
  * @Author yuji
- * @Date 2020/8/4 17:25
+ * @Date 2020-08-04 17:25
  * @Version 1.0
  */
 
-public class Anounce {
+public class Archive {
     private int id;
 
     @NotNull(message = "文档编号不能为空")

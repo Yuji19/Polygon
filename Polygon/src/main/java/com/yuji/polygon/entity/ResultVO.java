@@ -3,7 +3,7 @@ package com.yuji.polygon.entity;/**
  */
 
 /**
- * @program: polygon
+ * @ClassName: ResultVO
  * @description:
  * @author: yuji
  * @create: 2020-08-05 22:54
