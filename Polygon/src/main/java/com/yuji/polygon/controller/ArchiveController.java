@@ -7,11 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @ClassName ArchiveController
- * @Description TODO
- * @Author yuji
- * @Date 2020-08-04 17:25
- * @Version 1.0
+ * @className: ArchiveController
+ * @description: TODO
+ * @author: yuji
+ * @create: 2020-08-04 17:25
  */
 
 @RestController

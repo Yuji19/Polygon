@@ -1,9 +1,7 @@
-package com.yuji.polygon.entity;/**
- * Created by Enzo Cotter on 2020/8/5.
- */
+package com.yuji.polygon.entity;
 
 /**
- * @ClassName: ResultVO
+ * @className: ResultVO
  * @description:
  * @author: yuji
  * @create: 2020-08-05 22:54

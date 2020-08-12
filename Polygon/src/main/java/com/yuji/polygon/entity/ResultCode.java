@@ -1,8 +1,12 @@
 package com.yuji.polygon.entity;
 
 /**
- * Created by yuji on 2020/8/5.
- */
+ * @className: ResultCode
+ * @description:
+ * @author: yuji
+ * @create: 2020-08-05 22:50
+ **/
+
 public enum ResultCode {
 
     SUCCESS(1000,"操作成功"),

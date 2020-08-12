@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 /**
- * @ClassName ResponseControllerAdvice
- * @Description TODO
- * @Author yuji
- * @Date 2020-08-06 15:05
- * @Version 1.0
+ * @className: ResponseControllerAdvice
+ * @description: 全局处理响应数据
+ * @author: yuji
+ * @create: 2020-08-06 15:05
  */
+
 @RestControllerAdvice(basePackages = "com.yuji.polygon.controller")
 public class ResponseControllerAdvice implements ResponseBodyAdvice<Object> {
     @Override

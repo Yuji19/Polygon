@@ -6,16 +6,18 @@
 
     <resultMap id="BaseResultMap" type="com.yuji.polygon.entity.Archive">
         <id column="id" property="id"  />
-        <result column="file_type" property="fileType" />
-        <result column="issue_date" property="issueDate" />
         <result column="file_no" property="fileNo" />
+        <result column="old_file_no" property="oldFileNo"  />
         <result column="file_name" property="fileName"  />
+        <result column="file_path" property="filePath" />
+        <result column="file_type" property="fileType" />
         <result column="edit_office" property="editOffice"  />
         <result column="edit_person" property="editPerson"  />
-        <result column="old_file_no" property="oldFileNo"  />
+        <result column="issue_date" property="issueDate" />
         <result column="note" property="note" />
-        <result column="file_path" property="filePath" />
         <result column="is_new" property="newVersion"   />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtCreate" />
     </resultMap>
 
 
@@ -44,31 +46,6 @@
                 </if>
                 <if test="archive.fileType != null and archive.fileType != '' ">
                     and file_type = #{archive.fileType}
-                </if>
-                <if test="archive.fileType == null or archive.fileType == '' ">
-                    <if test="tab == 'manage'">
-                        and file_type in ('管理规定','管理标准','技术标准','通知','体系规范')
-                    </if>
-                    <if test="tab == 'task'">
-                        and file_type = '任务单'
-                    </if>
-                    <if test="tab == 'work'">
-                        and file_type = '作业指导书'
-                    </if>
-                    <if test="tab == 'table'">
-                        and file_type in ('综合类','管理类','专业类','模板')
-                    </if>
-                    <if test="tab == 'redtape'">
-                        and file_type in ('红头文件','体系通报','表扬通报','质量黑榜'
-                        ,'内部通报','职能通报','其他')
-                    </if>
-                    <if test="tab == 'train'">
-                        and file_type = '培训资料'
-                    </if>
-                    <if test="tab == '分析报告'">
-                        and file_type = '分析报告'
-                    </if>
-
                 </if>
                 <if test="archive.issueDate != null and archive.issueDate != '' ">
                     and issue_date like CONCAT('%',#{archive.issueDate},'%')
@@ -102,30 +79,6 @@
                 </if>
                 <if test="archive.fileType != null and archive.fileType != '' ">
                     and file_type = #{archive.fileType}
-                </if>
-                <if test="archive.fileType == null or archive.fileType == '' ">
-                    <if test="tab == 'manage'">
-                        and file_type in ('管理规定','管理标准','技术标准','通知','体系规范')
-                    </if>
-                    <if test="tab == 'task'">
-                        and file_type = '任务单'
-                    </if>
-                    <if test="tab == 'work'">
-                        and file_type = '作业指导书'
-                    </if>
-                    <if test="tab == 'table'">
-                        and file_type in ('综合类','管理类','专业类','模板')
-                    </if>
-                    <if test="tab == 'redtape'">
-                        and file_type in ('红头文件','体系通报','表扬通报','质量黑榜'
-                        ,'内部通报','职能通报','其他')
-                    </if>
-                    <if test="tab == 'train'">
-                        and file_type = '培训资料'
-                    </if>
-                    <if test="tab == 'analysis'">
-                        and file_type = '分析报告'
-                    </if>
                 </if>
                 <if test="archive.issueDate != null and archive.issueDate != '' ">
                     and issue_date like CONCAT('%',#{archive.issueDate},'%')

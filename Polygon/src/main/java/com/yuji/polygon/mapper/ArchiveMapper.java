@@ -8,11 +8,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @InterfaceName ArchiveMapper
- * @Description 数据库操作
- * @Author yuji
- * @Date 2020-08-11 10:53
- * @Version 1.0
+ * @calssName: ArchiveMapper
+ * @description: 数据库操作
+ * @author: yuji
+ * @create: 2020-08-11 10:53
  */
 
 @Mapper

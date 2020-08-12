@@ -4,11 +4,10 @@ package com.yuji.polygon.entity;
 import javax.validation.constraints.NotNull;
 
 /**
- * @ClassName Archive
- * @Description TODO
- * @Author yuji
- * @Date 2020-08-04 17:25
- * @Version 1.0
+ * @className: Archive
+ * @description: TODO
+ * @author: yuji
+ * @create: 2020-08-04 17:25
  */
 
 public class Archive {
@@ -17,14 +16,16 @@ public class Archive {
     @NotNull(message = "文档编号不能为空")
     private String fileNo;
 
+    private String oldFileNo;
+
     @NotNull(message = "文档名称不能为空")
     private String fileName;
 
+    @NotNull(message = "文档路径不能为空")
+    private String filePath;
+
     @NotNull(message = "文档类型不能为空")
     private String fileType;
-
-    @NotNull(message = "下发日期不能为空")
-    private String issueDate;
 
     @NotNull(message = "科室不能为空")
     private String editOffice;
@@ -32,14 +33,18 @@ public class Archive {
     @NotNull(message = "编辑者不能为空")
     private String editPerson;
 
-    private String oldFileNo;
+    @NotNull(message = "下发日期不能为空")
+    private String issueDate;
 
     private String note;
 
-    @NotNull(message = "文档路径不能为空")
-    private String filePath;
-
     private String newVersion ;
+
+    //创建时间
+    private String gmtCreate;
+
+    //更新时间
+    private String gmtModified;
 
     public int getId() {
         return id;
@@ -127,5 +132,21 @@ public class Archive {
 
     public void setNewVersion(String newVersion) {
         this.newVersion = newVersion;
+    }
+
+    public String getGmtCreate() {
+        return gmtCreate;
+    }
+
+    public void setGmtCreate(String gmtCreate) {
+        this.gmtCreate = gmtCreate;
+    }
+
+    public String getGmtModified() {
+        return gmtModified;
+    }
+
+    public void setGmtModified(String gmtModified) {
+        this.gmtModified = gmtModified;
     }
 }

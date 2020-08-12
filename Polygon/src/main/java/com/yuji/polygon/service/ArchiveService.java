@@ -1,11 +1,11 @@
 package com.yuji.polygon.service;
 
 /**
- * @InterfaceName ArchiveService
- * @Description TODO
- * @Author yuji
- * @Date 2020-08-11 11:29
- * @Version 1.0
+ * @className: ArchiveService
+ * @description: TODO
+ * @author: yuji
+ * @create: 2020-08-11 11:29
  */
+
 public interface ArchiveService {
 }

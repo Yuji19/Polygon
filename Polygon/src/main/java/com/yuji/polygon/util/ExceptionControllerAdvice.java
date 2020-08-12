@@ -1,6 +1,4 @@
-package com.yuji.polygon.util;/**
- * Created by Enzo Cotter on 2020/8/5.
- */
+package com.yuji.polygon.util;
 
 import com.yuji.polygon.entity.APIException;
 import com.yuji.polygon.entity.ResultCode;
@@ -11,8 +9,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * @program: polygon
- * @description:
+ * @className: ExceptionControllerAdvice
+ * @description: 全局异常处理
  * @author: yuji
  * @create: 2020-08-05 22:49
  **/
