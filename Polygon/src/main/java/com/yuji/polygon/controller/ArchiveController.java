@@ -5,13 +5,10 @@ import com.yuji.polygon.entity.APIException;
 import com.yuji.polygon.entity.Archive;
 import com.yuji.polygon.service.impl.ArchiveServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import javax.validation.Valid;
 
-import javax.validation.constraints.NotNull;
 
 /**
  * @className: ArchiveController
@@ -36,7 +33,8 @@ public class ArchiveController {
     }
 
     @PostMapping("/add")
-    public String insert(@NotNull Archive archive,@NotNull MultipartFile file){
+    public String insert(@Valid Archive archive, MultipartFile file){
         return archiveService.insertArchive(archive, file);
     }
+
 }

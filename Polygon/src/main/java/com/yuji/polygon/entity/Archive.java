@@ -21,7 +21,6 @@ public class Archive {
     @NotNull(message = "文档名称不能为空")
     private String fileName;
 
-    @NotNull(message = "文档路径不能为空")
     private String filePath;
 
     @NotNull(message = "文档类型不能为空")

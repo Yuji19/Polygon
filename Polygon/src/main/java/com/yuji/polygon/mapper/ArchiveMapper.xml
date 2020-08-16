@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dept.filesite.mapper.AnounceMapper">
+<mapper namespace="com.yuji.polygon.mapper.ArchiveMapper">
 
     <resultMap id="BaseResultMap" type="com.yuji.polygon.entity.Archive">
         <id column="id" property="id"  />
@@ -23,13 +23,13 @@
 
 
     <insert id="insertArchive" parameterType="com.yuji.polygon.entity.Archive" useGeneratedKeys="true" keyProperty="id">
-        insert into dept_anounce set file_type=#{fileType}, issue_date=#{issueDate}, file_no=#{fileNo}, file_name=#{fileName}
-            , edit_office=#{editOffice}, edit_person=#{editPerson}, old_file_no=#{oldFileNo}, note=#{note}, file_path=#{filePath}, is_new=#{newVersion}
+        insert into poly_archive set file_no=#{fileNo}, file_name=#{fileName}, old_file_no=#{oldFileNo}, file_type=#{fileType}
+             ,file_path=#{filePath}, edit_office=#{editOffice}, edit_person=#{editPerson}, issue_date=#{issueDate}, note=#{note}, is_new=#{newVersion}
     </insert>
 
 
     <select id="countTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
-        select count(*) from dept_anounce
+        select count(*) from poly_archive
         <where>
             <if test="archive != null ">
                 <if test="archive.fileNo != null and archive.fileNo != '' ">
@@ -62,7 +62,7 @@
     
 
     <select id="listArchives" parameterType="java.util.Map"  resultMap="BaseResultMap">
-        select * from dept_anounce
+        select * from poly_archive
         <where>
             <if test="archive != null ">
                 <if test="archive.fileNo != null and archive.fileNo != '' ">
@@ -96,7 +96,7 @@
 
 
     <update id="updateArchive" parameterType="com.yuji.polygon.entity.Archive" >
-        update dept_anounce
+        update poly_archive
         <set>
             <if test="fileType != null and fileType != '' ">
                 file_type = #{fileType},
@@ -133,17 +133,17 @@
     </update>
 
     <delete id="deleteArchiveById">
-        delete from dept_anounce where id in 
+        delete from poly_archive where id in
         <foreach collection="aids" item="aid" open="(" close=")" separator=",">
             #{aid}
         </foreach>
     </delete>
 
     <select id="findArchiveById" resultMap="BaseResultMap">
-        select * from dept_anounce where id = #{id}
+        select * from poly_archive where id = #{id}
     </select>
     
-    <select id="findArchiveByFileNo" resultMap="BaseResultMap">
-        select * from dept_anounce where file_no = #{fileNo}
+    <select id="findArchiveByFileNo" resultType="com.yuji.polygon.entity.Archive">
+        select * from poly_archive where file_no = #{fileNo}
     </select>
 </mapper>
