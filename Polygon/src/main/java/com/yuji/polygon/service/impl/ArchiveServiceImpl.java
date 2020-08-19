@@ -2,17 +2,15 @@ package com.yuji.polygon.service.impl;
 
 import com.yuji.polygon.entity.APIException;
 import com.yuji.polygon.entity.Archive;
-import com.yuji.polygon.entity.ResultCode;
 import com.yuji.polygon.mapper.ArchiveMapper;
 import com.yuji.polygon.service.ArchiveService;
 import com.yuji.polygon.util.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.env.EnvironmentPostProcessor;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
 /**
@@ -31,6 +29,7 @@ public class ArchiveServiceImpl implements ArchiveService {
     @Value("${custom.path}")
     String customPath;
 
+    @Override
     public String insertArchive(Archive archive, MultipartFile file){
         Archive oldArchive = archiveMapper.findArchiveByFileNo(archive.getFileNo());
         Optional.ofNullable(oldArchive)
@@ -52,5 +51,15 @@ public class ArchiveServiceImpl implements ArchiveService {
             throw new APIException("添加文档失败");
         }
 
+    }
+
+    @Override
+    public String downloadArchive(String fileNo, HttpServletResponse response) {
+        Optional<Archive> optional = Optional.ofNullable(archiveMapper.findArchiveByFileNo(fileNo));
+        if (!optional.isPresent()){
+            throw new APIException("文档不存在");
+        }
+        FileUtils.getInstance().download(optional.get().getFilePath(), response);
+        return "文档下载成功";
     }
 }

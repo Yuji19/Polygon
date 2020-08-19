@@ -1,5 +1,10 @@
 package com.yuji.polygon.service;
 
+import com.yuji.polygon.entity.Archive;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * @className: ArchiveService
  * @description: TODO
@@ -8,4 +13,7 @@ package com.yuji.polygon.service;
  */
 
 public interface ArchiveService {
+    public String insertArchive(Archive archive, MultipartFile file);
+
+    public String downloadArchive(String fileNo, HttpServletResponse response);
 }

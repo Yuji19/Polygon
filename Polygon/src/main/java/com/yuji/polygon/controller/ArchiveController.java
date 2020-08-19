@@ -7,6 +7,7 @@ import com.yuji.polygon.service.impl.ArchiveServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 
@@ -35,6 +36,11 @@ public class ArchiveController {
     @PostMapping("/add")
     public String insert(@Valid Archive archive, MultipartFile file){
         return archiveService.insertArchive(archive, file);
+    }
+
+    @GetMapping("/download")
+    public String download(String fileNo, HttpServletResponse response){
+        return archiveService.downloadArchive(fileNo, response);
     }
 
 }
