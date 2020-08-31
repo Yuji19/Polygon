@@ -2,15 +2,19 @@ package com.yuji.polygon.service.impl;
 
 import com.yuji.polygon.entity.APIException;
 import com.yuji.polygon.entity.Archive;
+import com.yuji.polygon.entity.Page;
 import com.yuji.polygon.mapper.ArchiveMapper;
 import com.yuji.polygon.service.ArchiveService;
-import com.yuji.polygon.util.FileUtils;
+import com.yuji.polygon.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -43,7 +47,7 @@ public class ArchiveServiceImpl implements ArchiveService {
         String fileNo = archive.getFileNo();
         String fileName = archive.getFileName();
         String path =customPath+"/"+year+"/"+fileType+"/"+fileNo+"/"+fileName;
-        String newPath = FileUtils.getInstance().save(path,file);
+        String newPath = FileUtil.getInstance().save(path,file);
         archive.setFilePath(newPath);
         if(Optional.ofNullable(archiveMapper.insertArchive(archive)).isPresent()){
             return "添加文档成功";
@@ -59,7 +63,73 @@ public class ArchiveServiceImpl implements ArchiveService {
         if (!optional.isPresent()){
             throw new APIException("文档不存在");
         }
-        FileUtils.getInstance().download(optional.get().getFilePath(), response);
+        FileUtil.getInstance().download(optional.get().getFilePath(), response);
         return "文档下载成功";
+    }
+
+    @Override
+    public Page<Archive> ListArchive(Archive archive, Integer pageNum, Integer pageSize) {
+        Map<String,Object> map = new HashMap<>();
+        map.put("archive",archive);
+        map.put("startIndex",(pageNum-1)*pageSize);
+        map.put("pageSize",pageSize);
+        //结果集
+        List<Archive> records = archiveMapper.listArchives(map);
+        //总记录数
+        int totalCount = archiveMapper.countTotal(map);
+        return new Page(pageNum,totalCount,records);
+    }
+
+    @Override
+    public String updateArchiive(Archive archive) {
+        //若发放日期年份、文档类型更改
+        Archive oldArchive = archiveMapper.findArchiveById(archive.getId());
+        String oldYear = oldArchive.getIssueDate().substring(0,4);
+        String newYear = archive.getIssueDate().substring(0,4);
+        String oldType = oldArchive.getFileType();
+        String newType = archive.getFileType();
+        String fileNo_original = oldArchive.getFileNo();
+        String fileNo = archive.getFileNo();
+        String fileName_original = oldArchive.getFileName();
+        String fileName = archive.getFileName();
+        String status = archive.getStatus();
+        if(!oldYear.equals(newYear) || !oldType.equals(newType) ||
+                !fileName_original.equals(fileName) ||
+                !fileNo_original.equals(fileNo)|| "替代报废".equals(status)){
+            String oldPath = oldArchive.getFilePath();
+            String originalFilename = oldPath.substring(oldPath.lastIndexOf("/")+1);
+
+            //文件路径更改
+            String newPath = customPath+newYear+"/"+newType+"/"+originalFilename;
+            boolean repetition = !fileName_original.equals(fileName) || !fileNo_original.equals(fileNo);
+            boolean result = false;
+            if ("替代报废".equals(status)){
+                newPath = customPath+newYear+"/替代报废/"+originalFilename;
+                //替代报废，即使新版文档名称与旧版不一样，也不修改旧版的名称
+                archive.setFileName(oldArchive.getFileName());
+                result = FileUtil.getInstance().moveFolder(oldPath,newPath);
+            }else {
+                //文档编号或文档名称更改，重命名文件
+                if(repetition){
+                    String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
+                    String newName = fileNo+" "+fileName;
+                    newPath = customPath+"/"+newYear+"/"+newType+"/"+newName+suffix;
+                    result = FileUtil.getInstance().renameFile(oldPath,newName);
+                }else{
+
+                    result = FileUtil.getInstance().copyFile(oldPath,newPath);
+                }
+            }
+
+            if(result){
+                archive.setFilePath(newPath);
+            }else{
+                throw new APIException("文件操作失败");
+            }
+
+
+        }
+        //update操作返回受影响的行数
+        return archiveMapper.updateArchive(archive) == 0 ? "更新失败" : "更新成功";
     }
 }

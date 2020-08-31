@@ -14,20 +14,20 @@ import java.net.URLEncoder;
  * @create: 2020-08-16 16:07
  **/
 
-public class FileUtils {
+public class FileUtil {
 
-    private static volatile FileUtils fileUtils = null;
+    private static volatile FileUtil fileUtil = null;
 
     //单例
-    public static FileUtils getInstance(){
-        if (fileUtils == null){
-            synchronized (FileUtils.class){
-                if (fileUtils == null){
-                    fileUtils = new FileUtils();
+    public static FileUtil getInstance(){
+        if (fileUtil == null){
+            synchronized (FileUtil.class){
+                if (fileUtil == null){
+                    fileUtil = new FileUtil();
                 }
             }
         }
-        return fileUtils;
+        return fileUtil;
     }
 
     public String save(String path, MultipartFile file){

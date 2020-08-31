@@ -1,8 +1,8 @@
 package com.yuji.polygon.controller;
 
 
-import com.yuji.polygon.entity.APIException;
 import com.yuji.polygon.entity.Archive;
+import com.yuji.polygon.entity.Page;
 import com.yuji.polygon.service.impl.ArchiveServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,12 +25,9 @@ public class ArchiveController {
     @Autowired
     ArchiveServiceImpl archiveService;
 
-    @GetMapping("/all")
-    public String listArchives(Integer currentPageNum, Integer pageSize){
-        //Archive archive = new Archive();
-        //archive.setFileName("ceshi");
-        //return archive;
-        throw new APIException("测试抛出异常");
+    @PostMapping("/all")
+    public Page<Archive> listArchive(@Valid Archive archive, Integer pageNum, Integer pageSize){
+        return archiveService.ListArchive(archive,pageNum,pageSize);
     }
 
     @PostMapping("/add")
@@ -41,6 +38,11 @@ public class ArchiveController {
     @GetMapping("/download")
     public String download(String fileNo, HttpServletResponse response){
         return archiveService.downloadArchive(fileNo, response);
+    }
+
+    @PostMapping("/update")
+    public String update(Archive archive){
+        return archiveService.updateArchiive(archive);
     }
 
 }

@@ -2,6 +2,7 @@ package com.yuji.polygon.entity;
 
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 
 /**
@@ -14,27 +15,29 @@ import javax.validation.constraints.NotEmpty;
 public class Archive {
     private int id;
 
-    @NotEmpty(message = "文档编号不能为空")
+    @NotNull(message = "文档编号不能为空")
     private String fileNo;
 
     private String oldFileNo;
 
-    @NotEmpty(message = "文档名称不能为空")
+    @NotNull(message = "文档名称不能为空")
     private String fileName;
 
     private String filePath;
 
-    @NotEmpty(message = "文档类型不能为空")
+    @NotNull(message = "文档类型不能为空")
     private String fileType;
 
-    @NotEmpty(message = "编辑科室不能为空")
+    @NotNull(message = "编辑科室不能为空")
     private String editOffice;
 
-    @NotEmpty(message = "编辑者不能为空")
+    @NotNull(message = "编辑者不能为空")
     private String editPerson;
 
-    @NotEmpty(message = "下发日期不能为空")
+    @NotNull(message = "下发日期不能为空")
     private String issueDate;
+
+    private String status;
 
     private String note;
 
@@ -108,6 +111,14 @@ public class Archive {
 
     public void setOldFileNo(String oldFileNo) {
         this.oldFileNo = oldFileNo;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getNote() {

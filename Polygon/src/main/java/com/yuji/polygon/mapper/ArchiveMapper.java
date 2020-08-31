@@ -20,7 +20,7 @@ public interface ArchiveMapper {
 
     int countTotal(Map<String, Object> map);
 
-    List<Archive> listArchive(Map<String, Object> map);
+    List<Archive> listArchives(Map<String, Object> map);
 
     int updateArchive(Archive archive);
 
