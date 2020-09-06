@@ -17,7 +17,7 @@
         <result column="note" property="note" />
         <result column="is_new" property="newVersion"   />
         <result column="gmt_create" property="gmtCreate" />
-        <result column="gmt_modified" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
     </resultMap>
 
 
@@ -143,7 +143,7 @@
         select * from poly_archive where id = #{id}
     </select>
     
-    <select id="findArchiveByFileNo" resultType="com.yuji.polygon.entity.Archive">
+    <select id="findArchiveByFileNo" resultMap="BaseResultMap">
         select * from poly_archive where file_no = #{fileNo}
     </select>
 </mapper>

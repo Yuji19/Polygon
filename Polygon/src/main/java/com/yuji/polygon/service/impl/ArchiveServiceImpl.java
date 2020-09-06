@@ -81,7 +81,7 @@ public class ArchiveServiceImpl implements ArchiveService {
     }
 
     @Override
-    public String updateArchiive(Archive archive) {
+    public String updateArchive(Archive archive) {
         //若发放日期年份、文档类型更改
         Archive oldArchive = archiveMapper.findArchiveById(archive.getId());
         String oldYear = oldArchive.getIssueDate().substring(0,4);
@@ -131,5 +131,10 @@ public class ArchiveServiceImpl implements ArchiveService {
         }
         //update操作返回受影响的行数
         return archiveMapper.updateArchive(archive) == 0 ? "更新失败" : "更新成功";
+    }
+
+    @Override
+    public String deleteArchive(Long[] aids) {
+        return archiveMapper.deleteArchiveById(aids) == 0 ? "删除失败" : "删除成功";
     }
 }

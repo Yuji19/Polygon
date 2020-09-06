@@ -25,8 +25,8 @@ public class ArchiveController {
     @Autowired
     ArchiveServiceImpl archiveService;
 
-    @PostMapping("/all")
-    public Page<Archive> listArchive(@Valid Archive archive, Integer pageNum, Integer pageSize){
+    @PostMapping("/query")
+    public Page<Archive> listArchive(Archive archive, Integer pageNum, Integer pageSize){
         return archiveService.ListArchive(archive,pageNum,pageSize);
     }
 
@@ -41,8 +41,14 @@ public class ArchiveController {
     }
 
     @PostMapping("/update")
-    public String update(Archive archive){
-        return archiveService.updateArchiive(archive);
+    public String update(@RequestBody @Valid Archive archive){
+        return archiveService.updateArchive(archive);
+    }
+
+    @GetMapping("/delete")
+    public String delete(Long[] aids){
+        System.out.println(aids.length);
+        return archiveService.deleteArchive(aids);
     }
 
 }

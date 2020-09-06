@@ -20,5 +20,7 @@ public interface ArchiveService {
 
     public Page<Archive> ListArchive(Archive archive, Integer pageNum, Integer pageSize);
 
-    public String updateArchiive(Archive archive);
+    public String updateArchive(Archive archive);
+
+    public String deleteArchive(Long[] aids);
 }
