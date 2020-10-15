@@ -16,8 +16,6 @@
         <result column="issue_date" property="issueDate" />
         <result column="note" property="note" />
         <result column="is_new" property="newVersion"   />
-        <result column="gmt_create" property="gmtCreate" />
-        <result column="gmt_modified" property="gmtModified" />
     </resultMap>
 
 
@@ -33,22 +31,22 @@
         <where>
             <if test="archive != null ">
                 <if test="archive.fileNo != null and archive.fileNo != '' ">
-                    file_no like CONCAT('%',#{archive.fileNo},'%')
+                    file_no like CONCAT(#{archive.fileNo},'%')
                 </if>
                 <if test="archive.fileName != null and archive.fileName != '' ">
-                    and file_name like CONCAT('%',#{archive.fileName},'%')
+                    and file_name like CONCAT(#{archive.fileName},'%')
                 </if>
                 <if test="archive.editOffice != null and archive.editOffice != '' ">
                     and edit_office = #{archive.editOffice}
                 </if>
                 <if test="archive.editPerson != null and archive.editPerson != '' ">
-                    and edit_person like CONCAT('%',#{archive.editPerson},'%')
+                    and edit_person like CONCAT(#{archive.editPerson},'%')
                 </if>
                 <if test="archive.fileType != null and archive.fileType != '' ">
                     and file_type = #{archive.fileType}
                 </if>
                 <if test="archive.issueDate != null and archive.issueDate != '' ">
-                    and issue_date like CONCAT('%',#{archive.issueDate},'%')
+                    and issue_date like CONCAT(#{archive.issueDate},'%')
                 </if>
                 <if test="archive.newVersion != null and archive.newVersion != '' ">
                     and is_new = #{archive.newVersion}
@@ -66,22 +64,22 @@
         <where>
             <if test="archive != null ">
                 <if test="archive.fileNo != null and archive.fileNo != '' ">
-                    and file_no like CONCAT('%',#{archive.fileNo},'%')
+                    and file_no like CONCAT(#{archive.fileNo},'%')
                 </if>
                 <if test="archive.fileName != null and archive.fileName != '' ">
-                    and file_name like CONCAT('%',#{archive.fileName},'%')
+                    and file_name like CONCAT(#{archive.fileName},'%')
                 </if>
                 <if test="archive.editOffice != null and archive.editOffice != '' ">
                     and edit_office = #{archive.editOffice}
                 </if>
                 <if test="archive.editPerson != null and archive.editPerson != '' ">
-                    and edit_person like CONCAT('%',#{archive.editPerson},'%')
+                    and edit_person like CONCAT(#{archive.editPerson},'%')
                 </if>
                 <if test="archive.fileType != null and archive.fileType != '' ">
                     and file_type = #{archive.fileType}
                 </if>
                 <if test="archive.issueDate != null and archive.issueDate != '' ">
-                    and issue_date like CONCAT('%',#{archive.issueDate},'%')
+                    and issue_date like CONCAT(#{archive.issueDate},'%')
                 </if>
 
                 <if test="archive.newVersion != null and archive.newVersion != '' ">

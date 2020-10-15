@@ -1,8 +1,6 @@
 package com.yuji.polygon.service.impl;
 
-import com.yuji.polygon.entity.APIException;
-import com.yuji.polygon.entity.Archive;
-import com.yuji.polygon.entity.Page;
+import com.yuji.polygon.entity.*;
 import com.yuji.polygon.mapper.ArchiveMapper;
 import com.yuji.polygon.service.ArchiveService;
 import com.yuji.polygon.util.FileUtil;
@@ -34,7 +32,7 @@ public class ArchiveServiceImpl implements ArchiveService {
     String customPath;
 
     @Override
-    public String insertArchive(Archive archive, MultipartFile file){
+    public ResultVO insertArchive(Archive archive, MultipartFile file){
         Archive oldArchive = archiveMapper.findArchiveByFileNo(archive.getFileNo());
         Optional.ofNullable(oldArchive)
                 .ifPresent(o -> {
@@ -50,21 +48,21 @@ public class ArchiveServiceImpl implements ArchiveService {
         String newPath = FileUtil.getInstance().save(path,file);
         archive.setFilePath(newPath);
         if(Optional.ofNullable(archiveMapper.insertArchive(archive)).isPresent()){
-            return "添加文档成功";
+            return new ResultVO("添加文档成功");
         }else {
-            throw new APIException("添加文档失败");
+            return new ResultVO(ResultCode.FAILED,"添加文档失败");
         }
 
     }
 
     @Override
-    public String downloadArchive(String fileNo, HttpServletResponse response) {
+    public ResultVO downloadArchive(String fileNo, HttpServletResponse response) {
         Optional<Archive> optional = Optional.ofNullable(archiveMapper.findArchiveByFileNo(fileNo));
         if (!optional.isPresent()){
             throw new APIException("文档不存在");
         }
         FileUtil.getInstance().download(optional.get().getFilePath(), response);
-        return "文档下载成功";
+        return new ResultVO("文档下载成功");
     }
 
     @Override
@@ -81,7 +79,7 @@ public class ArchiveServiceImpl implements ArchiveService {
     }
 
     @Override
-    public String updateArchive(Archive archive) {
+    public ResultVO updateArchive(Archive archive) {
         //若发放日期年份、文档类型更改
         Archive oldArchive = archiveMapper.findArchiveById(archive.getId());
         String oldYear = oldArchive.getIssueDate().substring(0,4);
@@ -130,11 +128,11 @@ public class ArchiveServiceImpl implements ArchiveService {
 
         }
         //update操作返回受影响的行数
-        return archiveMapper.updateArchive(archive) == 0 ? "更新失败" : "更新成功";
+        return archiveMapper.updateArchive(archive) == 0 ? new ResultVO(ResultCode.FAILED,"更新失败") : new ResultVO("更新成功");
     }
 
     @Override
-    public String deleteArchive(Long[] aids) {
-        return archiveMapper.deleteArchiveById(aids) == 0 ? "删除失败" : "删除成功";
+    public ResultVO deleteArchive(Long[] aids) {
+        return archiveMapper.deleteArchiveById(aids) == 0 ? new ResultVO(ResultCode.FAILED,"删除失败") : new ResultVO("删除成功");
     }
 }

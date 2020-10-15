@@ -2,6 +2,7 @@ package com.yuji.polygon.service;
 
 import com.yuji.polygon.entity.Archive;
 import com.yuji.polygon.entity.Page;
+import com.yuji.polygon.entity.ResultVO;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -14,13 +15,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 public interface ArchiveService {
-    public String insertArchive(Archive archive, MultipartFile file);
+    public ResultVO insertArchive(Archive archive, MultipartFile file);
 
-    public String downloadArchive(String fileNo, HttpServletResponse response);
+    public ResultVO downloadArchive(String fileNo, HttpServletResponse response);
 
     public Page<Archive> ListArchive(Archive archive, Integer pageNum, Integer pageSize);
 
-    public String updateArchive(Archive archive);
+    public ResultVO updateArchive(Archive archive);
 
-    public String deleteArchive(Long[] aids);
+    public ResultVO deleteArchive(Long[] aids);
 }

@@ -1,8 +1,8 @@
 package com.yuji.polygon.entity;
 
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 
 /**
@@ -35,7 +35,7 @@ public class Archive {
     private String editPerson;
 
     @NotNull(message = "下发日期不能为空")
-    private String issueDate;
+    private Date issueDate;
 
     private String status;
 
@@ -43,11 +43,6 @@ public class Archive {
 
     private String newVersion ;
 
-    //创建时间
-    private String gmtCreate;
-
-    //更新时间
-    private String gmtModified;
 
     public int getId() {
         return id;
@@ -81,11 +76,11 @@ public class Archive {
         this.fileType = fileType;
     }
 
-    public String getIssueDate() {
+    public Date getIssueDate() {
         return issueDate;
     }
 
-    public void setIssueDate(String issueDate) {
+    public void setIssueDate(Date issueDate) {
         this.issueDate = issueDate;
     }
 
@@ -145,19 +140,5 @@ public class Archive {
         this.newVersion = newVersion;
     }
 
-    public String getGmtCreate() {
-        return gmtCreate;
-    }
 
-    public void setGmtCreate(String gmtCreate) {
-        this.gmtCreate = gmtCreate;
-    }
-
-    public String getGmtModified() {
-        return gmtModified;
-    }
-
-    public void setGmtModified(String gmtModified) {
-        this.gmtModified = gmtModified;
-    }
 }

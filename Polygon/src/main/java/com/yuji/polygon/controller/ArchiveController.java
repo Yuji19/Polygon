@@ -3,6 +3,7 @@ package com.yuji.polygon.controller;
 
 import com.yuji.polygon.entity.Archive;
 import com.yuji.polygon.entity.Page;
+import com.yuji.polygon.entity.ResultVO;
 import com.yuji.polygon.service.impl.ArchiveServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -31,23 +32,22 @@ public class ArchiveController {
     }
 
     @PostMapping("/add")
-    public String insert(@Valid Archive archive, MultipartFile file){
+    public ResultVO insert(@Valid Archive archive, MultipartFile file){
         return archiveService.insertArchive(archive, file);
     }
 
     @GetMapping("/download")
-    public String download(String fileNo, HttpServletResponse response){
+    public ResultVO download(String fileNo, HttpServletResponse response){
         return archiveService.downloadArchive(fileNo, response);
     }
 
-    @PostMapping("/update")
-    public String update(@RequestBody @Valid Archive archive){
+    @PutMapping("/update")
+    public ResultVO update(@RequestBody @Valid Archive archive){
         return archiveService.updateArchive(archive);
     }
 
     @GetMapping("/delete")
-    public String delete(Long[] aids){
-        System.out.println(aids.length);
+    public ResultVO delete(Long[] aids){
         return archiveService.deleteArchive(aids);
     }
 
