@@ -1,4 +1,4 @@
-package com.yuji.polygon.advice;
+package com.yuji.polygon.config;
 
 import com.yuji.polygon.entity.APIException;
 import com.yuji.polygon.entity.ResultCode;

@@ -1,4 +1,4 @@
-package com.yuji.polygon.conterver;
+package com.yuji.polygon.config;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ import java.util.Date;
  **/
 
 @Component
-public class String2DateConterver implements Converter<String, Date> {
+public class StringToDateConterver implements Converter<String, Date> {
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
