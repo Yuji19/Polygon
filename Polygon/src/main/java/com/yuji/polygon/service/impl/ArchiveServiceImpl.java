@@ -10,10 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * @className: ArchiveServiceImpl
@@ -39,8 +36,10 @@ public class ArchiveServiceImpl implements ArchiveService {
                     throw new APIException("文档编号已存在");
                 });
 
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(archive.getIssueDate());
         //保存文件
-        String year = archive.getIssueDate().substring(0,4);
+        String year = String.valueOf(calendar.get(Calendar.YEAR));
         String fileType = archive.getFileType();
         String fileNo = archive.getFileNo();
         String fileName = archive.getFileName();
@@ -80,10 +79,16 @@ public class ArchiveServiceImpl implements ArchiveService {
 
     @Override
     public ResultVO updateArchive(Archive archive) {
+
         //若发放日期年份、文档类型更改
         Archive oldArchive = archiveMapper.findArchiveById(archive.getId());
-        String oldYear = oldArchive.getIssueDate().substring(0,4);
-        String newYear = archive.getIssueDate().substring(0,4);
+        Calendar oldCalendar = Calendar.getInstance();
+        oldCalendar.setTime(oldArchive.getIssueDate());
+        String oldYear = String.valueOf(oldCalendar.get(Calendar.YEAR));
+
+        Calendar newCalendar = Calendar.getInstance();
+        newCalendar.setTime(archive.getIssueDate());
+        String newYear = String.valueOf(newCalendar.get(Calendar.YEAR));
         String oldType = oldArchive.getFileType();
         String newType = archive.getFileType();
         String fileNo_original = oldArchive.getFileNo();

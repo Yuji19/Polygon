@@ -15,13 +15,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 public interface ArchiveService {
-    public ResultVO insertArchive(Archive archive, MultipartFile file);
+    ResultVO insertArchive(Archive archive, MultipartFile file);
 
-    public ResultVO downloadArchive(String fileNo, HttpServletResponse response);
+    ResultVO downloadArchive(String fileNo, HttpServletResponse response);
 
-    public Page<Archive> ListArchive(Archive archive, Integer pageNum, Integer pageSize);
+    Page<Archive> ListArchive(Archive archive, Integer pageNum, Integer pageSize);
 
-    public ResultVO updateArchive(Archive archive);
+    ResultVO updateArchive(Archive archive);
 
-    public ResultVO deleteArchive(Long[] aids);
+    ResultVO deleteArchive(Long[] aids);
 }
