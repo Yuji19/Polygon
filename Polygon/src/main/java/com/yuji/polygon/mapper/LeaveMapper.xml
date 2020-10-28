@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuji.polygon.mapper.LeaveMapper">
+
+    <resultMap id="BaseResultMap" type="com.yuji.polygon.entity.Leave">
+        <id column="id" property="id"  />
+        <result column="employee_no" property="employeeNo" />
+        <result column="employee_name" property="employeeName"  />
+        <result column="leave_type" property="leaveType"  />
+        <result column="leave_reason" property="leaveReason" />
+        <result column="start_date" property="startDate" />
+        <result column="end_date" property="endDate"  />
+        <result column="flow_no" property="flowNo"  />
+        <result column="current_node" property="currentNode" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
+
+    </resultMap>
+
+
+
+    <insert id="insertLeave" parameterType="com.yuji.polygon.entity.Leave" useGeneratedKeys="true" keyProperty="id">
+        insert into poly_leave set employee_no=#{employeeNo}, employee_name=#{employeeName}, leave_type=#{LeaveType}, leave_reason=#{leaveReason}
+             ,start_date=#{startDate}, end_date=#{endDate}, flow_no=#{flowNo}, current_node=#{currentNode}, gmt_create=#{gmtCreate}, gmt_modified=#{gmtModified}
+    </insert>
+
+
+
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuji.polygon.mapper.AuditMapper">
+
+    <resultMap id="BaseResultMap" type="com.yuji.polygon.entity.Audit">
+        <id column="id" property="id"  />
+        <result column="business_no" property="businessNo" />
+        <result column="flow_node_no" property="flowNodeNo"  />
+        <result column="employee_no" property="employeeNo"  />
+        <result column="employee_name" property="employeeName" />
+        <result column="audit_info" property="auditInfo" />
+        <result column="audit_date" property="auditDate" />
+
+
+    </resultMap>
+
+
+
+    <insert id="insertAudit" parameterType="com.yuji.polygon.entity.Audit" useGeneratedKeys="true" keyProperty="id">
+        insert into poly_audit set business_no=#{businessNo}, flow_node_no=#{flowNodeNo}, employee_no=#{emplpyeeNo}, employee_name=#{employeeName}
+             ,audit_info=#{auditInfo}, audit_date=#{auditDate}
+    </insert>
+
+
+
+</mapper>

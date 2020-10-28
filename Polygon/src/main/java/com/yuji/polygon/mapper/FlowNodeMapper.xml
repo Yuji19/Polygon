@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuji.polygon.mapper.FlowNodeMapper">
+
+    <resultMap id="BaseResultMap" type="com.yuji.polygon.entity.FlowNode">
+        <id column="id" property="id"  />
+        <result column="flow_no" property="flowNo" />
+        <result column="flow_node_name" property="flowNodeName"  />
+        <result column="flow_node_role" property="flowNodeRole" />
+        <result column="remark" property="remark"  />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
+
+
+    </resultMap>
+
+
+
+    <insert id="insertFlowNode" parameterType="com.yuji.polygon.entity.FlowNode" useGeneratedKeys="true" keyProperty="id">
+        insert into poly_flow_node set flow_no=#{flowNo}, flow_node_name=#{flowNodeName}, flow_node_role=#{flowNodeRole} ,
+             remark=#{remark}, gmt_create=#{gmtCreate}, gmt_modified=#{gmtModified}
+    </insert>
+
+
+
+</mapper>

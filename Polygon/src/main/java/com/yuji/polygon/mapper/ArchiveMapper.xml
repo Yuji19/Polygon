@@ -14,6 +14,7 @@
         <result column="edit_office" property="editOffice"  />
         <result column="edit_person" property="editPerson"  />
         <result column="issue_date" property="issueDate" />
+		<result column="status" property="status" />
         <result column="note" property="note" />
         <result column="is_new" property="newVersion"   />
     </resultMap>
@@ -22,7 +23,7 @@
 
     <insert id="insertArchive" parameterType="com.yuji.polygon.entity.Archive" useGeneratedKeys="true" keyProperty="id">
         insert into poly_archive set file_no=#{fileNo}, file_name=#{fileName}, old_file_no=#{oldFileNo}, file_type=#{fileType}
-             ,file_path=#{filePath}, edit_office=#{editOffice}, edit_person=#{editPerson}, issue_date=#{issueDate}, note=#{note}, is_new=#{newVersion}
+             ,file_path=#{filePath}, edit_office=#{editOffice}, edit_person=#{editPerson}, issue_date=#{issueDate}, status=#{status} note=#{note}, is_new=#{newVersion}
     </insert>
 
 
@@ -44,6 +45,9 @@
                 </if>
                 <if test="archive.fileType != null and archive.fileType != '' ">
                     and file_type = #{archive.fileType}
+                </if>
+                <if test="archive.status != null and archive.issueDate != '' ">
+                    and status = #{archive.status}
                 </if>
                 <if test="archive.issueDate != null and archive.issueDate != '' ">
                     and issue_date like CONCAT(#{archive.issueDate},'%')
@@ -77,6 +81,9 @@
                 </if>
                 <if test="archive.fileType != null and archive.fileType != '' ">
                     and file_type = #{archive.fileType}
+                </if>
+                <if test="archive.status != null and archive.issueDate != '' ">
+                    and status = #{archive.status}
                 </if>
                 <if test="archive.issueDate != null and archive.issueDate != '' ">
                     and issue_date like CONCAT(#{archive.issueDate},'%')
@@ -116,6 +123,9 @@
             </if>
             <if test="oldFileNo != null and oldFileNo != '' ">
                 old_file_no = #{oldFileNo},
+            </if>
+            <if test="archive.status != null and archive.issueDate != '' ">
+                and status = #{archive.status}
             </if>
             <if test="note != null and note != '' ">
                 note = #{note},
