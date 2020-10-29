@@ -19,7 +19,7 @@
 
 
     <insert id="insertAudit" parameterType="com.yuji.polygon.entity.Audit" useGeneratedKeys="true" keyProperty="id">
-        insert into poly_audit set business_no=#{businessNo}, flow_node_no=#{flowNodeNo}, employee_no=#{emplpyeeNo}, employee_name=#{employeeName}
+        insert into poly_audit set business_no=#{businessNo}, flow_node_no=#{flowNodeNo}, employee_no=#{employeeNo}, employee_name=#{employeeName}
              ,audit_info=#{auditInfo}, audit_date=#{auditDate}
     </insert>
 

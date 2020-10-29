@@ -23,6 +23,6 @@ public class FlowServiceImpl implements FlowService {
 
     @Override
     public ResultVO insertFlow(Flow flow) {
-        return (flowMapper.insertFlow(flow) > 0 ? new ResultVO("添加成功") : new ResultVO(ResultCode.FAILED,"添加失败"));
+        return (flowMapper.insertFlow(flow) > 0 ? new ResultVO("创建流程成功") : new ResultVO(ResultCode.FAILED,"创建流程失败"));
     }
 }

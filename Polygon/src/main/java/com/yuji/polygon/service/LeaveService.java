@@ -12,5 +12,6 @@ import com.yuji.polygon.entity.ResultVO;
  */
 public interface LeaveService {
 
-    ResultVO insertLeave(Leave leave, Audit audit);
+
+    ResultVO addLeaveFlow(Leave leave, Audit audit);
 }

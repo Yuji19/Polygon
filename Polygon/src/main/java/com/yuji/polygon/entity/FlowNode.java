@@ -16,9 +16,9 @@ public class FlowNode {
 
     private String flowNodeName;
 
-    private int flowNodeRole;
+    private String employeeNo;
 
-    private String remark;
+    private String employeeName;
 
     private Date gmtCreate;
 
@@ -48,20 +48,20 @@ public class FlowNode {
         this.flowNodeName = flowNodeName;
     }
 
-    public int getFlowNodeRole() {
-        return flowNodeRole;
+    public String getEmployeeNo() {
+        return employeeNo;
     }
 
-    public void setFlowNodeRole(int flowNodeRole) {
-        this.flowNodeRole = flowNodeRole;
+    public void setEmployeeNo(String employeeNo) {
+        this.employeeNo = employeeNo;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getEmployeeName() {
+        return employeeName;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
     }
 
     public Date getGmtCreate() {

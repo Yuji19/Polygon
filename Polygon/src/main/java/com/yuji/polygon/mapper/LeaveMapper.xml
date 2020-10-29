@@ -22,7 +22,7 @@
 
 
     <insert id="insertLeave" parameterType="com.yuji.polygon.entity.Leave" useGeneratedKeys="true" keyProperty="id">
-        insert into poly_leave set employee_no=#{employeeNo}, employee_name=#{employeeName}, leave_type=#{LeaveType}, leave_reason=#{leaveReason}
+        insert into poly_leave set employee_no=#{employeeNo}, employee_name=#{employeeName}, leave_type=#{leaveType}, leave_reason=#{leaveReason}
              ,start_date=#{startDate}, end_date=#{endDate}, flow_no=#{flowNo}, current_node=#{currentNode}, gmt_create=#{gmtCreate}, gmt_modified=#{gmtModified}
     </insert>
 

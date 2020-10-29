@@ -23,6 +23,6 @@ public class AuditServieImpl implements AuditService {
 
     @Override
     public ResultVO insertAudit(Audit audit) {
-        return (auditMapper.insertAudit(audit) > 0 ? new ResultVO("添加成功") : new ResultVO(ResultCode.FAILED,"添加失败"));
+        return (auditMapper.insertAudit(audit) > 0 ? new ResultVO("创建审批记录成功") : new ResultVO(ResultCode.FAILED,"创建审批记录失败"));
     }
 }

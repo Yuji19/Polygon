@@ -23,6 +23,6 @@ public class FlowLineServiceImpl implements FlowLineService {
 
     @Override
     public ResultVO insertFlowLine(FlowLine flowLine) {
-        return (flowLineMapper.insertFlowLine(flowLine) > 0 ? new ResultVO("添加成功") : new ResultVO(ResultCode.FAILED,"添加失败"));
+        return (flowLineMapper.insertFlowLine(flowLine) > 0 ? new ResultVO("创建流程线成功") : new ResultVO(ResultCode.FAILED,"创建流程线失败"));
     }
 }

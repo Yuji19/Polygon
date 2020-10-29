@@ -23,6 +23,6 @@ public class FlowNodeServiceImpl implements FlowNodeService {
 
     @Override
     public ResultVO insertFlowNode(FlowNode flowNode) {
-        return (flowNodeMapper.insertFlowNode(flowNode) > 0 ? new ResultVO("添加成功") : new ResultVO(ResultCode.FAILED,"添加失败"));
+        return (flowNodeMapper.insertFlowNode(flowNode) > 0 ? new ResultVO("创建流程节点成功") : new ResultVO(ResultCode.FAILED,"创建流程节点失败"));
     }
 }

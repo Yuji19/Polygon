@@ -14,7 +14,7 @@ public class Audit {
 
     private String businessNo;
 
-    private String flowNodeNo;
+    private int flowNodeNo;
 
     private String employeeNo;
 
@@ -40,11 +40,11 @@ public class Audit {
         this.businessNo = businessNo;
     }
 
-    public String getFlowNodeNo() {
+    public int getFlowNodeNo() {
         return flowNodeNo;
     }
 
-    public void setFlowNodeNo(String flowNodeNo) {
+    public void setFlowNodeNo(int flowNodeNo) {
         this.flowNodeNo = flowNodeNo;
     }
 

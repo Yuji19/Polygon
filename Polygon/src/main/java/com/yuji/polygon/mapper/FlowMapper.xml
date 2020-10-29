@@ -19,7 +19,7 @@
 
     <insert id="insertFlow" parameterType="com.yuji.polygon.entity.Flow" useGeneratedKeys="true" keyProperty="id">
         insert into poly_flow set flow_no=#{flowNo}, flow_name=#{flowName}, remark=#{remark},
-             ,gmt_create=#{gmtCreate}, gmt_modified=#{gmtModified}
+             gmt_create=#{gmtCreate}, gmt_modified=#{gmtModified}
     </insert>
 
 
