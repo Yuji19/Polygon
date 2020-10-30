@@ -44,16 +44,9 @@ public class LeaveSerice {
         flow.setFlowNo(CommonUtil.randomUid(12));
         flow.setFlowName("请假流程");
         flow.setFlowName("请假流程");
-        Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        try{
-            date = sdf.parse(sdf.format(date));
-        }catch (ParseException e) {
-            e.printStackTrace();
-        }
 
-        flow.setGmtCreate(date);
-        flow.setGmtModified(date);
+        flow.setGmtCreate(CommonUtil.getNowTime());
+        flow.setGmtModified(CommonUtil.getNowTime());
         ResultVO flowResult = flowService.insertFlow(flow);
         if (flowResult.getCode() != SUCCESS_CODE){
             return flowResult;
@@ -66,8 +59,8 @@ public class LeaveSerice {
         firstNode.setFlowNodeName("主任审批");
         firstNode.setEmployeeNo("X000");
         firstNode.setEmployeeName("X000");
-        firstNode.setGmtCreate(date);
-        firstNode.setGmtModified(date);
+        firstNode.setGmtCreate(CommonUtil.getNowTime());
+        firstNode.setGmtModified(CommonUtil.getNowTime());
         ResultVO firstNodeResult = flowNodeService.insertFlowNode(firstNode);
         if (firstNodeResult.getCode() != SUCCESS_CODE){
             return firstNodeResult;
@@ -79,8 +72,8 @@ public class LeaveSerice {
         secondNode.setFlowNodeName("部长审批");
         secondNode.setEmployeeNo("Z000");
         secondNode.setEmployeeName("Z000");
-        secondNode.setGmtCreate(date);
-        secondNode.setGmtModified(date);
+        secondNode.setGmtCreate(CommonUtil.getNowTime());
+        secondNode.setGmtModified(CommonUtil.getNowTime());
         ResultVO secondNodeResult = flowNodeService.insertFlowNode(secondNode);
         if (secondNodeResult.getCode() != SUCCESS_CODE){
             return secondNodeResult;
@@ -91,8 +84,8 @@ public class LeaveSerice {
         firstLine.setFlowNo(flow.getFlowNo());
         firstLine.setPreNode(0);
         firstLine.setNextNode(firstNode.getId());
-        firstLine.setGmtCreate(date);
-        firstLine.setGmtModified(date);
+        firstLine.setGmtCreate(CommonUtil.getNowTime());
+        firstLine.setGmtModified(CommonUtil.getNowTime());
         ResultVO firstLineResult = flowLineService.insertFlowLine(firstLine);
         if (firstLineResult.getCode() != SUCCESS_CODE){
             return firstLineResult;
@@ -102,8 +95,8 @@ public class LeaveSerice {
         secondLine.setFlowNo(flow.getFlowNo());
         secondLine.setPreNode(firstNode.getId());
         secondLine.setNextNode(secondNode.getId());
-        secondLine.setGmtCreate(date);
-        secondLine.setGmtModified(date);
+        secondLine.setGmtCreate(CommonUtil.getNowTime());
+        secondLine.setGmtModified(CommonUtil.getNowTime());
         ResultVO secondLineResult = flowLineService.insertFlowLine(secondLine);
         if (secondLineResult.getCode() != SUCCESS_CODE){
             return secondLineResult;
@@ -113,8 +106,8 @@ public class LeaveSerice {
         leave.setFlowNo(flow.getFlowNo());
         //赋予当前流程节点
         leave.setCurrentNode(firstNode.getId());
-        leave.setGmtCreate(date);
-        leave.setGmtModified(date);
+        leave.setGmtCreate(CommonUtil.getNowTime());
+        leave.setGmtModified(CommonUtil.getNowTime());
         if (leaveMapper.insertLeave(leave) < 1){
             return new ResultVO(ResultCode.FAILED,"创建请假单失败");
         }
@@ -140,7 +133,7 @@ public class LeaveSerice {
         if (secondAuditResult.getCode() != SUCCESS_CODE){
             return secondAuditResult;
         }
-        return null;
+        return new ResultVO("提交成功");
     }
 
 

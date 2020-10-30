@@ -1,5 +1,8 @@
 package com.yuji.polygon.util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 /**
@@ -32,5 +35,16 @@ public class CommonUtil {
         }
 
         return uid;
+    }
+
+    public static Date getNowTime(){
+        Date date = new Date(System.currentTimeMillis());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        try{
+            date = sdf.parse(sdf.format(date));
+        }catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
     }
 }

@@ -64,13 +64,7 @@ class PolygonApplicationTests {
         flow.setFlowNo(CommonUtil.randomUid(12));
         flow.setFlowName("请假流程");
         flow.setFlowName("请假流程");
-        Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        try{
-            date = sdf.parse(sdf.format(date));
-        }catch (ParseException e) {
-            e.printStackTrace();
-        }
+        Date date = CommonUtil.getNowTime();
 
         flow.setGmtCreate(date);
         flow.setGmtModified(date);
@@ -155,7 +149,10 @@ class PolygonApplicationTests {
     @Test
     public void updateLeaveFlow(){
 
+        //通过审批人的员工编号获取所有该员工的待审批流程
+        //审批人选择某条审批，前端发送审批实例
 
+        //更新审批表
 
     }
 
