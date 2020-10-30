@@ -14,4 +14,8 @@ import org.apache.ibatis.annotations.Mapper;
 public interface LeaveMapper {
 
     int insertLeave(Leave leave);
+
+    int updateLeave(Leave leave);
+
+    Leave findLeaveById(int id);
 }

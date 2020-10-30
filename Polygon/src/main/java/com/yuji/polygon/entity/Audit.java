@@ -22,6 +22,8 @@ public class Audit {
 
     private String auditInfo;
 
+    private int auditState;
+
     private Date auditDate;
 
     public int getId() {
@@ -70,6 +72,14 @@ public class Audit {
 
     public void setAuditInfo(String auditInfo) {
         this.auditInfo = auditInfo;
+    }
+
+    public int getAuditState() {
+        return auditState;
+    }
+
+    public void setAuditState(int auditState) {
+        this.auditState = auditState;
     }
 
     public Date getAuditDate() {

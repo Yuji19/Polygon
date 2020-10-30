@@ -27,6 +27,8 @@ public class Leave {
 
     private String flowNo;
 
+    private int flowState;
+
     private int  currentNode;
 
     private Date gmtCreate;
@@ -95,6 +97,14 @@ public class Leave {
 
     public void setFlowNo(String flowNo) {
         this.flowNo = flowNo;
+    }
+
+    public int getFlowState() {
+        return flowState;
+    }
+
+    public void setFlowState(int flowState) {
+        this.flowState = flowState;
     }
 
     public int getCurrentNode() {

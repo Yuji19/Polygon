@@ -14,11 +14,9 @@ public class FlowLine {
 
     private String flowNo;
 
-    private int currentNode;
+    private int preNode;
 
     private int nextNode;
-
-    private int flowState;
 
     private Date gmtCreate;
 
@@ -40,12 +38,12 @@ public class FlowLine {
         this.flowNo = flowNo;
     }
 
-    public int getCurrentNode() {
-        return currentNode;
+    public int getPreNode() {
+        return preNode;
     }
 
-    public void setCurrentNode(int currentNode) {
-        this.currentNode = currentNode;
+    public void setPreNode(int preNode) {
+        this.preNode = preNode;
     }
 
     public int getNextNode() {
@@ -54,14 +52,6 @@ public class FlowLine {
 
     public void setNextNode(int nextNode) {
         this.nextNode = nextNode;
-    }
-
-    public int getFlowState() {
-        return flowState;
-    }
-
-    public void setFlowState(int flowState) {
-        this.flowState = flowState;
     }
 
     public Date getGmtCreate() {

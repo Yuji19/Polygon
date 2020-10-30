@@ -12,4 +12,8 @@ import com.yuji.polygon.entity.ResultVO;
 public interface AuditService {
 
     ResultVO insertAudit(Audit audit);
+
+    ResultVO updateAudit(Audit audit);
+
+    ResultVO<Audit> findAuditByEmpolyeeNo(String employeeNo);
 }

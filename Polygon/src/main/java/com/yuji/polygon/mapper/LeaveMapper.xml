@@ -13,6 +13,7 @@
         <result column="start_date" property="startDate" />
         <result column="end_date" property="endDate"  />
         <result column="flow_no" property="flowNo"  />
+        <result column="flow_state" property="flowState" />
         <result column="current_node" property="currentNode" />
         <result column="gmt_create" property="gmtCreate" />
         <result column="gmt_modified" property="gmtModified" />
@@ -23,9 +24,24 @@
 
     <insert id="insertLeave" parameterType="com.yuji.polygon.entity.Leave" useGeneratedKeys="true" keyProperty="id">
         insert into poly_leave set employee_no=#{employeeNo}, employee_name=#{employeeName}, leave_type=#{leaveType}, leave_reason=#{leaveReason}
-             ,start_date=#{startDate}, end_date=#{endDate}, flow_no=#{flowNo}, current_node=#{currentNode}, gmt_create=#{gmtCreate}, gmt_modified=#{gmtModified}
+             ,start_date=#{startDate}, end_date=#{endDate}, flow_no=#{flowNo}, flow_state=#{flowState}, current_node=#{currentNode}, gmt_create=#{gmtCreate}, gmt_modified=#{gmtModified}
     </insert>
 
 
+    <update id="updateLeave" parameterType="com.yuji.polygon.entity.Leave" >
+        update poly_leave set
+        flow_state = #{flowState}
+        <if test="currentNode &gt; -1">
+            current_node = #{currentNode},
+        </if>
+        <if test="gmtModified != null" >
+            gmt_modified = #{gmtModified}
+        </if>
+        where flow_no = #{flowNo}
+    </update>
+    
+    <select id="findLeaveById" resultType="com.yuji.polygon.entity.Leave" >
+        select * from poly_leave where id = #{id}
+    </select>
 
 </mapper>

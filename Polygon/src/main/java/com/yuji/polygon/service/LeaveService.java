@@ -14,4 +14,8 @@ public interface LeaveService {
 
 
     ResultVO addLeaveFlow(Leave leave, Audit audit);
+
+    ResultVO updateLeaveFlow(Leave leave);
+
+    ResultVO<Leave> findLeaveById(int id);
 }

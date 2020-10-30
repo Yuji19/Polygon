@@ -83,6 +83,8 @@ class PolygonApplicationTests {
         firstNode.setFlowNodeName("主任审批");
         firstNode.setEmployeeNo("X000");
         firstNode.setEmployeeName("X000");
+        firstNode.setGmtCreate(date);
+        firstNode.setGmtModified(date);
         flowNodeService.insertFlowNode(firstNode);
 
         FlowNode secondNode = new FlowNode();
@@ -90,7 +92,28 @@ class PolygonApplicationTests {
         secondNode.setFlowNodeName("部长审批");
         secondNode.setEmployeeNo("Z000");
         secondNode.setEmployeeName("Z000");
+        secondNode.setGmtCreate(date);
+        secondNode.setGmtModified(date);
         flowNodeService.insertFlowNode(secondNode);
+
+        //创建流程线
+        FlowLine firstLine = new FlowLine();
+        firstLine.setFlowNo(flow.getFlowNo());
+        firstLine.setPreNode(0);
+        firstLine.setNextNode(firstNode.getId());
+        firstLine.setGmtCreate(date);
+        firstLine.setGmtModified(date);
+        ResultVO firstLineResult = flowLineService.insertFlowLine(firstLine);
+        System.out.println(firstLineResult.getData());
+
+        FlowLine secondLine = new FlowLine();
+        secondLine.setFlowNo(flow.getFlowNo());
+        secondLine.setPreNode(firstNode.getId());
+        secondLine.setNextNode(secondNode.getId());
+        secondLine.setGmtCreate(date);
+        secondLine.setGmtModified(date);
+        ResultVO secondLineResult = flowLineService.insertFlowLine(secondLine);
+        System.out.println(secondLineResult.getData());
 
         //创建请假单
         Leave leave = new Leave();
@@ -109,17 +132,6 @@ class PolygonApplicationTests {
             System.out.println("创建请假单失败");
         }
 
-        //创建流程线
-        FlowLine flowLine = new FlowLine();
-        flowLine.setFlowNo(flow.getFlowNo());
-        flowLine.setCurrentNode(1);
-        flowLine.setNextNode(2);
-        //0:未审批 1:已审批
-        flowLine.setFlowState(0);
-        flowLine.setGmtCreate(date);
-        flowLine.setGmtModified(date);
-        ResultVO flowLineResult = flowLineService.insertFlowLine(flowLine);
-        System.out.println(flowLineResult.getData());
 
         //为每个节点创建审批记录
         Audit firstAudit = new Audit();
@@ -127,14 +139,23 @@ class PolygonApplicationTests {
         firstAudit.setEmployeeNo(firstNode.getEmployeeNo());
         firstAudit.setEmployeeName(firstNode.getEmployeeName());
         firstAudit.setFlowNodeNo(firstNode.getId());
-        auditServie.insertAudit(firstAudit);
+        ResultVO firstAuditResult = auditServie.insertAudit(firstAudit);
+        System.out.println(firstAuditResult.getData());
 
         Audit secondAudit = new Audit();
         secondAudit.setBusinessNo(String.valueOf(leave.getId()));
         secondAudit.setEmployeeNo(secondNode.getEmployeeNo());
         secondAudit.setEmployeeName(secondNode.getEmployeeName());
         secondAudit.setFlowNodeNo(secondNode.getId());
-        auditServie.insertAudit(secondAudit);
+        ResultVO secondAuditResult = auditServie.insertAudit(secondAudit);
+        System.out.println(secondAuditResult.getData());
+
+    }
+
+    @Test
+    public void updateLeaveFlow(){
+
+
 
     }
 

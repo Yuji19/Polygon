@@ -7,9 +7,8 @@
     <resultMap id="BaseResultMap" type="com.yuji.polygon.entity.FlowLine">
         <id column="id" property="id"  />
         <result column="flow_no" property="flowNo" />
-        <result column="current_node" property="currentNode"  />
+        <result column="pre_node" property="preNode"  />
         <result column="next_node" property="nextNode" />
-        <result column="flow_state" property="flowState"  />
         <result column="gmt_create" property="gmtCreate" />
         <result column="gmt_modified" property="gmtModified" />
 
@@ -19,8 +18,8 @@
 
 
     <insert id="insertFlowLine" parameterType="com.yuji.polygon.entity.FlowLine" useGeneratedKeys="true" keyProperty="id">
-        insert into poly_flow_line set flow_no=#{flowNo}, current_node=#{currentNode}, next_node=#{nextNode}, flow_state=#{flowState}
-             ,gmt_create=#{gmtCreate}, gmt_modified=#{gmtModified}
+        insert into poly_flow_line set flow_no=#{flowNo}, pre_node=#{preNode}, next_node=#{nextNode},
+             gmt_create=#{gmtCreate}, gmt_modified=#{gmtModified}
     </insert>
 
 

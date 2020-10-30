@@ -14,4 +14,8 @@ import org.apache.ibatis.annotations.Mapper;
 public interface AuditMapper {
 
     int insertAudit(Audit audit);
+
+    int updateAudit(Audit audit);
+
+    Audit findAuditByEmployeeNo(String employeeNo);
 }

@@ -58,10 +58,7 @@ public class LeaveSericeImpl implements LeaveService {
         //创建流程线
         FlowLine flowLine = new FlowLine();
         flowLine.setFlowNo(flow.getFlowNo());
-        flowLine.setCurrentNode(1);
         flowLine.setNextNode(2);
-        //0:未审批 1:已审批
-        flowLine.setFlowState(0);
         flowLine.setGmtCreate(date);
         flowLine.setGmtModified(date);
         ResultVO flowLineResult = flowLineService.insertFlowLine(flowLine);
@@ -70,5 +67,16 @@ public class LeaveSericeImpl implements LeaveService {
         }
 
         return new ResultVO("提交成功");
+    }
+
+    @Override
+    public ResultVO updateLeaveFlow(Leave leave) {
+        return null;
+    }
+
+    @Override
+    public ResultVO<Leave> findLeaveById(int id) {
+        Leave leave = leaveMapper.findLeaveById(id);
+        return new ResultVO<>(leave);
     }
 }
