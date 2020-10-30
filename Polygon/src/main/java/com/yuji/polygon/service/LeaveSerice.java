@@ -1,46 +1,26 @@
-package com.yuji.polygon;
+package com.yuji.polygon.service;
 
 import com.yuji.polygon.entity.*;
 import com.yuji.polygon.mapper.LeaveMapper;
-import com.yuji.polygon.service.AuditServie;
-import com.yuji.polygon.service.FlowLineService;
-import com.yuji.polygon.service.FlowNodeService;
-import com.yuji.polygon.service.FlowService;
 import com.yuji.polygon.util.CommonUtil;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Random;
 
-@SpringBootTest
-class PolygonApplicationTests {
+/**
+ * @className: LeaveSerice
+ * @description: TODO
+ * @author: yuji
+ * @create: 2020-10-28 19:08:00
+ */
 
-    @Test
-    void contextLoads() {
-        String str="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        Random random = new Random();
-        StringBuffer stringBuffer = new StringBuffer();
-        for(int i = 0; i < 10; i++){
-            int number;
-            if (i == 0 || i == 1){
-                number = random.nextInt(25);
-                stringBuffer.append(str.charAt(number));
-            }else{
-                number = random.nextInt(9);
-                stringBuffer.append(number);
-            }
+@Service
+public class LeaveSerice {
 
-
-        }
-        String uid = stringBuffer.toString();
-        System.out.println(uid);
-
-    }
-
+    private final static int SUCCESS_CODE = 1000;
 
     @Autowired
     LeaveMapper leaveMapper;
@@ -49,16 +29,16 @@ class PolygonApplicationTests {
     FlowService flowService;
 
     @Autowired
-    FlowLineService flowLineService;
+    FlowNodeService flowNodeService;
 
     @Autowired
-    FlowNodeService flowNodeService;
+    FlowLineService flowLineService;
 
     @Autowired
     AuditServie auditServie;
 
-    @Test
-    void addLeaveFlow(){
+
+    public ResultVO addLeaveFlow(Leave leave) {
         //创建流程
         Flow flow = new Flow();
         flow.setFlowNo(CommonUtil.randomUid(12));
@@ -75,26 +55,36 @@ class PolygonApplicationTests {
         flow.setGmtCreate(date);
         flow.setGmtModified(date);
         ResultVO flowResult = flowService.insertFlow(flow);
-        System.out.println(flowResult.getData());
+        if (flowResult.getCode() != SUCCESS_CODE){
+            return flowResult;
+        }
 
         //创建流程节点
         FlowNode firstNode = new FlowNode();
         firstNode.setFlowNo(flow.getFlowNo());
+        //应由流程角色表获取
         firstNode.setFlowNodeName("主任审批");
         firstNode.setEmployeeNo("X000");
         firstNode.setEmployeeName("X000");
         firstNode.setGmtCreate(date);
         firstNode.setGmtModified(date);
-        flowNodeService.insertFlowNode(firstNode);
+        ResultVO firstNodeResult = flowNodeService.insertFlowNode(firstNode);
+        if (firstNodeResult.getCode() != SUCCESS_CODE){
+            return firstNodeResult;
+        }
 
         FlowNode secondNode = new FlowNode();
         secondNode.setFlowNo(flow.getFlowNo());
+        //应由流程角色表获取
         secondNode.setFlowNodeName("部长审批");
         secondNode.setEmployeeNo("Z000");
         secondNode.setEmployeeName("Z000");
         secondNode.setGmtCreate(date);
         secondNode.setGmtModified(date);
-        flowNodeService.insertFlowNode(secondNode);
+        ResultVO secondNodeResult = flowNodeService.insertFlowNode(secondNode);
+        if (secondNodeResult.getCode() != SUCCESS_CODE){
+            return secondNodeResult;
+        }
 
         //创建流程线
         FlowLine firstLine = new FlowLine();
@@ -104,7 +94,9 @@ class PolygonApplicationTests {
         firstLine.setGmtCreate(date);
         firstLine.setGmtModified(date);
         ResultVO firstLineResult = flowLineService.insertFlowLine(firstLine);
-        System.out.println(firstLineResult.getData());
+        if (firstLineResult.getCode() != SUCCESS_CODE){
+            return firstLineResult;
+        }
 
         FlowLine secondLine = new FlowLine();
         secondLine.setFlowNo(flow.getFlowNo());
@@ -113,23 +105,18 @@ class PolygonApplicationTests {
         secondLine.setGmtCreate(date);
         secondLine.setGmtModified(date);
         ResultVO secondLineResult = flowLineService.insertFlowLine(secondLine);
-        System.out.println(secondLineResult.getData());
+        if (secondLineResult.getCode() != SUCCESS_CODE){
+            return secondLineResult;
+        }
 
         //创建请假单
-        Leave leave = new Leave();
-        leave.setEmployeeNo("Y000");
-        leave.setEmployeeName("Y000");
-        leave.setLeaveType("病假");
-        leave.setLeaveReason("感冒");
-        leave.setStartDate(date);
-        leave.setEndDate(date);
         leave.setFlowNo(flow.getFlowNo());
         //赋予当前流程节点
         leave.setCurrentNode(firstNode.getId());
         leave.setGmtCreate(date);
         leave.setGmtModified(date);
         if (leaveMapper.insertLeave(leave) < 1){
-            System.out.println("创建请假单失败");
+            return new ResultVO(ResultCode.FAILED,"创建请假单失败");
         }
 
 
@@ -140,7 +127,9 @@ class PolygonApplicationTests {
         firstAudit.setEmployeeName(firstNode.getEmployeeName());
         firstAudit.setFlowNodeNo(firstNode.getId());
         ResultVO firstAuditResult = auditServie.insertAudit(firstAudit);
-        System.out.println(firstAuditResult.getData());
+        if (firstAuditResult.getCode() != SUCCESS_CODE){
+            return firstAuditResult;
+        }
 
         Audit secondAudit = new Audit();
         secondAudit.setBusinessNo(String.valueOf(leave.getId()));
@@ -148,15 +137,20 @@ class PolygonApplicationTests {
         secondAudit.setEmployeeName(secondNode.getEmployeeName());
         secondAudit.setFlowNodeNo(secondNode.getId());
         ResultVO secondAuditResult = auditServie.insertAudit(secondAudit);
-        System.out.println(secondAuditResult.getData());
-
+        if (secondAuditResult.getCode() != SUCCESS_CODE){
+            return secondAuditResult;
+        }
+        return null;
     }
 
-    @Test
-    public void updateLeaveFlow(){
 
-
-
+    public ResultVO updateLeaveFlow(Leave leave) {
+        return null;
     }
 
+
+    public ResultVO<Leave> findLeaveById(int id) {
+        Leave leave = leaveMapper.findLeaveById(id);
+        return new ResultVO<>(leave);
+    }
 }
