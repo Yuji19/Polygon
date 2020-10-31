@@ -24,5 +24,8 @@
     </insert>
 
 
+    <select id="findFlowNodeById" resultType="com.yuji.polygon.entity.FlowNode" >
+        select * from poly_flow_node where id = #{id}
+    </select>
 
 </mapper>

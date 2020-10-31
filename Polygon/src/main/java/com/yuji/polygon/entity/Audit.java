@@ -89,4 +89,18 @@ public class Audit {
     public void setAuditDate(Date auditDate) {
         this.auditDate = auditDate;
     }
+
+    @Override
+    public String toString() {
+        return "Audit{" +
+                "id=" + id +
+                ", businessNo='" + businessNo + '\'' +
+                ", flowNodeNo=" + flowNodeNo +
+                ", employeeNo='" + employeeNo + '\'' +
+                ", employeeName='" + employeeName + '\'' +
+                ", auditInfo='" + auditInfo + '\'' +
+                ", auditState=" + auditState +
+                ", auditDate=" + auditDate +
+                '}';
+    }
 }

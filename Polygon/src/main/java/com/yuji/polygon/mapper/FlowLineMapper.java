@@ -14,4 +14,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface FlowLineMapper {
 
     int insertFlowLine(FlowLine flowLine);
+
+    FlowLine findFlowLineByPreNode(int preNode);
 }

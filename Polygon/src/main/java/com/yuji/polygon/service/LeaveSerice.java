@@ -3,6 +3,7 @@ package com.yuji.polygon.service;
 import com.yuji.polygon.entity.*;
 import com.yuji.polygon.mapper.LeaveMapper;
 import com.yuji.polygon.util.CommonUtil;
+import com.yuji.polygon.util.ConstantValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +20,6 @@ import java.util.Date;
 
 @Service
 public class LeaveSerice {
-
-    private final static int SUCCESS_CODE = 1000;
 
     @Autowired
     LeaveMapper leaveMapper;
@@ -48,34 +47,32 @@ public class LeaveSerice {
         flow.setGmtCreate(CommonUtil.getNowTime());
         flow.setGmtModified(CommonUtil.getNowTime());
         ResultVO flowResult = flowService.insertFlow(flow);
-        if (flowResult.getCode() != SUCCESS_CODE){
+        if (flowResult.getCode() != ConstantValue.SUCCESS_CODE){
             return flowResult;
         }
 
         //创建流程节点
         FlowNode firstNode = new FlowNode();
         firstNode.setFlowNo(flow.getFlowNo());
-        //应由流程角色表获取
-        firstNode.setFlowNodeName("主任审批");
+        firstNode.setFlowNodeName(ConstantValue.LEAVE_ONE_AUDIT);
         firstNode.setEmployeeNo("X000");
         firstNode.setEmployeeName("X000");
         firstNode.setGmtCreate(CommonUtil.getNowTime());
         firstNode.setGmtModified(CommonUtil.getNowTime());
         ResultVO firstNodeResult = flowNodeService.insertFlowNode(firstNode);
-        if (firstNodeResult.getCode() != SUCCESS_CODE){
+        if (firstNodeResult.getCode() != ConstantValue.SUCCESS_CODE){
             return firstNodeResult;
         }
 
         FlowNode secondNode = new FlowNode();
         secondNode.setFlowNo(flow.getFlowNo());
-        //应由流程角色表获取
-        secondNode.setFlowNodeName("部长审批");
+        secondNode.setFlowNodeName(ConstantValue.LEAVE_TWO_AUDIT);
         secondNode.setEmployeeNo("Z000");
         secondNode.setEmployeeName("Z000");
         secondNode.setGmtCreate(CommonUtil.getNowTime());
         secondNode.setGmtModified(CommonUtil.getNowTime());
         ResultVO secondNodeResult = flowNodeService.insertFlowNode(secondNode);
-        if (secondNodeResult.getCode() != SUCCESS_CODE){
+        if (secondNodeResult.getCode() != ConstantValue.SUCCESS_CODE){
             return secondNodeResult;
         }
 
@@ -87,7 +84,7 @@ public class LeaveSerice {
         firstLine.setGmtCreate(CommonUtil.getNowTime());
         firstLine.setGmtModified(CommonUtil.getNowTime());
         ResultVO firstLineResult = flowLineService.insertFlowLine(firstLine);
-        if (firstLineResult.getCode() != SUCCESS_CODE){
+        if (firstLineResult.getCode() != ConstantValue.SUCCESS_CODE){
             return firstLineResult;
         }
 
@@ -98,7 +95,7 @@ public class LeaveSerice {
         secondLine.setGmtCreate(CommonUtil.getNowTime());
         secondLine.setGmtModified(CommonUtil.getNowTime());
         ResultVO secondLineResult = flowLineService.insertFlowLine(secondLine);
-        if (secondLineResult.getCode() != SUCCESS_CODE){
+        if (secondLineResult.getCode() != ConstantValue.SUCCESS_CODE){
             return secondLineResult;
         }
 
@@ -120,7 +117,7 @@ public class LeaveSerice {
         firstAudit.setEmployeeName(firstNode.getEmployeeName());
         firstAudit.setFlowNodeNo(firstNode.getId());
         ResultVO firstAuditResult = auditServie.insertAudit(firstAudit);
-        if (firstAuditResult.getCode() != SUCCESS_CODE){
+        if (firstAuditResult.getCode() != ConstantValue.SUCCESS_CODE){
             return firstAuditResult;
         }
 
@@ -130,7 +127,7 @@ public class LeaveSerice {
         secondAudit.setEmployeeName(secondNode.getEmployeeName());
         secondAudit.setFlowNodeNo(secondNode.getId());
         ResultVO secondAuditResult = auditServie.insertAudit(secondAudit);
-        if (secondAuditResult.getCode() != SUCCESS_CODE){
+        if (secondAuditResult.getCode() != ConstantValue.SUCCESS_CODE){
             return secondAuditResult;
         }
         return new ResultVO("提交成功");

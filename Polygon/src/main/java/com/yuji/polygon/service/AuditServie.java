@@ -33,6 +33,6 @@ public class AuditServie {
 
     public ResultVO<Audit> findAuditByEmpolyeeNo(String employeeNo) {
         Audit audit = auditMapper.findAuditByEmployeeNo(employeeNo);
-        return new ResultVO<Audit>(audit);
+        return new ResultVO<>(audit);
     }
 }

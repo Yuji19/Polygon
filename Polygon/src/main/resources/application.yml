@@ -15,3 +15,7 @@ server:
 
 custom:
   path: D:/polygon
+
+mybatis:
+  config-location: classpath:/mybatis-config.xml
+

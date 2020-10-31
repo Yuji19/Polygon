@@ -22,6 +22,9 @@
              gmt_create=#{gmtCreate}, gmt_modified=#{gmtModified}
     </insert>
 
+    <select id="findFlowLineByPreNode" resultType="com.yuji.polygon.entity.FlowLine" >
+        select * from poly_flow_line where pre_node = #{preNode}
+    </select>
 
 
 </mapper>

@@ -23,4 +23,8 @@ public class FlowLineService  {
     public ResultVO insertFlowLine(FlowLine flowLine) {
         return (flowLineMapper.insertFlowLine(flowLine) > 0 ? new ResultVO("创建流程线成功") : new ResultVO(ResultCode.FAILED,"创建流程线失败"));
     }
+
+    public ResultVO<FlowLine> findFlowLineByPreNode(int preNode){
+        return new ResultVO<>(flowLineMapper.findFlowLineByPreNode(preNode));
+    }
 }

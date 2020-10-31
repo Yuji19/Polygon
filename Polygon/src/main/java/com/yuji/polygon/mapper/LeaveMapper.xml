@@ -30,7 +30,7 @@
 
     <update id="updateLeave" parameterType="com.yuji.polygon.entity.Leave" >
         update poly_leave set
-        flow_state = #{flowState}
+        flow_state = #{flowState},
         <if test="currentNode &gt; -1">
             current_node = #{currentNode},
         </if>

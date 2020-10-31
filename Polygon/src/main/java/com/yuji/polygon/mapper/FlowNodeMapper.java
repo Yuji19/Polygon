@@ -14,4 +14,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface FlowNodeMapper {
 
     int insertFlowNode(FlowNode flowNode);
+
+    FlowNode findFlowNodeById(int id);
 }

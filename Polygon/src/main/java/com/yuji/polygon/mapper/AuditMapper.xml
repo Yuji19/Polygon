@@ -33,7 +33,7 @@
         <if test="auditDate != null">
             audit_date = #{auditDate},
         </if>
-        audit_state = #{audit_state}
+        audit_state = #{auditState}
         where flow_node_no = #{flowNodeNo}
     </update>
 

@@ -7,6 +7,7 @@ import com.yuji.polygon.service.FlowLineService;
 import com.yuji.polygon.service.FlowNodeService;
 import com.yuji.polygon.service.FlowService;
 import com.yuji.polygon.util.CommonUtil;
+import com.yuji.polygon.util.ConstantValue;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -63,7 +64,6 @@ class PolygonApplicationTests {
         Flow flow = new Flow();
         flow.setFlowNo(CommonUtil.randomUid(12));
         flow.setFlowName("请假流程");
-        flow.setFlowName("请假流程");
         Date date = CommonUtil.getNowTime();
 
         flow.setGmtCreate(date);
@@ -74,7 +74,7 @@ class PolygonApplicationTests {
         //创建流程节点
         FlowNode firstNode = new FlowNode();
         firstNode.setFlowNo(flow.getFlowNo());
-        firstNode.setFlowNodeName("主任审批");
+        firstNode.setFlowNodeName(ConstantValue.LEAVE_ONE_AUDIT);
         firstNode.setEmployeeNo("X000");
         firstNode.setEmployeeName("X000");
         firstNode.setGmtCreate(date);
@@ -83,7 +83,7 @@ class PolygonApplicationTests {
 
         FlowNode secondNode = new FlowNode();
         secondNode.setFlowNo(flow.getFlowNo());
-        secondNode.setFlowNodeName("部长审批");
+        secondNode.setFlowNodeName(ConstantValue.LEAVE_TWO_AUDIT);
         secondNode.setEmployeeNo("Z000");
         secondNode.setEmployeeName("Z000");
         secondNode.setGmtCreate(date);
@@ -147,13 +147,65 @@ class PolygonApplicationTests {
     }
 
     @Test
-    public void updateLeaveFlow(){
+    public void LeaveFlowAgree(){
 
         //通过审批人的员工编号获取所有该员工的待审批流程
         //审批人选择某条审批，前端发送审批实例
 
+        //先模拟成功通过的流程
         //更新审批表
+        Audit audit = auditServie.findAuditByEmpolyeeNo("X000").getData();
+        System.out.println(audit);
+        audit.setAuditInfo("同意");
+        audit.setAuditState(1);
+        audit.setAuditDate(new Date());
 
+        //获取请假单
+        Leave leave = leaveMapper.findLeaveById(Integer.parseInt(audit.getBusinessNo()));
+        //获取流程线
+        FlowLine flowLine = flowLineService.findFlowLineByPreNode(leave.getCurrentNode()).getData();
+        //根据更新结果，更新请假单
+        if (auditServie.updateAudit(audit).getCode() == ConstantValue.SUCCESS_CODE){
+            if (flowLine == null || audit.getAuditState() == -1){
+                //已到流程的终点，设置节点为0，流程结束
+                leave.setCurrentNode(0);
+                leave.setFlowState(1);
+            }else{
+                //设置为下一个节点
+                leave.setCurrentNode(flowLine.getNextNode());
+            }
+            leaveMapper.updateLeave(leave);
+
+        }else{
+            System.out.println("审批出错");
+        }
+
+    }
+
+    @Test
+    public void LeaveFlowAgainst(){
+
+        Audit audit = auditServie.findAuditByEmpolyeeNo("Z000").getData();
+        audit.setAuditInfo("ok");
+        audit.setAuditState(1);
+        audit.setAuditDate(new Date());
+
+        //获取请假单
+        Leave leave = leaveMapper.findLeaveById(Integer.parseInt(audit.getBusinessNo()));
+        //获取流程线
+        FlowLine flowLine = flowLineService.findFlowLineByPreNode(leave.getCurrentNode()).getData();
+        //根据更新结果，更新请假单
+        if (auditServie.updateAudit(audit).getCode() == ConstantValue.SUCCESS_CODE){
+            if (flowLine == null || audit.getAuditState() == -1){
+                //已到流程的终点，设置节点为0，流程结束
+                leave.setCurrentNode(0);
+                leave.setFlowState(1);
+            }else{
+                //设置为下一个节点
+                leave.setCurrentNode(flowLine.getNextNode());
+            }
+
+        }
     }
 
 }
