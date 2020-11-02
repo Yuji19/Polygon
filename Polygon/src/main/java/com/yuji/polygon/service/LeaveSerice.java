@@ -6,6 +6,7 @@ import com.yuji.polygon.util.CommonUtil;
 import com.yuji.polygon.util.ConstantValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,44 +38,32 @@ public class LeaveSerice {
     AuditServie auditServie;
 
 
-    public ResultVO addLeaveFlow(Leave leave) {
+    @Transactional
+    public String addLeaveFlow(Leave leave, FlowNode firstNode, FlowNode secondNode) {
         //创建流程
         Flow flow = new Flow();
         flow.setFlowNo(CommonUtil.randomUid(12));
         flow.setFlowName("请假流程");
-        flow.setFlowName("请假流程");
 
         flow.setGmtCreate(CommonUtil.getNowTime());
         flow.setGmtModified(CommonUtil.getNowTime());
-        ResultVO flowResult = flowService.insertFlow(flow);
-        if (flowResult.getCode() != ConstantValue.SUCCESS_CODE){
-            return flowResult;
-        }
+        flowService.insertFlow(flow);
+
 
         //创建流程节点
-        FlowNode firstNode = new FlowNode();
         firstNode.setFlowNo(flow.getFlowNo());
         firstNode.setFlowNodeName(ConstantValue.LEAVE_ONE_AUDIT);
-        firstNode.setEmployeeNo("X000");
-        firstNode.setEmployeeName("X000");
         firstNode.setGmtCreate(CommonUtil.getNowTime());
         firstNode.setGmtModified(CommonUtil.getNowTime());
-        ResultVO firstNodeResult = flowNodeService.insertFlowNode(firstNode);
-        if (firstNodeResult.getCode() != ConstantValue.SUCCESS_CODE){
-            return firstNodeResult;
-        }
+        flowNodeService.insertFlowNode(firstNode);
 
-        FlowNode secondNode = new FlowNode();
+
         secondNode.setFlowNo(flow.getFlowNo());
         secondNode.setFlowNodeName(ConstantValue.LEAVE_TWO_AUDIT);
-        secondNode.setEmployeeNo("Z000");
-        secondNode.setEmployeeName("Z000");
         secondNode.setGmtCreate(CommonUtil.getNowTime());
         secondNode.setGmtModified(CommonUtil.getNowTime());
-        ResultVO secondNodeResult = flowNodeService.insertFlowNode(secondNode);
-        if (secondNodeResult.getCode() != ConstantValue.SUCCESS_CODE){
-            return secondNodeResult;
-        }
+        flowNodeService.insertFlowNode(secondNode);
+
 
         //创建流程线
         FlowLine firstLine = new FlowLine();
@@ -83,10 +72,8 @@ public class LeaveSerice {
         firstLine.setNextNode(firstNode.getId());
         firstLine.setGmtCreate(CommonUtil.getNowTime());
         firstLine.setGmtModified(CommonUtil.getNowTime());
-        ResultVO firstLineResult = flowLineService.insertFlowLine(firstLine);
-        if (firstLineResult.getCode() != ConstantValue.SUCCESS_CODE){
-            return firstLineResult;
-        }
+        flowLineService.insertFlowLine(firstLine);
+
 
         FlowLine secondLine = new FlowLine();
         secondLine.setFlowNo(flow.getFlowNo());
@@ -94,10 +81,8 @@ public class LeaveSerice {
         secondLine.setNextNode(secondNode.getId());
         secondLine.setGmtCreate(CommonUtil.getNowTime());
         secondLine.setGmtModified(CommonUtil.getNowTime());
-        ResultVO secondLineResult = flowLineService.insertFlowLine(secondLine);
-        if (secondLineResult.getCode() != ConstantValue.SUCCESS_CODE){
-            return secondLineResult;
-        }
+        flowLineService.insertFlowLine(secondLine);
+
 
         //创建请假单
         leave.setFlowNo(flow.getFlowNo());
@@ -105,9 +90,7 @@ public class LeaveSerice {
         leave.setCurrentNode(firstNode.getId());
         leave.setGmtCreate(CommonUtil.getNowTime());
         leave.setGmtModified(CommonUtil.getNowTime());
-        if (leaveMapper.insertLeave(leave) < 1){
-            return new ResultVO(ResultCode.FAILED,"创建请假单失败");
-        }
+        leaveMapper.insertLeave(leave);
 
 
         //为每个节点创建审批记录
@@ -116,26 +99,43 @@ public class LeaveSerice {
         firstAudit.setEmployeeNo(firstNode.getEmployeeNo());
         firstAudit.setEmployeeName(firstNode.getEmployeeName());
         firstAudit.setFlowNodeNo(firstNode.getId());
-        ResultVO firstAuditResult = auditServie.insertAudit(firstAudit);
-        if (firstAuditResult.getCode() != ConstantValue.SUCCESS_CODE){
-            return firstAuditResult;
-        }
+        auditServie.insertAudit(firstAudit);
+
 
         Audit secondAudit = new Audit();
         secondAudit.setBusinessNo(String.valueOf(leave.getId()));
         secondAudit.setEmployeeNo(secondNode.getEmployeeNo());
         secondAudit.setEmployeeName(secondNode.getEmployeeName());
         secondAudit.setFlowNodeNo(secondNode.getId());
-        ResultVO secondAuditResult = auditServie.insertAudit(secondAudit);
-        if (secondAuditResult.getCode() != ConstantValue.SUCCESS_CODE){
-            return secondAuditResult;
-        }
-        return new ResultVO("提交成功");
+        auditServie.insertAudit(secondAudit);
+
+        return "提交成功";
     }
 
 
-    public ResultVO updateLeaveFlow(Leave leave) {
-        return null;
+    @Transactional
+    public String updateLeaveFlow(Audit audit) {
+
+        audit.setAuditDate(new Date());
+        auditServie.updateAudit(audit);
+
+        //获取请假单
+        Leave leave = leaveMapper.findLeaveById(Integer.parseInt(audit.getBusinessNo()));
+        //获取流程线
+        FlowLine flowLine = flowLineService.findFlowLineByPreNode(leave.getCurrentNode()).getData();
+
+        if (flowLine == null || audit.getAuditState() == -1){
+            //已到流程的终点，设置节点为0，流程结束
+            leave.setCurrentNode(0);
+            leave.setFlowState(1);
+        }else{
+            //设置为下一个节点
+            leave.setCurrentNode(flowLine.getNextNode());
+        }
+        leaveMapper.updateLeave(leave);
+
+
+        return "审批成功";
     }
 
 

@@ -9,6 +9,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.sql.SQLException;
+
 /**
  * @className: ExceptionControllerAdvice
  * @description: 全局异常处理
@@ -35,5 +37,25 @@ public class ExceptionControllerAdvice {
     public ResultVO<String> BindExceptionHandler(BindException e){
         ObjectError objectError = e.getBindingResult().getAllErrors().get(0);
         return new ResultVO<>(ResultCode.VALIDATE_FAILED,objectError.getDefaultMessage());
+    }
+
+    @ExceptionHandler(SQLException.class)
+    public ResultVO<String> SQLExceptionHandler(SQLException e){
+        return new ResultVO<>(ResultCode.ERROR,e.getLocalizedMessage());
+    }
+
+    @ExceptionHandler(ArrayIndexOutOfBoundsException.class)
+    public ResultVO<String> ArrayIndexOutOfBoundsException(ArrayIndexOutOfBoundsException e){
+        return new ResultVO<>(ResultCode.FAILED,e.getLocalizedMessage());
+    }
+
+    @ExceptionHandler(ArithmeticException.class)
+    public ResultVO<String> ArithmeticException(ArithmeticException e){
+        return new ResultVO<>(ResultCode.FAILED,e.getLocalizedMessage());
+    }
+
+    @ExceptionHandler(ClassCastException.class)
+    public ResultVO<String> ClassCastException(ClassCastException e){
+        return new ResultVO<>(ResultCode.FAILED,e.getLocalizedMessage());
     }
 }

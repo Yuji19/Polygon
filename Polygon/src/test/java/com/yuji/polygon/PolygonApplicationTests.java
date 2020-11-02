@@ -11,7 +11,9 @@ import com.yuji.polygon.util.ConstantValue;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,29 +21,6 @@ import java.util.Random;
 
 @SpringBootTest
 class PolygonApplicationTests {
-
-    @Test
-    void contextLoads() {
-        String str="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        Random random = new Random();
-        StringBuffer stringBuffer = new StringBuffer();
-        for(int i = 0; i < 10; i++){
-            int number;
-            if (i == 0 || i == 1){
-                number = random.nextInt(25);
-                stringBuffer.append(str.charAt(number));
-            }else{
-                number = random.nextInt(9);
-                stringBuffer.append(number);
-            }
-
-
-        }
-        String uid = stringBuffer.toString();
-        System.out.println(uid);
-
-    }
-
 
     @Autowired
     LeaveMapper leaveMapper;
@@ -59,6 +38,18 @@ class PolygonApplicationTests {
     AuditServie auditServie;
 
     @Test
+    void contextLoads() {
+
+        Audit audit = auditServie.findAuditByEmpolyeeNo("X000").getData();
+        auditServie.updateAudit(audit);
+
+    }
+
+
+
+
+    @Test
+    @Transactional
     void addLeaveFlow(){
         //创建流程
         Flow flow = new Flow();
@@ -68,6 +59,7 @@ class PolygonApplicationTests {
 
         flow.setGmtCreate(date);
         flow.setGmtModified(date);
+
         ResultVO flowResult = flowService.insertFlow(flow);
         System.out.println(flowResult.getData());
 
@@ -143,7 +135,7 @@ class PolygonApplicationTests {
         secondAudit.setFlowNodeNo(secondNode.getId());
         ResultVO secondAuditResult = auditServie.insertAudit(secondAudit);
         System.out.println(secondAuditResult.getData());
-
+        throw new APIException("事务回滚");
     }
 
     @Test
