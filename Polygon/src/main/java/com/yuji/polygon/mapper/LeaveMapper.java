@@ -3,6 +3,9 @@ package com.yuji.polygon.mapper;
 import com.yuji.polygon.entity.Leave;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @interface: LeaveMapper
  * @description: TODO
@@ -18,4 +21,8 @@ public interface LeaveMapper {
     int updateLeave(Leave leave);
 
     Leave findLeaveById(int id);
+
+    int countTotal(Leave leave);
+
+    List<Leave> listLeave(Map<String,Object> map);
 }

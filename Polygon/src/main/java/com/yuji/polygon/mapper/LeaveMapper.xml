@@ -44,4 +44,50 @@
         select * from poly_leave where id = #{id}
     </select>
 
+    <select id="countTotal"  parameterType="com.yuji.polygon.entity.Leave">
+        select count(*) from poly_leave
+        <where>
+            <if test="id &gt; 0">
+                and id = #{id}
+            </if>
+            <if test="employeeNo != null and employeeNo != '' ">
+                and employee_no = #{employeeNo}
+            </if>
+            <if test="leaveType != null and leaveType != '' ">
+                and leave_type = #{leaveType}
+            </if>
+            <if test="flowNo != null and flowNo != '' ">
+                and flow_no = #{flowNo}
+            </if>
+            <if test="flowState != null and flowState != '' ">
+                and flow_state = #{flowState}
+            </if>
+        </where>
+    </select>
+
+    <select id="listLeave" parameterType="java.util.Map" resultType="com.yuji.polygon.entity.Leave" >
+        select * from poly_leave
+        <where>
+            <if test="leave != null">
+                <if test="leave.id &gt; 0">
+                    and id = #{leave.id}
+                </if>
+                <if test="leave.employeeNo != null and leave.employeeNo != '' ">
+                    and employee_no = #{leave.employeeNo}
+                </if>
+                <if test="leave.leaveType != null and leave.leaveType != '' ">
+                    and leave_type = #{leave.leaveType}
+                </if>
+                <if test="leave.flowNo != null and leave.flowNo != '' ">
+                    and flow_no = #{leave.flowNo}
+                </if>
+                <if test="leave.flowState != null and leave.flowState != '' ">
+                    and flow_state = #{leave.flowState}
+                </if>
+            </if>
+
+        </where>
+        order by gmt_modified desc limit #{startIndex},#{pageSize}
+    </select>
+
 </mapper>

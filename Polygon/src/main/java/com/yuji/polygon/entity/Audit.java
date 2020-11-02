@@ -12,7 +12,7 @@ public class Audit {
 
     private int id;
 
-    private String businessNo;
+    private int businessNo;
 
     private int flowNodeNo;
 
@@ -34,11 +34,11 @@ public class Audit {
         this.id = id;
     }
 
-    public String getBusinessNo() {
+    public int getBusinessNo() {
         return businessNo;
     }
 
-    public void setBusinessNo(String businessNo) {
+    public void setBusinessNo(int businessNo) {
         this.businessNo = businessNo;
     }
 

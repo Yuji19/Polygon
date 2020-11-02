@@ -121,7 +121,7 @@ class PolygonApplicationTests {
 
         //为每个节点创建审批记录
         Audit firstAudit = new Audit();
-        firstAudit.setBusinessNo(String.valueOf(leave.getId()));
+        firstAudit.setBusinessNo(leave.getId());
         firstAudit.setEmployeeNo(firstNode.getEmployeeNo());
         firstAudit.setEmployeeName(firstNode.getEmployeeName());
         firstAudit.setFlowNodeNo(firstNode.getId());
@@ -129,7 +129,7 @@ class PolygonApplicationTests {
         System.out.println(firstAuditResult.getData());
 
         Audit secondAudit = new Audit();
-        secondAudit.setBusinessNo(String.valueOf(leave.getId()));
+        secondAudit.setBusinessNo(leave.getId());
         secondAudit.setEmployeeNo(secondNode.getEmployeeNo());
         secondAudit.setEmployeeName(secondNode.getEmployeeName());
         secondAudit.setFlowNodeNo(secondNode.getId());
@@ -153,7 +153,7 @@ class PolygonApplicationTests {
         audit.setAuditDate(new Date());
 
         //获取请假单
-        Leave leave = leaveMapper.findLeaveById(Integer.parseInt(audit.getBusinessNo()));
+        Leave leave = leaveMapper.findLeaveById(audit.getBusinessNo());
         //获取流程线
         FlowLine flowLine = flowLineService.findFlowLineByPreNode(leave.getCurrentNode()).getData();
         //根据更新结果，更新请假单
@@ -183,7 +183,7 @@ class PolygonApplicationTests {
         audit.setAuditDate(new Date());
 
         //获取请假单
-        Leave leave = leaveMapper.findLeaveById(Integer.parseInt(audit.getBusinessNo()));
+        Leave leave = leaveMapper.findLeaveById(audit.getBusinessNo());
         //获取流程线
         FlowLine flowLine = flowLineService.findFlowLineByPreNode(leave.getCurrentNode()).getData();
         //根据更新结果，更新请假单

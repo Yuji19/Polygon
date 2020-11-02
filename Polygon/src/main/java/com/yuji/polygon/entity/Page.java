@@ -41,6 +41,9 @@ public class Page<T> implements Serializable {
         this.records = records;
     }
 
+    public Page(int currentPageNumber, int totalCount) {
+    }
+
     public int getPrePageNum(){
         prePageNum = pageNum - 1;
         if (prePageNum < 1){

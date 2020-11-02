@@ -1,32 +1,25 @@
 package com.yuji.polygon.service;
 
 import com.yuji.polygon.entity.*;
-import com.yuji.polygon.mapper.LeaveMapper;
+import com.yuji.polygon.mapper.FileSignMapper;
 import com.yuji.polygon.util.CommonUtil;
 import com.yuji.polygon.util.ConstantValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
- * @className: LeaveSerice
+ * @className: FileSignService
  * @description: TODO
  * @author: yuji
- * @create: 2020-10-28 19:08:00
+ * @create: 2020-11-02 18:47:00
  */
 
 @Service
-public class LeaveSerice {
+public class FileSignService {
 
     @Autowired
-    LeaveMapper leaveMapper;
+    FileSignMapper fileSignMapper;
 
     @Autowired
     FlowService flowService;
@@ -40,13 +33,12 @@ public class LeaveSerice {
     @Autowired
     AuditServie auditServie;
 
-
     @Transactional
-    public String addLeaveFlow(Leave leave, FlowNode firstNode, FlowNode secondNode) {
+    public String addFlowSignFlow(FileSign fileSign, FlowNode firstNode, FlowNode secondNode, FlowNode thirdNode){
         //创建流程
         Flow flow = new Flow();
         flow.setFlowNo(CommonUtil.randomUid(12));
-        flow.setFlowName("请假流程");
+        flow.setFlowName("项目文件签审流程");
 
         flow.setGmtCreate(CommonUtil.getNowTime());
         flow.setGmtModified(CommonUtil.getNowTime());
@@ -55,17 +47,23 @@ public class LeaveSerice {
 
         //创建流程节点
         firstNode.setFlowNo(flow.getFlowNo());
-        firstNode.setFlowNodeName(ConstantValue.LEAVE_ONE_AUDIT);
+        firstNode.setFlowNodeName(ConstantValue.FILE_SIGN_ONE_AUDIT);
         firstNode.setGmtCreate(CommonUtil.getNowTime());
         firstNode.setGmtModified(CommonUtil.getNowTime());
         flowNodeService.insertFlowNode(firstNode);
 
 
         secondNode.setFlowNo(flow.getFlowNo());
-        secondNode.setFlowNodeName(ConstantValue.LEAVE_TWO_AUDIT);
+        secondNode.setFlowNodeName(ConstantValue.FILE_SING_THREE_AUDIT);
         secondNode.setGmtCreate(CommonUtil.getNowTime());
         secondNode.setGmtModified(CommonUtil.getNowTime());
         flowNodeService.insertFlowNode(secondNode);
+
+        thirdNode.setFlowNo(flow.getFlowNo());
+        thirdNode.setFlowNodeName(ConstantValue.FILE_SING_TWO_AUDIT);
+        thirdNode.setGmtCreate(CommonUtil.getNowTime());
+        thirdNode.setGmtModified(CommonUtil.getNowTime());
+        flowNodeService.insertFlowNode(thirdNode);
 
 
         //创建流程线
@@ -86,19 +84,26 @@ public class LeaveSerice {
         secondLine.setGmtModified(CommonUtil.getNowTime());
         flowLineService.insertFlowLine(secondLine);
 
+        FlowLine thirdLine = new FlowLine();
+        thirdLine.setFlowNo(flow.getFlowNo());
+        thirdLine.setPreNode(secondNode.getId());
+        thirdLine.setNextNode(thirdNode.getId());
+        thirdLine.setGmtCreate(CommonUtil.getNowTime());
+        thirdLine.setGmtModified(CommonUtil.getNowTime());
+        flowLineService.insertFlowLine(thirdLine);
 
-        //创建请假单
-        leave.setFlowNo(flow.getFlowNo());
+        //创建项目文件签审单
+        fileSign.setFlowNo(flow.getFlowNo());
         //赋予当前流程节点
-        leave.setCurrentNode(firstNode.getId());
-        leave.setGmtCreate(CommonUtil.getNowTime());
-        leave.setGmtModified(CommonUtil.getNowTime());
-        leaveMapper.insertLeave(leave);
+        fileSign.setCurrentNode(firstNode.getId());
+        fileSign.setGmtCreate(CommonUtil.getNowTime());
+        fileSign.setGmtModified(CommonUtil.getNowTime());
+        fileSignMapper.insertFileSign(fileSign);
 
 
         //为每个节点创建审批记录
         Audit firstAudit = new Audit();
-        firstAudit.setBusinessNo(leave.getId());
+        firstAudit.setBusinessNo(fileSign.getId());
         firstAudit.setEmployeeNo(firstNode.getEmployeeNo());
         firstAudit.setEmployeeName(firstNode.getEmployeeName());
         firstAudit.setFlowNodeNo(firstNode.getId());
@@ -106,58 +111,43 @@ public class LeaveSerice {
 
 
         Audit secondAudit = new Audit();
-        secondAudit.setBusinessNo(leave.getId());
+        secondAudit.setBusinessNo(fileSign.getId());
         secondAudit.setEmployeeNo(secondNode.getEmployeeNo());
         secondAudit.setEmployeeName(secondNode.getEmployeeName());
         secondAudit.setFlowNodeNo(secondNode.getId());
         auditServie.insertAudit(secondAudit);
 
+        Audit thirdAudit = new Audit();
+        thirdAudit.setBusinessNo(fileSign.getId());
+        thirdAudit.setEmployeeNo(thirdNode.getEmployeeNo());
+        thirdAudit.setEmployeeName(thirdNode.getEmployeeName());
+        thirdAudit.setFlowNodeNo(thirdNode.getId());
+        auditServie.insertAudit(thirdAudit);
+
         return "提交成功";
     }
 
-
     @Transactional
-    public String updateLeaveFlow(Audit audit) {
-
-        audit.setAuditDate(new Date());
+    public String updateFileSignFlow(Audit audit){
+        audit.setAuditDate(CommonUtil.getNowTime());
         auditServie.updateAudit(audit);
 
         //获取请假单
-        Leave leave = leaveMapper.findLeaveById(audit.getBusinessNo());
+        FileSign fileSign = fileSignMapper.findFileSignById(audit.getBusinessNo());
         //获取流程线
-        FlowLine flowLine = flowLineService.findFlowLineByPreNode(leave.getCurrentNode()).getData();
+        FlowLine flowLine = flowLineService.findFlowLineByPreNode(fileSign.getCurrentNode()).getData();
 
         if (flowLine == null || audit.getAuditState() == -1){
             //已到流程的终点，设置节点为0，流程结束
-            leave.setCurrentNode(0);
-            leave.setFlowState(1);
+            fileSign.setCurrentNode(0);
+            fileSign.setFlowState(1);
         }else{
             //设置为下一个节点
-            leave.setCurrentNode(flowLine.getNextNode());
+            fileSign.setCurrentNode(flowLine.getNextNode());
         }
-        leaveMapper.updateLeave(leave);
+        fileSignMapper.updateFileSign(fileSign);
 
 
         return "审批成功";
-    }
-
-
-    public ResultVO<Leave> findLeaveById(int id) {
-        Leave leave = leaveMapper.findLeaveById(id);
-        return new ResultVO<>(leave);
-    }
-
-    public Page<Leave> listLeavePage(Leave leave, int currentPageNumber, int pageSize){
-        int startIndex = (currentPageNumber-1)*pageSize;
-        Map<String,Object> map = new HashMap<String, Object>(4);
-        map.put("leave",leave);
-        map.put("startIndex",startIndex);
-        map.put("pageSize",pageSize);
-        int totalCount = leaveMapper.countTotal(leave);
-        Page page = new Page(currentPageNumber,totalCount);
-
-        List<Leave> records = leaveMapper.listLeave(map);
-        page.setRecords(records);
-        return page;
     }
 }
