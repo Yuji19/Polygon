@@ -4,9 +4,18 @@ import com.yuji.polygon.entity.*;
 import com.yuji.polygon.mapper.FileSignMapper;
 import com.yuji.polygon.util.CommonUtil;
 import com.yuji.polygon.util.ConstantValue;
+import com.yuji.polygon.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * @className: FileSignService
@@ -17,6 +26,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class FileSignService {
+
+    @Value("${custom.path}")
+    String customPath;
 
     @Autowired
     FileSignMapper fileSignMapper;
@@ -34,7 +46,8 @@ public class FileSignService {
     AuditServie auditServie;
 
     @Transactional
-    public String addFlowSignFlow(FileSign fileSign, FlowNode firstNode, FlowNode secondNode, FlowNode thirdNode){
+    public String addFlowSignFlow(FileSign fileSign, FlowNode firstNode, FlowNode secondNode,
+                                  FlowNode thirdNode, MultipartFile file){
         //创建流程
         Flow flow = new Flow();
         flow.setFlowNo(CommonUtil.randomUid(12));
@@ -98,6 +111,11 @@ public class FileSignService {
         fileSign.setCurrentNode(firstNode.getId());
         fileSign.setGmtCreate(CommonUtil.getNowTime());
         fileSign.setGmtModified(CommonUtil.getNowTime());
+        //保存文件
+        String originalFilename = file.getOriginalFilename();
+        String savePath = customPath+"/"+flow.getFlowNo()+"/"+originalFilename.substring(0,originalFilename.lastIndexOf("."));
+        savePath = FileUtil.getInstance().save(savePath,file);
+        fileSign.setFilePath(savePath);
         fileSignMapper.insertFileSign(fileSign);
 
 
@@ -149,5 +167,31 @@ public class FileSignService {
 
 
         return "审批成功";
+    }
+
+    public FileSign findFileSignById(int id){
+        return fileSignMapper.findFileSignById(id);
+    }
+
+    public Page<FileSign> getFileSignPage(FileSign fileSign, int currentPageNumber, int pageSize){
+        int startIndex = (currentPageNumber-1)*pageSize;
+        Map<String,Object> map = new HashMap<>(4);
+        map.put("fileSign",fileSign);
+        map.put("startIndex",startIndex);
+        map.put("pageSize",pageSize);
+        int totalCount = fileSignMapper.countTotal(fileSign);
+        Page page = new Page(currentPageNumber,totalCount);
+
+        List<FileSign> records = fileSignMapper.listFileSign(map);
+        page.setRecords(records);
+        return page;
+    }
+
+    public void downloadSignFile(int id , HttpServletResponse response){
+        Optional<FileSign> optional = Optional.ofNullable(fileSignMapper.findFileSignById(id));
+        if (!optional.isPresent()){
+            throw new APIException("文档不存在");
+        }
+        FileUtil.getInstance().download(optional.get().getFilePath(), response);
     }
 }

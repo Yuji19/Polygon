@@ -1,5 +1,7 @@
 package com.yuji.polygon.entity;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -14,14 +16,18 @@ public class Audit {
 
     private int businessNo;
 
+    @NotNull(message = "流程节点编号不能为空")
     private int flowNodeNo;
 
+    @NotNull(message = "审批者员工编号不能为空")
     private String employeeNo;
 
+    @NotNull(message = "审批者员工编号不能为空")
     private String employeeName;
 
     private String auditInfo;
 
+    @NotNull(message = "审批状态不能为空")
     private int auditState;
 
     private Date auditDate;

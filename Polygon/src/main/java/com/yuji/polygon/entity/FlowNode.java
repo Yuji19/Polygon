@@ -1,5 +1,6 @@
 package com.yuji.polygon.entity;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -16,8 +17,10 @@ public class FlowNode {
 
     private String flowNodeName;
 
+    @NotNull(message = "审批者员工编号不能为空")
     private String employeeNo;
 
+    @NotNull(message = "审批者姓名不能为空")
     private String employeeName;
 
     private Date gmtCreate;

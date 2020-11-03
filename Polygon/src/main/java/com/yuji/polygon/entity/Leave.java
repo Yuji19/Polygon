@@ -1,6 +1,7 @@
 package com.yuji.polygon.entity;
 
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -13,16 +14,22 @@ public class Leave {
 
     private int id;
 
+    @NotNull(message = "请假人员工编号不能为空")
     private String employeeNo;
 
+    @NotNull(message = "请假人姓名不能为空")
     private String employeeName;
 
+    @NotNull(message = "请假类型不能为空")
     private String leaveType;
 
+    @NotNull(message = "请假原因不能为空")
     private String leaveReason;
 
+    @NotNull(message = "开始日期不能为空")
     private Date startDate;
 
+    @NotNull(message = "结束日期不能为空")
     private Date endDate;
 
     private String flowNo;

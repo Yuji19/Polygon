@@ -27,7 +27,7 @@ public class ArchiveService  {
     @Value("${custom.path}")
     String customPath;
 
-    public ResultVO insertArchive(Archive archive, MultipartFile file){
+    public String insertArchive(Archive archive, MultipartFile file){
         Archive oldArchive = archiveMapper.findArchiveByFileNo(archive.getFileNo());
         Optional.ofNullable(oldArchive)
                 .ifPresent(o -> {
@@ -45,21 +45,21 @@ public class ArchiveService  {
         String newPath = FileUtil.getInstance().save(path,file);
         archive.setFilePath(newPath);
         if(Optional.ofNullable(archiveMapper.insertArchive(archive)).isPresent()){
-            return new ResultVO("添加文档成功");
+            return "添加文档成功";
         }else {
-            return new ResultVO(ResultCode.FAILED,"添加文档失败");
+            throw new APIException("添加文档失败");
         }
 
     }
 
 
-    public ResultVO downloadArchive(String fileNo, HttpServletResponse response) {
+    public void downloadArchive(String fileNo, HttpServletResponse response) {
         Optional<Archive> optional = Optional.ofNullable(archiveMapper.findArchiveByFileNo(fileNo));
         if (!optional.isPresent()){
             throw new APIException("文档不存在");
         }
         FileUtil.getInstance().download(optional.get().getFilePath(), response);
-        return new ResultVO("文档下载成功");
+
     }
 
 
@@ -71,12 +71,12 @@ public class ArchiveService  {
         //结果集
         List<Archive> records = archiveMapper.listArchives(map);
         //总记录数
-        int totalCount = archiveMapper.countTotal(map);
+        int totalCount = archiveMapper.countTotal(archive);
         return new Page(pageNum,totalCount,records);
     }
 
 
-    public ResultVO updateArchive(Archive archive) {
+    public int updateArchive(Archive archive) {
 
         //若发放日期年份、文档类型更改
         Archive oldArchive = archiveMapper.findArchiveById(archive.getId());
@@ -131,11 +131,11 @@ public class ArchiveService  {
 
         }
         //update操作返回受影响的行数
-        return archiveMapper.updateArchive(archive) == 0 ? new ResultVO(ResultCode.FAILED,"更新失败") : new ResultVO("更新成功");
+        return archiveMapper.updateArchive(archive);
     }
 
 
-    public ResultVO deleteArchive(Long[] aids) {
-        return archiveMapper.deleteArchiveById(aids) == 0 ? new ResultVO(ResultCode.FAILED,"删除失败") : new ResultVO("删除成功");
+    public int deleteArchive(Long[] aids) {
+        return archiveMapper.deleteArchiveById(aids);
     }
 }

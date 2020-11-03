@@ -59,7 +59,7 @@
             <if test="flowNo != null and flowNo != '' ">
                 and flow_no = #{flowNo}
             </if>
-            <if test="flowState != null and flowState != '' ">
+            <if test="flowState &gt; -1 and flowState &lt; 2 ">
                 and flow_state = #{flowState}
             </if>
         </where>
@@ -81,7 +81,7 @@
                 <if test="leave.flowNo != null and leave.flowNo != '' ">
                     and flow_no = #{leave.flowNo}
                 </if>
-                <if test="leave.flowState != null and leave.flowState != '' ">
+                <if test="leave.flowState &gt; -1 and leave.flowState &lt; 2 ">
                     and flow_state = #{leave.flowState}
                 </if>
             </if>

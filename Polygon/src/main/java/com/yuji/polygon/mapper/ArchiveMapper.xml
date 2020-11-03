@@ -27,37 +27,33 @@
     </insert>
 
 
-    <select id="countTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+    <select id="countTotal"  resultType="java.lang.Integer">
         select count(*) from poly_archive
         <where>
-            <if test="archive != null ">
-                <if test="archive.fileNo != null and archive.fileNo != '' ">
-                    file_no like CONCAT(#{archive.fileNo},'%')
+                <if test="fileNo != null and fileNo != '' ">
+                    file_no like CONCAT(#{fileNo},'%')
                 </if>
-                <if test="archive.fileName != null and archive.fileName != '' ">
-                    and file_name like CONCAT(#{archive.fileName},'%')
+                <if test="fileName != null and fileName != '' ">
+                    and file_name like CONCAT(#{fileName},'%')
                 </if>
-                <if test="archive.editOffice != null and archive.editOffice != '' ">
-                    and edit_office = #{archive.editOffice}
+                <if test="editOffice != null and editOffice != '' ">
+                    and edit_office = #{editOffice}
                 </if>
-                <if test="archive.editPerson != null and archive.editPerson != '' ">
-                    and edit_person like CONCAT(#{archive.editPerson},'%')
+                <if test="editPerson != null and editPerson != '' ">
+                    and edit_person like CONCAT(#{editPerson},'%')
                 </if>
-                <if test="archive.fileType != null and archive.fileType != '' ">
-                    and file_type = #{archive.fileType}
+                <if test="fileType != null and fileType != '' ">
+                    and file_type = #{fileType}
                 </if>
-                <if test="archive.status != null and archive.issueDate != '' ">
-                    and status = #{archive.status}
+                <if test="status != null and issueDate != '' ">
+                    and status = #{status}
                 </if>
-                <if test="archive.issueDate != null and archive.issueDate != '' ">
-                    and issue_date like CONCAT(#{archive.issueDate},'%')
+                <if test="issueDate != null and issueDate != '' ">
+                    and issue_date like CONCAT(#{issueDate},'%')
                 </if>
-                <if test="archive.newVersion != null and archive.newVersion != '' ">
-                    and is_new = #{archive.newVersion}
+                <if test="newVersion != null and newVersion != '' ">
+                    and is_new = #{newVersion}
                 </if>
-            </if>
-
-
         </where>
     </select>
 

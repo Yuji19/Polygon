@@ -32,22 +32,22 @@ public class ArchiveController {
     }
 
     @PostMapping("/add")
-    public ResultVO insert(@Valid Archive archive, MultipartFile file){
+    public String insert(@Valid Archive archive, MultipartFile file){
         return archiveService.insertArchive(archive, file);
     }
 
     @GetMapping("/download")
-    public ResultVO download(String fileNo, HttpServletResponse response){
-        return archiveService.downloadArchive(fileNo, response);
+    public void download(String fileNo, HttpServletResponse response){
+        archiveService.downloadArchive(fileNo, response);
     }
 
     @PutMapping("/update")
-    public ResultVO update(@RequestBody @Valid Archive archive){
+    public int update(@RequestBody @Valid Archive archive){
         return archiveService.updateArchive(archive);
     }
 
     @GetMapping("/delete")
-    public ResultVO delete(Long[] aids){
+    public int delete(Long[] aids){
         return archiveService.deleteArchive(aids);
     }
 

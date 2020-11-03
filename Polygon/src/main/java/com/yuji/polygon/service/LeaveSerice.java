@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -142,14 +140,13 @@ public class LeaveSerice {
     }
 
 
-    public ResultVO<Leave> findLeaveById(int id) {
-        Leave leave = leaveMapper.findLeaveById(id);
-        return new ResultVO<>(leave);
+    public Leave findLeaveById(int id) {
+        return leaveMapper.findLeaveById(id);
     }
 
-    public Page<Leave> listLeavePage(Leave leave, int currentPageNumber, int pageSize){
+    public Page<Leave> getLeavePage(Leave leave, int currentPageNumber, int pageSize){
         int startIndex = (currentPageNumber-1)*pageSize;
-        Map<String,Object> map = new HashMap<String, Object>(4);
+        Map<String,Object> map = new HashMap<>(4);
         map.put("leave",leave);
         map.put("startIndex",startIndex);
         map.put("pageSize",pageSize);

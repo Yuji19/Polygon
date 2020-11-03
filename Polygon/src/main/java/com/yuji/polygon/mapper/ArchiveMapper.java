@@ -18,7 +18,7 @@ import java.util.Map;
 public interface ArchiveMapper {
     int insertArchive(Archive archive);
 
-    int countTotal(Map<String, Object> map);
+    int countTotal(Archive archive);
 
     List<Archive> listArchives(Map<String, Object> map);
 

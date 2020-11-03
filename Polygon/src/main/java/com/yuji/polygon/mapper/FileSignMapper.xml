@@ -41,5 +41,51 @@
     <select id="findFileSignById" resultType="com.yuji.polygon.entity.FileSign" >
         select * from poly_file_sign where id = #{id}
     </select>
+    
+    <select id="countTotal" parameterType="com.yuji.polygon.entity.FileSign" >
+        select count(*) from poly_file_sign
+        <where>
+            <if test="id &gt; 0">
+                and id = #{id}
+            </if>
+            <if test="emlpoyeeNo != null and employeeNo != '' ">
+                and employee_no = #{employeeNo}
+            </if>
+            <if test="projectNo != null and projectNo != '' ">
+                and project_no = #{projectNo}
+            </if>
+            <if test="flowNo != null and flowNo != '' ">
+                and flow_no = #{flowNo}
+            </if>
+            <if test="flowState &gt; -1 and flowState &lt; 2">
+                and flowState = #{flowState}
+            </if>
+        </where>
+    </select>
+
+    <select id="listFileSign" parameterType="java.util.Map" resultType="com.yuji.polygon.entity.FileSign">
+        select count(*) from poly_file_sign
+        <where>
+            <if test="fileSign != null">
+                <if test="fileSign.id &gt; 0">
+                    and id = #{id}
+                </if>
+                <if test="fileSign.emlpoyeeNo != null and fileSign.employeeNo != '' ">
+                    and employee_no = #{fileSign.employeeNo}
+                </if>
+                <if test="fileSign.projectNo != null and fileSign.projectNo != '' ">
+                    and project_no = #{fileSign.projectNo}
+                </if>
+                <if test="fileSign.flowNo != null and fileSign.flowNo != '' ">
+                    and flow_no = #{fileSign.flowNo}
+                </if>
+                <if test="fileSign.flowState &gt; -1 and fileSign.flowState &lt; 2">
+                    and flowState = #{fileSign.flowState}
+                </if>
+            </if>
+
+        </where>
+        order by gmt_modified desc limit #{startIndex},#{pageSize}
+    </select>
 
 </mapper>

@@ -3,6 +3,9 @@ package com.yuji.polygon.mapper;
 import com.yuji.polygon.entity.FileSign;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @interface: FileSignMapper
  * @description: TODO
@@ -18,4 +21,8 @@ public interface FileSignMapper {
     int updateFileSign(FileSign fileSign);
 
     FileSign findFileSignById(int id);
+
+    int countTotal(FileSign fileSign);
+
+    List<FileSign> listFileSign(Map<String,Object> map);
 }
