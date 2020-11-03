@@ -57,6 +57,7 @@ public class LogAspect {
         //后端响应数据
         Object result = null;
         try {
+            //proceed方法启动目标方法执行
             result = joinPoint.proceed();
             ObjectMapper json = new ObjectMapper();
             logger.info("------RESULT: "+json.writeValueAsString(result));
@@ -65,7 +66,7 @@ public class LogAspect {
         }
 
 
-        return request;
+        return result;
 
     }
 
