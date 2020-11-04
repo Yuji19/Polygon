@@ -1,18 +1,16 @@
 package com.yuji.polygon.config;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yuji.polygon.util.LogSqlUtil;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -43,47 +41,35 @@ public class LogAspect {
     @Pointcut("execution(public * com.yuji.polygon.mapper.*.*(..))")
     public void mapperLog(){}
 
-    //环绕通知
-    @Around("controllerLog()")
-    public Object logAroundController(ProceedingJoinPoint joinPoint){
-        //获取请求
-        RequestAttribute requestAttribute = (RequestAttribute) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = ((ServletRequestAttributes)requestAttribute).getRequest();
+    @Before("controllerLog()")
+    public void logBeforeController(JoinPoint joinPoint){
+        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = requestAttributes.getRequest();
 
-        logger.info("------URL: "+request.getRequestURL());
-        logger.info("------PARAMS: "+ Arrays.toString(joinPoint.getArgs()));
-        logger.info("------CLASS_METHOD: "+joinPoint.getSignature().getDeclaringTypeName()+"."+joinPoint.getSignature().getName());
+        String tag = joinPoint.getSignature().getDeclaringTypeName();
 
-        //后端响应数据
-        Object result = null;
+        logger.info(tag,"url: "+request.getRequestURL());
+        logger.info(tag,"params: "+ Arrays.toString(joinPoint.getArgs()));
+        logger.info(tag,"method: "+ joinPoint.getSignature().getName());
+    }
+
+    //returning的值必须与方法的参数名一致,不然无法绑定
+    @AfterReturning(pointcut = "controllerLog()",returning = "result")
+    public void logAfterController(JoinPoint joinPoint, Object result){
+        String tag = joinPoint.getSignature().getDeclaringTypeName();
+        ObjectMapper json = new ObjectMapper();
         try {
-            //proceed方法启动目标方法执行
-            result = joinPoint.proceed();
-            ObjectMapper json = new ObjectMapper();
-            logger.info("------RESULT: "+json.writeValueAsString(result));
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
+            logger.info(tag,"result: "+json.writeValueAsString(result));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
         }
-
-
-        return result;
-
     }
 
 
-    @Around("mapperLog()")
-    public Object logAroundMapper(ProceedingJoinPoint joinPoint){
-
-        logger.info("------SQL: "+ LogSqlUtil.getMybatisSql(joinPoint,sqlSessionFactory));
-
-        Object result = null;
-        try {
-            result = joinPoint.proceed();
-        }catch (Throwable throwable){
-            throwable.printStackTrace();
-        }
-
-        return result;
+    @After("mapperLog()")
+    public void logBeforeMapper(JoinPoint joinPoint){
+        String tag = joinPoint.getSignature().getDeclaringTypeName();
+        logger.info(tag,"sql: "+LogSqlUtil.getMybatisSql(joinPoint,sqlSessionFactory));
     }
 
 }

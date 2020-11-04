@@ -8,7 +8,7 @@ import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.TypeHandlerRegistry;
-import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 
 import java.lang.annotation.Annotation;
@@ -20,7 +20,7 @@ import java.util.*;
 /**
  * @className: LogSqlUtil
  * @description: 用于解析mybatis的SQL语句的工具类
- * @author: 感谢伟大的互联网
+ * @author: 互联网
  * @create: 2020-10-26 21:37
  */
 public class LogSqlUtil {
@@ -43,8 +43,8 @@ public class LogSqlUtil {
         return map;
     }
 
-    public static String getMybatisSql(ProceedingJoinPoint joinPoint, SqlSessionFactory sqlSessionFactory){
-        Map<String,Object> map = new HashMap<String, Object>();
+    public static String getMybatisSql(JoinPoint joinPoint, SqlSessionFactory sqlSessionFactory){
+        Map<String,Object> map = new HashMap<>(8);
         //获取当前mapper的方法
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
