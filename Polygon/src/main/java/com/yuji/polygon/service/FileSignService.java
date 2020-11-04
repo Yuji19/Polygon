@@ -153,7 +153,7 @@ public class FileSignService {
         //获取请假单
         FileSign fileSign = fileSignMapper.findFileSignById(audit.getBusinessNo());
         //获取流程线
-        FlowLine flowLine = flowLineService.findFlowLineByPreNode(fileSign.getCurrentNode()).getData();
+        FlowLine flowLine = flowLineService.findFlowLineByPreNode(fileSign.getCurrentNode());
 
         if (flowLine == null || audit.getAuditState() == -1){
             //已到流程的终点，设置节点为0，流程结束
@@ -193,5 +193,16 @@ public class FileSignService {
             throw new APIException("文档不存在");
         }
         FileUtil.getInstance().download(optional.get().getFilePath(), response);
+    }
+
+    @Transactional
+    public String deleteFileSignById(int id){
+        String flowNo = fileSignMapper.findFileSignById(id).getFlowNo();
+        fileSignMapper.deleteFileSignById(id);
+        flowService.deleteFlowByFlowNo(flowNo);
+        flowNodeService.deleteFlowNodeByFlowNo(flowNo);
+        flowLineService.deleteFlowLineByFlowNo(flowNo);
+        auditServie.deleteAuditByBusinessNo(id);
+        return "删除成功";
     }
 }

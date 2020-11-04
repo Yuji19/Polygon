@@ -16,4 +16,6 @@ public interface FlowLineMapper {
     int insertFlowLine(FlowLine flowLine);
 
     FlowLine findFlowLineByPreNode(int preNode);
+
+    int deleteFlowLineByFlowNo(String flowNo);
 }

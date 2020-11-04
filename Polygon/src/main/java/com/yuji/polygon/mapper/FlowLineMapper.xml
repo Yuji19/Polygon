@@ -27,4 +27,8 @@
     </select>
 
 
+    <delete id="deleteFlowLineByFlowNo">
+        delete from poly_flow_line where flow_no = #{flowNo}
+    </delete>
+
 </mapper>

@@ -4,12 +4,9 @@ import com.yuji.polygon.entity.Audit;
 import com.yuji.polygon.entity.FlowNode;
 import com.yuji.polygon.entity.Leave;
 import com.yuji.polygon.entity.Page;
-import com.yuji.polygon.service.LeaveSerice;
+import com.yuji.polygon.service.LeaveService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -25,7 +22,7 @@ import javax.validation.Valid;
 public class LeaveController {
 
     @Autowired
-    LeaveSerice leaveSerice;
+    LeaveService leaveSerice;
 
     @PostMapping("/add")
     public String addLeaveFlow(@Valid Leave leave, @Valid FlowNode firstNode, @Valid FlowNode secondNode){
@@ -40,6 +37,11 @@ public class LeaveController {
     @PostMapping("/page")
     public Page getLeavePage(Leave leave, int currentPageNumber, int pageSize){
         return leaveSerice.getLeavePage(leave,currentPageNumber,pageSize);
+    }
+
+    @GetMapping("/delete")
+    public String deleteLeaveFlow(int id){
+        return leaveSerice.deleteLeaveFlow(id);
     }
 
 }

@@ -23,7 +23,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 public class ResponseControllerAdvice implements ResponseBodyAdvice<Object> {
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
-        return !methodParameter.getGenericParameterType().equals(ResultVO.class);
+        //只需要判断泛型类的类型，不需要判断具体泛型中指定类型实参的类型，调用getParameterType()
+        return !methodParameter.getParameterType().equals(ResultVO.class);
     }
 
     @Override

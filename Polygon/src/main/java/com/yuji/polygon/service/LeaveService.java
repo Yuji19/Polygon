@@ -21,7 +21,7 @@ import java.util.Map;
  */
 
 @Service
-public class LeaveSerice {
+public class LeaveService {
 
     @Autowired
     LeaveMapper leaveMapper;
@@ -123,7 +123,7 @@ public class LeaveSerice {
         //获取请假单
         Leave leave = leaveMapper.findLeaveById(audit.getBusinessNo());
         //获取流程线
-        FlowLine flowLine = flowLineService.findFlowLineByPreNode(leave.getCurrentNode()).getData();
+        FlowLine flowLine = flowLineService.findFlowLineByPreNode(leave.getCurrentNode());
 
         if (flowLine == null || audit.getAuditState() == -1){
             //已到流程的终点，设置节点为0，流程结束
@@ -144,6 +144,7 @@ public class LeaveSerice {
         return leaveMapper.findLeaveById(id);
     }
 
+    @Transactional
     public Page<Leave> getLeavePage(Leave leave, int currentPageNumber, int pageSize){
         int startIndex = (currentPageNumber-1)*pageSize;
         Map<String,Object> map = new HashMap<>(4);
@@ -157,4 +158,16 @@ public class LeaveSerice {
         page.setRecords(records);
         return page;
     }
+
+    public String deleteLeaveFlow(int id){
+        String flowNo = leaveMapper.findLeaveById(id).getFlowNo();
+        leaveMapper.deleteLeaveById(id);
+        flowService.deleteFlowByFlowNo(flowNo);
+        flowNodeService.deleteFlowNodeByFlowNo(flowNo);
+        flowLineService.deleteFlowLineByFlowNo(flowNo);
+        auditServie.deleteAuditByBusinessNo(id);
+
+        return "删除成功";
+    }
+
 }

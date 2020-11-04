@@ -1,8 +1,6 @@
 package com.yuji.polygon.service;
 
 import com.yuji.polygon.entity.Flow;
-import com.yuji.polygon.entity.ResultCode;
-import com.yuji.polygon.entity.ResultVO;
 import com.yuji.polygon.mapper.FlowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +18,11 @@ public class FlowService {
     @Autowired
     FlowMapper flowMapper;
 
-    public ResultVO insertFlow(Flow flow) {
-        return (flowMapper.insertFlow(flow) > 0 ? new ResultVO("创建流程成功") : new ResultVO(ResultCode.FAILED,"创建流程失败"));
+    public int insertFlow(Flow flow) {
+        return flowMapper.insertFlow(flow);
+    }
+
+    public int deleteFlowByFlowNo(String flowNo){
+        return flowMapper.deleteFlowByFlowNo(flowNo);
     }
 }

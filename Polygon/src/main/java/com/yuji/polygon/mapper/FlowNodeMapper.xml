@@ -28,4 +28,8 @@
         select * from poly_flow_node where id = #{id}
     </select>
 
+    <delete id="deleteFlowNodeByFlowNo">
+        delete from poly_flow_node where flow_no = #{flowNo}
+    </delete>
+
 </mapper>

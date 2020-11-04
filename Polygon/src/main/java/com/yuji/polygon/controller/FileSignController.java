@@ -46,4 +46,9 @@ public class FileSignController {
     public void downloadFileSign(int id, HttpServletResponse response){
         fileSignService.downloadSignFile(id,response);
     }
+
+    @GetMapping("/delete")
+    public String deleteFileSignFlow(int id){
+        return fileSignService.deleteFileSignById(id);
+    }
 }

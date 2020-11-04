@@ -90,4 +90,8 @@
         order by gmt_modified desc limit #{startIndex},#{pageSize}
     </select>
 
+    <delete id="deleteLeaveById">
+        delete from poly_leave where id = #{id}
+    </delete>
+
 </mapper>

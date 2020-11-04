@@ -25,4 +25,6 @@ public interface FileSignMapper {
     int countTotal(FileSign fileSign);
 
     List<FileSign> listFileSign(Map<String,Object> map);
+
+    int deleteFileSignById(int id);
 }

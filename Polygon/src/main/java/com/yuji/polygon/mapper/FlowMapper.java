@@ -14,4 +14,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface FlowMapper {
 
     int insertFlow(Flow flow);
+
+    int deleteFlowByFlowNo(String flowNo);
 }

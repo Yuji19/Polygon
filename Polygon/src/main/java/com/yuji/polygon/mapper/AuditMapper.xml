@@ -41,4 +41,8 @@
         select * from poly_audit where employee_no = #{employeeNo}
     </select>
 
+    <delete id="deleteAuditByBusinessNo">
+        delete from poly_audit where business_no = #{businessNo}
+    </delete>
+
 </mapper>

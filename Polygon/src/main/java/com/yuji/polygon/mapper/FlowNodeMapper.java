@@ -16,4 +16,6 @@ public interface FlowNodeMapper {
     int insertFlowNode(FlowNode flowNode);
 
     FlowNode findFlowNodeById(int id);
+
+    int deleteFlowNodeByFlowNo(String flowNo);
 }

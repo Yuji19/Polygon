@@ -18,4 +18,6 @@ public interface AuditMapper {
     int updateAudit(Audit audit);
 
     Audit findAuditByEmployeeNo(String employeeNo);
+
+    int deleteAuditByBusinessNo(int businessNo);
 }

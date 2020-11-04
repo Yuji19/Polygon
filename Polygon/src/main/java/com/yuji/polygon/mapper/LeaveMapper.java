@@ -25,4 +25,7 @@ public interface LeaveMapper {
     int countTotal(Leave leave);
 
     List<Leave> listLeave(Map<String,Object> map);
+
+    int deleteLeaveById(int id);
+
 }

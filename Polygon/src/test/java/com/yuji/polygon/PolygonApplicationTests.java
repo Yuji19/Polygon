@@ -40,7 +40,7 @@ class PolygonApplicationTests {
     @Test
     void contextLoads() {
 
-        Audit audit = auditServie.findAuditByEmpolyeeNo("X000").getData();
+        Audit audit = auditServie.findAuditByEmpolyeeNo("X000");
         auditServie.updateAudit(audit);
 
     }
@@ -60,8 +60,8 @@ class PolygonApplicationTests {
         flow.setGmtCreate(date);
         flow.setGmtModified(date);
 
-        ResultVO flowResult = flowService.insertFlow(flow);
-        System.out.println(flowResult.getData());
+        int flowResult = flowService.insertFlow(flow);
+        System.out.println(flowResult);
 
         //创建流程节点
         FlowNode firstNode = new FlowNode();
@@ -89,8 +89,8 @@ class PolygonApplicationTests {
         firstLine.setNextNode(firstNode.getId());
         firstLine.setGmtCreate(date);
         firstLine.setGmtModified(date);
-        ResultVO firstLineResult = flowLineService.insertFlowLine(firstLine);
-        System.out.println(firstLineResult.getData());
+        int firstLineResult = flowLineService.insertFlowLine(firstLine);
+        System.out.println(firstLineResult);
 
         FlowLine secondLine = new FlowLine();
         secondLine.setFlowNo(flow.getFlowNo());
@@ -98,8 +98,8 @@ class PolygonApplicationTests {
         secondLine.setNextNode(secondNode.getId());
         secondLine.setGmtCreate(date);
         secondLine.setGmtModified(date);
-        ResultVO secondLineResult = flowLineService.insertFlowLine(secondLine);
-        System.out.println(secondLineResult.getData());
+        int secondLineResult = flowLineService.insertFlowLine(secondLine);
+        System.out.println(secondLineResult);
 
         //创建请假单
         Leave leave = new Leave();
@@ -125,16 +125,16 @@ class PolygonApplicationTests {
         firstAudit.setEmployeeNo(firstNode.getEmployeeNo());
         firstAudit.setEmployeeName(firstNode.getEmployeeName());
         firstAudit.setFlowNodeNo(firstNode.getId());
-        ResultVO firstAuditResult = auditServie.insertAudit(firstAudit);
-        System.out.println(firstAuditResult.getData());
+        int firstAuditResult = auditServie.insertAudit(firstAudit);
+        System.out.println(firstAuditResult);
 
         Audit secondAudit = new Audit();
         secondAudit.setBusinessNo(leave.getId());
         secondAudit.setEmployeeNo(secondNode.getEmployeeNo());
         secondAudit.setEmployeeName(secondNode.getEmployeeName());
         secondAudit.setFlowNodeNo(secondNode.getId());
-        ResultVO secondAuditResult = auditServie.insertAudit(secondAudit);
-        System.out.println(secondAuditResult.getData());
+        int secondAuditResult = auditServie.insertAudit(secondAudit);
+        System.out.println(secondAuditResult);
         throw new APIException("事务回滚");
     }
 
@@ -146,7 +146,7 @@ class PolygonApplicationTests {
 
         //先模拟成功通过的流程
         //更新审批表
-        Audit audit = auditServie.findAuditByEmpolyeeNo("X000").getData();
+        Audit audit = auditServie.findAuditByEmpolyeeNo("X000");
         System.out.println(audit);
         audit.setAuditInfo("同意");
         audit.setAuditState(1);
@@ -155,9 +155,9 @@ class PolygonApplicationTests {
         //获取请假单
         Leave leave = leaveMapper.findLeaveById(audit.getBusinessNo());
         //获取流程线
-        FlowLine flowLine = flowLineService.findFlowLineByPreNode(leave.getCurrentNode()).getData();
+        FlowLine flowLine = flowLineService.findFlowLineByPreNode(leave.getCurrentNode());
         //根据更新结果，更新请假单
-        if (auditServie.updateAudit(audit).getCode() == ConstantValue.SUCCESS_CODE){
+        if (auditServie.updateAudit(audit) > 0){
             if (flowLine == null || audit.getAuditState() == -1){
                 //已到流程的终点，设置节点为0，流程结束
                 leave.setCurrentNode(0);
@@ -177,7 +177,7 @@ class PolygonApplicationTests {
     @Test
     public void LeaveFlowAgainst(){
 
-        Audit audit = auditServie.findAuditByEmpolyeeNo("Z000").getData();
+        Audit audit = auditServie.findAuditByEmpolyeeNo("Z000");
         audit.setAuditInfo("ok");
         audit.setAuditState(1);
         audit.setAuditDate(new Date());
@@ -185,9 +185,9 @@ class PolygonApplicationTests {
         //获取请假单
         Leave leave = leaveMapper.findLeaveById(audit.getBusinessNo());
         //获取流程线
-        FlowLine flowLine = flowLineService.findFlowLineByPreNode(leave.getCurrentNode()).getData();
+        FlowLine flowLine = flowLineService.findFlowLineByPreNode(leave.getCurrentNode());
         //根据更新结果，更新请假单
-        if (auditServie.updateAudit(audit).getCode() == ConstantValue.SUCCESS_CODE){
+        if (auditServie.updateAudit(audit) > 0){
             if (flowLine == null || audit.getAuditState() == -1){
                 //已到流程的终点，设置节点为0，流程结束
                 leave.setCurrentNode(0);
