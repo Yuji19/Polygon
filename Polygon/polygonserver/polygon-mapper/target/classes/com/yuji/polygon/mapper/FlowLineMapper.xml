@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuji.polygon.mapper.FlowLineMapper">
+
+    <resultMap id="BaseResultMap" type="com.yuji.polygon.entity.FlowLine">
+        <id column="id" property="id"/>
+        <result column="flow_no" property="flowNo"/>
+        <result column="pre_node" property="preNode"/>
+        <result column="next_node" property="nextNode"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+
+
+    </resultMap>
+
+
+    <insert id="insertFlowLine" parameterType="com.yuji.polygon.entity.FlowLine" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into poly_flow_line set flow_no=#{flowNo}, pre_node=#{preNode}, next_node=#{nextNode},
+        gmt_create=#{gmtCreate}, gmt_modified=#{gmtModified}
+    </insert>
+
+    <select id="findFlowLineByPreNode" resultType="com.yuji.polygon.entity.FlowLine">
+        select * from poly_flow_line where pre_node = #{preNode}
+    </select>
+
+
+    <delete id="deleteFlowLineByFlowNo">
+        delete from poly_flow_line where flow_no = #{flowNo}
+    </delete>
+
+</mapper>
