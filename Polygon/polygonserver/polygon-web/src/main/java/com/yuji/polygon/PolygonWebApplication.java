@@ -3,6 +3,14 @@ package com.yuji.polygon;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
+/**
+ * @className: PolygonWebApplication
+ * @description: 启动类
+ * @author: yuji
+ * @create: 2020-11-09 10:59
+ **/
+
 @SpringBootApplication
 public class PolygonWebApplication {
 

@@ -5,9 +5,7 @@ spring:
     url: jdbc:mysql://localhost:3306/polygon?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useAffectedRows=true
     username: root
     password: 123456
-  groovy:
-    template:
-      resource-loader-path:
+
 
 server:
   port: 8080
@@ -18,4 +16,8 @@ custom:
 
 mybatis:
   config-location: classpath:/mybatis-config.xml
+logging:
+  file:
+    path: D:\\polygon\\log\\
+    name: polygonLog.log
 

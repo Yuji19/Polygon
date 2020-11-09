@@ -2,7 +2,6 @@ package com.yuji.polygon.advice;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.yuji.polygon.service.utils.LogSqlUtil;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -10,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import com.yuji.polygon.service.utils.LogSqlUtil;
 
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
