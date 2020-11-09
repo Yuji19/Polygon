@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuji.polygon.mapper.LeaveMapper">
+
+    <resultMap id="BaseResultMap" type="com.yuji.polygon.entity.Leave">
+        <id column="id" property="id"/>
+        <result column="employee_no" property="employeeNo"/>
+        <result column="employee_name" property="employeeName"/>
+        <result column="leave_type" property="leaveType"/>
+        <result column="leave_reason" property="leaveReason"/>
+        <result column="start_date" property="startDate"/>
+        <result column="end_date" property="endDate"/>
+        <result column="flow_no" property="flowNo"/>
+        <result column="flow_state" property="flowState"/>
+        <result column="current_node" property="currentNode"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+
+    </resultMap>
+
+
+    <insert id="insertLeave" parameterType="com.yuji.polygon.entity.Leave" useGeneratedKeys="true" keyProperty="id">
+        insert into poly_leave set employee_no=#{employeeNo}, employee_name=#{employeeName}, leave_type=#{leaveType},
+        leave_reason=#{leaveReason}
+        ,start_date=#{startDate}, end_date=#{endDate}, flow_no=#{flowNo}, flow_state=#{flowState},
+        current_node=#{currentNode}, gmt_create=#{gmtCreate}, gmt_modified=#{gmtModified}
+    </insert>
+
+
+    <update id="updateLeave" parameterType="com.yuji.polygon.entity.Leave">
+        update poly_leave set
+        flow_state = #{flowState},
+        <if test="currentNode &gt; -1">
+            current_node = #{currentNode},
+        </if>
+        <if test="gmtModified != null">
+            gmt_modified = #{gmtModified}
+        </if>
+        where flow_no = #{flowNo}
+    </update>
+
+    <select id="findLeaveById" resultType="com.yuji.polygon.entity.Leave">
+        select * from poly_leave where id = #{id}
+    </select>
+
+    <select id="countTotal" parameterType="com.yuji.polygon.entity.Leave">
+        select count(*) from poly_leave
+        <where>
+            <if test="id &gt; 0">
+                and id = #{id}
+            </if>
+            <if test="employeeNo != null and employeeNo != '' ">
+                and employee_no = #{employeeNo}
+            </if>
+            <if test="leaveType != null and leaveType != '' ">
+                and leave_type = #{leaveType}
+            </if>
+            <if test="flowNo != null and flowNo != '' ">
+                and flow_no = #{flowNo}
+            </if>
+            <if test="flowState &gt; -1 and flowState &lt; 2 ">
+                and flow_state = #{flowState}
+            </if>
+        </where>
+    </select>
+
+    <select id="listLeave" parameterType="java.util.Map" resultType="com.yuji.polygon.entity.Leave">
+        select * from poly_leave
+        <where>
+            <if test="leave != null">
+                <if test="leave.id &gt; 0">
+                    and id = #{leave.id}
+                </if>
+                <if test="leave.employeeNo != null and leave.employeeNo != '' ">
+                    and employee_no = #{leave.employeeNo}
+                </if>
+                <if test="leave.leaveType != null and leave.leaveType != '' ">
+                    and leave_type = #{leave.leaveType}
+                </if>
+                <if test="leave.flowNo != null and leave.flowNo != '' ">
+                    and flow_no = #{leave.flowNo}
+                </if>
+                <if test="leave.flowState &gt; -1 and leave.flowState &lt; 2 ">
+                    and flow_state = #{leave.flowState}
+                </if>
+            </if>
+
+        </where>
+        order by gmt_modified desc limit #{startIndex},#{pageSize}
+    </select>
+
+    <delete id="deleteLeaveById">
+        delete from poly_leave where id = #{id}
+    </delete>
+
+</mapper>
