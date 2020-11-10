@@ -19,4 +19,8 @@ public class ConstantValue {
     public final static String FILE_SING_TWO_AUDIT = "审核";
 
     public final static String FILE_SING_THREE_AUDIT = "审定";
+
+    public final static int LEAVE_AUDIT_LENGTH = 2;
+
+    public final static int FILE_SING_AUDIT_LENGTH = 3;
 }

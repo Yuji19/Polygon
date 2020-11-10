@@ -47,8 +47,7 @@ public class FileSignService {
     AuditServie auditServie;
 
     @Transactional
-    public String addFlowSignFlow(FileSign fileSign, FlowNode firstNode, FlowNode secondNode,
-                                  FlowNode thirdNode, MultipartFile file) {
+    public String addFlowSignFlow(FileSign fileSign,String[] eNo,String[] eName, MultipartFile file) {
         //创建流程
         Flow flow = new Flow();
         flow.setFlowNo(CommonUtil.randomUid(12));
@@ -60,19 +59,27 @@ public class FileSignService {
 
 
         //创建流程节点
+        FlowNode firstNode = new FlowNode();
+        firstNode.setEmployeeNo(eNo[0]);
+        firstNode.setEmployeeName(eName[0]);
         firstNode.setFlowNo(flow.getFlowNo());
         firstNode.setFlowNodeName(ConstantValue.FILE_SIGN_ONE_AUDIT);
         firstNode.setGmtCreate(CommonUtil.getNowTime());
         firstNode.setGmtModified(CommonUtil.getNowTime());
         flowNodeService.insertFlowNode(firstNode);
 
-
+        FlowNode secondNode = new FlowNode();
+        secondNode.setEmployeeNo(eNo[1]);
+        secondNode.setEmployeeName(eName[1]);
         secondNode.setFlowNo(flow.getFlowNo());
         secondNode.setFlowNodeName(ConstantValue.FILE_SING_THREE_AUDIT);
         secondNode.setGmtCreate(CommonUtil.getNowTime());
         secondNode.setGmtModified(CommonUtil.getNowTime());
         flowNodeService.insertFlowNode(secondNode);
 
+        FlowNode thirdNode = new FlowNode();
+        thirdNode.setEmployeeNo(eNo[2]);
+        thirdNode.setEmployeeName(eName[2]);
         thirdNode.setFlowNo(flow.getFlowNo());
         thirdNode.setFlowNodeName(ConstantValue.FILE_SING_TWO_AUDIT);
         thirdNode.setGmtCreate(CommonUtil.getNowTime());

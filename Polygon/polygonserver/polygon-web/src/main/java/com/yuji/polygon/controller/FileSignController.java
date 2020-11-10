@@ -1,10 +1,8 @@
 package com.yuji.polygon.controller;
 
-import com.yuji.polygon.entity.Audit;
-import com.yuji.polygon.entity.FileSign;
-import com.yuji.polygon.entity.FlowNode;
-import com.yuji.polygon.entity.Page;
+import com.yuji.polygon.entity.*;
 import com.yuji.polygon.service.FileSignService;
+import com.yuji.polygon.service.utils.ConstantValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,27 +25,29 @@ public class FileSignController {
     FileSignService fileSignService;
 
     @PostMapping("/add")
-    public String addFlowSignFlow(@Valid FileSign fileSign, @Valid FlowNode firstNode, @Valid FlowNode secondNode,
-                                  FlowNode thirdNode, MultipartFile file){
-        return fileSignService.addFlowSignFlow(fileSign,firstNode,secondNode,thirdNode,file);
+    public String addFlowSignFlow(@Valid FileSign fileSign, String[] eNo,String[] eName, MultipartFile file){
+        if (eNo.length < ConstantValue.FILE_SING_AUDIT_LENGTH || eName.length < ConstantValue.FILE_SING_AUDIT_LENGTH){
+            throw new APIException(ResultCode.VALIDATE_FAILED.getCode(),"签审者不足");
+        }
+        return fileSignService.addFlowSignFlow(fileSign,eNo,eName,file);
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     public String updateFileSignFlow(@RequestBody @Valid Audit audit){
         return fileSignService.updateFileSignFlow(audit);
     }
 
-    @PostMapping("/page")
+    @GetMapping("/page")
     public Page getFileSignPage(FileSign fileSign, int currentPageNumber, int pageSize){
         return fileSignService.getFileSignPage(fileSign,currentPageNumber,pageSize);
     }
 
-    @GetMapping("/download")
+    @GetMapping("/download/{id}")
     public void downloadFileSign(int id, HttpServletResponse response){
         fileSignService.downloadSignFile(id,response);
     }
 
-    @GetMapping("/delete")
+    @DeleteMapping("/delete/{id}")
     public String deleteFileSignFlow(int id){
         return fileSignService.deleteFileSignById(id);
     }
