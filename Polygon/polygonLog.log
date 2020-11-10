@@ -1,0 +1,136 @@
+2020-11-09 20:12:42.847  INFO 8828 --- [main] com.yuji.polygon.PolygonWebApplication   : Starting PolygonWebApplication on W20-201998 with PID 8828 (F:\project\Polygon\polygon\polygonserver\polygon-web\target\classes started by 201998 in F:\project\Polygon\polygon)
+2020-11-09 20:12:42.850  INFO 8828 --- [main] com.yuji.polygon.PolygonWebApplication   : No active profile set, falling back to default profiles: default
+2020-11-09 20:12:43.840  INFO 8828 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-09 20:12:43.846  INFO 8828 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-09 20:12:43.847  INFO 8828 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.37]
+2020-11-09 20:12:43.984  INFO 8828 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-09 20:12:43.984  INFO 8828 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1104 ms
+2020-11-09 20:12:44.601  INFO 8828 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-09 20:12:44.873  INFO 8828 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-09 20:12:44.881  INFO 8828 --- [main] com.yuji.polygon.PolygonWebApplication   : Started PolygonWebApplication in 2.358 seconds (JVM running for 3.135)
+2020-11-09 20:16:07.419  INFO 10148 --- [main] com.yuji.polygon.PolygonWebApplication   : Starting PolygonWebApplication on W20-201998 with PID 10148 (F:\project\Polygon\polygon\polygonserver\polygon-web\target\classes started by 201998 in F:\project\Polygon\polygon)
+2020-11-09 20:16:07.422  INFO 10148 --- [main] com.yuji.polygon.PolygonWebApplication   : No active profile set, falling back to default profiles: default
+2020-11-09 20:16:08.551  INFO 10148 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-09 20:16:08.559  INFO 10148 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-09 20:16:08.559  INFO 10148 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.37]
+2020-11-09 20:16:08.698  INFO 10148 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-09 20:16:08.698  INFO 10148 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1232 ms
+2020-11-09 20:16:09.333  INFO 10148 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-09 20:16:09.590  INFO 10148 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-09 20:16:09.598  INFO 10148 --- [main] com.yuji.polygon.PolygonWebApplication   : Started PolygonWebApplication in 2.568 seconds (JVM running for 3.188)
+2020-11-09 20:16:12.805  INFO 10148 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-09 20:16:12.806  INFO 10148 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-09 20:16:12.812  INFO 10148 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2020-11-09 20:16:12.870  INFO 10148 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.controller.LeaveController
+2020-11-09 20:16:12.870  INFO 10148 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.controller.LeaveController
+2020-11-09 20:16:12.870  INFO 10148 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.controller.LeaveController
+2020-11-09 20:16:12.971  INFO 10148 --- [http-nio-8080-exec-1] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-11-09 20:16:15.216  INFO 10148 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.mapper.FlowMapper
+2020-11-09 20:16:15.291  INFO 10148 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.mapper.FlowNodeMapper
+2020-11-09 20:16:15.293  INFO 10148 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.mapper.FlowNodeMapper
+2020-11-09 20:16:15.298  INFO 10148 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.mapper.FlowLineMapper
+2020-11-09 20:16:15.300  INFO 10148 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.mapper.FlowLineMapper
+2020-11-09 20:16:15.483  INFO 10148 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.mapper.LeaveMapper
+2020-11-09 20:17:34.116  INFO 8220 --- [main] com.yuji.polygon.PolygonWebApplication   : Starting PolygonWebApplication on W20-201998 with PID 8220 (F:\project\Polygon\polygon\polygonserver\polygon-web\target\classes started by 201998 in F:\project\Polygon\polygon)
+2020-11-09 20:17:34.120  INFO 8220 --- [main] com.yuji.polygon.PolygonWebApplication   : No active profile set, falling back to default profiles: default
+2020-11-09 20:17:35.195  INFO 8220 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-09 20:17:35.203  INFO 8220 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-09 20:17:35.203  INFO 8220 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.37]
+2020-11-09 20:17:35.341  INFO 8220 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-09 20:17:35.342  INFO 8220 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1161 ms
+2020-11-09 20:17:35.996  INFO 8220 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-09 20:17:36.257  INFO 8220 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-09 20:17:36.265  INFO 8220 --- [main] com.yuji.polygon.PolygonWebApplication   : Started PolygonWebApplication in 2.538 seconds (JVM running for 3.151)
+2020-11-09 20:17:41.890  INFO 8220 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-09 20:17:41.890  INFO 8220 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-09 20:17:41.897  INFO 8220 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2020-11-09 20:17:41.935  INFO 8220 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.controller.LeaveController
+2020-11-09 20:17:41.936  INFO 8220 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.controller.LeaveController
+2020-11-09 20:17:41.936  INFO 8220 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.controller.LeaveController
+2020-11-09 20:17:41.972  INFO 8220 --- [http-nio-8080-exec-1] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-11-09 20:17:42.088  INFO 8220 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.mapper.FlowMapper
+2020-11-09 20:17:42.091  INFO 8220 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.mapper.FlowNodeMapper
+2020-11-09 20:17:42.092  INFO 8220 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.mapper.FlowNodeMapper
+2020-11-09 20:17:42.095  INFO 8220 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.mapper.FlowLineMapper
+2020-11-09 20:17:42.097  INFO 8220 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.mapper.FlowLineMapper
+2020-11-09 20:17:42.163  INFO 8220 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.mapper.LeaveMapper
+2020-11-09 20:18:09.415  INFO 14032 --- [main] com.yuji.polygon.PolygonWebApplication   : Starting PolygonWebApplication on W20-201998 with PID 14032 (F:\project\Polygon\polygon\polygonserver\polygon-web\target\classes started by 201998 in F:\project\Polygon\polygon)
+2020-11-09 20:18:09.418  INFO 14032 --- [main] com.yuji.polygon.PolygonWebApplication   : No active profile set, falling back to default profiles: default
+2020-11-09 20:18:10.452  INFO 14032 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-09 20:18:10.459  INFO 14032 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-09 20:18:10.460  INFO 14032 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.37]
+2020-11-09 20:18:10.594  INFO 14032 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-09 20:18:10.595  INFO 14032 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1131 ms
+2020-11-09 20:18:11.296  INFO 14032 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-09 20:18:11.565  INFO 14032 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-09 20:18:11.574  INFO 14032 --- [main] com.yuji.polygon.PolygonWebApplication   : Started PolygonWebApplication in 2.538 seconds (JVM running for 3.17)
+2020-11-09 20:18:16.993  INFO 14032 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-09 20:18:16.993  INFO 14032 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-09 20:18:17.000  INFO 14032 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2020-11-09 20:18:17.042  INFO 14032 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.controller.LeaveController
+2020-11-09 20:18:17.043  INFO 14032 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.controller.LeaveController
+2020-11-09 20:18:17.043  INFO 14032 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.controller.LeaveController
+2020-11-09 20:18:17.080  INFO 14032 --- [http-nio-8080-exec-1] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-11-09 20:18:17.212  INFO 14032 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.mapper.FlowMapper
+2020-11-09 20:18:17.225  INFO 14032 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.mapper.FlowNodeMapper
+2020-11-09 20:18:17.227  INFO 14032 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.mapper.FlowNodeMapper
+2020-11-09 20:18:17.228  INFO 14032 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.mapper.FlowLineMapper
+2020-11-09 20:18:17.230  INFO 14032 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.mapper.FlowLineMapper
+2020-11-09 20:18:17.282  INFO 14032 --- [http-nio-8080-exec-1] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.mapper.LeaveMapper
+2020-11-09 20:19:04.324  INFO 12888 --- [main] com.yuji.polygon.PolygonWebApplication   : Starting PolygonWebApplication on W20-201998 with PID 12888 (F:\project\Polygon\polygon\polygonserver\polygon-web\target\classes started by 201998 in F:\project\Polygon\polygon)
+2020-11-09 20:19:04.328  INFO 12888 --- [main] com.yuji.polygon.PolygonWebApplication   : No active profile set, falling back to default profiles: default
+2020-11-09 20:19:05.375  INFO 12888 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-09 20:19:05.382  INFO 12888 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-09 20:19:05.382  INFO 12888 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.37]
+2020-11-09 20:19:05.519  INFO 12888 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-09 20:19:05.519  INFO 12888 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1154 ms
+2020-11-09 20:19:06.183  INFO 12888 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-09 20:19:06.440  INFO 12888 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-09 20:19:06.448  INFO 12888 --- [main] com.yuji.polygon.PolygonWebApplication   : Started PolygonWebApplication in 2.493 seconds (JVM running for 3.1)
+2020-11-09 20:19:12.506  INFO 12888 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-09 20:19:12.507  INFO 12888 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-09 20:19:12.514  INFO 12888 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2020-11-09 20:19:12.617  WARN 12888 --- [http-nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.validation.BindException: org.springframework.validation.BeanPropertyBindingResult: 4 errors
+Field error in object 'leave' on field 'leaveReason': rejected value [null]; codes [NotNull.leave.leaveReason,NotNull.leaveReason,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [leave.leaveReason,leaveReason]; arguments []; default message [leaveReason]]; default message [请假原因不能为空]
+Field error in object 'leave' on field 'startDate': rejected value [null]; codes [NotNull.leave.startDate,NotNull.startDate,NotNull.java.util.Date,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [leave.startDate,startDate]; arguments []; default message [startDate]]; default message [开始日期不能为空]
+Field error in object 'leave' on field 'endDate': rejected value [null]; codes [NotNull.leave.endDate,NotNull.endDate,NotNull.java.util.Date,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [leave.endDate,endDate]; arguments []; default message [endDate]]; default message [结束日期不能为空]
+Field error in object 'leave' on field 'leaveType': rejected value [null]; codes [NotNull.leave.leaveType,NotNull.leaveType,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [leave.leaveType,leaveType]; arguments []; default message [leaveType]]; default message [请假类型不能为空]]
+2020-11-09 20:19:33.718  INFO 5496 --- [main] com.yuji.polygon.PolygonWebApplication   : Starting PolygonWebApplication on W20-201998 with PID 5496 (F:\project\Polygon\polygon\polygonserver\polygon-web\target\classes started by 201998 in F:\project\Polygon\polygon)
+2020-11-09 20:19:33.721  INFO 5496 --- [main] com.yuji.polygon.PolygonWebApplication   : No active profile set, falling back to default profiles: default
+2020-11-09 20:19:34.807  INFO 5496 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-09 20:19:34.814  INFO 5496 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-09 20:19:34.815  INFO 5496 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.37]
+2020-11-09 20:19:34.952  INFO 5496 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-09 20:19:34.952  INFO 5496 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1184 ms
+2020-11-09 20:19:35.724  INFO 5496 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-09 20:19:35.988  INFO 5496 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-09 20:19:35.996  INFO 5496 --- [main] com.yuji.polygon.PolygonWebApplication   : Started PolygonWebApplication in 2.681 seconds (JVM running for 3.311)
+2020-11-09 20:19:41.745  INFO 5496 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-09 20:19:41.745  INFO 5496 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-09 20:19:41.753  INFO 5496 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
+2020-11-09 20:21:26.679  INFO 7004 --- [main] com.yuji.polygon.PolygonWebApplication   : Starting PolygonWebApplication on W20-201998 with PID 7004 (F:\project\Polygon\polygon\polygonserver\polygon-web\target\classes started by 201998 in F:\project\Polygon\polygon)
+2020-11-09 20:21:26.682  INFO 7004 --- [main] com.yuji.polygon.PolygonWebApplication   : No active profile set, falling back to default profiles: default
+2020-11-09 20:21:27.789  INFO 7004 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-09 20:21:27.795  INFO 7004 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-09 20:21:27.796  INFO 7004 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.37]
+2020-11-09 20:21:27.929  INFO 7004 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-09 20:21:27.929  INFO 7004 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1192 ms
+2020-11-09 20:21:28.548  INFO 7004 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-09 20:21:28.803  INFO 7004 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-09 20:21:28.812  INFO 7004 --- [main] com.yuji.polygon.PolygonWebApplication   : Started PolygonWebApplication in 2.503 seconds (JVM running for 3.1)
+2020-11-09 20:21:31.817  INFO 7004 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-09 20:21:31.817  INFO 7004 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-09 20:21:31.825  INFO 7004 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
+2020-11-09 20:22:14.981  INFO 7004 --- [http-nio-8080-exec-3] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.controller.LeaveController
+2020-11-09 20:22:14.983  INFO 7004 --- [http-nio-8080-exec-3] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.controller.LeaveController
+2020-11-09 20:22:14.984  INFO 7004 --- [http-nio-8080-exec-3] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.controller.LeaveController
+2020-11-09 20:22:15.031  INFO 7004 --- [http-nio-8080-exec-3] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-11-09 20:22:15.165  INFO 7004 --- [http-nio-8080-exec-3] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.mapper.FlowMapper
+2020-11-09 20:22:15.168  INFO 7004 --- [http-nio-8080-exec-3] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.mapper.FlowNodeMapper
+2020-11-09 20:22:15.169  INFO 7004 --- [http-nio-8080-exec-3] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.mapper.FlowNodeMapper
+2020-11-09 20:22:15.171  INFO 7004 --- [http-nio-8080-exec-3] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.mapper.FlowLineMapper
+2020-11-09 20:22:15.173  INFO 7004 --- [http-nio-8080-exec-3] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.mapper.FlowLineMapper
+2020-11-09 20:22:15.180  INFO 7004 --- [http-nio-8080-exec-3] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.mapper.LeaveMapper
+2020-11-09 20:22:15.217  INFO 7004 --- [http-nio-8080-exec-3] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.mapper.AuditMapper
+2020-11-09 20:22:15.218  INFO 7004 --- [http-nio-8080-exec-3] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.mapper.AuditMapper
+2020-11-09 20:22:15.272  INFO 7004 --- [http-nio-8080-exec-3] com.yuji.polygon.advice.LogAspect        : com.yuji.polygon.controller.LeaveController
