@@ -1,4 +1,4 @@
-package com.yuji.polygon.service.utils;
+package com.yuji.polygon.utils;
 
 /**
  * @className: ConstantValue

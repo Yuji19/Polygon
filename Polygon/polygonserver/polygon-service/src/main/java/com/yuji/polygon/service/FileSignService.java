@@ -3,9 +3,9 @@ package com.yuji.polygon.service;
 import com.yuji.polygon.entity.*;
 import com.yuji.polygon.mapper.FileSignMapper;
 
-import com.yuji.polygon.service.utils.CommonUtil;
-import com.yuji.polygon.service.utils.ConstantValue;
-import com.yuji.polygon.service.utils.FileUtil;
+import com.yuji.polygon.utils.CommonUtil;
+import com.yuji.polygon.utils.ConstantValue;
+import com.yuji.polygon.utils.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

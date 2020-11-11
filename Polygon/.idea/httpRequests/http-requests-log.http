@@ -1,0 +1,387 @@
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+leave.employeeNo=c1&leave.employeeName=c1&leave.startDate=2020-11-09&leave.endDate=2020-11-10&leave.leaveType=sick&leave.leaveReason=sick&firstNode.employeeNo=c2&firstNode.employeeName=c2&secondNode.employeeNo=c3&secondNode.employeeName=c3
+
+<> 2020-11-10T021606.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+leave="employeeNo='c1'&employeeName='c1"&startDate='2020-11-09'&endDate='2020-11-10'&leaveType='sick'&leaveReason='sick'"&firstNode="employeeNo='c2'&employeeName='c2'"&secondNode="employeeNo='c3'&employeeName='c3'"
+
+<> 2020-11-10T014918.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+leave="employeeNo:'c1',employeeName:'c1",startDate:'2020-11-09',endDate:'2020-11-10',leaveType:'sick',leaveReason:'sick'"&firstNode="employeeNo:'c2',employeeName:'c2'"&secondNode="employeeNo:'c3',employeeName:'c3'"
+
+<> 2020-11-10T014736.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+leave={employeeNo=c1,employeeName=c1,startDate=2020-11-09,endDate=2020-11-10,leaveType=sick,leaveReason=sick}&firstNode={employeeNo=c2,employeeName=c2}&secondNode={employeeNo=c3,employeeName=c3}
+
+<> 2020-11-10T113619.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+leave.employeeNo=c1&leave.employeeName=c1&leave.startDate=2020-11-09&leave.endDate=2020-11-10&leave.leaveType=sick&leave.leaveReason=sick&firstNode.employeeNo=c2&firstNode.employeeName=c2&secondNode.employeeNo=c3&secondNode.employeeName=c3
+
+<> 2020-11-10T111744.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=c1&employeeName=c1&startDate=2020-11-09&endDate=2020-11-10&leaveType=sick&leaveReason=sick&employeeNo=c2&employeeName=c2&employeeNo=c3&employeeName=c3
+
+<> 2020-11-10T084755.200.txt
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=c1&employeeName=c1&startDate=2020-11-09&endDate=2020-11-10&leaveType=sick&leaveReason=sick
+
+<> 2020-11-09T082215.200.txt
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=c1&employeeName=c1&startDate='2020-11-09'&endDate='2020-11-10'&leaveType=sick&leaveReason=sick
+
+<> 2020-11-09T082131.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=c1&employeeName=c1&startDate='2020-11-09'&endDate='2020-11-10'&leaveType=sick&leaveReason=sick
+
+<> 2020-11-09T082020.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=c1&employeeName=c1&startDate='2020-11-09'&endDate='2020-11-10'
+
+<> 2020-11-09T081941.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=c1&employeeName=c1&startDate='2020-11-09'&endDate='2020-11-10'
+
+<> 2020-11-09T081912.400.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=c1&employeeName=c1&startDate='2020-11-09'&endDate='2020-11-10'
+
+<> 2020-11-09T081817.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=c1&employeeName=c1&startDate='2020-11-09'&endDate='2020-11-10'
+
+<> 2020-11-09T081742.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=c1&employeeName=c1&startDate='2020-11-09'&endDate='2020-11-10'
+
+<> 2020-11-09T081615.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=c1&employeeName=c1&startDate='2020-11-09'&endDate='2020-11-10'
+
+<> 2020-11-09T074406.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=c1&employeeName=c1&startDate='2020-11-09'&endDate='2020-11-10'
+
+<> 2020-11-09T074324.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=c1&employeeName=c1&startDate='2020-11-09'&endDate='2020-11-10'
+
+<> 2020-11-09T073930.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=c1&employeeName=c1&startDate='2020-11-09'&endDate='2020-11-10'
+
+<> 2020-11-09T073449.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=c1&employeeName=c1&startDate='2020-11-09'&endDate='2020-11-10'
+
+<> 2020-11-09T073359.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=c1&employeeName=c1&startDate='2020-11-09'&endDate='2020-11-10'
+
+<> 2020-11-09T071306.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=c1&employeeName=c1&startDate='2020-11-09'&endDate='2020-11-10'
+
+<> 2020-11-09T070316.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=c1&employeeName=c1&startDate='2020-11-09'&endDate='2020-11-10'
+
+<> 2020-11-09T065953.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=c1&employeeName=c1&startDate='2020-11-09'&endDate='2020-11-10'
+
+<> 2020-11-09T060502.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=c1&employeeName=c1&startDate='2020-11-09'&endDate='2020-11-10'
+
+<> 2020-11-09T040311.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=100194950&employeeName=c1&leaveType=sick&leaveReason=sick&startDate=2020-11-09&employeeNo=c2&employeeName=c2&employeeNo=c3&employeeName=c3
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=100194950&employeeName=c1&leaveType=sick&leaveReason=sick&startDate=2020-11-09&employeeNo=c2&employeeName=c2&employeeNo=c3&employeeName=c3
+
+<> 2020-11-09T024923.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=100194950&employeeName=c1&leaveType=sick&leaveReason=sick&startDate=2020-11-09&employeeNo=c2&employeeName=c2&employeeNo=c3&employeeName=c3
+
+<> 2020-11-09T023517.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=100194950&employeeName=c1&leaveType=sick&leaveReason=sick&startDate=2020-11-09&employeeNo=c2&employeeName=c2&employeeNo=c3&employeeName=c3
+
+<> 2020-11-09T023428.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=100194950&employeeName=c1&leaveType=sick&leaveReason=sick&startDate=2020-11-09&employeeNo=c2&employeeName=c2&employeeNo=c3&employeeName=c3
+
+<> 2020-11-09T023255.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=100194950&employeeName=c1&leaveType=sick&leaveReason=sick&startDate=2020-11-09&employeeNo=c2&employeeName=c2&employeeNo=c3&employeeName=c3
+
+<> 2020-11-09T022940.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=100194950&employeeName=c1&leaveType=sick&leaveReason=sick&startDate=2020-11-09&employeeNo=c2&employeeName=c2&employeeNo=c3&employeeName=c3
+
+<> 2020-11-09T022914.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=100194950&employeeName=c1&leaveType=sick&leaveReason=sick&startDate=2020-11-09
+&employeeNo=C2&employeeName=C2&employeeNo=C3&employeeName=C3
+
+<> 2020-11-09T022027.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=100194950&employeeName=c1&leaveType=sick&leaveReason=sick&startDate=2020-11-09
+&endDate=2020-11-10&employeeNo=C2&employeeName=C2&employeeNo=C3&employeeName=C3
+
+<> 2020-11-09T022008.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=100194950&employeeName=c1&leaveType=sick&leaveReason=sick&startDate=2020-11-09&endDate=2020-11-10
+
+<> 2020-11-09T021523.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=100194950&employeeName=c1&leaveType=sick&leaveReason=sick&startDate=2020-11-09 10:19:11&endDate=2020-11-10 10:19:11
+
+<> 2020-11-09T014359.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=100194950&employeeName=c1&leaveType=sick&leaveReason=sick&startDate=2020-11-09 10:19:11&endDate=2020-11-10 10:19:11
+
+<> 2020-11-09T105738.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=100194950&employeeName=c1&leaveType=sick&leaveReason=sick&startDate='2020-11-09 10:19:11'&endDate='2020-11-10 10:19:11'
+
+<> 2020-11-09T104752.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=100194950&employeeName=c1&leaveType=sick&leaveReason=sick&startDate='2020-11-09 10:19:11'&endDate='2020-11-10 10:19:11'
+
+<> 2020-11-09T103957.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=100194950&employeeName=c1&leaveType=sick&leaveReason=sick&startDate='2020-11-09 10:19:11'&endDate='2020-11-10 10:19:11'
+
+<> 2020-11-09T103725.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=100194950&employeeName=c1&leaveType=sick&leaveReason=sick&startDate='2020-11-09 10:19:11'&endDate='2020-11-10 10:19:11'
+
+<> 2020-11-09T102549.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=100194950&employeeName=c1&leaveType=sick&leaveReason=sick&startDate='2020-11-09 10:19:11'&endDate='2020-11-10 10:19:11'
+
+<> 2020-11-09T101950.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=100194950&employeeName=c1&leaveType=sick&leaveReason=sick&startDate=2020-11-09 10:19:11&endDate=2020-11-10 10:19:11
+
+<> 2020-11-09T101930.200.json
+
+###
+
+POST http://localhost:8080/leave/add
+Content-Type: application/x-www-form-urlencoded
+
+employeeNo=100194950&employeeName=c1&leaveType=sick&leaveReason=sick&startDate=2020-11-09&endData=2020-11-10
+
+<> 2020-11-09T101829.200.json
+
+###
+

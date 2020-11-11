@@ -3,8 +3,8 @@ package com.yuji.polygon.service;
 import com.yuji.polygon.entity.*;
 import com.yuji.polygon.mapper.LeaveMapper;
 
-import com.yuji.polygon.service.utils.CommonUtil;
-import com.yuji.polygon.service.utils.ConstantValue;
+import com.yuji.polygon.utils.CommonUtil;
+import com.yuji.polygon.utils.ConstantValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

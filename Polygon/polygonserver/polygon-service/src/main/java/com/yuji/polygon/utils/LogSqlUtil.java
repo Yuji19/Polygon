@@ -1,4 +1,4 @@
-package com.yuji.polygon.service.utils;
+package com.yuji.polygon.utils;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.mapping.BoundSql;

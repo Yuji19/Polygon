@@ -2,7 +2,7 @@ package com.yuji.polygon.controller;
 
 import com.yuji.polygon.entity.*;
 import com.yuji.polygon.service.FileSignService;
-import com.yuji.polygon.service.utils.ConstantValue;
+import com.yuji.polygon.utils.ConstantValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;

@@ -3,7 +3,6 @@ package com.yuji.polygon.controller;
 
 import com.yuji.polygon.entity.Archive;
 import com.yuji.polygon.entity.Page;
-import com.yuji.polygon.entity.ResultVO;
 import com.yuji.polygon.service.ArchiveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

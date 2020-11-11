@@ -5,7 +5,7 @@ import com.yuji.polygon.entity.Archive;
 import com.yuji.polygon.entity.Page;
 import com.yuji.polygon.mapper.ArchiveMapper;
 
-import com.yuji.polygon.service.utils.FileUtil;
+import com.yuji.polygon.utils.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

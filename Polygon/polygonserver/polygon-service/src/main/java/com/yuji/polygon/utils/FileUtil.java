@@ -1,4 +1,4 @@
-package com.yuji.polygon.service.utils;
+package com.yuji.polygon.utils;
 
 import com.yuji.polygon.entity.APIException;
 import org.springframework.web.multipart.MultipartFile;
