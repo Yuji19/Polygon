@@ -35,7 +35,7 @@ public class LeaveController {
         return leaveSerice.updateLeaveFlow(audit);
     }
 
-    @GetMapping("/page")
+    @GetMapping("/query/page")
     public Page getLeavePage(Leave leave, int currentPageNumber, int pageSize){
         return leaveSerice.getLeavePage(leave,currentPageNumber,pageSize);
     }

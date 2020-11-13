@@ -37,7 +37,7 @@ public class FileSignController {
         return fileSignService.updateFileSignFlow(audit);
     }
 
-    @GetMapping("/page")
+    @GetMapping("/query/page")
     public Page getFileSignPage(FileSign fileSign, int currentPageNumber, int pageSize){
         return fileSignService.getFileSignPage(fileSign,currentPageNumber,pageSize);
     }
