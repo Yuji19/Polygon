@@ -1,5 +1,7 @@
 package com.yuji.polygon.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -30,6 +32,7 @@ public class Audit {
     @NotNull(message = "审批状态不能为空")
     private int auditState;
 
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss",timezone = "Asia/Shanghai")
     private Date auditDate;
 
     public int getId() {

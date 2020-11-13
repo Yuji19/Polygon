@@ -1,5 +1,7 @@
 package com.yuji.polygon.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 /**
@@ -18,8 +20,10 @@ public class FlowLine {
 
     private int nextNode;
 
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss",timezone = "Asia/Shanghai")
     private Date gmtCreate;
 
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss",timezone = "Asia/Shanghai")
     private Date gmtModified;
 
     public int getId() {

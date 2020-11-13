@@ -18,4 +18,10 @@ public interface MenuMapper {
     int insertMenu(Menu menu);
 
     List<Menu> getMenuByEmployeeId(int eid);
+
+    List<Menu> getAllMenuWithPermission();
+
+    List<Menu> getMenuWithPermissionByRoleId(int rid);
+
+    List<Menu> getAllMenu();
 }

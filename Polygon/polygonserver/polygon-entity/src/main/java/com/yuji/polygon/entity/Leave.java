@@ -1,6 +1,8 @@
 package com.yuji.polygon.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -27,9 +29,11 @@ public class Leave {
     private String leaveReason;
 
     @NotNull(message = "开始日期不能为空")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss",timezone = "Asia/Shanghai")
     private Date startDate;
 
     @NotNull(message = "结束日期不能为空")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss",timezone = "Asia/Shanghai")
     private Date endDate;
 
     private String flowNo;
@@ -38,8 +42,10 @@ public class Leave {
 
     private int currentNode;
 
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss",timezone = "Asia/Shanghai")
     private Date gmtCreate;
 
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss",timezone = "Asia/Shanghai")
     private Date gmtModified;
 
     public int getId() {

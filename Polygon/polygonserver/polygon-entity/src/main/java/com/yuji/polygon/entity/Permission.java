@@ -1,12 +1,10 @@
 package com.yuji.polygon.entity;
 
-import java.util.Date;
-
 /**
  * @className: Permission
  * @description: TODO
  * @author: yuji
- * @create: 2020-11-10 19:11:00
+ * @create: 2020-11-13 15:43:00
  */
 public class Permission {
 
@@ -28,5 +26,13 @@ public class Permission {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Permission{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

@@ -17,5 +17,5 @@ public interface RoleMapper {
 
     int insertRole(String name);
 
-    List<Role> getRoleByEmployeeId(String eid);
+    List<Role> getRoleByEmployeeId(int eid);
 }

@@ -1,6 +1,5 @@
 package com.yuji.polygon.entity;
 
-import java.util.List;
 
 /**
  * @className: Role
@@ -14,7 +13,7 @@ public class Role {
 
     private String name;
 
-    private List<Permission> permissions;
+    private String nameZh;
 
     public int getId() {
         return id;
@@ -32,11 +31,11 @@ public class Role {
         this.name = name;
     }
 
-    public List<Permission> getPermissions() {
-        return permissions;
+    public String getNameZh() {
+        return nameZh;
     }
 
-    public void setPermissions(List<Permission> permissions) {
-        this.permissions = permissions;
+    public void setNameZh(String nameZh) {
+        this.nameZh = nameZh;
     }
 }

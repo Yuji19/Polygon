@@ -1,6 +1,5 @@
 package com.yuji.polygon.entity;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,9 +14,11 @@ public class Menu {
 
     private String name;
 
-    private String icon;
+    private String url;
 
     private String path;
+
+    private String icon;
 
     private String component;
 
@@ -28,6 +29,8 @@ public class Menu {
     private int parentId;
 
     private List<Menu> children;
+
+    private List<Permission> permissions;
 
     public int getId() {
         return id;
@@ -43,6 +46,14 @@ public class Menu {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getIcon() {
@@ -99,5 +110,30 @@ public class Menu {
 
     public void setChildren(List<Menu> children) {
         this.children = children;
+    }
+
+    public List<Permission> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<Permission> permissions) {
+        this.permissions = permissions;
+    }
+
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", url='" + url + '\'' +
+                ", path='" + path + '\'' +
+                ", icon='" + icon + '\'' +
+                ", component='" + component + '\'' +
+                ", meta=" + meta +
+                ", enabled=" + enabled +
+                ", parentId=" + parentId +
+                ", children=" + children +
+                ", permissions=" + permissions +
+                '}';
     }
 }

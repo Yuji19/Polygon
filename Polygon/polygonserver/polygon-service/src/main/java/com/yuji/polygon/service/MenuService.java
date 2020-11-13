@@ -23,4 +23,16 @@ public class MenuService {
     public List<Menu> getMenuByEmployeeId(int eid){
         return menuMapper.getMenuByEmployeeId(eid);
     }
+
+    public List<Menu> getAllMenuWithPermission(){
+        return menuMapper.getAllMenuWithPermission();
+    }
+
+    public List<Menu> getMenuWithPermissionByRoleId(int rid){
+        return menuMapper.getMenuWithPermissionByRoleId(rid);
+    }
+
+    public List<Menu> getAllMenu(){
+        return menuMapper.getAllMenu();
+    }
 }

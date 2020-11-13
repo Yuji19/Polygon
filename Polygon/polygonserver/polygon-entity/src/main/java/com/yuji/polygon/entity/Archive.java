@@ -1,6 +1,8 @@
 package com.yuji.polygon.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -35,6 +37,7 @@ public class Archive {
     private String editPerson;
 
     @NotNull(message = "下发日期不能为空")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
     private Date issueDate;
 
     private String status;

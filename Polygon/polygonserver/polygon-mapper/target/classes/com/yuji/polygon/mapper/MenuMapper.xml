@@ -115,19 +115,4 @@
             order by m1.`id`,m2.`id`,m3.`id`
     </select>
 
-    <select id="getMenuWithPermissionByRoleId" resultMap="MenuWithPermission">
-        select
-            m.*,
-            p.`id` as pid,
-            p.`name` as pname
-        from
-            poly_role r,
-            poly_menu m,
-            poly_permission p,
-            poly_role_menu rm,
-            poly_menu_permission mp
-        where
-            r.`id`=#{rid},r.`id`=rm.`rid` and rm.`mid`=m.`id` and m.`id`=mp.`mid` and mp.`pid`=p.`id`
-    </select>
-
 </mapper>
