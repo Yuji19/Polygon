@@ -1,5 +1,7 @@
 package com.yuji.polygon.entity;
 
+import java.util.List;
+
 /**
  * @className: Permission
  * @description: TODO
@@ -11,6 +13,9 @@ public class Permission {
     private int id;
 
     private String name;
+
+    private List<Menu> menus;
+
 
     public int getId() {
         return id;
@@ -28,11 +33,20 @@ public class Permission {
         this.name = name;
     }
 
+    public List<Menu> getMenus() {
+        return menus;
+    }
+
+    public void setMenus(List<Menu> menus) {
+        this.menus = menus;
+    }
+
     @Override
     public String toString() {
         return "Permission{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", menus=" + menus +
                 '}';
     }
 }

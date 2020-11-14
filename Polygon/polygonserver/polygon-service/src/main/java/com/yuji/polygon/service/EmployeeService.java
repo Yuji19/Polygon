@@ -28,7 +28,7 @@ public class EmployeeService implements UserDetailsService {
     RoleService roleService;
 
     @Autowired
-    MenuService menuService;
+    PermissionService permissionService;
 
     @Override
     public UserDetails loadUserByUsername(String employeeNo) throws UsernameNotFoundException {
@@ -40,18 +40,19 @@ public class EmployeeService implements UserDetailsService {
         List<Role> roles = roleService.getRoleByEmployeeId(employee.getId());
         employee.setRoles(roles);
         for (Role role : roles){
-            //根据角色查找菜单和权限
-            List<Menu> menus = menuService.getMenuWithPermissionByRoleId(role.getId());
-            for (Menu menu : menus){
-                List<Permission> permissions = menu.getPermissions();
-                for (Permission permission : permissions){
-                    authorities.add(new SimpleGrantedAuthority(permission.getName()));
+            //根据角色查找权限
+            List<Permission> permissions = permissionService.getPermissionByRoleId(role.getId());
+            for (Permission permission : permissions){
+                List<Menu> menus = permission.getMenus();
+                for (Menu menu : menus){
+                    //菜单权限+操作权限 exp: employee_add
+                    String own = menu.getUrl().substring(1)+"_"+permission.getName();
+                    authorities.add(new SimpleGrantedAuthority(own));
                 }
 
             }
+
         }
-        //去重 由于菜单基本都具有增删改查,所以只保留一个即可
-        authorities = authorities.stream().distinct().collect(Collectors.toList());
         //Employee没有实现UserDetails接口，需要返回spring sercurity的User
         return new User(employee.getEmployeeNo(),employee.getPassword(),employee.isEnabled(),true,true,true,authorities);
     }

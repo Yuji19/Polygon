@@ -30,7 +30,6 @@ public class Menu {
 
     private List<Menu> children;
 
-    private List<Permission> permissions;
 
     public int getId() {
         return id;
@@ -112,13 +111,7 @@ public class Menu {
         this.children = children;
     }
 
-    public List<Permission> getPermissions() {
-        return permissions;
-    }
 
-    public void setPermissions(List<Permission> permissions) {
-        this.permissions = permissions;
-    }
 
     @Override
     public String toString() {
@@ -133,7 +126,6 @@ public class Menu {
                 ", enabled=" + enabled +
                 ", parentId=" + parentId +
                 ", children=" + children +
-                ", permissions=" + permissions +
                 '}';
     }
 }

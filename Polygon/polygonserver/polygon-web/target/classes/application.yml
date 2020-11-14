@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/polygon?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useAffectedRows=true
+    username: root
+    password: 123456
+
+
+server:
+  port: 8082
+
+
+custom:
+  path: D:/polygon
+
+mybatis:
+  config-location: classpath:/mybatis-config.xml
+logging:
+  file:
+    name: D:/polygon/log/polygonLog.log
+

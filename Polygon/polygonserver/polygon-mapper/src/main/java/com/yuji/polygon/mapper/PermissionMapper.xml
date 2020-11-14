@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuji.polygon.mapper.PermissionMapper">
+
+    <resultMap id="BaseResultMap" type="com.yuji.polygon.entity.Permission">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <collection property="menus" ofType="com.yuji.polygon.entity.Menu" >
+            <id column="mid" property="id" />
+            <result column="mname" property="name"/>
+            <result column="url" property="url" />
+            <result column="path" property="path"/>
+            <result column="icon" property="icon"/>
+            <result column="component" property="component"/>
+            <result column="parent_id" property="parentId"/>
+            <result column="enabled" property="enabled" />
+            <association property="meta" javaType="com.yuji.polygon.entity.Meta">
+                <result column="keep_alive" property="keepAlive" />
+                <result column="require_auth" property="requireAuth" />
+            </association>
+        </collection>
+
+    </resultMap>
+
+
+    <insert id="insertPermission" parameterType="com.yuji.polygon.entity.Permission" useGeneratedKeys="true" keyProperty="id">
+        insert into poly_permission (name) values (#{name})
+    </insert>
+
+
+    <select id="getPermissionByRoleId" resultMap="BaseResultMap">
+        select
+            p.*,
+            m.`id` as mid,
+            m.`name` as mname,
+            m.`url`,
+            m.`path`,
+            m.`icon`,
+            m.`component`,
+            m.`parent_id`,
+            m.`enabled`,
+            m.`keep_alive`,
+            m.`require_auth`
+        from
+            poly_role r,
+            poly_menu m,
+            poly_permission p,
+            poly_role_permission rp,
+            poly_permission_menu pm
+        where
+            r.`id`=#{rid} and r.`id`=rp.`rid` and rp.`pid`=pm.`pid` and pm.`mid`=m.`id`
+    </select>
+
+    <select id="getAllPermissionByRole" resultMap="BaseResultMap">
+        select
+            p.*,
+            m.`id` as mid,
+            m.`name` as mname,
+            m.`url`,
+            m.`path`,
+            m.`icon`,
+            m.`component`,
+            m.`parent_id`,
+            m.`enabled`,
+            m.`keep_alive`,
+            m.`require_auth`
+        from
+            poly_role r,
+            poly_permission p,
+            poly_menu m,
+            poly_role_permission rp,
+            poly_permission_menu pm
+        where
+            r.`id`=rp.`rid` and rp.`pid`=pm.`pid` and pm.`mid`=m.`id`
+    </select>
+
+
+</mapper>
