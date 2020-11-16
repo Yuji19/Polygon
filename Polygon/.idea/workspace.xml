@@ -25,14 +25,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72e6dd13-b176-4760-9cc3-18aee4e791fe" name="Default Changelist" comment="开发权限控制模块">
-      <change afterPath="$PROJECT_DIR$/polygonserver/polygon-entity/src/main/java/com/yuji/polygon/entity/EmplRoleDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/polygonserver/polygon-entity/src/main/java/com/yuji/polygon/entity/RolePermDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/PermissionMenuMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/PermissionMenuMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/RolePermissionMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/RolePermissionMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/polygonserver/polygon-web/src/main/java/com/yuji/polygon/controller/RoleController.java" afterDir="false" />
+    <list default="true" id="72e6dd13-b176-4760-9cc3-18aee4e791fe" name="Default Changelist" comment="角色接口调试">
       <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2020-11-09T014359.200.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2020-11-09T021523.200.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2020-11-09T101829.200.json" beforeDir="false" />
@@ -45,40 +38,22 @@
       <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2020-11-09T105738.200.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-client.cookies" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-client.cookies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_security_2_3_2_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_config_5_3_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_core_5_3_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_web_5_3_3_RELEASE.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-entity/polygon-entity.iml" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-entity/polygon-entity.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-entity/src/main/java/com/yuji/polygon/entity/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-entity/src/main/java/com/yuji/polygon/entity/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-mapper/polygon-mapper.iml" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-mapper/polygon-mapper.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/EmployeeMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/EmployeeMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/EmployeeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/EmployeeMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/RoleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/RoleMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/RoleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/RoleMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-service/polygon-service.iml" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-service/polygon-service.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-service/src/main/java/com/yuji/polygon/service/ArchiveService.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-service/src/main/java/com/yuji/polygon/service/ArchiveService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-service/src/main/java/com/yuji/polygon/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-service/src/main/java/com/yuji/polygon/service/EmployeeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-service/src/main/java/com/yuji/polygon/service/FileSignService.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-service/src/main/java/com/yuji/polygon/service/FileSignService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-service/src/main/java/com/yuji/polygon/service/LeaveService.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-service/src/main/java/com/yuji/polygon/service/LeaveService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-service/src/main/java/com/yuji/polygon/service/PermissionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-service/src/main/java/com/yuji/polygon/service/PermissionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-service/src/main/java/com/yuji/polygon/service/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-service/src/main/java/com/yuji/polygon/service/RoleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/polygon-web.iml" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/polygon-web.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/src/main/java/com/yuji/polygon/config/CustomFilterInvocationSecurityMetadataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/src/main/java/com/yuji/polygon/config/CustomFilterInvocationSecurityMetadataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/src/main/java/com/yuji/polygon/config/CustomUrlDecisionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/src/main/java/com/yuji/polygon/config/CustomUrlDecisionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/src/main/java/com/yuji/polygon/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/src/main/java/com/yuji/polygon/config/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/src/main/java/com/yuji/polygon/controller/ArchiveController.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/src/main/java/com/yuji/polygon/controller/ArchiveController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/src/main/java/com/yuji/polygon/controller/FileSignController.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/src/main/java/com/yuji/polygon/controller/FileSignController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/src/main/java/com/yuji/polygon/controller/LeaveController.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/src/main/java/com/yuji/polygon/controller/LeaveController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/src/test/java/com/yuji/polygon/PolygonWebApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/src/test/java/com/yuji/polygon/PolygonWebApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/config/CustomFilterInvocationSecurityMetadataSource.class" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/config/CustomFilterInvocationSecurityMetadataSource.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/config/CustomUrlDecisionManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/config/CustomUrlDecisionManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/config/WebSecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/config/WebSecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/controller/ArchiveController.class" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/controller/ArchiveController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/controller/FileSignController.class" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/controller/FileSignController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/controller/LeaveController.class" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/controller/LeaveController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/test-classes/com/yuji/polygon/PolygonWebApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/target/test-classes/com/yuji/polygon/PolygonWebApplicationTests.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/PolygonWebApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/advice/ExceptionControllerAdvice.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/advice/LogAspect.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/advice/ResponseControllerAdvice.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/config/CustomFilterInvocationSecurityMetadataSource.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/config/CustomUrlDecisionManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/config/WebSecurityConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/controller/ArchiveController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/controller/FileSignController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/controller/LeaveController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/controller/PermissionController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/converter/StringToDateConverter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/mybatis-config.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/test-classes/com/yuji/polygon/PolygonWebApplicationTests.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +108,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -792,19 +767,6 @@
     </option>
   </component>
   <component name="RunManager" selected="JUnit.PolygonWebApplicationTests.testAddEmployee">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="rest-api_5#1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$APPLICATION_CONFIG_DIR$/scratches/rest-api_5.http" runType="Run single request">
       <method v="2" />
     </configuration>
@@ -880,12 +842,12 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="HTTP Request.rest-api_5#1" />
       <item itemvalue="JUnit.PolygonWebApplicationTests.contextLoads" />
       <item itemvalue="JUnit.PolygonWebApplicationTests.testPermission" />
       <item itemvalue="JUnit.PolygonWebApplicationTests.testUrl" />
-      <item itemvalue="Spring Boot.PolygonWebApplication" />
-      <item itemvalue="HTTP Request.rest-api_5#1" />
       <item itemvalue="JUnit.PolygonWebApplicationTests.testAddEmployee" />
+      <item itemvalue="Spring Boot.PolygonWebApplication" />
     </list>
     <recent_temporary>
       <list>
@@ -945,7 +907,8 @@
       <workItem from="1605141968658" duration="15370000" />
       <workItem from="1605228338603" duration="22669000" />
       <workItem from="1605313959967" duration="20082000" />
-      <workItem from="1605487310753" duration="19912000" />
+      <workItem from="1605487310753" duration="21647000" />
+      <workItem from="1605516782843" duration="107000" />
     </task>
     <task id="LOCAL-00001" summary="使用yml文件代替properties文件">
       <created>1597227777273</created>
@@ -1136,7 +1099,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605338134717</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="角色接口调试">
+      <created>1605515083718</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1605515083718</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1176,7 +1146,8 @@
     <MESSAGE value="1.修改LeaveController的addLeaveFlow接收参数的方式&#10;2.修改FileSignController的addFileSignFlow接收参数的方式" />
     <MESSAGE value="增加动态菜单的sql" />
     <MESSAGE value="开发权限控制模块" />
-    <option name="LAST_COMMIT_MESSAGE" value="开发权限控制模块" />
+    <MESSAGE value="角色接口调试" />
+    <option name="LAST_COMMIT_MESSAGE" value="角色接口调试" />
   </component>
   <component name="WindowStateProjectService">
     <state x="94" y="0" width="1092" height="984" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604922487417">
@@ -1267,14 +1238,14 @@
       <screen x="0" y="0" width="1280" height="984" />
     </state>
     <state x="170" y="146" key="Maven.ArtifactSearchDialog/0.0.1280.984@0.0.1280.984" timestamp="1604923570578" />
-    <state x="99" y="82" key="SettingsEditor" timestamp="1604922792017">
+    <state x="99" y="82" key="SettingsEditor" timestamp="1605516894440">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state x="99" y="82" key="SettingsEditor/0.0.1280.984@0.0.1280.984" timestamp="1604922792017" />
-    <state x="232" y="224" key="Vcs.Push.Dialog.v2" timestamp="1605338173390">
+    <state x="99" y="82" key="SettingsEditor/0.0.1280.984@0.0.1280.984" timestamp="1605516894440" />
+    <state x="232" y="224" key="Vcs.Push.Dialog.v2" timestamp="1605515683001">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state x="232" y="224" key="Vcs.Push.Dialog.v2/0.0.1280.984@0.0.1280.984" timestamp="1605338173390" />
+    <state x="232" y="224" key="Vcs.Push.Dialog.v2/0.0.1280.984@0.0.1280.984" timestamp="1605515683001" />
     <state width="648" height="500" key="XDebugger.FullValuePopup" timestamp="1604908642153">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
