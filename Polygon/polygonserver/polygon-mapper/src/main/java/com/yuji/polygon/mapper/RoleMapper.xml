@@ -16,10 +16,31 @@
     </insert>
 
     <select id="getRoleByEmployeeId" parameterType="java.lang.String" resultMap="BaseResultMap">
-       select r.*
-       from poly_role r, poly_employee_role er
-       where er.`eid` = #{eid} and er.`rid` = r.`id`
+       select
+            r.*
+       from
+            poly_role r, poly_employee_role er
+       where
+            er.`eid` = #{eid} and er.`rid` = r.`id`
     </select>
+
+    <!-- 删除一个或多个角色 -->
+    <delete id="deleteRoleById">
+        delete
+            poly_role,
+            poly_role_permission
+        from
+            poly_role left join poly_role_permission on poly_role.`id`=poly_role_permission.`rid`
+        <where>
+            <if test="ids.length &gt; 0">
+                poly_role.`id` in
+                <foreach collection="ids" item="id" open="(" close=")" separator=",">
+                    #{id}
+                </foreach>
+            </if>
+        </where>
+
+    </delete>
 
 
 

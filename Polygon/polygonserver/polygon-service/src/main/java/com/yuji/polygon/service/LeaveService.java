@@ -39,9 +39,15 @@ public class LeaveService {
     @Autowired
     AuditServie auditServie;
 
-
-    @Transactional
-    public String addLeaveFlow(Leave leave, String[] eNo, String[] eName) {
+    /**
+     * Spring框架的事务管理默认地只在发生不受控异常（RuntimeException和Error）时才进行事务回滚
+     * @param leave
+     * @param eNo
+     * @param eName
+     * @return
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public int addLeaveFlow(Leave leave, String[] eNo, String[] eName) {
         //创建流程
         Flow flow = new Flow();
         flow.setFlowNo(CommonUtil.randomUid(12));
@@ -116,12 +122,12 @@ public class LeaveService {
         secondAudit.setFlowNodeNo(secondNode.getId());
         auditServie.insertAudit(secondAudit);
 
-        return "提交成功";
+        return 1;
     }
 
 
-    @Transactional
-    public String updateLeaveFlow(Audit audit) {
+    @Transactional(rollbackFor = Exception.class)
+    public int updateLeaveFlow(Audit audit) {
 
         audit.setAuditDate(new Date());
         auditServie.updateAudit(audit);
@@ -142,7 +148,7 @@ public class LeaveService {
         leaveMapper.updateLeave(leave);
 
 
-        return "审批成功";
+        return 1;
     }
 
 
@@ -150,7 +156,7 @@ public class LeaveService {
         return leaveMapper.findLeaveById(id);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Page<Leave> getLeavePage(Leave leave, int currentPageNumber, int pageSize) {
         int startIndex = (currentPageNumber - 1) * pageSize;
         Map<String, Object> map = new HashMap<>(4);
@@ -165,8 +171,8 @@ public class LeaveService {
         return page;
     }
 
-    @Transactional
-    public String deleteLeaveFlow(int id) {
+    @Transactional(rollbackFor = Exception.class)
+    public int deleteLeaveFlow(int id) {
         String flowNo = leaveMapper.findLeaveById(id).getFlowNo();
         leaveMapper.deleteLeaveById(id);
         flowService.deleteFlowByFlowNo(flowNo);
@@ -174,7 +180,7 @@ public class LeaveService {
         flowLineService.deleteFlowLineByFlowNo(flowNo);
         auditServie.deleteAuditByBusinessNo(id);
 
-        return "删除成功";
+        return 1;
     }
 
 }

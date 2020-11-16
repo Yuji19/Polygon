@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuji.polygon.mapper.RolePermissionMapper">
+
+
+    <insert id="insertRolePermission"  useGeneratedKeys="true">
+        insert into poly_role_permission(rid,pid) values
+        <foreach collection="pids" item="pid" separator="," >
+            (#{rid},#{pid})
+        </foreach>
+    </insert>
+
+
+    <!-- 删除某个角色拥有的某些权限 -->
+    <delete id="deleteRolePermissionByRidAndPid">
+        delete from poly_role_permission where
+        <where>
+            <if test="rid &gt; 0">
+                and rid=#{rid}
+            </if>
+            <if test="pids.length &gt; 0">
+                and pid in
+                <foreach collection="pids" item="pid" open="(" close=")" separator=",">
+                    #{pid}
+                </foreach>
+            </if>
+        </where>
+    </delete>
+
+
+</mapper>

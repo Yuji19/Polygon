@@ -26,12 +26,59 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72e6dd13-b176-4760-9cc3-18aee4e791fe" name="Default Changelist" comment="开发权限控制模块">
-      <change afterPath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/PermissionMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/PermissionMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/polygonserver/polygon-service/src/main/java/com/yuji/polygon/service/PermissionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/polygonserver/polygon-entity/src/main/java/com/yuji/polygon/entity/EmplRoleDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/polygonserver/polygon-entity/src/main/java/com/yuji/polygon/entity/RolePermDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/PermissionMenuMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/PermissionMenuMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/RolePermissionMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/RolePermissionMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/polygonserver/polygon-web/src/main/java/com/yuji/polygon/controller/RoleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2020-11-09T014359.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2020-11-09T021523.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2020-11-09T101829.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2020-11-09T101930.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2020-11-09T101950.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2020-11-09T102549.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2020-11-09T103725.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2020-11-09T103957.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2020-11-09T104752.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2020-11-09T105738.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-client.cookies" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-client.cookies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_security_2_3_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_config_5_3_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_core_5_3_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_web_5_3_3_RELEASE.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-entity/src/main/java/com/yuji/polygon/entity/Permission.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-entity/src/main/java/com/yuji/polygon/entity/Permission.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/MenuMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/MenuMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-entity/polygon-entity.iml" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-entity/polygon-entity.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-entity/src/main/java/com/yuji/polygon/entity/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-entity/src/main/java/com/yuji/polygon/entity/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-mapper/polygon-mapper.iml" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-mapper/polygon-mapper.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/EmployeeMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/EmployeeMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/EmployeeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/EmployeeMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/RoleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/RoleMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/RoleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-mapper/src/main/java/com/yuji/polygon/mapper/RoleMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-service/polygon-service.iml" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-service/polygon-service.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-service/src/main/java/com/yuji/polygon/service/ArchiveService.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-service/src/main/java/com/yuji/polygon/service/ArchiveService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-service/src/main/java/com/yuji/polygon/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-service/src/main/java/com/yuji/polygon/service/EmployeeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-service/src/main/java/com/yuji/polygon/service/FileSignService.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-service/src/main/java/com/yuji/polygon/service/FileSignService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-service/src/main/java/com/yuji/polygon/service/LeaveService.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-service/src/main/java/com/yuji/polygon/service/LeaveService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-service/src/main/java/com/yuji/polygon/service/PermissionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-service/src/main/java/com/yuji/polygon/service/PermissionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-service/src/main/java/com/yuji/polygon/service/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-service/src/main/java/com/yuji/polygon/service/RoleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/polygon-web.iml" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/polygon-web.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/src/main/java/com/yuji/polygon/config/CustomFilterInvocationSecurityMetadataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/src/main/java/com/yuji/polygon/config/CustomFilterInvocationSecurityMetadataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/src/main/java/com/yuji/polygon/config/CustomUrlDecisionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/src/main/java/com/yuji/polygon/config/CustomUrlDecisionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/src/main/java/com/yuji/polygon/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/src/main/java/com/yuji/polygon/config/WebSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/src/main/java/com/yuji/polygon/controller/ArchiveController.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/src/main/java/com/yuji/polygon/controller/ArchiveController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/src/main/java/com/yuji/polygon/controller/FileSignController.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/src/main/java/com/yuji/polygon/controller/FileSignController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/src/main/java/com/yuji/polygon/controller/LeaveController.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/src/main/java/com/yuji/polygon/controller/LeaveController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/src/test/java/com/yuji/polygon/PolygonWebApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/src/test/java/com/yuji/polygon/PolygonWebApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/config/CustomFilterInvocationSecurityMetadataSource.class" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/config/CustomFilterInvocationSecurityMetadataSource.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/config/CustomUrlDecisionManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/config/CustomUrlDecisionManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/config/WebSecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/config/WebSecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/controller/ArchiveController.class" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/controller/ArchiveController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/controller/FileSignController.class" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/controller/FileSignController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/controller/LeaveController.class" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/target/classes/com/yuji/polygon/controller/LeaveController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/polygonserver/polygon-web/target/test-classes/com/yuji/polygon/PolygonWebApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/polygonserver/polygon-web/target/test-classes/com/yuji/polygon/PolygonWebApplicationTests.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,6 +160,211 @@
   <component name="RestClientSettings">
     <option name="REQUEST_HISTORY">
       <list>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="-1" />
+                <option name="domain" value="localhost" />
+                <option name="name" value="JSESSIONID" />
+                <option name="path" value="/" />
+                <option name="value" value="4B9680906FD3C44B03A3D4CB2041A75C" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://localhost:8082/role/add" />
+          <option name="urlPath" value="" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="application/json" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&#10;  &quot;role&quot;: {&#10;    &quot;name&quot;: &quot;recorder2&quot;,&#10;    &quot;nameZh&quot;: &quot;记录员2&quot;&#10;  },&#10;&#10;  &quot;permissions&quot;: [&#10;    {&#10;      &quot;id&quot;: 2,&#10;      &quot;name&quot;: &quot;query&quot;,&#10;      &quot;menus&quot;: [&#10;        {&#10;          &quot;id&quot;: 1&#10;        },&#10;        {&#10;          &quot;id&quot;: 2&#10;        }&#10;      ]&#10;    }&#10;  ]&#10;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="-1" />
+                <option name="domain" value="localhost" />
+                <option name="name" value="JSESSIONID" />
+                <option name="path" value="/" />
+                <option name="value" value="4B9680906FD3C44B03A3D4CB2041A75C" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://localhost:8082/role/add" />
+          <option name="urlPath" value="" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="application/json" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&#10;  &quot;role&quot;: {&#10;    &quot;name&quot;: &quot;recorder&quot;,&#10;    &quot;nameZh&quot;: &quot;记录员&quot;&#10;  },&#10;&#10;  &quot;permissions&quot;: [&#10;    {&#10;      &quot;id&quot;: 2,&#10;      &quot;name&quot;: &quot;query&quot;,&#10;      &quot;menus&quot;: [&#10;        {&#10;          &quot;id&quot;: 1&#10;        },&#10;        {&#10;          &quot;id&quot;: 2&#10;        }&#10;      ]&#10;    }&#10;  ]&#10;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="-1" />
+                <option name="domain" value="localhost" />
+                <option name="name" value="JSESSIONID" />
+                <option name="path" value="/" />
+                <option name="value" value="4B9680906FD3C44B03A3D4CB2041A75C" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://localhost:8082/role/add" />
+          <option name="urlPath" value="" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="application/json" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&#10;  &quot;role&quot;: {&#10;    &quot;name&quot;: &quot;author&quot;,&#10;    &quot;nameZh&quot;: &quot;体系管理者&quot;&#10;  },&#10;&#10;  &quot;permissions&quot;: [&#10;    {&#10;      &quot;id&quot;: 1,&#10;      &quot;name&quot;: &quot;add&quot;,&#10;      &quot;menus&quot;: [&#10;        {&#10;          &quot;id&quot;: 1&#10;        },&#10;        {&#10;          &quot;id&quot;: 2&#10;        }&#10;      ]&#10;    }&#10;  ]&#10;}&#10;&#10;&lt;&gt;&lt;&gt; 2020-11-16T100748.200.json&#10; 2020-11-16T100524.200.json" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="-1" />
+                <option name="domain" value="localhost" />
+                <option name="name" value="JSESSIONID" />
+                <option name="path" value="/" />
+                <option name="value" value="4B9680906FD3C44B03A3D4CB2041A75C" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://localhost:8082/role/add" />
+          <option name="urlPath" value="" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="application/json" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&#10;  &quot;role&quot;: {&#10;    &quot;name&quot;: &quot;author&quot;,&#10;    &quot;nameZh&quot;: &quot;体系管理者&quot;&#10;  },&#10;  &#10;  &quot;permissions&quot;: [&#10;    {&#10;      &quot;id&quot;: 1,&#10;      &quot;name&quot;: &quot;add&quot;,&#10;      &quot;menus&quot;: [&#10;        {&#10;          &quot;id&quot;: 1&#10;        },&#10;        {&#10;          &quot;id&quot;: 2&#10;        }&#10;      ]&#10;    }&#10;  ]&#10;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="-1" />
+                <option name="domain" value="localhost" />
+                <option name="name" value="JSESSIONID" />
+                <option name="path" value="/" />
+                <option name="value" value="4B9680906FD3C44B03A3D4CB2041A75C" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://localhost:8082/role/add" />
+          <option name="urlPath" value="" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="application/json" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&#10;&#10;  &quot;name&quot;: &quot;author&quot;,&#10;  &quot;nameZh&quot;: &quot;体系管理者&quot;,&#10;  &quot;permissions&quot;: [&#10;    {&#10;      &quot;id&quot;: 1,&#10;      &quot;name&quot;: &quot;add&quot;,&#10;      &quot;menus&quot;: [&#10;        {&#10;          &quot;id&quot;: 1&#10;        },&#10;        {&#10;          &quot;id&quot;: 2&#10;        }&#10;      ]&#10;    }&#10;  ]&#10;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="-1" />
+                <option name="domain" value="localhost" />
+                <option name="name" value="JSESSIONID" />
+                <option name="path" value="/" />
+                <option name="value" value="5CB3E18CBFFBC6559B1AAB89578FF2A3" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://localhost:8082/role/add" />
+          <option name="urlPath" value="" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="application/json" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&#10;&#10;  &quot;name&quot;: &quot;author&quot;,&#10;  &quot;nameZh&quot;: &quot;体系管理者&quot;,&#10;  &quot;permissions&quot;: [&#10;    {&#10;      &quot;id&quot;: 1,&#10;      &quot;name&quot;: &quot;add&quot;,&#10;      &quot;menus&quot;: [&#10;        {&#10;          &quot;id&quot;: 1&#10;        },&#10;        {&#10;          &quot;id&quot;: 2&#10;        }&#10;      ]&#10;    }&#10;  ]&#10;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="-1" />
+                <option name="domain" value="localhost" />
+                <option name="name" value="JSESSIONID" />
+                <option name="path" value="/" />
+                <option name="value" value="CF0225D0F9B28CCBB00902372E01A6AE" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://localhost:8082/role/add" />
+          <option name="urlPath" value="" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="application/json" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&#10;&#10;  &quot;name&quot;: &quot;author&quot;,&#10;  &quot;nameZh&quot;: &quot;体系管理者&quot;,&#10;  &quot;permissions&quot;: [&#10;    {&#10;      &quot;id&quot;: 1,&#10;      &quot;name&quot;: &quot;add&quot;,&#10;      &quot;menus&quot;: [&#10;        {&#10;          &quot;id&quot;: 1&#10;        },&#10;        {&#10;          &quot;id&quot;: 2&#10;        }&#10;      ]&#10;    }&#10;  ]&#10;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://localhost:8082/role/add" />
+          <option name="urlPath" value="" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="application/json" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&#10;&#10;  &quot;name&quot;: &quot;author&quot;,&#10;  &quot;nameZh&quot;: &quot;体系管理者&quot;,&#10;  &quot;permissions&quot;: [&#10;    {&#10;      &quot;id&quot;: 1,&#10;      &quot;name&quot;: &quot;add&quot;,&#10;      &quot;menus&quot;: [&#10;        {&#10;          &quot;id&quot;: 1&#10;        },&#10;        {&#10;          &quot;id&quot;: 2&#10;        }&#10;      ]&#10;    }&#10;  ]&#10;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
         <RestClientRequest>
           <option name="httpMethod" value="POST" />
           <option name="urlBase" value="http://localhost:8080/leave/add" />
@@ -539,19 +791,21 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.PolygonWebApplicationTests.testUrl">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.PolygonWebApplicationTests.testAddEmployee">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="rest-api_3#1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$APPLICATION_CONFIG_DIR$/scratches/rest-api_3.http" runType="Run single request">
+    <configuration name="rest-api_5#1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$APPLICATION_CONFIG_DIR$/scratches/rest-api_5.http" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="PolygonWebApplicationTests.contextLoads" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
@@ -570,7 +824,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PolygonWebApplicationTests.testMenu" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PolygonWebApplicationTests.testAddEmployee" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="polygon-web" />
       <extension name="coverage">
         <pattern>
@@ -580,7 +834,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.yuji.polygon" />
       <option name="MAIN_CLASS_NAME" value="com.yuji.polygon.PolygonWebApplicationTests" />
-      <option name="METHOD_NAME" value="testMenu" />
+      <option name="METHOD_NAME" value="testAddEmployee" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -626,20 +880,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="HTTP Request.rest-api_3#1" />
       <item itemvalue="JUnit.PolygonWebApplicationTests.contextLoads" />
-      <item itemvalue="JUnit.PolygonWebApplicationTests.testMenu" />
-      <item itemvalue="Spring Boot.PolygonWebApplication" />
       <item itemvalue="JUnit.PolygonWebApplicationTests.testPermission" />
       <item itemvalue="JUnit.PolygonWebApplicationTests.testUrl" />
+      <item itemvalue="Spring Boot.PolygonWebApplication" />
+      <item itemvalue="HTTP Request.rest-api_5#1" />
+      <item itemvalue="JUnit.PolygonWebApplicationTests.testAddEmployee" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.PolygonWebApplicationTests.testAddEmployee" />
+        <item itemvalue="HTTP Request.rest-api_5#1" />
         <item itemvalue="JUnit.PolygonWebApplicationTests.testUrl" />
         <item itemvalue="JUnit.PolygonWebApplicationTests.testPermission" />
         <item itemvalue="JUnit.PolygonWebApplicationTests.contextLoads" />
-        <item itemvalue="JUnit.PolygonWebApplicationTests.testMenu" />
-        <item itemvalue="HTTP Request.rest-api_3#1" />
       </list>
     </recent_temporary>
   </component>
@@ -690,7 +944,8 @@
       <workItem from="1605054823889" duration="10193000" />
       <workItem from="1605141968658" duration="15370000" />
       <workItem from="1605228338603" duration="22669000" />
-      <workItem from="1605313959967" duration="13399000" />
+      <workItem from="1605313959967" duration="20082000" />
+      <workItem from="1605487310753" duration="19912000" />
     </task>
     <task id="LOCAL-00001" summary="使用yml文件代替properties文件">
       <created>1597227777273</created>
@@ -860,7 +1115,28 @@
       <option name="project" value="LOCAL" />
       <updated>1605266537133</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="开发权限控制模块">
+      <created>1605338076078</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1605338076078</updated>
+    </task>
+    <task id="LOCAL-00026" summary="开发权限控制模块">
+      <created>1605338113212</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1605338113212</updated>
+    </task>
+    <task id="LOCAL-00027" summary="开发权限控制模块">
+      <created>1605338134717</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1605338134717</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -911,10 +1187,10 @@
       <screen x="0" y="0" width="1280" height="984" />
     </state>
     <state x="389" y="360" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1280.984@0.0.1280.984" timestamp="1597218287091" />
-    <state x="445" y="175" key="#com.intellij.ide.util.MemberChooser" timestamp="1605322826649">
+    <state x="445" y="175" key="#com.intellij.ide.util.MemberChooser" timestamp="1605492509043">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state x="445" y="175" key="#com.intellij.ide.util.MemberChooser/0.0.1280.984@0.0.1280.984" timestamp="1605322826649" />
+    <state x="445" y="175" key="#com.intellij.ide.util.MemberChooser/0.0.1280.984@0.0.1280.984" timestamp="1605492509043" />
     <state x="301" y="398" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1604885333955">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
@@ -923,66 +1199,66 @@
       <screen x="0" y="0" width="1280" height="984" />
     </state>
     <state x="389" y="358" width="501" height="276" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1280.984@0.0.1280.984" timestamp="1604650133465" />
-    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1605247662887">
+    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1605498460601">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.984@0.0.1280.984" timestamp="1605247662887" />
-    <state x="370" y="237" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1605253358055">
+    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.984@0.0.1280.984" timestamp="1605498460601" />
+    <state x="370" y="237" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1605489004680">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state x="370" y="237" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.984@0.0.1280.984" timestamp="1605253358055" />
+    <state x="370" y="237" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.984@0.0.1280.984" timestamp="1605489004680" />
     <state x="415" y="232" key="FileChooserDialogImpl" timestamp="1604111973890">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
     <state x="415" y="232" key="FileChooserDialogImpl/0.0.1280.984@0.0.1280.984" timestamp="1604111973890" />
-    <state width="1236" height="495" key="GridCell.Tab.0.bottom" timestamp="1605335158996">
+    <state width="1236" height="487" key="GridCell.Tab.0.bottom" timestamp="1605514665525">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1236" height="495" key="GridCell.Tab.0.bottom/0.0.1280.984@0.0.1280.984" timestamp="1605335158996" />
-    <state width="1236" height="495" key="GridCell.Tab.0.center" timestamp="1605335158996">
+    <state width="1236" height="487" key="GridCell.Tab.0.bottom/0.0.1280.984@0.0.1280.984" timestamp="1605514665525" />
+    <state width="1236" height="487" key="GridCell.Tab.0.center" timestamp="1605514665525">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1236" height="495" key="GridCell.Tab.0.center/0.0.1280.984@0.0.1280.984" timestamp="1605335158996" />
-    <state width="1236" height="495" key="GridCell.Tab.0.left" timestamp="1605335158996">
+    <state width="1236" height="487" key="GridCell.Tab.0.center/0.0.1280.984@0.0.1280.984" timestamp="1605514665525" />
+    <state width="1236" height="487" key="GridCell.Tab.0.left" timestamp="1605514665525">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1236" height="495" key="GridCell.Tab.0.left/0.0.1280.984@0.0.1280.984" timestamp="1605335158996" />
-    <state width="1236" height="495" key="GridCell.Tab.0.right" timestamp="1605335158996">
+    <state width="1236" height="487" key="GridCell.Tab.0.left/0.0.1280.984@0.0.1280.984" timestamp="1605514665525" />
+    <state width="1236" height="487" key="GridCell.Tab.0.right" timestamp="1605514665525">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1236" height="495" key="GridCell.Tab.0.right/0.0.1280.984@0.0.1280.984" timestamp="1605335158996" />
-    <state width="1236" height="450" key="GridCell.Tab.1.bottom" timestamp="1605335050159">
+    <state width="1236" height="487" key="GridCell.Tab.0.right/0.0.1280.984@0.0.1280.984" timestamp="1605514665525" />
+    <state width="1236" height="502" key="GridCell.Tab.1.bottom" timestamp="1605514093157">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1236" height="450" key="GridCell.Tab.1.bottom/0.0.1280.984@0.0.1280.984" timestamp="1605335050159" />
-    <state width="1236" height="450" key="GridCell.Tab.1.center" timestamp="1605335050159">
+    <state width="1236" height="502" key="GridCell.Tab.1.bottom/0.0.1280.984@0.0.1280.984" timestamp="1605514093157" />
+    <state width="1236" height="502" key="GridCell.Tab.1.center" timestamp="1605514093157">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1236" height="450" key="GridCell.Tab.1.center/0.0.1280.984@0.0.1280.984" timestamp="1605335050159" />
-    <state width="1236" height="450" key="GridCell.Tab.1.left" timestamp="1605335050158">
+    <state width="1236" height="502" key="GridCell.Tab.1.center/0.0.1280.984@0.0.1280.984" timestamp="1605514093157" />
+    <state width="1236" height="502" key="GridCell.Tab.1.left" timestamp="1605514093157">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1236" height="450" key="GridCell.Tab.1.left/0.0.1280.984@0.0.1280.984" timestamp="1605335050158" />
-    <state width="1236" height="450" key="GridCell.Tab.1.right" timestamp="1605335050159">
+    <state width="1236" height="502" key="GridCell.Tab.1.left/0.0.1280.984@0.0.1280.984" timestamp="1605514093157" />
+    <state width="1236" height="502" key="GridCell.Tab.1.right" timestamp="1605514093157">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1236" height="450" key="GridCell.Tab.1.right/0.0.1280.984@0.0.1280.984" timestamp="1605335050159" />
-    <state width="1236" height="557" key="GridCell.Tab.2.bottom" timestamp="1604922274884">
+    <state width="1236" height="502" key="GridCell.Tab.1.right/0.0.1280.984@0.0.1280.984" timestamp="1605514093157" />
+    <state width="1236" height="450" key="GridCell.Tab.2.bottom" timestamp="1605493986016">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1236" height="557" key="GridCell.Tab.2.bottom/0.0.1280.984@0.0.1280.984" timestamp="1604922274884" />
-    <state width="1236" height="557" key="GridCell.Tab.2.center" timestamp="1604922274884">
+    <state width="1236" height="450" key="GridCell.Tab.2.bottom/0.0.1280.984@0.0.1280.984" timestamp="1605493986016" />
+    <state width="1236" height="450" key="GridCell.Tab.2.center" timestamp="1605493986016">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1236" height="557" key="GridCell.Tab.2.center/0.0.1280.984@0.0.1280.984" timestamp="1604922274884" />
-    <state width="1236" height="557" key="GridCell.Tab.2.left" timestamp="1604922274884">
+    <state width="1236" height="450" key="GridCell.Tab.2.center/0.0.1280.984@0.0.1280.984" timestamp="1605493986016" />
+    <state width="1236" height="450" key="GridCell.Tab.2.left" timestamp="1605493986016">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1236" height="557" key="GridCell.Tab.2.left/0.0.1280.984@0.0.1280.984" timestamp="1604922274884" />
-    <state width="1236" height="557" key="GridCell.Tab.2.right" timestamp="1604922274884">
+    <state width="1236" height="450" key="GridCell.Tab.2.left/0.0.1280.984@0.0.1280.984" timestamp="1605493986016" />
+    <state width="1236" height="450" key="GridCell.Tab.2.right" timestamp="1605493986016">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state width="1236" height="557" key="GridCell.Tab.2.right/0.0.1280.984@0.0.1280.984" timestamp="1604922274884" />
+    <state width="1236" height="450" key="GridCell.Tab.2.right/0.0.1280.984@0.0.1280.984" timestamp="1605493986016" />
     <state x="220" y="225" key="IDE.errors.dialog" timestamp="1597227962016">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
@@ -995,10 +1271,10 @@
       <screen x="0" y="0" width="1280" height="984" />
     </state>
     <state x="99" y="82" key="SettingsEditor/0.0.1280.984@0.0.1280.984" timestamp="1604922792017" />
-    <state x="232" y="224" key="Vcs.Push.Dialog.v2" timestamp="1605266542416">
+    <state x="232" y="224" key="Vcs.Push.Dialog.v2" timestamp="1605338173390">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state x="232" y="224" key="Vcs.Push.Dialog.v2/0.0.1280.984@0.0.1280.984" timestamp="1605266542416" />
+    <state x="232" y="224" key="Vcs.Push.Dialog.v2/0.0.1280.984@0.0.1280.984" timestamp="1605338173390" />
     <state width="648" height="500" key="XDebugger.FullValuePopup" timestamp="1604908642153">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
@@ -1007,10 +1283,10 @@
       <screen x="0" y="0" width="1280" height="984" />
     </state>
     <state x="443" y="404" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.984@0.0.1280.984" timestamp="1597391951260" />
-    <state x="342" y="224" width="596" height="536" key="find.popup" timestamp="1604457241270">
+    <state x="342" y="224" width="736" height="536" key="find.popup" timestamp="1605489909613">
       <screen x="0" y="0" width="1280" height="984" />
     </state>
-    <state x="342" y="224" width="596" height="536" key="find.popup/0.0.1280.984@0.0.1280.984" timestamp="1604457241270" />
+    <state x="342" y="224" width="736" height="536" key="find.popup/0.0.1280.984@0.0.1280.984" timestamp="1605489909613" />
     <state x="10" y="151" key="new project wizard" timestamp="1604653740157">
       <screen x="0" y="0" width="1280" height="984" />
     </state>

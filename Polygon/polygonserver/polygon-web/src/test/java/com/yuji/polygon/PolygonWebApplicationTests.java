@@ -1,16 +1,22 @@
 package com.yuji.polygon;
 
+import com.yuji.polygon.entity.Employee;
 import com.yuji.polygon.entity.Permission;
+import com.yuji.polygon.service.EmployeeService;
 import com.yuji.polygon.service.PermissionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.AntPathMatcher;
 
+import java.util.Date;
 import java.util.List;
 
 @SpringBootTest
 class PolygonWebApplicationTests {
+
+    @Autowired
+    EmployeeService employeeService;
 
     @Autowired
     PermissionService permissionService;
@@ -32,14 +38,21 @@ class PolygonWebApplicationTests {
     }
 
     @Test
-    void testUrl(){
-        AntPathMatcher antPathMatcher = new AntPathMatcher();
-        boolean result1 = antPathMatcher.match("/leave/**","/leave/query/page");
-        if (result1){
-            boolean result2 = "/leave/query/page".contains("query");
-            System.out.println(result2);
-        }
+    void testAddEmployee(){
+        Employee employee = new Employee();
+        employee.setEmployeeNo("GREE1001");
+        employee.setEmployeeName("员工2");
+        employee.setEnabled(false);
+        employee.setPassword("123456");
+        employee.setGmtCreate(new Date());
+        employee.setGmtModified(new Date());
+        int[] rids = {2,3};
+        int result = employeeService.insertEmployee(employee,rids);
+        System.out.println(result);
+    }
 
+    @Test
+    void testAddRole(){
 
     }
 

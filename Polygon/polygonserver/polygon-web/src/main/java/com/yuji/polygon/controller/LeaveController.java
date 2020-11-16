@@ -27,12 +27,14 @@ public class LeaveController {
         if (eNo.length < ConstantValue.LEAVE_AUDIT_LENGTH || eName.length < ConstantValue.LEAVE_AUDIT_LENGTH){
             throw new APIException(ResultCode.VALIDATE_FAILED.getCode(),"签审者不足");
         }
-        return leaveSerice.addLeaveFlow(leave,eNo,eName);
+        int result = leaveSerice.addLeaveFlow(leave,eNo,eName);
+        return result > 0 ? "提交成功":"提交失败";
     }
 
     @PutMapping("/update")
     public String updateLeaveFlow(@RequestBody @Valid Audit audit){
-        return leaveSerice.updateLeaveFlow(audit);
+        int result = leaveSerice.updateLeaveFlow(audit);
+        return result > 0 ? "更新成功":"更新失败";
     }
 
     @GetMapping("/query/page")
@@ -42,7 +44,8 @@ public class LeaveController {
 
     @DeleteMapping("/delete/{id}")
     public String deleteLeaveFlow(int id){
-        return leaveSerice.deleteLeaveFlow(id);
+        int result = leaveSerice.deleteLeaveFlow(id);
+        return result > 0 ? "删除成功":"删除失败";
     }
 
 }

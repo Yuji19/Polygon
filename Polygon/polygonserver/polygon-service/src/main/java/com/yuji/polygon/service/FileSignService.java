@@ -46,8 +46,8 @@ public class FileSignService {
     @Autowired
     AuditServie auditServie;
 
-    @Transactional
-    public String addFlowSignFlow(FileSign fileSign,String[] eNo,String[] eName, MultipartFile file) {
+    @Transactional(rollbackFor = Exception.class)
+    public int addFlowSignFlow(FileSign fileSign,String[] eNo,String[] eName, MultipartFile file) {
         //创建流程
         Flow flow = new Flow();
         flow.setFlowNo(CommonUtil.randomUid(12));
@@ -150,11 +150,11 @@ public class FileSignService {
         thirdAudit.setFlowNodeNo(thirdNode.getId());
         auditServie.insertAudit(thirdAudit);
 
-        return "提交成功";
+        return 1;
     }
 
-    @Transactional
-    public String updateFileSignFlow(Audit audit) {
+    @Transactional(rollbackFor = Exception.class)
+    public int updateFileSignFlow(Audit audit) {
         audit.setAuditDate(CommonUtil.getNowTime());
         auditServie.updateAudit(audit);
 
@@ -174,7 +174,7 @@ public class FileSignService {
         fileSignMapper.updateFileSign(fileSign);
 
 
-        return "审批成功";
+        return 1;
     }
 
     public FileSign findFileSignById(int id) {
@@ -203,14 +203,14 @@ public class FileSignService {
         FileUtil.getInstance().download(optional.get().getFilePath(), response);
     }
 
-    @Transactional
-    public String deleteFileSignById(int id) {
+    @Transactional(rollbackFor = Exception.class)
+    public int deleteFileSignById(int id) {
         String flowNo = fileSignMapper.findFileSignById(id).getFlowNo();
         fileSignMapper.deleteFileSignById(id);
         flowService.deleteFlowByFlowNo(flowNo);
         flowNodeService.deleteFlowNodeByFlowNo(flowNo);
         flowLineService.deleteFlowLineByFlowNo(flowNo);
         auditServie.deleteAuditByBusinessNo(id);
-        return "删除成功";
+        return 1;
     }
 }

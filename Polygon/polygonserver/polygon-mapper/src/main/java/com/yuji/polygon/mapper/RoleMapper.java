@@ -15,7 +15,9 @@ import java.util.List;
 @Mapper
 public interface RoleMapper {
 
-    int insertRole(String name);
+    int insertRole(Role role);
 
     List<Role> getRoleByEmployeeId(int eid);
+
+    int deleteRoleById(int[] ids);
 }

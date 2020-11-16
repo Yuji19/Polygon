@@ -30,7 +30,7 @@ public class ArchiveService {
     @Value("${custom.path}")
     String customPath;
 
-    public String insertArchive(Archive archive, MultipartFile file) {
+    public int insertArchive(Archive archive, MultipartFile file) {
         Archive oldArchive = archiveMapper.findArchiveByFileNo(archive.getFileNo());
         Optional.ofNullable(oldArchive)
                 .ifPresent(o -> {
@@ -48,7 +48,7 @@ public class ArchiveService {
         String newPath = FileUtil.getInstance().save(path, file);
         archive.setFilePath(newPath);
         if (Optional.ofNullable(archiveMapper.insertArchive(archive)).isPresent()) {
-            return "添加文档成功";
+            return 1;
         } else {
             throw new APIException("添加文档失败");
         }

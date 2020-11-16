@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * @author: yuji
  * @create: 2020-11-12 10:46:00
  */
+
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -19,7 +20,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(employeeService);
+        //auth.userDetailsService(employeeService);
     }
 
     /**
@@ -27,6 +28,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        
+
     }
 }

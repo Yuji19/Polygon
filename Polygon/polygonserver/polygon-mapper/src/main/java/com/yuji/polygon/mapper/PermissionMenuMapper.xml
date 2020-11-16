@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuji.polygon.mapper.PermissionMenuMapper">
+
+
+    <insert id="insertPermissionMenu"  useGeneratedKeys="true">
+        insert into poly_permission_menu values
+        <foreach collection="mids" item="mid" separator="," >
+            (null,#{pid},#{mid})
+        </foreach>
+    </insert>
+
+    <delete id="deletePermissionMenuByPid">
+        delete from poly_permission_menu where pid=#{pid}
+    </delete>
+
+    <delete id="deletePermissionMenuByMid">
+        delete from poly_permission_menu where mid=#{mid}
+    </delete>
+
+
+
+</mapper>

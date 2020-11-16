@@ -32,7 +32,8 @@ public class ArchiveController {
 
     @PostMapping("/add")
     public String insert(@Valid Archive archive, MultipartFile file){
-        return archiveService.insertArchive(archive, file);
+        int result = archiveService.insertArchive(archive, file);
+        return result > 0 ? "提交成功":"提交失败";
     }
 
     @GetMapping("/download")
@@ -41,13 +42,15 @@ public class ArchiveController {
     }
 
     @PutMapping("/update")
-    public int update(@RequestBody @Valid Archive archive){
-        return archiveService.updateArchive(archive);
+    public String update(@RequestBody @Valid Archive archive){
+        int result = archiveService.updateArchive(archive);
+        return result > 0 ? "更新成功":"更新失败";
     }
 
     @GetMapping("/delete")
-    public int delete(Long[] aids){
-        return archiveService.deleteArchive(aids);
+    public String delete(Long[] aids){
+        int result = archiveService.deleteArchive(aids);
+        return result > 0 ? "删除成功":"删除失败";
     }
 
 }

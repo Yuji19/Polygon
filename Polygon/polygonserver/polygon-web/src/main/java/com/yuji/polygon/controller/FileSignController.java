@@ -29,12 +29,14 @@ public class FileSignController {
         if (eNo.length < ConstantValue.FILE_SING_AUDIT_LENGTH || eName.length < ConstantValue.FILE_SING_AUDIT_LENGTH){
             throw new APIException(ResultCode.VALIDATE_FAILED.getCode(),"签审者不足");
         }
-        return fileSignService.addFlowSignFlow(fileSign,eNo,eName,file);
+        int result = fileSignService.addFlowSignFlow(fileSign,eNo,eName,file);
+        return result > 0 ? "提交成功":"提交失败";
     }
 
     @PutMapping("/update")
     public String updateFileSignFlow(@RequestBody @Valid Audit audit){
-        return fileSignService.updateFileSignFlow(audit);
+        int result = fileSignService.updateFileSignFlow(audit);
+        return result > 0 ? "更新成功":"更新失败";
     }
 
     @GetMapping("/query/page")
@@ -49,6 +51,7 @@ public class FileSignController {
 
     @DeleteMapping("/delete/{id}")
     public String deleteFileSignFlow(int id){
-        return fileSignService.deleteFileSignById(id);
+        int result = fileSignService.deleteFileSignById(id);
+        return result > 0 ? "删除成功":"删除失败";
     }
 }

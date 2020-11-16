@@ -30,6 +30,16 @@
        where e.`employee_no`=#{employeeNo} and e.`id` = er.`eid` and er.`rid` = r.`id`
     </select>
 
+    <delete id="deleteEmployeeById">
+        delete
+            poly_employee,
+            poly_employee_role
+        from
+            poly_employee left join poly_employee_role on poly_employee.`id`=poly_employee_role.`eid`
+        where
+            id = #{id}
+    </delete>
+
 
 
 </mapper>
