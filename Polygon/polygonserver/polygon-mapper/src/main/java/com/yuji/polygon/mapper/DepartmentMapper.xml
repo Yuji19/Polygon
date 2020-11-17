@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuji.polygon.mapper.DepartmentMapper">
+
+    <resultMap id="BaseResultMap" type="com.yuji.polygon.entity.Department">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
+    </resultMap>
+
+
+    <insert id="insertDepartment" useGeneratedKeys="true" keyProperty="id">
+        insert into poly_department(name,gmt_create,gmt_modified) values (#{name},#{gmtCreate},#{gmtModified})
+    </insert>
+
+   <select id="getDepartmentById" resultMap="BaseResultMap">
+       select * from poly_department where id = #{id}
+   </select>
+
+    <select id="getAllDepartment" resultMap="BaseResultMap">
+        select * from poly_department
+    </select>
+
+    <delete id="deleteDepartmentById">
+        delete from poly_department where id = #{id}
+    </delete>
+
+    <update id="updateDepartment">
+        update poly_department
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+</mapper>

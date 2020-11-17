@@ -15,7 +15,7 @@
 
     <!-- 删除某个角色拥有的某些权限 -->
     <delete id="deleteRolePermissionByRidAndPid">
-        delete from poly_role_permission where
+        delete from poly_role_permission
         <where>
             <if test="rid &gt; 0">
                 and rid=#{rid}

@@ -64,7 +64,6 @@ public class RoleService {
         if (pids.length > 0){
             result3 = rolePermissionMapper.insertRolePermission(role.getId(),pids);
         }
-        System.out.println("result1="+result1+" result2="+result2+" result3="+result3);
         return (result1 > 0 && result2 > 0 && result3 > 0) ? 1 : 0;
     }
 

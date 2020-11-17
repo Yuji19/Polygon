@@ -8,6 +8,18 @@ package com.yuji.polygon.utils;
  */
 public class ConstantValue {
 
+    public final static String ADD_SUCCESS = "添加成功";
+
+    public final static String ADD_FAILURE = "添加失败";
+
+    public final static String DELETE_SUCCESS = "删除成功";
+
+    public final static String DELETE_FAILURE = "删除失败";
+
+    public final static String UPDATE_SUCCESS = "更新成功";
+
+    public final static String UPDATE_FAILURE = "更新失败";
+
     public final static int SUCCESS_CODE = 1000;
     //请假单一级审批：主任审批
     public final static String LEAVE_ONE_AUDIT = "主任审批";

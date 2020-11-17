@@ -9,6 +9,7 @@
         <result column="employee_no" property="employeeNo" />
         <result column="employee_name" property="employeeName"/>
         <result column="password" property="password" />
+        <result column="department_id" property="departmentId" />
         <result column="enabled" property="enabled" />
         <result column="gmt_create" property="gmtCreate" />
         <result column="gmt_modified" property="gmtModified" />
@@ -20,8 +21,8 @@
 
 
     <insert id="insertEmployee" parameterType="com.yuji.polygon.entity.Employee" useGeneratedKeys="true" keyProperty="id">
-        insert into poly_employee(employee_no, employee_name, password, enabled, gmt_create, gmt_modified)
-        values (#{employeeNo}, #{employeeName}, #{password}, #{enabled}, #{gmtCreate}, #{gmtModified})
+        insert into poly_employee(employee_no, employee_name, password, department_id, enabled, gmt_create, gmt_modified)
+        values (#{employeeNo}, #{employeeName}, #{password}, #{departmentId}, #{enabled}, #{gmtCreate}, #{gmtModified})
     </insert>
 
     <select id="getEmployeeByEmployeeNo" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -40,6 +41,24 @@
             id = #{id}
     </delete>
 
+    <update id="updateEmpolyee">
+        update poly_employee
+        <set>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="departmentId &gt; 0">
+                department_id = #{departmentId},
+            </if>
+            <if test="enabled != null">
+                enabled = #{enabled},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 
 
 </mapper>

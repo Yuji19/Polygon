@@ -24,6 +24,8 @@ public class Employee{
 
     private String password;
 
+    private int deparmentId;
+
     private boolean enabled;
 
     private List<Role> roles;
@@ -99,5 +101,11 @@ public class Employee{
         this.enabled = enabled;
     }
 
+    public int getDeparmentId() {
+        return deparmentId;
+    }
 
+    public void setDeparmentId(int deparmentId) {
+        this.deparmentId = deparmentId;
+    }
 }
