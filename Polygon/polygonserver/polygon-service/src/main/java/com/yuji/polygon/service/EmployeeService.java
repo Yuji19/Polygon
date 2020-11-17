@@ -12,9 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @className: EmployeeService
@@ -116,5 +114,32 @@ public class EmployeeService implements UserDetailsService {
     public int updateEmployee(Employee employee){
         employee.setGmtModified(new Date());
         return employeeMapper.updateEmployee(employee);
+    }
+
+    /**
+     * 根据员工编号获取员工
+     * @param employeeNo
+     * @return
+     */
+    public Employee getEmployeeByEmployeeNo(String employeeNo){
+        return employeeMapper.getEmployeeByEmployeeNo(employeeNo);
+    }
+
+    /**
+     * 分页查询
+     * @param employee
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    public Page<Employee> getAllEmployee(Employee employee, int pageNum, int pageSize){
+        int startIndex = (pageNum-1)*pageSize;
+        int totalCount = employeeMapper.countTotalEmployee(employee);
+//        Map<String,Object> map = new HashMap();
+//        map.put("employee",employee);
+//        map.put("startIndex",startIndex);
+//        map.put("pageSize",pageSize);
+        List<Employee> records = employeeMapper.getAllEmployee(employee,startIndex,pageSize);
+        return new Page(pageNum,totalCount,records);
     }
 }

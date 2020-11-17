@@ -59,7 +59,7 @@
     </select>
 
 
-    <select id="listArchives" parameterType="java.util.Map" resultMap="BaseResultMap">
+    <select id="listArchives" resultMap="BaseResultMap">
         select * from poly_archive
         <where>
             <if test="archive != null ">

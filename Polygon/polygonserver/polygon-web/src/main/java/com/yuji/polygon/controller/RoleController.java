@@ -40,8 +40,9 @@ public class RoleController {
         return result > 0 ? ConstantValue.DELETE_SUCCESS : ConstantValue.DELETE_FAILURE;
     }
 
-    @PutMapping("/delete/permission")
-    public String deleteRolePermission(int rid, int[] pids){
+
+    @DeleteMapping("/delete/{rid}/{pids}")
+    public String deleteRolePermission(@PathVariable int rid, @PathVariable int[] pids){
         int result = roleService.deleteRolePermissionByRidAndPid(rid,pids);
         return result > 0 ? ConstantValue.DELETE_SUCCESS : ConstantValue.DELETE_FAILURE;
     }

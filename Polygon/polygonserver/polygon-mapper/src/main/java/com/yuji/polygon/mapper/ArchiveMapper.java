@@ -20,7 +20,8 @@ public interface ArchiveMapper {
 
     int countTotal(Archive archive);
 
-    List<Archive> listArchives(Map<String, Object> map);
+    List<Archive> listArchives(@Param("archive") Archive archive,
+                               @Param("startIndex") int startIndex, @Param("pageSize") int pageSize);
 
     int updateArchive(Archive archive);
 

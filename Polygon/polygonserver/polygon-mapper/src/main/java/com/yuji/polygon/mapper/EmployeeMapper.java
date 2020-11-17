@@ -2,6 +2,9 @@ package com.yuji.polygon.mapper;
 
 import com.yuji.polygon.entity.Employee;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @interface: EmployeeMapper
@@ -16,6 +19,11 @@ public interface EmployeeMapper {
     int insertEmployee(Employee employee);
 
     Employee getEmployeeByEmployeeNo(String employeeNo);
+
+    int countTotalEmployee(Employee employee);
+
+    List<Employee> getAllEmployee(@Param("employee") Employee employee,
+                                  @Param("startIndex") int startIndex, @Param("pageSize") int pageSize);
 
     int deleteEmployeeById(int id);
 

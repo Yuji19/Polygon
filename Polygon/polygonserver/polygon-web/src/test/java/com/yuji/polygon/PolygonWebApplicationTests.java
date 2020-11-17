@@ -1,6 +1,7 @@
 package com.yuji.polygon;
 
 import com.yuji.polygon.entity.Employee;
+import com.yuji.polygon.entity.Page;
 import com.yuji.polygon.entity.Permission;
 import com.yuji.polygon.service.EmployeeService;
 import com.yuji.polygon.service.PermissionService;
@@ -92,4 +93,11 @@ class PolygonWebApplicationTests {
         System.out.println(result);
     }
 
+    @Test
+    void testGetAllEmployee(){
+        Employee employee = new Employee();
+        employee.setEmployeeNo("GREE1002");
+        Page page = employeeService.getAllEmployee(employee,1,10);
+        System.out.println(page);
+    }
 }
