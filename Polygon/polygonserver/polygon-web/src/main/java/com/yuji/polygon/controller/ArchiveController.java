@@ -4,6 +4,7 @@ package com.yuji.polygon.controller;
 import com.yuji.polygon.entity.Archive;
 import com.yuji.polygon.entity.Page;
 import com.yuji.polygon.service.ArchiveService;
+import com.yuji.polygon.utils.ConstantValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,7 +26,7 @@ public class ArchiveController {
     @Autowired
     ArchiveService archiveService;
 
-    @PostMapping("/query")
+    @PostMapping("/query/page")
     public Page<Archive> listArchive(Archive archive, Integer pageNum, Integer pageSize){
         return archiveService.ListArchive(archive,pageNum,pageSize);
     }
@@ -33,24 +34,24 @@ public class ArchiveController {
     @PostMapping("/add")
     public String insert(@Valid Archive archive, MultipartFile file){
         int result = archiveService.insertArchive(archive, file);
-        return result > 0 ? "提交成功":"提交失败";
+        return result > 0 ? ConstantValue.ADD_SUCCESS : ConstantValue.ADD_FAILURE;
     }
 
-    @GetMapping("/download")
-    public void download(String fileNo, HttpServletResponse response){
+    @GetMapping("/download/{fileNo}")
+    public void download(@PathVariable String fileNo, HttpServletResponse response){
         archiveService.downloadArchive(fileNo, response);
     }
 
     @PutMapping("/update")
     public String update(@RequestBody @Valid Archive archive){
         int result = archiveService.updateArchive(archive);
-        return result > 0 ? "更新成功":"更新失败";
+        return result > 0 ? ConstantValue.UPDATE_SUCCESS : ConstantValue.UPDATE_FAILURE;
     }
 
-    @GetMapping("/delete")
-    public String delete(Long[] aids){
+    @DeleteMapping("/delete/{aids}")
+    public String delete(@PathVariable Long[] aids){
         int result = archiveService.deleteArchive(aids);
-        return result > 0 ? "删除成功":"删除失败";
+        return result > 0 ? ConstantValue.DELETE_SUCCESS : ConstantValue.DELETE_FAILURE;
     }
 
 }

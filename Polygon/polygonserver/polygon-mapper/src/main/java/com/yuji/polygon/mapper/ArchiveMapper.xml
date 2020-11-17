@@ -143,11 +143,11 @@
         </foreach>
     </delete>
 
-    <select id="findArchiveById" resultMap="BaseResultMap">
+    <select id="getArchiveById" resultMap="BaseResultMap">
         select * from poly_archive where id = #{id}
     </select>
 
-    <select id="findArchiveByFileNo" resultMap="BaseResultMap">
+    <select id="getArchiveByFileNo" resultMap="BaseResultMap">
         select * from poly_archive where file_no = #{fileNo}
     </select>
 </mapper>

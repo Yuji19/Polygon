@@ -30,13 +30,13 @@ public class FileSignController {
             throw new APIException(ResultCode.VALIDATE_FAILED.getCode(),"签审者不足");
         }
         int result = fileSignService.addFlowSignFlow(fileSign,eNo,eName,file);
-        return result > 0 ? "提交成功":"提交失败";
+        return result > 0 ? ConstantValue.ADD_SUCCESS : ConstantValue.ADD_FAILURE;
     }
 
     @PutMapping("/update")
     public String updateFileSignFlow(@RequestBody @Valid Audit audit){
         int result = fileSignService.updateFileSignFlow(audit);
-        return result > 0 ? "更新成功":"更新失败";
+        return result > 0 ? ConstantValue.UPDATE_SUCCESS : ConstantValue.UPDATE_FAILURE;
     }
 
     @GetMapping("/query/page")
@@ -45,13 +45,13 @@ public class FileSignController {
     }
 
     @GetMapping("/download/{id}")
-    public void downloadFileSign(int id, HttpServletResponse response){
+    public void downloadFileSign(@PathVariable int id, HttpServletResponse response){
         fileSignService.downloadSignFile(id,response);
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteFileSignFlow(int id){
+    public String deleteFileSignFlow(@PathVariable int id){
         int result = fileSignService.deleteFileSignById(id);
-        return result > 0 ? "删除成功":"删除失败";
+        return result > 0 ? ConstantValue.DELETE_SUCCESS : ConstantValue.DELETE_FAILURE;
     }
 }

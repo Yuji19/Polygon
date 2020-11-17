@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -105,5 +106,15 @@ public class EmployeeService implements UserDetailsService {
      */
     public int deleteEmpolyeeRoleByEidAndRid(int eid, int[] rids){
         return employeeRoleMapper.deleteEmployeeRoleByEidAndRid(eid,rids);
+    }
+
+    /**
+     * 更新员工基本信息
+     * @param employee
+     * @return
+     */
+    public int updateEmployee(Employee employee){
+        employee.setGmtModified(new Date());
+        return employeeMapper.updateEmployee(employee);
     }
 }

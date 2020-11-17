@@ -26,7 +26,7 @@ public interface ArchiveMapper {
 
     int deleteArchiveById(@Param("aids") Long[] aids);
 
-    Archive findArchiveById(Integer id);
+    Archive getArchiveById(Integer id);
 
-    Archive findArchiveByFileNo(String fileNo);
+    Archive getArchiveByFileNo(String fileNo);
 }

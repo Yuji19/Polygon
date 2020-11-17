@@ -31,7 +31,7 @@ public class ArchiveService {
     String customPath;
 
     public int insertArchive(Archive archive, MultipartFile file) {
-        Archive oldArchive = archiveMapper.findArchiveByFileNo(archive.getFileNo());
+        Archive oldArchive = archiveMapper.getArchiveByFileNo(archive.getFileNo());
         Optional.ofNullable(oldArchive)
                 .ifPresent(o -> {
                     throw new APIException("文档编号已存在");
@@ -57,7 +57,7 @@ public class ArchiveService {
 
 
     public void downloadArchive(String fileNo, HttpServletResponse response) {
-        Optional<Archive> optional = Optional.ofNullable(archiveMapper.findArchiveByFileNo(fileNo));
+        Optional<Archive> optional = Optional.ofNullable(archiveMapper.getArchiveByFileNo(fileNo));
         if (!optional.isPresent()) {
             throw new APIException("文档不存在");
         }
@@ -82,7 +82,7 @@ public class ArchiveService {
     public int updateArchive(Archive archive) {
 
         //若发放日期年份、文档类型更改
-        Archive oldArchive = archiveMapper.findArchiveById(archive.getId());
+        Archive oldArchive = archiveMapper.getArchiveById(archive.getId());
         Calendar oldCalendar = Calendar.getInstance();
         oldCalendar.setTime(oldArchive.getIssueDate());
         String oldYear = String.valueOf(oldCalendar.get(Calendar.YEAR));

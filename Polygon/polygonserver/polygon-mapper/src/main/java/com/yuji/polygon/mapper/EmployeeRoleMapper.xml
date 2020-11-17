@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuji.polygon.mapper.EmployeeRoleMapper">
+
+
+    <insert id="insertEmployeeRole" useGeneratedKeys="true">
+        insert into poly_employee_role(eid,rid) values
+        <foreach collection="rids" item="rid" separator="," >
+            (#{eid},#{rid})
+        </foreach>
+
+    </insert>
+
+    <delete id="deleteEmployeeRoleByEidAndRid">
+        delete
+            e,
+            er
+        from
+            poly_employee e left join poly_employee_role er on e.`id`=er.`eid`
+        <where>
+            e.`id`=#{eid}
+            <if test="rids.length &gt; 0">
+                and er.`rid` in
+                <foreach collection="rids" item="rid" open="(" close=")" separator=",">
+                    #{rid}
+                </foreach>
+            </if>
+        </where>
+    </delete>
+
+
+
+</mapper>

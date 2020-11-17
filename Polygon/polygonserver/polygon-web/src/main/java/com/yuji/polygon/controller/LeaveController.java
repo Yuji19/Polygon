@@ -28,13 +28,13 @@ public class LeaveController {
             throw new APIException(ResultCode.VALIDATE_FAILED.getCode(),"签审者不足");
         }
         int result = leaveSerice.addLeaveFlow(leave,eNo,eName);
-        return result > 0 ? "提交成功":"提交失败";
+        return result > 0 ? ConstantValue.ADD_SUCCESS : ConstantValue.ADD_FAILURE;
     }
 
     @PutMapping("/update")
     public String updateLeaveFlow(@RequestBody @Valid Audit audit){
         int result = leaveSerice.updateLeaveFlow(audit);
-        return result > 0 ? "更新成功":"更新失败";
+        return result > 0 ? ConstantValue.UPDATE_SUCCESS : ConstantValue.UPDATE_FAILURE;
     }
 
     @GetMapping("/query/page")
@@ -43,9 +43,9 @@ public class LeaveController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteLeaveFlow(int id){
+    public String deleteLeaveFlow(@PathVariable int id){
         int result = leaveSerice.deleteLeaveFlow(id);
-        return result > 0 ? "删除成功":"删除失败";
+        return result > 0 ? ConstantValue.DELETE_SUCCESS : ConstantValue.DELETE_FAILURE;
     }
 
 }

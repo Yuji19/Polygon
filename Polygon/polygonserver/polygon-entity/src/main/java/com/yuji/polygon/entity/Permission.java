@@ -1,5 +1,6 @@
 package com.yuji.polygon.entity;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -12,6 +13,7 @@ public class Permission {
 
     private int id;
 
+    @NotNull(message = "操作权限名称不能为空")
     private String name;
 
     private List<Menu> menus;

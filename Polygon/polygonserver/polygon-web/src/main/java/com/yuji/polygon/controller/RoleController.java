@@ -2,11 +2,11 @@ package com.yuji.polygon.controller;
 
 import com.yuji.polygon.entity.RolePermDTO;
 import com.yuji.polygon.service.RoleService;
+import com.yuji.polygon.utils.ConstantValue;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * @className: RoleController
@@ -23,8 +23,27 @@ public class RoleController {
     RoleService roleService;
 
     @PostMapping("/add")
-    public String addRole(@RequestBody RolePermDTO rolePermDTO){
+    public String addRole(@RequestBody @Valid RolePermDTO rolePermDTO){
         int result = roleService.insertRole(rolePermDTO.getRole(), rolePermDTO.getPermissions());
-        return result > 0 ? "提交成功":"提交失败";
+        return result > 0 ? ConstantValue.ADD_SUCCESS : ConstantValue.ADD_FAILURE;
     }
+
+    @PostMapping("/add/permission")
+    public String addRolePermission(int rid, int[] pids){
+        int result = roleService.insertRolePermission(rid,pids);
+        return result > 0 ? ConstantValue.ADD_SUCCESS : ConstantValue.ADD_FAILURE;
+    }
+
+    @DeleteMapping("/delete/{rids}")
+    public String deleteRole(@PathVariable int[] rids){
+        int result = roleService.deleteRoleById(rids);
+        return result > 0 ? ConstantValue.DELETE_SUCCESS : ConstantValue.DELETE_FAILURE;
+    }
+
+    @PutMapping("/delete/permission")
+    public String deleteRolePermission(int rid, int[] pids){
+        int result = roleService.deleteRolePermissionByRidAndPid(rid,pids);
+        return result > 0 ? ConstantValue.DELETE_SUCCESS : ConstantValue.DELETE_FAILURE;
+    }
+
 }
