@@ -41,7 +41,7 @@
         where flow_no = #{flowNo}
     </update>
 
-    <select id="findLeaveById" resultType="com.yuji.polygon.entity.Leave">
+    <select id="getLeaveById" resultType="com.yuji.polygon.entity.Leave">
         select * from poly_leave where id = #{id}
     </select>
 

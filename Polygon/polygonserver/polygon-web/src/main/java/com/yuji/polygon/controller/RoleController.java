@@ -1,5 +1,7 @@
 package com.yuji.polygon.controller;
 
+import com.yuji.polygon.entity.Page;
+import com.yuji.polygon.entity.Role;
 import com.yuji.polygon.entity.RolePermDTO;
 import com.yuji.polygon.service.RoleService;
 import com.yuji.polygon.utils.ConstantValue;
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @className: RoleController
@@ -45,6 +48,16 @@ public class RoleController {
     public String deleteRolePermission(@PathVariable int rid, @PathVariable int[] pids){
         int result = roleService.deleteRolePermissionByRidAndPid(rid,pids);
         return result > 0 ? ConstantValue.DELETE_SUCCESS : ConstantValue.DELETE_FAILURE;
+    }
+
+    @GetMapping("/query/eid/{eid}")
+    public List<Role> getRoleByEmployeeId(@PathVariable int eid){
+        return roleService.getRoleByEmployeeId(eid);
+    }
+
+    @GetMapping("/query/page")
+    public Page getAllRole(String nameZh, int pageNum, int pageSize){
+        return roleService.getAllRole(nameZh, pageNum, pageSize);
     }
 
 }

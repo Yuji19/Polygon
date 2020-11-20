@@ -133,7 +133,7 @@ public class LeaveService {
         auditServie.updateAudit(audit);
 
         //获取请假单
-        Leave leave = leaveMapper.findLeaveById(audit.getBusinessNo());
+        Leave leave = leaveMapper.getLeaveById(audit.getBusinessNo());
         //获取流程线
         FlowLine flowLine = flowLineService.findFlowLineByPreNode(leave.getCurrentNode());
 
@@ -152,28 +152,23 @@ public class LeaveService {
     }
 
 
-    public Leave findLeaveById(int id) {
-        return leaveMapper.findLeaveById(id);
+    public Leave getLeaveById(int id) {
+        return leaveMapper.getLeaveById(id);
     }
 
-    @Transactional(rollbackFor = Exception.class)
     public Page<Leave> getLeavePage(Leave leave, int currentPageNumber, int pageSize) {
         int startIndex = (currentPageNumber - 1) * pageSize;
-        Map<String, Object> map = new HashMap<>(4);
-        map.put("leave", leave);
-        map.put("startIndex", startIndex);
-        map.put("pageSize", pageSize);
         int totalCount = leaveMapper.countTotal(leave);
         Page page = new Page(currentPageNumber, totalCount);
 
-        List<Leave> records = leaveMapper.listLeave(map);
+        List<Leave> records = leaveMapper.listLeave(leave,startIndex,pageSize);
         page.setRecords(records);
         return page;
     }
 
     @Transactional(rollbackFor = Exception.class)
     public int deleteLeaveFlow(int id) {
-        String flowNo = leaveMapper.findLeaveById(id).getFlowNo();
+        String flowNo = leaveMapper.getLeaveById(id).getFlowNo();
         leaveMapper.deleteLeaveById(id);
         flowService.deleteFlowByFlowNo(flowNo);
         flowNodeService.deleteFlowNodeByFlowNo(flowNo);

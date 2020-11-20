@@ -1,6 +1,7 @@
 package com.yuji.polygon.service;
 
 import com.yuji.polygon.entity.Menu;
+import com.yuji.polygon.entity.Page;
 import com.yuji.polygon.entity.Permission;
 import com.yuji.polygon.entity.Role;
 import com.yuji.polygon.mapper.PermissionMenuMapper;
@@ -35,10 +36,21 @@ public class RoleService {
     @Autowired
     PermissionMenuMapper permissionMenuMapper;
 
+    /**
+     * 查询员工所拥有的角色
+     * @param eid
+     * @return
+     */
     public List<Role> getRoleByEmployeeId(int eid){
         return roleMapper.getRoleByEmployeeId(eid);
     }
 
+    /**
+     * 增加角色
+     * @param role
+     * @param permissions
+     * @return
+     */
     @Transactional(rollbackFor = Exception.class)
     public int insertRole(Role role, List<Permission> permissions){
 
@@ -90,4 +102,19 @@ public class RoleService {
     public int deleteRolePermissionByRidAndPid(int rid, int[] pids){
         return rolePermissionMapper.deleteRolePermissionByRidAndPid(rid,pids);
     }
+
+    /**
+     * 分页查询
+     * @param nameZh
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    public Page<Role> getAllRole(String nameZh, int pageNum, int pageSize){
+        int startIndex = (pageNum-1)*pageSize;
+        int totalCount = roleMapper.countTotalRole(nameZh);
+        List<Role> records = roleMapper.getAllRole(nameZh,startIndex,pageSize);
+        return new Page(pageNum,pageSize,records);
+    }
+
 }

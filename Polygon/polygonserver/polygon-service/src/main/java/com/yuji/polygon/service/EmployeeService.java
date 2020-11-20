@@ -135,10 +135,6 @@ public class EmployeeService implements UserDetailsService {
     public Page<Employee> getAllEmployee(Employee employee, int pageNum, int pageSize){
         int startIndex = (pageNum-1)*pageSize;
         int totalCount = employeeMapper.countTotalEmployee(employee);
-//        Map<String,Object> map = new HashMap();
-//        map.put("employee",employee);
-//        map.put("startIndex",startIndex);
-//        map.put("pageSize",pageSize);
         List<Employee> records = employeeMapper.getAllEmployee(employee,startIndex,pageSize);
         return new Page(pageNum,totalCount,records);
     }

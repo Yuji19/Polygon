@@ -24,6 +24,32 @@
             er.`eid` = #{eid} and er.`rid` = r.`id`
     </select>
 
+    <select id="countTotalRole" resultType="java.lang.Integer" >
+        select
+            count(*)
+        from
+            poly_role
+        <where>
+            <if test="nameZh != null">
+                name_zh like concat('%',#{nameZh},'')
+            </if>
+        </where>
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="getAllRole" resultMap="BaseResultMap">
+        select
+            *
+        from
+            poly_role
+        <where>
+            <if test="nameZh != null">
+                name_zh like concat('%',#{nameZh},'')
+            </if>
+        </where>
+        limit #{startIndex},#{pageSize}
+    </select>
+
     <!-- 删除一个或多个角色 -->
     <delete id="deleteRoleById">
         delete

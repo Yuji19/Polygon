@@ -2,6 +2,7 @@ package com.yuji.polygon.mapper;
 
 import com.yuji.polygon.entity.Role;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,5 +20,9 @@ public interface RoleMapper {
 
     List<Role> getRoleByEmployeeId(int eid);
 
-    int deleteRoleById(int[] ids);
+    int countTotalRole(String nameZh);
+
+    List<Role> getAllRole(String nameZh, int startIndex, int pageSize);
+
+    int deleteRoleById(@Param("ids") int[] ids);
 }

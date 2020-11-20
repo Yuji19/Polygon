@@ -68,10 +68,11 @@ public class ArchiveService {
 
     public Page<Archive> ListArchive(Archive archive, Integer pageNum, Integer pageSize) {
         int startIndex = (pageNum-1)*pageSize;
-        //结果集
-        List<Archive> records = archiveMapper.listArchives(archive,startIndex,pageSize);
         //总记录数
         int totalCount = archiveMapper.countTotal(archive);
+        //结果集
+        List<Archive> records = archiveMapper.listArchives(archive,startIndex,pageSize);
+
         return new Page(pageNum, totalCount, records);
     }
 

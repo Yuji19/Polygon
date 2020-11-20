@@ -159,7 +159,7 @@ public class FileSignService {
         auditServie.updateAudit(audit);
 
         //获取请假单
-        FileSign fileSign = fileSignMapper.findFileSignById(audit.getBusinessNo());
+        FileSign fileSign = fileSignMapper.getFileSignById(audit.getBusinessNo());
         //获取流程线
         FlowLine flowLine = flowLineService.findFlowLineByPreNode(fileSign.getCurrentNode());
 
@@ -177,26 +177,22 @@ public class FileSignService {
         return 1;
     }
 
-    public FileSign findFileSignById(int id) {
-        return fileSignMapper.findFileSignById(id);
+    public FileSign getFileSignById(int id) {
+        return fileSignMapper.getFileSignById(id);
     }
 
     public Page<FileSign> getFileSignPage(FileSign fileSign, int currentPageNumber, int pageSize) {
         int startIndex = (currentPageNumber - 1) * pageSize;
-        Map<String, Object> map = new HashMap<>(4);
-        map.put("fileSign", fileSign);
-        map.put("startIndex", startIndex);
-        map.put("pageSize", pageSize);
         int totalCount = fileSignMapper.countTotal(fileSign);
         Page page = new Page(currentPageNumber, totalCount);
 
-        List<FileSign> records = fileSignMapper.listFileSign(map);
+        List<FileSign> records = fileSignMapper.listFileSign(fileSign,startIndex,pageSize);
         page.setRecords(records);
         return page;
     }
 
     public void downloadSignFile(int id, HttpServletResponse response) {
-        Optional<FileSign> optional = Optional.ofNullable(fileSignMapper.findFileSignById(id));
+        Optional<FileSign> optional = Optional.ofNullable(fileSignMapper.getFileSignById(id));
         if (!optional.isPresent()) {
             throw new APIException("文档不存在");
         }
@@ -205,7 +201,7 @@ public class FileSignService {
 
     @Transactional(rollbackFor = Exception.class)
     public int deleteFileSignById(int id) {
-        String flowNo = fileSignMapper.findFileSignById(id).getFlowNo();
+        String flowNo = fileSignMapper.getFileSignById(id).getFlowNo();
         fileSignMapper.deleteFileSignById(id);
         flowService.deleteFlowByFlowNo(flowNo);
         flowNodeService.deleteFlowNodeByFlowNo(flowNo);

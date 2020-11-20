@@ -11,6 +11,7 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -35,7 +36,7 @@ public class CustomFilterInvocationSecurityMetadataSource implements FilterInvoc
         String requestUrl = ((FilterInvocation) obj).getRequestUrl();
         //根据角色获取操作权限和菜单权限
         List<Permission> permissions = permissionService.getAllPermissionByRole();
-        String[] own = new String[permissions.size()];
+        List<String> own = new ArrayList<>();
         for (int i = 0; i < permissions.size(); i++){
             Permission permission = permissions.get(i);
             List<Menu> menus = permission.getMenus();
@@ -45,16 +46,16 @@ public class CustomFilterInvocationSecurityMetadataSource implements FilterInvoc
                     //匹配操作权限
                     if (requestUrl.contains(permission.getName())){
                         //菜单权限+操作权限 exp: employee_add
-                        own[i]=menu.getUrl().substring(1)+"_"+permission.getName();
+                        own.add(menu.getUrl().substring(1)+"_"+permission.getName());
                     }
                     break;
                 }
             }
         }
 
-        //判断own数组中的实际元素个数，大于0，有请求所需的权限
-        if (Arrays.stream(own).count() > 0){
-            return SecurityConfig.createList(own);
+        //判断own是否有元素，确定请求需不需要权限
+        if (own != null && own.size() > 0){
+            return SecurityConfig.createList(own.toArray(new String[own.size()]));
         }
 
         return SecurityConfig.createList("login");
@@ -65,8 +66,13 @@ public class CustomFilterInvocationSecurityMetadataSource implements FilterInvoc
         return null;
     }
 
+    /**
+     * 返回类对象是否支持校验，web项目一般使用FilterInvocation来判断，或者直接返回true
+     * @param aClass
+     * @return
+     */
     @Override
     public boolean supports(Class<?> aClass) {
-        return false;
+        return true;
     }
 }

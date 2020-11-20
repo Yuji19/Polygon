@@ -40,7 +40,7 @@
         where flow_no = #{flowNo}
     </update>
 
-    <select id="findFileSignById" resultType="com.yuji.polygon.entity.FileSign">
+    <select id="getFileSignById" resultType="com.yuji.polygon.entity.FileSign">
         select * from poly_file_sign where id = #{id}
     </select>
 

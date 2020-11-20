@@ -58,4 +58,5 @@ public class ExceptionControllerAdvice {
     public ResultVO<String> ClassCastException(ClassCastException e){
         return new ResultVO<>(ResultCode.FAILED,e.getLocalizedMessage());
     }
+
 }
