@@ -15,5 +15,5 @@ public interface EmployeeRoleMapper {
 
     int insertEmployeeRole(int eid, @Param("rids") int[] rids);
 
-    int deleteEmployeeRoleByEidAndRid(int eid, @Param("rids") int[] rids);
+    int deleteEmployeeRole(int eid, @Param("rids") int[] rids);
 }

@@ -13,7 +13,7 @@
 
     </insert>
 
-    <delete id="deleteEmployeeRoleByEidAndRid">
+    <delete id="deleteEmployeeRole">
         delete
             e,
             er

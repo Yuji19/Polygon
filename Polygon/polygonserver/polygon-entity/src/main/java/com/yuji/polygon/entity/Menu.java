@@ -14,8 +14,6 @@ public class Menu {
 
     private String name;
 
-    private String url;
-
     private String path;
 
     private String icon;
@@ -45,14 +43,6 @@ public class Menu {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public String getIcon() {
@@ -111,14 +101,11 @@ public class Menu {
         this.children = children;
     }
 
-
-
     @Override
     public String toString() {
         return "Menu{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", url='" + url + '\'' +
                 ", path='" + path + '\'' +
                 ", icon='" + icon + '\'' +
                 ", component='" + component + '\'' +

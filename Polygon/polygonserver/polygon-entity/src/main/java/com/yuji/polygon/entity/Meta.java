@@ -2,24 +2,25 @@ package com.yuji.polygon.entity;
 
 /**
  * @className: Meta
- * @description: TODO
+ * @description: 前端路由元信息
  * @author: yuji
  * @create: 2020-11-11 09:37:00
  */
 public class Meta {
 
-    private int id;
+    //后端访问路径
+    private String url;
 
     private boolean keepAlive;
 
     private boolean requireAuth;
 
-    public int getId() {
-        return id;
+    public String getUrl() {
+        return url;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public boolean isKeepAlive() {

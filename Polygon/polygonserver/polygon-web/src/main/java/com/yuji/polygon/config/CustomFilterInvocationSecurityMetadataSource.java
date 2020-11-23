@@ -42,11 +42,11 @@ public class CustomFilterInvocationSecurityMetadataSource implements FilterInvoc
             List<Menu> menus = permission.getMenus();
             for (Menu menu : menus){
                 //匹配菜单权限
-                if (antPathMatcher.match(menu.getUrl()+"/**",requestUrl)){
+                if (antPathMatcher.match(menu.getMeta().getUrl()+"/**",requestUrl)){
                     //匹配操作权限
                     if (requestUrl.contains(permission.getName())){
                         //菜单权限+操作权限 exp: employee_add
-                        own.add(menu.getUrl().substring(1)+"_"+permission.getName());
+                        own.add(menu.getMeta().getUrl().substring(1)+"_"+permission.getName());
                     }
                     break;
                 }

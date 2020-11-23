@@ -68,7 +68,7 @@ class PolygonWebApplicationTests {
     void testDeleteEmployeeRole(){
         int eid = 2;
         int[] rids = {1,2};
-        int result = employeeService.deleteEmpolyeeRoleByEidAndRid(eid,rids);
+        int result = employeeService.deleteEmpolyeeRole(eid,rids);
         System.out.println(result);
     }
 

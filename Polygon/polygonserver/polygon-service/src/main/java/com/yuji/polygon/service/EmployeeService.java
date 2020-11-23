@@ -52,7 +52,7 @@ public class EmployeeService implements UserDetailsService {
                 List<Menu> menus = permission.getMenus();
                 for (Menu menu : menus){
                     //菜单权限+操作权限 exp: employee_add
-                    String own = menu.getUrl().substring(1)+"_"+permission.getName();
+                    String own = menu.getMeta().getUrl().substring(1)+"_"+permission.getName();
                     authorities.add(new SimpleGrantedAuthority(own));
                 }
 
@@ -102,8 +102,8 @@ public class EmployeeService implements UserDetailsService {
      * @param rids
      * @return
      */
-    public int deleteEmpolyeeRoleByEidAndRid(int eid, int[] rids){
-        return employeeRoleMapper.deleteEmployeeRoleByEidAndRid(eid,rids);
+    public int deleteEmpolyeeRole(int eid, int[] rids){
+        return employeeRoleMapper.deleteEmployeeRole(eid,rids);
     }
 
     /**
