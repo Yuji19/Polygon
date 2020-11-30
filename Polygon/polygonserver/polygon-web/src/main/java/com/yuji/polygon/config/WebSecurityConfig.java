@@ -16,6 +16,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.session.SessionRegistryImpl;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -61,6 +63,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(employeeService);
     }
 
+//    @Bean
+//    PasswordEncoder passwordEncoder(){
+//        return new BCryptPasswordEncoder();
+//    }
+
     @Bean
     SessionRegistryImpl sessionRegistry(){
         return new SessionRegistryImpl();
@@ -69,6 +76,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     LoginFilter loginFilter() throws Exception {
         LoginFilter loginFilter = new LoginFilter();
+
+        //自定义usernameParameter
+        loginFilter.setUsernameParameter("employeeNo");
+
         //设置身份验证成功处理
         loginFilter.setAuthenticationSuccessHandler((request, response, authentication) -> {
             response.setContentType("application/json;charset=utf-8");

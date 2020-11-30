@@ -15,7 +15,7 @@
         insert into poly_role(name,name_zh) values (#{name},#{nameZh})
     </insert>
 
-    <select id="getRoleByEmployeeId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="getRoleByEmployeeId"  resultMap="BaseResultMap">
        select
             r.*
        from

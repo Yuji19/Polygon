@@ -109,7 +109,7 @@ export function resetRouter() {
 }
 
 export function addRoutes(routes){
-  routes.addRoutes(routes)
+  router.addRoutes(routes)
 }
 
 export default router

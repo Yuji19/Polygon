@@ -37,7 +37,7 @@ module.exports = {
       errors: true
     },
     before: require('./mock/mock-server.js'),
-    proxyTable: {
+    proxy: {
         "/api" : {
              target: 'http://localhost:8082', 
 

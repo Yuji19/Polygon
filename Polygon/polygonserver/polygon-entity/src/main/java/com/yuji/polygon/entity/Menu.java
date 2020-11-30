@@ -16,8 +16,6 @@ public class Menu {
 
     private String path;
 
-    private String icon;
-
     private String component;
 
     private Meta meta;
@@ -43,14 +41,6 @@ public class Menu {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
     }
 
     public String getPath() {
@@ -101,18 +91,4 @@ public class Menu {
         this.children = children;
     }
 
-    @Override
-    public String toString() {
-        return "Menu{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", path='" + path + '\'' +
-                ", icon='" + icon + '\'' +
-                ", component='" + component + '\'' +
-                ", meta=" + meta +
-                ", enabled=" + enabled +
-                ", parentId=" + parentId +
-                ", children=" + children +
-                '}';
-    }
 }

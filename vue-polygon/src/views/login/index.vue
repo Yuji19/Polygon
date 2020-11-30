@@ -41,6 +41,11 @@
         </span>
       </el-form-item>
 
+      <el-form-item>
+         <el-input size="normal" type="text" v-model="loginForm.code" auto-complete="off" placeholder="点击图片更换验证码"  style="width: 250px"></el-input>
+        <el-image :src="vcUrl" @click="updateVerifyCode" alt="" style="cursor: pointer" />
+      </el-form-item>
+
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
 
 
@@ -63,7 +68,8 @@ export default {
     return {
       loginForm: {
         employeeNo: 'GREE1002',
-        password: '123456'
+        password: '123456',
+        code:''
       },
       loginRules: {
         employeeNo: [{ required: true, trigger: 'blur'}],
@@ -71,7 +77,8 @@ export default {
       },
       loading: false,
       passwordType: 'password',
-      redirect: undefined
+      redirect: undefined,
+      vcUrl: '/api/verifyCode'
     }
   },
   watch: {
@@ -98,7 +105,7 @@ export default {
         if (valid) {
           this.loading = true
           this.$store.dispatch('employee/login', this.loginForm).then(() => {
-            this.$router.push({ path: this.redirect || '/' })
+            this.$router.push({ path:  '/' })
             this.loading = false
           }).catch(() => {
             this.loading = false
@@ -108,6 +115,9 @@ export default {
           return false
         }
       })
+    },
+    updateVerifyCode() {
+      this.vcUrl='/api/verifyCode?time='+new Date()
     }
   }
 }

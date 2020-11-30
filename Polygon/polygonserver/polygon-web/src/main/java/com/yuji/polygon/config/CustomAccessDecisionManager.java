@@ -33,7 +33,7 @@ public class CustomAccessDecisionManager implements AccessDecisionManager {
     public void decide(Authentication authentication, Object o, Collection<ConfigAttribute> collection) throws AccessDeniedException, InsufficientAuthenticationException {
         for (ConfigAttribute configAttribute : collection){
             String needPermission = configAttribute.getAttribute();
-            if("login".equals(needPermission)){
+            if("ROLE_LOGIN".equals(needPermission)){
                 //认证用户是否登录
                 if (authentication instanceof AnonymousAuthenticationToken){
                     //该异常会被Spring Security的AuthenticationEntryPoint捕获，
@@ -45,7 +45,7 @@ public class CustomAccessDecisionManager implements AccessDecisionManager {
             }
             Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
             for (GrantedAuthority grantedAuthority : authorities){
-                if (grantedAuthority.equals(needPermission)){
+                if (grantedAuthority.getAuthority().equals(needPermission)){
                     return;
                 }
             }

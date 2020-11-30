@@ -1,11 +1,12 @@
 import {login,getInfo,logout} from '@/api/employee'
 import { resetRouter, addRoutes } from '@/router'
+import router from '../../router/'
 import { formatRoutes } from '@/utils/index'
 import { setToken , removeToken} from '@/utils/auth'
 
 const getDefaultState = () => {
   return {
-    session: null,
+    isLogin: false,
     employee: JSON.parse(window.sessionStorage.getItem("employee")),
     routes: [],
     permissions: []
@@ -26,17 +27,22 @@ const mutations = {
     },
     SET_PERMISSIONS(state,data){
       state.permissions = data;
+    },
+    SET_ISLOGIN(state,data){
+      console.log("islogin: "+data)
+      state.isLogin=data;
     }
 }
 
 const actions = {
   // employee login
   login({ commit }, info) {
-    const { employeeNo, password } = info
+    const { employeeNo, password, code } = info
     return new Promise((resolve, reject) => {
-      login({ employeeNo: employeeNo.trim(), password: password }).then(response => {
+      login({ employeeNo: employeeNo.trim(), password: password , code: code}).then(response => {
         const { data } = response
-        setToken(true)
+        commit('SET_ISLOGIN',true);
+        //setToken(true)
         resolve()
       }).catch(error => {
         reject(error)
@@ -59,7 +65,10 @@ const actions = {
         commit('INIT_CURRENT_EMPLOYEE', employee)
         commit('SET_PERMISSIONS', permissions)
         let routes = formatRoutes(menus)
+        commit('INIT_ROUTES',routes)
         addRoutes(routes)
+        router.options.routes=router.options.routes.concat(routes);
+        console.log(router.options.routes)
         resolve(data)
       }).catch(error => {
         reject(error)

@@ -58,7 +58,7 @@ public class CustomFilterInvocationSecurityMetadataSource implements FilterInvoc
             return SecurityConfig.createList(own.toArray(new String[own.size()]));
         }
 
-        return SecurityConfig.createList("login");
+        return SecurityConfig.createList("ROLE_LOGIN");
     }
 
     @Override

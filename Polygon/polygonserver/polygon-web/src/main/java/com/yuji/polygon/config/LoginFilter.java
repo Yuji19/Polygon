@@ -49,6 +49,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
                 String code = (String) requestData.get("code");
                 checkVerifyCode(verifyCode,code);
             }
+
             //usernameParamenter默认值是username  要在SecurityConfig中设置为employeeNo
             String employeeNo = (String)requestData.get(getUsernameParameter());
             String password = (String)requestData.get(getPasswordParameter());

@@ -11,6 +11,8 @@ public class Meta {
     //后端访问路径
     private String url;
 
+    private String icon;
+
     private boolean keepAlive;
 
     private boolean requireAuth;
@@ -21,6 +23,14 @@ public class Meta {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public boolean isKeepAlive() {

@@ -9,6 +9,7 @@ import com.yuji.polygon.utils.ConstantValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -69,7 +70,9 @@ public class EmployeeController {
     @GetMapping("/query/current")
     public Map<String,Object> getCurrentEmployee(Authentication authentication){
         Map<String,Object> map = new HashMap<>(4);
-        Employee employee = (Employee) authentication.getPrincipal();
+        Employee employee = new Employee();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        employee.setEmployeeNo(userDetails.getUsername());
         Collection<SimpleGrantedAuthority> collection = (Collection<SimpleGrantedAuthority>) authentication.getAuthorities();
         employee = employeeService.getEmployeeByEmployeeNo(employee.getEmployeeNo());
         List<String> permissions = new ArrayList<>();

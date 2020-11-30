@@ -68,6 +68,7 @@ export default {
       this.$message('submit!')
     },
     onCancel() {
+      console.log(this.$router)
       this.$message({
         message: 'cancel!',
         type: 'warning'

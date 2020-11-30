@@ -59,6 +59,7 @@ public class EmployeeService implements UserDetailsService {
             }
 
         }
+        System.out.println("password: "+employee.getPassword());
         //Employee没有实现UserDetails接口，需要返回spring sercurity的User
         return new User(employee.getEmployeeNo(),employee.getPassword(),employee.isEnabled(),true,true,true,authorities);
     }
