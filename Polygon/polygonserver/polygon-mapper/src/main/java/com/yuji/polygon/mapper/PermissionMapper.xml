@@ -10,13 +10,13 @@
         <collection property="menus" ofType="com.yuji.polygon.entity.Menu" >
             <id column="mid" property="id" />
             <result column="mname" property="name"/>
-            <result column="url" property="url" />
             <result column="path" property="path"/>
-            <result column="icon" property="icon"/>
             <result column="component" property="component"/>
             <result column="parent_id" property="parentId"/>
             <result column="enabled" property="enabled" />
             <association property="meta" javaType="com.yuji.polygon.entity.Meta">
+                <result column="url" property="url" />
+                <result column="icon" property="icon"/>
                 <result column="keep_alive" property="keepAlive" />
                 <result column="require_auth" property="requireAuth" />
             </association>
