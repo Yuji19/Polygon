@@ -8,14 +8,24 @@ package com.yuji.polygon.entity;
  */
 public class Meta {
 
-    //后端访问路径
-    private String url;
+    private String title;
 
     private String icon;
+
+    //后端访问路径
+    private String url;
 
     private boolean keepAlive;
 
     private boolean requireAuth;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public String getUrl() {
         return url;

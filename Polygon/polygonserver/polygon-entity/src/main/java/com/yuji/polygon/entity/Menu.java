@@ -20,8 +20,6 @@ public class Menu {
 
     private Meta meta;
 
-    private boolean enabled;
-
     private int parentId;
 
     private List<Menu> children;
@@ -65,14 +63,6 @@ public class Menu {
 
     public void setMeta(Meta meta) {
         this.meta = meta;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
     }
 
     public int getParentId() {

@@ -10,8 +10,8 @@
         <result column="path" property="path"/>
         <result column="component" property="component"/>
         <result column="parent_id" property="parentId"/>
-        <result column="enabled" property="enabled" />
         <association property="meta" javaType="com.yuji.polygon.entity.Meta">
+            <result column="title" property="title" />
             <result column="url" property="url" />
             <result column="icon" property="icon"/>
             <result column="keep_alive" property="keepAlive" />
@@ -27,9 +27,9 @@
             <result column="path2" property="path"/>
             <result column="component2" property="component"/>
             <result column="parent_id2" property="parentId"/>
-            <result column="enabled2" property="enabled" />
             <association property="meta" javaType="com.yuji.polygon.entity.Meta">
-                <result column="url" property="url" />
+                <result column="title2" property="title" />
+                <result column="url2" property="url" />
                 <result column="icon2" property="icon"/>
                 <result column="keep_alive2" property="keepAlive" />
                 <result column="require_auth2" property="requireAuth" />
@@ -51,8 +51,8 @@
     </resultMap>
 
     <insert id="insertMenu" parameterType="com.yuji.polygon.entity.Menu" useGeneratedKeys="true" keyProperty="id">
-        insert into poly_menu (name,url,icon,path,component,keep_alive,require_auth,parent_id,enabled)
-        values (#{name},#{url},#{icon},#{path},#{component},#{keepAlive},#{requireAuth},#{parentId},#{enabled})
+        insert into poly_menu (name,icon,path,component,title,url,keep_alive,require_auth,parent_id)
+        values (#{name},#{icon},#{path},#{component},#{title},#{url},#{keepAlive},#{requireAuth},#{parentId})
     </insert>
 
     <select id="getMenuByEmployeeId" resultMap="MenuResult">
@@ -60,12 +60,12 @@
             m1.*,
             m2.`id` as id2,
             m2.`name` as name2,
-            m2.`url` as url2,
             m2.`path` as path2,
             m2.`icon` as icon2,
             m2.`component` as component2,
-            m2.`enabled` as enabled2,
             m2.`parent_id` as parentId2,
+            m2.`title` as title2,
+            m2.`url` as url2,
             m2.`keep_alive` as keepAlive2,
             m2.`require_auth` as requireAuth2
         from
