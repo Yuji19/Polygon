@@ -48,9 +48,9 @@ public class LogAspect {
 
         String tag = joinPoint.getSignature().getDeclaringTypeName();
 
-        logger.info(tag,"url: "+request.getRequestURL());
-        logger.info(tag,"params: "+ Arrays.toString(joinPoint.getArgs()));
-        logger.info(tag,"method: "+ joinPoint.getSignature().getName());
+        logger.info(tag+"---url: "+request.getRequestURL());
+        logger.info(tag+"---params: "+ Arrays.toString(joinPoint.getArgs()));
+        logger.info(tag+"---method: "+ joinPoint.getSignature().getName());
     }
 
     //returning的值必须与方法的参数名一致,不然无法绑定
@@ -59,7 +59,7 @@ public class LogAspect {
         String tag = joinPoint.getSignature().getDeclaringTypeName();
         ObjectMapper json = new ObjectMapper();
         try {
-            logger.info(tag,"result: "+json.writeValueAsString(result));
+            logger.info(tag+"---result: "+json.writeValueAsString(result));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
@@ -67,9 +67,9 @@ public class LogAspect {
 
 
     @After("mapperLog()")
-    public void logBeforeMapper(JoinPoint joinPoint){
+    public void logAfterMapper(JoinPoint joinPoint){
         String tag = joinPoint.getSignature().getDeclaringTypeName();
-        logger.info(tag,"sql: "+ LogSqlUtil.getMybatisSql(joinPoint,sqlSessionFactory));
+        logger.info(tag+"---sql: "+ LogSqlUtil.getMybatisSql(joinPoint,sqlSessionFactory));
     }
 
 }

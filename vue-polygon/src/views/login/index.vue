@@ -42,8 +42,11 @@
       </el-form-item>
 
       <el-form-item>
-         <el-input size="normal" type="text" v-model="loginForm.code" auto-complete="off" placeholder="点击图片更换验证码"  style="width: 250px"></el-input>
-        <el-image :src="vcUrl" @click="updateVerifyCode" alt="" style="cursor: pointer" />
+         <el-input size="normal" type="text" v-model="loginForm.code" auto-complete="off" placeholder="点击图片更换验证码"  style="width:70%"></el-input>
+         <div style="width:30%;height:100%;text-align:center;vertical-align:middle;display:inline-block;">
+           <img :src="vcUrl" @click="updateVerifyCode" alt="" style="margin: 0 auto;cursor: pointer;" />
+         </div>
+        
       </el-form-item>
 
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>

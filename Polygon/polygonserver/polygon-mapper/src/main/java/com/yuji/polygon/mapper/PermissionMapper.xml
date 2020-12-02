@@ -13,8 +13,8 @@
             <result column="path" property="path"/>
             <result column="component" property="component"/>
             <result column="parent_id" property="parentId"/>
-            <result column="enabled" property="enabled" />
             <association property="meta" javaType="com.yuji.polygon.entity.Meta">
+                <result column="title" property="title" />
                 <result column="url" property="url" />
                 <result column="icon" property="icon"/>
                 <result column="keep_alive" property="keepAlive" />
@@ -35,12 +35,12 @@
             p.*,
             m.`id` as mid,
             m.`name` as mname,
-            m.`url`,
             m.`path`,
             m.`icon`,
             m.`component`,
             m.`parent_id`,
-            m.`enabled`,
+            m.`title`,
+            m.`url`,
             m.`keep_alive`,
             m.`require_auth`
         from
@@ -50,7 +50,7 @@
             poly_role_permission rp,
             poly_permission_menu pm
         where
-            r.`id`=#{rid} and r.`id`=rp.`rid` and rp.`pid`=pm.`pid` and pm.`mid`=m.`id`
+            r.`id`=#{rid} and r.`id`=rp.`rid` and rp.`pid` =  p.`id` and p.`id`=pm.`pid` and pm.`mid`=m.`id`
     </select>
 
     <select id="getAllPermissionByRole" resultMap="BaseResultMap">
@@ -58,12 +58,12 @@
             p.*,
             m.`id` as mid,
             m.`name` as mname,
-            m.`url`,
             m.`path`,
             m.`icon`,
             m.`component`,
             m.`parent_id`,
-            m.`enabled`,
+            m.`title`,
+            m.`url`,
             m.`keep_alive`,
             m.`require_auth`
         from

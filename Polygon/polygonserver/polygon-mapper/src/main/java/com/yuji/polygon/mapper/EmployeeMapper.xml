@@ -16,6 +16,9 @@
         <collection property="roles" ofType="com.yuji.polygon.entity.Role" >
             <result column="id" property="id" />
             <result column="name" property="name" />
+            <result column="name_zh" property="nameZh" />
+            <result column="gmt_create" property="gmtCreate" />
+            <result column="gmt_modified" property="gmtModified" />
         </collection>
     </resultMap>
 
@@ -28,8 +31,7 @@
     <select id="getEmployeeByEmployeeNo" parameterType="java.lang.String" resultMap="BaseResultMap">
        select
             e.*,
-            r.`id`,
-            r.`name`
+            r.*
        from
             poly_employee e,
             poly_employee_role er,
@@ -44,10 +46,10 @@
         from
             poly_employee
         <where>
-            <if test="employeeNo != null">
+            <if test="employeeNo != null and employeeNo != '' ">
                 and employee_no = #{employeeNo}
             </if>
-            <if test="employeeName != null">
+            <if test="employeeName != null and employName != '' ">
                 and employee_name like concat('%',#{employeeName},'')
             </if>
             <if test="departmentId &gt; 0">
@@ -60,8 +62,7 @@
     <select id="getAllEmployee" resultMap="BaseResultMap" >
         select
             e.*,
-            r.`id`,
-            r.`name`
+            r.*
         from
             poly_employee e,
             poly_employee_role er,
@@ -70,10 +71,10 @@
         <where>
             e.`id` = er.`eid` and er.`rid` = r.`id`
             <if test="employee != null"></if>
-                <if test="employee.employeeNo != null">
+                <if test="employee.employeeNo != null and employee.employeeNo != '' ">
                     and employee_no = #{employee.employeeNo}
                 </if>
-                <if test="employee.employeeName != null">
+                <if test="employee.employeeName != null and employee.employeeName != '' ">
                     and employee_name = #{employee.employeeName}
                 </if>
                 <if test="employee.departmentId &gt; 0">

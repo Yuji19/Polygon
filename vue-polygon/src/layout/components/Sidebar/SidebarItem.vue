@@ -62,8 +62,6 @@ export default {
         children = []
       }
       const showingChildren = children.filter(item => {
-        console.log(children)
-        console.log(parent)
         if (item.hidden) {
           return false
         } else {

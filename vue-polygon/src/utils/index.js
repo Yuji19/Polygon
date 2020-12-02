@@ -105,34 +105,3 @@ export function param2Obj(url) {
   })
   return obj
 }
-
-export const formatRoutes = (routes) => {
-    let fmRoutes = [];
-    routes.forEach(router => {
-        let {
-            path,
-            component,
-            name,
-            meta,
-            iconCls,
-            children
-        } = router;
-        if (children && children instanceof Array) {
-            children = formatRoutes(children);
-        }
-        let fmRouter = {
-            path: path,
-            name: name,
-            iconCls: iconCls,
-            meta: meta,
-            children: children,
-            component(resolve) {
-                if (component.startsWith("Home")) {
-                    require(['../views/dashboard/' + component + '.vue'], resolve);
-                } 
-            }
-        }
-        fmRoutes.push(fmRouter);
-    })
-    return fmRoutes;
-}

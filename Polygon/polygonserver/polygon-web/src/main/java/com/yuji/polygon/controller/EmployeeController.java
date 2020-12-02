@@ -62,8 +62,9 @@ public class EmployeeController {
         return result > 0 ? ConstantValue.UPDATE_SUCCESS : ConstantValue.UPDATE_FAILURE;
     }
 
-    @GetMapping("/query/page")
-    public Page getAllEmployee(Employee employee, int pageNum, int pageSize){
+    @PutMapping("/query/page")
+    public Page getAllEmployee(Employee employee, Integer pageNum, Integer pageSize){
+        System.out.println("employeeNo: "+employee.getEmployeeNo());
         return employeeService.getAllEmployee(employee,pageNum,pageSize);
     }
 
