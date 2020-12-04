@@ -11,10 +11,7 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * @className: CustomFilterInvocationSecurityMetadataSource
@@ -36,7 +33,7 @@ public class CustomFilterInvocationSecurityMetadataSource implements FilterInvoc
         String requestUrl = ((FilterInvocation) obj).getRequestUrl();
         //根据角色获取操作权限和菜单权限
         List<Permission> permissions = permissionService.getAllPermissionByRole();
-        List<String> own = new ArrayList<>();
+        Set<String> own = new HashSet<>();
         for (int i = 0; i < permissions.size(); i++){
             Permission permission = permissions.get(i);
             List<Menu> menus = permission.getMenus();
@@ -45,7 +42,7 @@ public class CustomFilterInvocationSecurityMetadataSource implements FilterInvoc
                 if (antPathMatcher.match(menu.getMeta().getUrl()+"/**",requestUrl)){
                     //匹配操作权限
                     if (requestUrl.contains(permission.getName())){
-                        //菜单权限+操作权限 exp: employee_add
+                        //菜单权限+操作权限 exp: employee_add 或 employee_add_all
                         own.add(menu.getMeta().getUrl().substring(1)+"_"+permission.getName());
                     }
                     break;

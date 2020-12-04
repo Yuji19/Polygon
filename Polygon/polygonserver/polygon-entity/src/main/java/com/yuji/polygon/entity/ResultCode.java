@@ -9,7 +9,7 @@ package com.yuji.polygon.entity;
 
 public enum ResultCode {
 
-    SUCCESS(1000, "操作成功"),
+    SUCCESS(1000, "响应成功"),
 
     FAILED(1001, "响应失败"),
 

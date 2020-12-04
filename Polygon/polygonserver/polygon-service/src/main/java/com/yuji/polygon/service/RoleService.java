@@ -110,11 +110,15 @@ public class RoleService {
      * @param pageSize
      * @return
      */
-    public Page<Role> getAllRole(String nameZh, int pageNum, int pageSize){
+    public Page<Role> getRolePage(String nameZh, int pageNum, int pageSize){
         int startIndex = (pageNum-1)*pageSize;
         int totalCount = roleMapper.countTotalRole(nameZh);
-        List<Role> records = roleMapper.getAllRole(nameZh,startIndex,pageSize);
+        List<Role> records = roleMapper.getRolePage(nameZh,startIndex,pageSize);
         return new Page(pageNum,pageSize,records);
+    }
+
+    public List<Role> getAllRole(){
+        return roleMapper.getAllRole();
     }
 
 }

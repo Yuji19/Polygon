@@ -81,7 +81,7 @@ export default {
       loading: false,
       passwordType: 'password',
       redirect: undefined,
-      vcUrl: '/api/verifyCode'
+      vcUrl: '/api/verifyCode?time='+new Date()
     }
   },
   watch: {

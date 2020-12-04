@@ -22,7 +22,9 @@ public interface RoleMapper {
 
     int countTotalRole(String nameZh);
 
-    List<Role> getAllRole(String nameZh, int startIndex, int pageSize);
+    List<Role> getRolePage(String nameZh, int startIndex, int pageSize);
+
+    List<Role> getAllRole();
 
     int deleteRoleById(@Param("ids") int[] ids);
 }

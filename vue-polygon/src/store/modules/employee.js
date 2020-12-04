@@ -19,16 +19,18 @@ const mutations = {
       Object.assign(state, getDefaultState())
     },
     SET_CURRENT_EMPLOYEE(state,data){
-      state.employee = data;
+      state.employee = data
     },
     SET_ROUTES(state,data){
-      state.routes = data;
+      state.routes = []
+      state.routes = data
+      console.log(state.routes)
     },
     SET_PERMISSIONS(state,data){
-      state.permissions = data;
+      state.permissions = data
     },
     SET_ISLOGIN(state,data){
-      state.isLogin=data;
+      state.isLogin=data
     }
 }
 

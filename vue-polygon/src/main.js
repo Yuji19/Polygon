@@ -36,7 +36,7 @@ Vue.use(ElementUI, { locale })
 Vue.config.productionTip = false
 
 //自定义指令
-Vue.directive('hasPermission', {
+Vue.directive('permission', {
     inserted(el, binding) {
     if (!Vue.prototype.$_hasPermission(binding.value)) {
       el.parentNode.removeChild(el);
@@ -48,15 +48,17 @@ Vue.directive('hasPermission', {
 
 //全局方法
 Vue.prototype.$_hasPermission = function(value){
-	let isExist = false
-	var permissions = store.getters.permissions;
-	if(permissions === undefined || permissions == null){
-		return false;
-	}
-	if(permissions.indexOf(value) > -1){
-		isExist = true;
-	}
-	return isExist;
+	
+  if (value && value instanceof Array && value.length > 0) {
+    const permissions = store.getters && store.getters.permissions
+    const hasPermission = permissions.some(role => {
+      return value.includes(role)
+    })
+    return hasPermission
+  } else {
+    //console.error(`need roles! Like v-permission="['admin','editor']"`)
+    return false
+  }
 }
 
 new Vue({

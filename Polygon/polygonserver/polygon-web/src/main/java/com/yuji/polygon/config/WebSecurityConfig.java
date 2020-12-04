@@ -5,6 +5,7 @@ import com.yuji.polygon.entity.ResultCode;
 import com.yuji.polygon.entity.ResultVO;
 import com.yuji.polygon.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.*;
@@ -13,23 +14,16 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.session.SessionRegistryImpl;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy;
 import org.springframework.security.web.session.ConcurrentSessionFilter;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+
 import java.io.PrintWriter;
 
 /**
@@ -73,6 +67,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new SessionRegistryImpl();
     }
 
+    /**
+     * 注册Servlet Listener,用于发布Session的创建和销毁事件
+     */
+    @Bean
+    public ServletListenerRegistrationBean httpSessionEventPublisher() {
+        ServletListenerRegistrationBean<HttpSessionEventPublisher> registration = new ServletListenerRegistrationBean<>();
+        registration.setListener(new HttpSessionEventPublisher());
+        return registration;
+    }
+
     @Bean
     LoginFilter loginFilter() throws Exception {
         LoginFilter loginFilter = new LoginFilter();
@@ -94,7 +98,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         loginFilter.setAuthenticationFailureHandler((request, response, exception) -> {
             response.setContentType("application/json;charset=utf-8");
             PrintWriter out = response.getWriter();
-            String msg = "登录失败";
+            String msg = exception.getLocalizedMessage();
             if (exception instanceof LockedException) {
                 msg = "账户被锁定，请联系管理员!";
             } else if (exception instanceof CredentialsExpiredException) {

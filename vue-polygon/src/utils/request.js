@@ -27,12 +27,12 @@ service.interceptors.response.use(
     
     if (res.code !== 1000) {
       Message({
-        message: res.message || 'Error',
+        message: res.data || 'Error',
         type: 'error',
         duration: 5 * 1000
       })
       
-      return Promise.reject(new Error(res.message || 'Error'))
+      return Promise.reject(new Error(res.data || 'Error'))
     } else {
       return res
     }

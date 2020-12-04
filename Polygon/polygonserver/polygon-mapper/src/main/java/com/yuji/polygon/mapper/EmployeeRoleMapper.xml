@@ -15,14 +15,12 @@
 
     <delete id="deleteEmployeeRole">
         delete
-            e,
-            er
         from
-            poly_employee e left join poly_employee_role er on e.`id`=er.`eid`
+            poly_employee_role
         <where>
-            e.`id`=#{eid}
+            poly_employee_role.`eid`=#{eid}
             <if test="rids.length &gt; 0">
-                and er.`rid` in
+                and poly_employee_role.`rid` in
                 <foreach collection="rids" item="rid" open="(" close=")" separator=",">
                     #{rid}
                 </foreach>

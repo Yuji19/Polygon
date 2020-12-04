@@ -37,7 +37,7 @@
     </select>
 
     <!-- 分页查询 -->
-    <select id="getAllRole" resultMap="BaseResultMap">
+    <select id="getRolePage" resultMap="BaseResultMap">
         select
             *
         from
@@ -48,6 +48,10 @@
             </if>
         </where>
         limit #{startIndex},#{pageSize}
+    </select>
+
+    <select id="getAllRole" resultMap="BaseResultMap">
+        select * from poly_role
     </select>
 
     <!-- 删除一个或多个角色 -->

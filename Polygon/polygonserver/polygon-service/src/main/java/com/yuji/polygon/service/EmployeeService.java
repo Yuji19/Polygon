@@ -4,7 +4,11 @@ import com.yuji.polygon.entity.*;
 import com.yuji.polygon.mapper.EmployeeMapper;
 import com.yuji.polygon.mapper.EmployeeRoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -36,13 +40,17 @@ public class EmployeeService implements UserDetailsService {
     @Autowired
     EmployeeRoleMapper employeeRoleMapper;
 
+    @Autowired
+    SessionRegistry sessionRegistry;
+
+
     @Override
     public UserDetails loadUserByUsername(String employeeNo) throws UsernameNotFoundException {
         Employee employee = employeeMapper.getEmployeeByEmployeeNo(employeeNo);
         if (employee == null){
             throw new UsernameNotFoundException(String.format("No user found with username: %s", employeeNo));
         }
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
         List<Role> roles = roleService.getRoleByEmployeeId(employee.getId());
         employee.setRoles(roles);
         for (Role role : roles){
@@ -59,10 +67,10 @@ public class EmployeeService implements UserDetailsService {
             }
 
         }
-        System.out.println("password: "+employee.getPassword());
-        //Employee没有实现UserDetails接口，需要返回spring sercurity的User
-        return new User(employee.getEmployeeNo(),employee.getPassword(),employee.isEnabled(),true,true,true,authorities);
+        employee.setAuthorities(authorities);
+        return employee;
     }
+
 
     /**
      * 增加员工以及该员工所拥有的角色
@@ -72,6 +80,10 @@ public class EmployeeService implements UserDetailsService {
      */
     @Transactional(rollbackFor = Exception.class)
     public int insertEmployee(Employee employee,int[] rids){
+        //默认员工密码为123456
+        employee.setPassword("123456");
+        employee.setGmtCreate(new Date());
+        employee.setGmtModified(new Date());
         int result1 = employeeMapper.insertEmployee(employee);
         int result2 = employeeRoleMapper.insertEmployeeRole(employee.getId(),rids);
 
@@ -114,8 +126,26 @@ public class EmployeeService implements UserDetailsService {
      */
     public int updateEmployee(Employee employee){
         employee.setGmtModified(new Date());
-        return employeeMapper.updateEmployee(employee);
+        Employee principal = (Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if(employee.getDepartmentId() == principal.getDepartmentId()
+                || checkRole(principal.getRoles(),"admin") ){
+            return employeeMapper.updateEmployee(employee);
+        }else {
+            return 0;
+        }
+
     }
+
+    private boolean checkRole(List<Role> roles,String value){
+        for(Role role : roles){
+            if (role.getName().equals(value)){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     /**
      * 根据员工编号获取员工
@@ -125,6 +155,11 @@ public class EmployeeService implements UserDetailsService {
     public Employee getEmployeeByEmployeeNo(String employeeNo){
         return employeeMapper.getEmployeeByEmployeeNo(employeeNo);
     }
+
+    public Employee getEmployeeByEid(int eid){
+        return employeeMapper.getEmployeeByEid(eid);
+    }
+
 
     /**
      * 分页查询

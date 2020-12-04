@@ -1,6 +1,7 @@
 package com.yuji.polygon.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yuji.polygon.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationServiceException;
@@ -70,8 +71,10 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
                     new UsernamePasswordAuthenticationToken(employeeNo,password);
             //将来自HTTP请求中的参数按照预先约定放入赋值给Authentication指定属性
             setDetails(request,authRequest);
-            //账号密码验证通过后，注册session  即前端的JESSIONID
-            sessionRegistry.registerNewSession(request.getSession().getId(),authRequest.getPrincipal());
+            Employee principal = new Employee();
+            principal.setEmployeeNo(employeeNo);
+            //账号密码验证通过后，注册session
+            sessionRegistry.registerNewSession(request.getSession(true).getId(),principal);
             return this.getAuthenticationManager().authenticate(authRequest);
         }else {
             checkVerifyCode(verifyCode,request.getParameter("code"));

@@ -14,7 +14,7 @@
         <result column="gmt_create" property="gmtCreate" />
         <result column="gmt_modified" property="gmtModified" />
         <collection property="roles" ofType="com.yuji.polygon.entity.Role" >
-            <result column="id" property="id" />
+            <result column="rid" property="id" />
             <result column="name" property="name" />
             <result column="name_zh" property="nameZh" />
             <result column="gmt_create" property="gmtCreate" />
@@ -31,13 +31,33 @@
     <select id="getEmployeeByEmployeeNo" parameterType="java.lang.String" resultMap="BaseResultMap">
        select
             e.*,
-            r.*
+            r.`id` as rid,
+            r.`name`,
+            r.`name_zh`,
+            r.`gmt_create`,
+            r.`gmt_modified`
        from
             poly_employee e,
             poly_employee_role er,
             poly_role r
        where
             e.`employee_no`=#{employeeNo} and e.`id` = er.`eid` and er.`rid` = r.`id`
+    </select>
+
+    <select id="getEmployeeByEid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+       select
+            e.*,
+            r.`id` as rid,
+            r.`name`,
+            r.`name_zh`,
+            r.`gmt_create`,
+            r.`gmt_modified`
+       from
+            poly_employee e,
+            poly_employee_role er,
+            poly_role r
+       where
+            e.`id`=#{eid} and e.`id` = er.`eid` and er.`rid` = r.`id`
     </select>
     
     <select id="countTotalEmployee" resultType="java.lang.Integer" >
@@ -49,7 +69,7 @@
             <if test="employeeNo != null and employeeNo != '' ">
                 and employee_no = #{employeeNo}
             </if>
-            <if test="employeeName != null and employName != '' ">
+            <if test="employeeName != null and employeeName != '' ">
                 and employee_name like concat('%',#{employeeName},'')
             </if>
             <if test="departmentId &gt; 0">
@@ -62,7 +82,11 @@
     <select id="getAllEmployee" resultMap="BaseResultMap" >
         select
             e.*,
-            r.*
+            r.`id` as rid,
+            r.`name`,
+            r.`name_zh`,
+            r.`gmt_create`,
+            r.`gmt_modified`
         from
             poly_employee e,
             poly_employee_role er,
@@ -96,9 +120,15 @@
             id = #{id}
     </delete>
 
-    <update id="updateEmpolyee">
+    <update id="updateEmployee">
         update poly_employee
         <set>
+            <if test="employeeName != null">
+                employee_name = #{employeeName},
+            </if>
+            <if test="employeeNo != null">
+                employee_no = #{employeeNo},
+            </if>
             <if test="password != null">
                 password = #{password},
             </if>

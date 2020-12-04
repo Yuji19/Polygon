@@ -55,9 +55,14 @@ public class RoleController {
         return roleService.getRoleByEmployeeId(eid);
     }
 
-    @GetMapping("/query/page")
-    public Page getAllRole(String nameZh, int pageNum, int pageSize){
-        return roleService.getAllRole(nameZh, pageNum, pageSize);
+    @PutMapping("/query/page")
+    public Page getRolePage(String nameZh, int pageNum, int pageSize){
+        return roleService.getRolePage(nameZh, pageNum, pageSize);
+    }
+
+    @GetMapping("/query/all")
+    public List<Role> getAllRole(){
+        return roleService.getAllRole();
     }
 
 }
