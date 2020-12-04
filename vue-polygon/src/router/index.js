@@ -78,16 +78,13 @@ export const constantRoutes = [
   },
 
   {
-    path: '/form',
+    path: '/redirect', // 重定向路由
     component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
-      }
-    ]
+    hidden: true,
+    children: [{
+      path: '',
+      component: () => import('@/views/redirect')
+    }]
   },
 ]
 

@@ -31,7 +31,7 @@
 
 
     <select id="getPermissionByRoleId" resultMap="BaseResultMap">
-        select
+        select distinct
             p.*,
             m.`id` as mid,
             m.`name` as mname,
@@ -50,11 +50,13 @@
             poly_role_permission rp,
             poly_permission_menu pm
         where
-            r.`id`=#{rid} and r.`id`=rp.`rid` and rp.`pid` =  p.`id` and p.`id`=pm.`pid` and pm.`mid`=m.`id`
+            r.`id`=#{rid} and r.`id` = rp.`rid`
+            and rp.`pid` = p.`id` and p.`id` = pm.`pid`
+            and pm.`mid` = m.`id`
     </select>
 
     <select id="getAllPermissionByRole" resultMap="BaseResultMap">
-        select
+        select distinct
             p.*,
             m.`id` as mid,
             m.`name` as mname,
@@ -73,7 +75,9 @@
             poly_role_permission rp,
             poly_permission_menu pm
         where
-            r.`id`=rp.`rid` and rp.`pid`=pm.`pid` and pm.`mid`=m.`id`
+            r.`id` = rp.`rid`
+            and rp.`pid` = p.`id` and p.`id` = pm.`pid`
+            and pm.`mid` = m.`id`
     </select>
 
 

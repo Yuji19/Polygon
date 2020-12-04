@@ -19,6 +19,8 @@ public interface EmployeeMapper {
     int insertEmployee(Employee employee);
 
     Employee getEmployeeByEmployeeNo(String employeeNo);
+    
+    Employee getEmployeeByEid(int eid);
 
     int countTotalEmployee(Employee employee);
 
