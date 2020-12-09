@@ -145,5 +145,18 @@
         where id = #{id}
     </update>
 
+    <update id="updatePassword">
+        update poly_employee
+        <set>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
 
 </mapper>

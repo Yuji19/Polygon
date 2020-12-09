@@ -53,9 +53,27 @@ export function addInfo(data) {
 
 export function updateInfo(data) {
   return request({
-    url: '/employee/update',
+    url: '/employee/update/base',
     method: 'put',
     data
+  })
+}
+
+export function updatePassword(data){
+  return request({
+    url: '/employee/update/password',
+    method: 'put',
+    data: data,
+    transformRequest: [function (data) {
+            let ret = '';
+            for (let i in data) {
+                ret += encodeURIComponent(i) + '=' + encodeURIComponent(data[i]) + '&'
+            }
+            return ret;
+        }],
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    }
   })
 }
 

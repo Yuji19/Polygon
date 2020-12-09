@@ -16,6 +16,9 @@
               首页
             </el-dropdown-item>
           </router-link>
+          <el-dropdown-item divided @click.native="dialogVisible = true">
+            <span style="display:block;">个人中心</span>
+          </el-dropdown-item>
           <a target="_blank" href="https://github.com/PanJiaChen/vue-admin-template/">
             <el-dropdown-item>Github</el-dropdown-item>
           </a>
@@ -25,13 +28,42 @@
         </el-dropdown-menu>
       </el-dropdown>
     </div>
+    <el-dialog title="个人中心" :show-close="false" :close-on-click-modal="false" :visible.sync="dialogVisible">
+      <div>
+        <label>员工编号: </label>
+        <span>{{employee.employeeNo}}</span>
+      </div>
+      <div>
+        <label>员工姓名: </label>
+        <span>{{employee.employeeName}}</span>
+      </div>
+      <div>
+        <label>所属部门</label>
+        <span>{{employee.departmentId}}</span>
+      </div>
+      <div>
+        <label>拥有角色: </label>
+        <span v-for="role in employee.roles">{{role.nameZh}}</span>
+      </div>
+      <div>
+        <label>更改密码: </label>
+        <el-input v-model="password" required autocomplete="off"></el-input>
+      </div>
+      
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="reset">取 消</el-button>
+        <el-button type="primary" @click="onSubmit">保 存</el-button>
+      </div>
+    </el-dialog>
   </div>
+
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
+import { updatePassword } from '@/api/employee'
 
 export default {
   components: {
@@ -44,6 +76,12 @@ export default {
       'employee'
     ])
   },
+  data(){
+    return {
+      dialogVisible: false,
+      password: ""
+    }
+  },
   methods: {
     toggleSideBar() {
       this.$store.dispatch('app/toggleSideBar')
@@ -51,6 +89,17 @@ export default {
     async logout() {
       await this.$store.dispatch('employee/logout')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+    },
+    onSubmit(){
+      let params = {id: this.employee.id, password: this.password}
+      updatePassword(params).then(() => {
+        this.dialogVisible = false
+        this.logout()
+      })
+    },
+    reset(){
+      this.password = ''
+      this.dialogVisible = false;
     }
   }
 }

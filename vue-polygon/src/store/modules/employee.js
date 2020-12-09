@@ -1,11 +1,10 @@
 import {login,getInfo,logout} from '@/api/employee'
 import { resetRouter, addRoutes , constantRoutes } from '@/router'
 import { formatRoutes } from '@/utils/router'
-import { setToken , removeToken} from '@/utils/auth'
+import { setLogin, removeLogin } from '@/utils/auth'
 
 const getDefaultState = () => {
   return {
-    isLogin: false,
     employee: null,
     routes: [],
     permissions: []
@@ -28,9 +27,6 @@ const mutations = {
     },
     SET_PERMISSIONS(state,data){
       state.permissions = data
-    },
-    SET_ISLOGIN(state,data){
-      state.isLogin=data
     }
 }
 
@@ -41,7 +37,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       login({ employeeNo: employeeNo.trim(), password: password , code: code}).then(response => {
         const { data } = response
-        commit('SET_ISLOGIN',true);
+        setLogin(true)
         //setToken(true)
         resolve()
       }).catch(error => {
@@ -74,11 +70,11 @@ const actions = {
     })
   },
 
-  // user logout
+  // employeelogout
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
       logout(state.token).then(() => {
-        removeToken() // must remove  token  first
+        removeLogin()
         resetRouter()
         commit('RESET_STATE')
         resolve()
@@ -91,7 +87,7 @@ const actions = {
   // remove token
   resetState({ commit }) {
     return new Promise(resolve => {
-      //removeToken() // must remove  token  first
+      removeLogin()
       commit('RESET_STATE')
       resolve()
     })

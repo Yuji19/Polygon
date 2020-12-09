@@ -20,7 +20,7 @@
     
 
     <!-- 添加用户表单弹框  -->
-    <el-dialog title="用户添加" :visible.sync="dialogVisible">
+    <el-dialog title="用户添加" :show-close="false" :close-on-click-modal="false" :visible.sync="dialogVisible">
       <el-form :model="addForm" :rules="rules" ref="addForm">
         <el-form-item label="员工编号" prop="employeeNo" label-width="120">
           <el-input v-model="addForm.employeeNo" autocomplete="off"></el-input>
@@ -96,7 +96,7 @@
     </el-table>
 
     <!-- 角色增减弹框 -->
-    <el-dialog title="角色增减" :visible.sync="roleVisible">
+    <el-dialog title="角色增减" :show-close="false" :close-on-click-modal="false" :visible.sync="roleVisible">
       <el-select v-model="rids"  multiple placeholder="请选择">
         <el-option
           v-for="(item,index) in roles"

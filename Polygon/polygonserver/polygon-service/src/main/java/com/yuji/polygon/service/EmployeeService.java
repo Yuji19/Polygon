@@ -3,6 +3,7 @@ package com.yuji.polygon.service;
 import com.yuji.polygon.entity.*;
 import com.yuji.polygon.mapper.EmployeeMapper;
 import com.yuji.polygon.mapper.EmployeeRoleMapper;
+import com.yuji.polygon.utils.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -129,7 +130,7 @@ public class EmployeeService implements UserDetailsService {
         Employee principal = (Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         if(employee.getDepartmentId() == principal.getDepartmentId()
-                || checkRole(principal.getRoles(),"admin") ){
+                || CommonUtil.checkRole(principal.getRoles(),"admin") ){
             return employeeMapper.updateEmployee(employee);
         }else {
             return 0;
@@ -137,13 +138,9 @@ public class EmployeeService implements UserDetailsService {
 
     }
 
-    private boolean checkRole(List<Role> roles,String value){
-        for(Role role : roles){
-            if (role.getName().equals(value)){
-                return true;
-            }
-        }
-        return false;
+    public int updatePassword(int id, String password){
+        //可加密...
+        return employeeMapper.updatePassword(id,password,new Date());
     }
 
 

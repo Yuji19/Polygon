@@ -118,7 +118,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         loginFilter.setAuthenticationManager(authenticationManagerBean());
         ConcurrentSessionControlAuthenticationStrategy sessionStrategy = new ConcurrentSessionControlAuthenticationStrategy(sessionRegistry());
-        //同一用户只能登录一次
+        //同一用户只能有一个会话
         sessionStrategy.setMaximumSessions(1);
         //设置session控制策略
         loginFilter.setSessionAuthenticationStrategy(sessionStrategy);

@@ -4,6 +4,7 @@ import com.yuji.polygon.entity.Employee;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,4 +31,6 @@ public interface EmployeeMapper {
     int deleteEmployeeById(int id);
 
     int updateEmployee(Employee employee);
+
+    int updatePassword(int id, String password, Date gmtModified);
 }

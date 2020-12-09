@@ -45,6 +45,7 @@ public class CustomAccessDecisionManager implements AccessDecisionManager {
             }
             Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
             for (GrantedAuthority grantedAuthority : authorities){
+                System.out.println("cyj "+grantedAuthority.getAuthority());
                 if (grantedAuthority.getAuthority().equals(needPermission)){
                     return;
                 }

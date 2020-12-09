@@ -1,8 +1,11 @@
 package com.yuji.polygon.utils;
 
+import com.yuji.polygon.entity.Role;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -46,5 +49,14 @@ public class CommonUtil {
             e.printStackTrace();
         }
         return date;
+    }
+
+    public static boolean checkRole(List<Role> roles, String value){
+        for(Role role : roles){
+            if (role.getName().equals(value)){
+                return true;
+            }
+        }
+        return false;
     }
 }
