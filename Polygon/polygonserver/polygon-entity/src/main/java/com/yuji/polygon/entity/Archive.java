@@ -30,8 +30,8 @@ public class Archive {
     @NotNull(message = "文档类型不能为空")
     private String fileType;
 
-    @NotNull(message = "编辑科室不能为空")
-    private String editOffice;
+    @NotNull(message = "编辑部门不能为空")
+    private String editDept;
 
     @NotNull(message = "编辑者不能为空")
     private String editPerson;
@@ -87,12 +87,12 @@ public class Archive {
         this.issueDate = issueDate;
     }
 
-    public String getEditOffice() {
-        return editOffice;
+    public String getEditDept() {
+        return editDept;
     }
 
-    public void setEditOffice(String editOffice) {
-        this.editOffice = editOffice;
+    public void setEditDept(String editDept) {
+        this.editDept = editDept;
     }
 
     public String getEditPerson() {

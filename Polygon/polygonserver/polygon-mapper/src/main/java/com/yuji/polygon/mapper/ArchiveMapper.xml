@@ -11,7 +11,7 @@
         <result column="file_name" property="fileName"/>
         <result column="file_path" property="filePath"/>
         <result column="file_type" property="fileType"/>
-        <result column="edit_office" property="editOffice"/>
+        <result column="edit_dept" property="editDept"/>
         <result column="edit_person" property="editPerson"/>
         <result column="issue_date" property="issueDate"/>
         <result column="status" property="status"/>
@@ -23,7 +23,7 @@
     <insert id="insertArchive" parameterType="com.yuji.polygon.entity.Archive" useGeneratedKeys="true" keyProperty="id">
         insert into poly_archive set file_no=#{fileNo}, file_name=#{fileName}, old_file_no=#{oldFileNo},
         file_type=#{fileType}
-        ,file_path=#{filePath}, edit_office=#{editOffice}, edit_person=#{editPerson}, issue_date=#{issueDate},
+        ,file_path=#{filePath}, edit_dept=#{editDept}, edit_person=#{editPerson}, issue_date=#{issueDate},
         status=#{status} note=#{note}, is_new=#{newVersion}
     </insert>
 
@@ -37,8 +37,8 @@
             <if test="fileName != null and fileName != '' ">
                 and file_name like CONCAT(#{fileName},'%')
             </if>
-            <if test="editOffice != null and editOffice != '' ">
-                and edit_office = #{editOffice}
+            <if test="editDept != null and editDept != '' ">
+                and edit_dept = #{editDept}
             </if>
             <if test="editPerson != null and editPerson != '' ">
                 and edit_person like CONCAT(#{editPerson},'%')
@@ -69,8 +69,8 @@
                 <if test="archive.fileName != null and archive.fileName != '' ">
                     and file_name like CONCAT(#{archive.fileName},'%')
                 </if>
-                <if test="archive.editOffice != null and archive.editOffice != '' ">
-                    and edit_office = #{archive.editOffice}
+                <if test="archive.editDept != null and archive.editDept != '' ">
+                    and edit_dept = #{archive.editDept}
                 </if>
                 <if test="archive.editPerson != null and archive.editPerson != '' ">
                     and edit_person like CONCAT(#{archive.editPerson},'%')
@@ -111,8 +111,8 @@
             <if test="fileName != null and fileName != '' ">
                 file_name = #{fileName},
             </if>
-            <if test="editOffice != null and editOffice != '' ">
-                edit_office = #{editOffice},
+            <if test="editDept != null and editDept != '' ">
+                edit_dept = #{editDept},
             </if>
             <if test="editPerson != null and editPerson != '' ">
                 edit_person = #{editPerson},
