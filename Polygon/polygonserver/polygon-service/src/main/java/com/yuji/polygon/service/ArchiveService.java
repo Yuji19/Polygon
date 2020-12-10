@@ -9,6 +9,7 @@ import com.yuji.polygon.utils.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +31,7 @@ public class ArchiveService {
     @Value("${custom.path}")
     String customPath;
 
+    @Transactional(rollbackFor = Exception.class)
     public int insertArchive(Archive archive, MultipartFile file) {
         Archive oldArchive = archiveMapper.getArchiveByFileNo(archive.getFileNo());
         Optional.ofNullable(oldArchive)
@@ -46,7 +48,32 @@ public class ArchiveService {
         String fileName = archive.getFileName();
         String path = customPath + "/" + year + "/" + fileType + "/" + fileNo + "/" + fileName;
         String newPath = FileUtil.getInstance().save(path, file);
-        archive.setFilePath(newPath);
+
+        if (newPath != null) {
+            //插入记录
+            archive.setFilePath(newPath);
+            String oldFileNo = archive.getOldFileNo();
+            oldArchive = null;
+            //旧版文件编号不为空，查找是否存在旧版记录
+            boolean isnull = "".equals(oldFileNo);
+            if (!isnull) {
+                oldArchive = archiveMapper.getArchiveByFileNo(oldFileNo);
+            }
+            //存在旧版记录证明是换版
+            if (oldArchive != null) {
+
+                //换版 更新旧版记录，受控转为替代报废
+                oldArchive.setStatus("替代报废");
+
+                //更新旧版
+                updateArchive(oldArchive);
+
+            }
+            //不存在该旧版编号
+            if (!isnull && oldArchive == null) {
+                return 0;
+            }
+        }
         if (Optional.ofNullable(archiveMapper.insertArchive(archive)).isPresent()) {
             return 1;
         } else {

@@ -26,7 +26,7 @@ public class ArchiveController {
     @Autowired
     ArchiveService archiveService;
 
-    @PostMapping("/query/page")
+    @PutMapping("/query/page")
     public Page<Archive> listArchive(Archive archive, Integer pageNum, Integer pageSize){
         return archiveService.ListArchive(archive,pageNum,pageSize);
     }

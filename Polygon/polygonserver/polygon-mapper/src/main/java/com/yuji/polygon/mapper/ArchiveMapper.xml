@@ -16,15 +16,13 @@
         <result column="issue_date" property="issueDate"/>
         <result column="status" property="status"/>
         <result column="note" property="note"/>
-        <result column="is_new" property="newVersion"/>
     </resultMap>
 
 
     <insert id="insertArchive" parameterType="com.yuji.polygon.entity.Archive" useGeneratedKeys="true" keyProperty="id">
         insert into poly_archive set file_no=#{fileNo}, file_name=#{fileName}, old_file_no=#{oldFileNo},
-        file_type=#{fileType}
-        ,file_path=#{filePath}, edit_dept=#{editDept}, edit_person=#{editPerson}, issue_date=#{issueDate},
-        status=#{status} note=#{note}, is_new=#{newVersion}
+        file_type=#{fileType}, file_path=#{filePath}, edit_dept=#{editDept}, edit_person=#{editPerson}, issue_date=#{issueDate},
+        status=#{status} ,note=#{note}
     </insert>
 
 
@@ -46,14 +44,11 @@
             <if test="fileType != null and fileType != '' ">
                 and file_type = #{fileType}
             </if>
-            <if test="status != null and issueDate != '' ">
+            <if test="status != null and status != '' ">
                 and status = #{status}
             </if>
-            <if test="issueDate != null and issueDate != '' ">
+            <if test="issueDate != null  ">
                 and issue_date like CONCAT(#{issueDate},'%')
-            </if>
-            <if test="newVersion != null and newVersion != '' ">
-                and is_new = #{newVersion}
             </if>
         </where>
     </select>
@@ -78,15 +73,11 @@
                 <if test="archive.fileType != null and archive.fileType != '' ">
                     and file_type = #{archive.fileType}
                 </if>
-                <if test="archive.status != null and archive.issueDate != '' ">
+                <if test="archive.status != null and archive.status != '' ">
                     and status = #{archive.status}
                 </if>
-                <if test="archive.issueDate != null and archive.issueDate != '' ">
+                <if test="archive.issueDate != null ">
                     and issue_date like CONCAT(#{archive.issueDate},'%')
-                </if>
-
-                <if test="archive.newVersion != null and archive.newVersion != '' ">
-                    and is_new = #{archive.newVersion}
                 </if>
 
             </if>
@@ -102,7 +93,7 @@
             <if test="fileType != null and fileType != '' ">
                 file_type = #{fileType},
             </if>
-            <if test="issueDate != null and issueDate != '' ">
+            <if test="issueDate != null ">
                 issue_date = #{issueDate},
             </if>
             <if test="fileNo != null and fileNo != '' ">
@@ -120,8 +111,8 @@
             <if test="oldFileNo != null and oldFileNo != '' ">
                 old_file_no = #{oldFileNo},
             </if>
-            <if test="archive.status != null and archive.issueDate != '' ">
-                and status = #{archive.status}
+            <if test="status != null and status != '' ">
+                status = #{status},
             </if>
             <if test="note != null and note != '' ">
                 note = #{note},
@@ -129,9 +120,7 @@
             <if test="filePath != null and filePath != '' ">
                 file_path = #{filePath},
             </if>
-            <if test="newVersion != null and newVersion != '' ">
-                is_new = #{newVersion},
-            </if>
+
         </set>
         where id = #{id}
     </update>

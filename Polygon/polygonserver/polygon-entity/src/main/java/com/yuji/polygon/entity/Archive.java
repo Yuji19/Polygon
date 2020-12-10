@@ -44,7 +44,6 @@ public class Archive {
 
     private String note;
 
-    private String newVersion;
 
 
     public int getId() {
@@ -135,13 +134,6 @@ public class Archive {
         this.filePath = filePath;
     }
 
-    public String getNewVersion() {
-        return newVersion;
-    }
-
-    public void setNewVersion(String newVersion) {
-        this.newVersion = newVersion;
-    }
 
 
 }

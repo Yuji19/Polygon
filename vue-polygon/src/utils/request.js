@@ -25,7 +25,7 @@ service.interceptors.response.use(
     const res = response.data
 
     
-    if (res.code !== 1000) {
+    if (res.code != null && res.code !== 1000) {
       Message({
         message: res.data || 'Error',
         type: 'error',

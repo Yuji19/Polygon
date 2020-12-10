@@ -219,7 +219,7 @@
         })
       },
       handleCurrentChange(pageNum){
-        this.pageNum = pageNum
+        this.form.pageNum = pageNum
         this.fetchData()
       },
       onSubmit(){
