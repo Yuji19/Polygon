@@ -6,9 +6,10 @@
 
     <resultMap id="BaseResultMap" type="com.yuji.polygon.entity.Employee">
         <id column="id" property="id"/>
-        <result column="employee_no" property="employeeNo" />
-        <result column="employee_name" property="employeeName"/>
+        <result column="no" property="no" />
+        <result column="name" property="name"/>
         <result column="password" property="password" />
+        <result column="mail" property="mail" />
         <result column="department_id" property="departmentId" />
         <result column="enabled" property="enabled" />
         <result column="gmt_create" property="gmtCreate" />
@@ -24,11 +25,11 @@
 
 
     <insert id="insertEmployee" parameterType="com.yuji.polygon.entity.Employee" useGeneratedKeys="true" keyProperty="id">
-        insert into poly_employee(employee_no, employee_name, password, department_id, enabled, gmt_create, gmt_modified)
-        values (#{employeeNo}, #{employeeName}, #{password}, #{departmentId}, #{enabled}, #{gmtCreate}, #{gmtModified})
+        insert into poly_employee(no, name, password, mail, department_id, enabled, gmt_create, gmt_modified)
+        values (#{no}, #{name}, #{password}, #{mail}, #{departmentId}, #{enabled}, #{gmtCreate}, #{gmtModified})
     </insert>
 
-    <select id="getEmployeeByEmployeeNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="getEmployeeByNo" parameterType="java.lang.String" resultMap="BaseResultMap">
        select
             e.*,
             r.`id` as rid,
@@ -41,7 +42,26 @@
             poly_employee_role er,
             poly_role r
        where
-            e.`employee_no`=#{employeeNo} and e.`id` = er.`eid` and er.`rid` = r.`id`
+           e.`no`=#{no} and e.`id` = er.`eid` and er.`rid` = r.`id`
+    </select>
+
+    <select id="getEmployeeByNos"  resultMap="BaseResultMap">
+       select
+            e.*,
+            r.`id` as rid,
+            r.`name`,
+            r.`name_zh`,
+            r.`gmt_create`,
+            r.`gmt_modified`
+       from
+            poly_employee e,
+            poly_employee_role er,
+            poly_role r
+       where
+            e.`id` = er.`eid` and er.`rid` = r.`id` and e.`no` in
+            <foreach collection="nos" item="no" open="(" separator="," close=")">
+                #{no}
+            </foreach>
     </select>
 
     <select id="getEmployeeByEid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -66,11 +86,11 @@
         from
             poly_employee
         <where>
-            <if test="employeeNo != null and employeeNo != '' ">
-                and employee_no = #{employeeNo}
+            <if test="no != null and no != '' ">
+                and no = #{no}
             </if>
-            <if test="employeeName != null and employeeName != '' ">
-                and employee_name like concat('%',#{employeeName},'')
+            <if test="name != null and name != '' ">
+                and name like concat('%',#{name},'')
             </if>
             <if test="departmentId &gt; 0">
                 and department_id = #{departmentId}
@@ -95,11 +115,11 @@
         <where>
             e.`id` = er.`eid` and er.`rid` = r.`id`
             <if test="employee != null"></if>
-                <if test="employee.employeeNo != null and employee.employeeNo != '' ">
-                    and employee_no = #{employee.employeeNo}
+                <if test="employee.no != null and employee.no != '' ">
+                    and no = #{employee.no}
                 </if>
-                <if test="employee.employeeName != null and employee.employeeName != '' ">
-                    and employee_name = #{employee.employeeName}
+                <if test="employee.name != null and employee.name != '' ">
+                    and name = #{employee.name}
                 </if>
                 <if test="employee.departmentId &gt; 0">
                     and department_id = #{employee.departmentId}
@@ -123,14 +143,17 @@
     <update id="updateEmployee">
         update poly_employee
         <set>
-            <if test="employeeName != null">
-                employee_name = #{employeeName},
+            <if test="name != null">
+                name = #{name},
             </if>
-            <if test="employeeNo != null">
-                employee_no = #{employeeNo},
+            <if test="no != null">
+                no = #{no},
             </if>
             <if test="password != null">
                 password = #{password},
+            </if>
+            <if test="mail != null">
+                mail = #{mail},
             </if>
             <if test="departmentId &gt; 0">
                 department_id = #{departmentId},

@@ -23,11 +23,11 @@ public class LeaveController {
     LeaveService leaveSerice;
 
     @PostMapping("/add")
-    public String addLeaveFlow(@Valid Leave leave, String[] eNo,String[] eName){
-        if (eNo.length < ConstantValue.LEAVE_AUDIT_LENGTH || eName.length < ConstantValue.LEAVE_AUDIT_LENGTH){
+    public String addLeaveFlow(@Valid Leave leave, String[] eNo){
+        if (eNo.length < ConstantValue.LEAVE_AUDIT_LENGTH ){
             throw new APIException(ResultCode.VALIDATE_FAILED.getCode(),"签审者不足");
         }
-        int result = leaveSerice.addLeaveFlow(leave,eNo,eName);
+        int result = leaveSerice.addLeaveFlow(leave,eNo);
         return result > 0 ? ConstantValue.ADD_SUCCESS : ConstantValue.ADD_FAILURE;
     }
 

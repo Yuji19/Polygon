@@ -8,8 +8,8 @@
         <id column="id" property="id"/>
         <result column="employee_no" property="employeeNo"/>
         <result column="employee_name" property="employeeName"/>
-        <result column="leave_type" property="leaveType"/>
-        <result column="leave_reason" property="leaveReason"/>
+        <result column="type" property="type"/>
+        <result column="reason" property="reason"/>
         <result column="start_date" property="startDate"/>
         <result column="end_date" property="endDate"/>
         <result column="flow_no" property="flowNo"/>
@@ -22,8 +22,8 @@
 
 
     <insert id="insertLeave" parameterType="com.yuji.polygon.entity.Leave" useGeneratedKeys="true" keyProperty="id">
-        insert into poly_leave set employee_no=#{employeeNo}, employee_name=#{employeeName}, leave_type=#{leaveType},
-        leave_reason=#{leaveReason}
+        insert into poly_leave set employee_no=#{employeeNo}, employee_name=#{employeeName}, type=#{type},
+        reason=#{reason}
         ,start_date=#{startDate}, end_date=#{endDate}, flow_no=#{flowNo}, flow_state=#{flowState},
         current_node=#{currentNode}, gmt_create=#{gmtCreate}, gmt_modified=#{gmtModified}
     </insert>
@@ -54,8 +54,8 @@
             <if test="employeeNo != null and employeeNo != '' ">
                 and employee_no = #{employeeNo}
             </if>
-            <if test="leaveType != null and leaveType != '' ">
-                and leave_type = #{leaveType}
+            <if test="type != null and type != '' ">
+                and type = #{type}
             </if>
             <if test="flowNo != null and flowNo != '' ">
                 and flow_no = #{flowNo}
@@ -76,8 +76,8 @@
                 <if test="leave.employeeNo != null and leave.employeeNo != '' ">
                     and employee_no = #{leave.employeeNo}
                 </if>
-                <if test="leave.leaveType != null and leave.leaveType != '' ">
-                    and leave_type = #{leave.leaveType}
+                <if test="leave.type != null and leave.type != '' ">
+                    and type = #{leave.type}
                 </if>
                 <if test="leave.flowNo != null and leave.flowNo != '' ">
                     and flow_no = #{leave.flowNo}

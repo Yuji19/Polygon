@@ -19,7 +19,9 @@ public interface EmployeeMapper {
 
     int insertEmployee(Employee employee);
 
-    Employee getEmployeeByEmployeeNo(String employeeNo);
+    Employee getEmployeeByNo(String no);
+
+    List<Employee> getEmployeeByNos(String[] nos);
     
     Employee getEmployeeByEid(int eid);
 

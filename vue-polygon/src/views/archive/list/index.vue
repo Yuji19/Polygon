@@ -132,7 +132,7 @@
       <el-table-column label="操作"  align="center">
         <template slot-scope="scope">
           <el-button type="primary" size="mini" v-permission="['archive_update']"    @click="showArchiveVisible(scope.row)">修改</el-button>
-          <el-button type="danger" size="mini" v-permission="['archive_delete']">删除</el-button>
+          <el-button type="danger" size="mini" v-permission="['archive_delete']" @click="handleDelete(scope.row.id)">删除</el-button>
           <el-button type="success" size="mini"  @click="handleDownload(scope.row)">下载</el-button>
         </template>
       </el-table-column>
@@ -153,7 +153,7 @@
 
 <script>
 
-  import { getList, download , updateInfo , addArchive } from '@/api/archive'
+  import { getList, download , updateInfo , addArchive , deleteArchive} from '@/api/archive'
   import { getAllDepartment } from '@/api/department'
 
   export default {
@@ -298,7 +298,7 @@
         this.$refs[updateForm].resetFields()
       },
       handleDownload(row){
-        let _this = this;
+        
         download(row.fileNo).then(resp=> {
           
             //由服务端返回的文件流构成直接下载的链接
@@ -312,6 +312,13 @@
             window.URL.revokeObjectURL(link.href);
         })
       },
+      handleDelete(id){
+        let param = []
+        param.push(id)
+        deleteArchive(param).then(resp => {
+          this.fetchData()
+        })
+      }
     }
   }
 

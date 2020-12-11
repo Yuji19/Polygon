@@ -38,9 +38,9 @@ export function updateInfo(data) {
 }
 
 
-export function deleteEmployeeRole(params) {
+export function deleteArchive(param) {
   return request({
-    url: `/employee/delete/${params.eid}/${params.rids}`,
+    url: `/archive/delete/${param}`,
     method: 'delete',
   })
 }

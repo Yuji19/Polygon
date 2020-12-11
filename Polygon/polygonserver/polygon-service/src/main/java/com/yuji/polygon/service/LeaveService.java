@@ -39,15 +39,24 @@ public class LeaveService {
     @Autowired
     AuditServie auditServie;
 
+    @Autowired
+    EmployeeService employeeService;
+
     /**
      * Spring框架的事务管理默认地只在发生不受控异常（RuntimeException和Error）时才进行事务回滚
      * @param leave
      * @param eNo
-     * @param eName
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public int addLeaveFlow(Leave leave, String[] eNo, String[] eName) {
+    public int addLeaveFlow(Leave leave, String[] eNo) {
+
+        List<Employee> employees = employeeService.getEmployeeByNos(eNo);
+
+        if (employees.size() != ConstantValue.LEAVE_AUDIT_LENGTH){
+            return 0;
+        }
+
         //创建流程
         Flow flow = new Flow();
         flow.setFlowNo(CommonUtil.randomUid(12));
@@ -60,8 +69,8 @@ public class LeaveService {
 
         //创建流程节点
         FlowNode firstNode = new FlowNode();
-        firstNode.setEmployeeNo(eNo[0]);
-        firstNode.setEmployeeName(eName[0]);
+        firstNode.setEmployeeNo(employees.get(0).getNo());
+        firstNode.setEmployeeName(employees.get(0).getName());
         firstNode.setFlowNo(flow.getFlowNo());
         firstNode.setFlowNodeName(ConstantValue.LEAVE_ONE_AUDIT);
         firstNode.setGmtCreate(CommonUtil.getNowTime());
@@ -69,8 +78,8 @@ public class LeaveService {
         flowNodeService.insertFlowNode(firstNode);
 
         FlowNode secondNode = new FlowNode();
-        secondNode.setEmployeeNo(eNo[1]);
-        secondNode.setEmployeeName(eName[1]);
+        secondNode.setEmployeeNo(employees.get(1).getNo());
+        secondNode.setEmployeeName(employees.get(1).getName());
         secondNode.setFlowNo(flow.getFlowNo());
         secondNode.setFlowNodeName(ConstantValue.LEAVE_TWO_AUDIT);
         secondNode.setGmtCreate(CommonUtil.getNowTime());

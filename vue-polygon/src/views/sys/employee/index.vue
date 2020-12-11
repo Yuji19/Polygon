@@ -2,10 +2,10 @@
   <div class="app-container">
     <el-form :inline="true" :model="form" >
       <el-form-item label="员工编号">
-        <el-input v-model="form.employeeNo" ></el-input>
+        <el-input v-model="form.no" ></el-input>
       </el-form-item>
       <el-form-item label="员工姓名">
-        <el-input v-model="form.employeeName" ></el-input>
+        <el-input v-model="form.name" ></el-input>
       </el-form-item>
       <el-form-item label="所属部门">
         <el-select v-model="form.departmentId" placeholder="请选择部门">
@@ -22,11 +22,11 @@
     <!-- 添加用户表单弹框  -->
     <el-dialog title="用户添加" :show-close="false" :close-on-click-modal="false" :visible.sync="dialogVisible">
       <el-form :model="addForm" :rules="rules" ref="addForm">
-        <el-form-item label="员工编号" prop="employeeNo" label-width="120">
-          <el-input v-model="addForm.employeeNo" autocomplete="off"></el-input>
+        <el-form-item label="员工编号" prop="no" label-width="120">
+          <el-input v-model="addForm.no" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="员工姓名" prop="employeeName" label-width="120">
-          <el-input v-model="addForm.employeeName" autocomplete="off"></el-input>
+        <el-form-item label="员工姓名" prop="name" label-width="120">
+          <el-input v-model="addForm.name" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="所属部门" prop="departmentId" label-width="120">
           <el-select v-model="addForm.departmentId" placeholder="请选择部门">
@@ -60,12 +60,12 @@
       </el-table-column>
       <el-table-column label="员工编号" width="150" >
         <template slot-scope="scope">
-          {{ scope.row.employeeNo }}
+          {{ scope.row.no }}
         </template>
       </el-table-column>
       <el-table-column label="员工姓名" width="110" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.employeeName }}</span>
+          <span>{{ scope.row.name }}</span>
         </template>
       </el-table-column>
       <el-table-column label="所属部门" width="110" align="center">
@@ -114,11 +114,11 @@
     <!-- 用户基础信息弹框 -->
     <el-dialog title="用户基础信息" :show-close="false" :close-on-click-modal="false" :visible.sync="baseVisible">
       <el-form :model="updateForm" :rules="rules" ref="updateForm">
-        <el-form-item label="员工编号" prop="employeeNo" label-width="120">
-          <el-input v-model="updateForm.employeeNo" autocomplete="off"></el-input>
+        <el-form-item label="员工编号" prop="no" label-width="120">
+          <el-input v-model="updateForm.no" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="员工姓名" prop="employeeName" label-width="120">
-          <el-input v-model="updateForm.employeeName" autocomplete="off"></el-input>
+        <el-form-item label="员工姓名" prop="name" label-width="120">
+          <el-input v-model="updateForm.name" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="所属部门" prop="departmentId" label-width="120">
           <el-select v-model="updateForm.departmentId" placeholder="请选择部门">
@@ -159,24 +159,24 @@
         listLoading: false,
         totalCount: 0,
         form:{
-          employeeNo: "",
-          employeeName: "",
+          no: "",
+          name: "",
           departmentId: 0,
           pageNum: 1,
           pageSize: 10
         },
         dialogVisible: false,
         addForm:{
-          employeeNo: "",
-          employeeName: "",
+          no: "",
+          name: "",
           departmentId: null,
           rids: []
         },
         departments: [],
         roles: [],
         rules: {
-          employeeNo: [{required: true,message: '员工编号不能为空',trigger: 'blur'}],
-          employeeName: [{required: true,message: '员工姓名不能为空',trigger: 'blur'}],
+          no: [{required: true,message: '员工编号不能为空',trigger: 'blur'}],
+          name: [{required: true,message: '员工姓名不能为空',trigger: 'blur'}],
           departmentId: [{required: true,message: '员工姓名不能为空',trigger: 'blur'}]
         },
         roleVisible: false,

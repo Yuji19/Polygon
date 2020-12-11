@@ -23,10 +23,10 @@ public class Leave {
     private String employeeName;
 
     @NotNull(message = "请假类型不能为空")
-    private String leaveType;
+    private String type;
 
     @NotNull(message = "请假原因不能为空")
-    private String leaveReason;
+    private String reason;
 
     @NotNull(message = "开始日期不能为空")
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss",timezone = "Asia/Shanghai")
@@ -72,20 +72,20 @@ public class Leave {
         this.employeeName = employeeName;
     }
 
-    public String getLeaveType() {
-        return leaveType;
+    public String getType() {
+        return type;
     }
 
-    public void setLeaveType(String leaveType) {
-        this.leaveType = leaveType;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getLeaveReason() {
-        return leaveReason;
+    public String getReason() {
+        return reason;
     }
 
-    public void setLeaveReason(String leaveReason) {
-        this.leaveReason = leaveReason;
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 
     public Date getStartDate() {

@@ -82,7 +82,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         LoginFilter loginFilter = new LoginFilter();
 
         //自定义usernameParameter
-        loginFilter.setUsernameParameter("employeeNo");
+        loginFilter.setUsernameParameter("no");
 
         //设置身份验证成功处理
         loginFilter.setAuthenticationSuccessHandler((request, response, authentication) -> {

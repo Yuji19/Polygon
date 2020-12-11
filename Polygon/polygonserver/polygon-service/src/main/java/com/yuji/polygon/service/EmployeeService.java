@@ -47,7 +47,7 @@ public class EmployeeService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String employeeNo) throws UsernameNotFoundException {
-        Employee employee = employeeMapper.getEmployeeByEmployeeNo(employeeNo);
+        Employee employee = employeeMapper.getEmployeeByNo(employeeNo);
         if (employee == null){
             throw new UsernameNotFoundException(String.format("No user found with username: %s", employeeNo));
         }
@@ -146,11 +146,15 @@ public class EmployeeService implements UserDetailsService {
 
     /**
      * 根据员工编号获取员工
-     * @param employeeNo
+     * @param no
      * @return
      */
-    public Employee getEmployeeByEmployeeNo(String employeeNo){
-        return employeeMapper.getEmployeeByEmployeeNo(employeeNo);
+    public Employee getEmployeeByNo(String no){
+        return employeeMapper.getEmployeeByNo(no);
+    }
+
+    public List<Employee> getEmployeeByNos(String[] nos){
+        return employeeMapper.getEmployeeByNos(nos);
     }
 
     public Employee getEmployeeByEid(int eid){

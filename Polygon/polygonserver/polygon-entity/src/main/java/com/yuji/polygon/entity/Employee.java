@@ -23,12 +23,14 @@ public class Employee implements UserDetails {
     private int id;
 
     @NotNull(message = "员工编号不能为空")
-    private String employeeNo;
+    private String no;
 
     @NotNull(message = "员工姓名不能为空")
-    private String employeeName;
+    private String name;
 
     private String password;
+
+    private String mail;
 
     private int departmentId;
 
@@ -53,20 +55,28 @@ public class Employee implements UserDetails {
         this.id = id;
     }
 
-    public String getEmployeeNo() {
-        return employeeNo;
+    public String getNo() {
+        return no;
     }
 
-    public void setEmployeeNo(String employeeNo) {
-        this.employeeNo = employeeNo;
+    public void setNo(String no) {
+        this.no = no;
     }
 
-    public String getEmployeeName() {
-        return employeeName;
+    public String getName() {
+        return name;
     }
 
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public List<Role> getRoles() {
@@ -98,12 +108,12 @@ public class Employee implements UserDetails {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return Objects.equals(employeeNo, employee.employeeNo);
+        return Objects.equals(no, employee.no);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(employeeNo);
+        return Objects.hash(no);
     }
 
     @Override
@@ -122,7 +132,7 @@ public class Employee implements UserDetails {
 
     @Override
     public String getUsername() {
-        return employeeNo;
+        return no;
     }
 
     @Override
@@ -168,9 +178,10 @@ public class Employee implements UserDetails {
     public String toString() {
         return "Employee{" +
                 "id=" + id +
-                ", employeeNo='" + employeeNo + '\'' +
-                ", employeeName='" + employeeName + '\'' +
+                ", no='" + no + '\'' +
+                ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
+                ", mail='" + mail + '\'' +
                 ", departmentId=" + departmentId +
                 ", enabled=" + enabled +
                 ", roles=" + roles +

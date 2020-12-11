@@ -138,7 +138,7 @@ public class EmployeeController {
             SecurityContext securityContext = (SecurityContext) session.getAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY);
             //获取当前身份令牌
             Authentication authentication = securityContext.getAuthentication();
-            Employee principal = (Employee) employeeService.loadUserByUsername(employee.getEmployeeNo());
+            Employee principal = (Employee) employeeService.loadUserByUsername(employee.getNo());
             securityContext.setAuthentication(new UsernamePasswordAuthenticationToken(principal,authentication.getCredentials(), principal.getAuthorities()));
 
         }
