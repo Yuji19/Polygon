@@ -2,6 +2,7 @@ package com.yuji.polygon.mapper;
 
 import com.yuji.polygon.entity.Menu;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -24,4 +25,6 @@ public interface MenuMapper {
     List<Menu> getMenuWithPermissionByRoleId(int rid);
 
     List<Menu> getAllMenu();
+
+    List<Menu> getMenuByRoleNames(@Param("roleNames") String[] roleNames);
 }

@@ -35,4 +35,8 @@ public class MenuService {
     public List<Menu> getAllMenu(){
         return menuMapper.getAllMenu();
     }
+
+    public List<Menu> getMenuByRoleNames(String[] roleNames){
+        return menuMapper.getMenuByRoleNames(roleNames);
+    }
 }

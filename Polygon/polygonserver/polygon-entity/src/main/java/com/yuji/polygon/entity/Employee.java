@@ -7,10 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.validation.constraints.NotNull;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * @className: Employee
@@ -37,9 +34,6 @@ public class Employee implements UserDetails {
     private boolean enabled;
 
     private List<Role> roles;
-
-    //权限集合
-    private Collection<? extends GrantedAuthority> authorities;
 
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss",timezone = "Asia/Shanghai")
     private Date gmtCreate;
@@ -119,11 +113,11 @@ public class Employee implements UserDetails {
     @Override
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>(roles.size());
+        for (Role role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
         return authorities;
-    }
-
-    public void setAuthorities(Collection<? extends GrantedAuthority> authorities){
-        this.authorities = authorities;
     }
 
     public String getPassword() {
@@ -174,20 +168,4 @@ public class Employee implements UserDetails {
         this.departmentId = departmentId;
     }
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", no='" + no + '\'' +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", mail='" + mail + '\'' +
-                ", departmentId=" + departmentId +
-                ", enabled=" + enabled +
-                ", roles=" + roles +
-                ", authorities=" + authorities +
-                ", gmtCreate=" + gmtCreate +
-                ", gmtModified=" + gmtModified +
-                '}';
-    }
 }

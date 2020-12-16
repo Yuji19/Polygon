@@ -1,15 +1,23 @@
 package com.yuji.polygon.config;
 
+import com.yuji.polygon.entity.Operation;
+import com.yuji.polygon.entity.Role;
+import com.yuji.polygon.service.OperationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.ConfigAttribute;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @className: CustomAccessDecisionManager
@@ -20,6 +28,12 @@ import java.util.Collection;
 
 @Component
 public class CustomAccessDecisionManager implements AccessDecisionManager {
+
+    @Autowired
+    OperationService operationService;
+
+    @Autowired
+    RoleHierarchy roleHierarchy;
 
     /**
      *
@@ -43,10 +57,15 @@ public class CustomAccessDecisionManager implements AccessDecisionManager {
                     return;
                 }
             }
-            Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-            for (GrantedAuthority grantedAuthority : authorities){
-                System.out.println("cyj "+grantedAuthority.getAuthority());
-                if (grantedAuthority.getAuthority().equals(needPermission)){
+
+            Collection<? extends GrantedAuthority> authorities = roleHierarchy.getReachableGrantedAuthorities(authentication.getAuthorities());
+            String[] roleNames;
+            List<String> temp = authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
+            roleNames = temp.toArray(new String[temp.size()]);
+            //根据角色查找操作权限
+            List<Operation> operations = operationService.getOperationByRoleNames(roleNames);
+            for (Operation operation : operations){
+                if (operation.getName().equals(needPermission)){
                     return;
                 }
             }
