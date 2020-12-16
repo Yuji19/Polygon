@@ -73,10 +73,10 @@
             poly_menu m2,
             poly_employee_role er,
             poly_role_permission rp,
-            poly_permission_menu pm
+            poly_permission p
         where
             m1.`id` = m2.`parent_id`
-            and er.`eid` = #{eid} and er.`rid`=rp.`rid` and rp.`pid`=pm.`pid` and pm.`mid` =m2.`id`
+            and er.`eid` = #{eid} and er.`rid`=rp.`rid` and rp.`pid`=p.`id` and p.`pid` =m2.`id` and p.`type`='menu'
             order by m1.`id`,m2.`id`
     </select>
 
@@ -95,6 +95,36 @@
         where
             m1.`id` = m2.`parent_id` and m2.`id` = m3.`parent_id`
             order by m1.`id`,m2.`id`,m3.`id`
+    </select>
+
+    <select id="getMenuByRoleNames" resultMap="MenuResult">
+        select distinct
+            m1.*,
+            m2.`id` as id2,
+            m2.`name` as name2,
+            m2.`path` as path2,
+            m2.`icon` as icon2,
+            m2.`component` as component2,
+            m2.`parent_id` as parentId2,
+            m2.`title` as title2,
+            m2.`url` as url2,
+            m2.`keep_alive` as keepAlive2,
+            m2.`require_auth` as requireAuth2
+        from
+            poly_menu m1,
+            poly_menu m2,
+            poly_role r,
+            poly_role_permission rp,
+            poly_permission p
+        <where>
+            r.`name` in
+            <foreach collection="roleNames" item="roleName" open="(" separator="," close=")">
+                #{roleName}
+            </foreach>
+            and m1.`id` = m2.`parent_id`
+            and r.`id`=rp.`rid` and rp.`pid`=p.`id` and p.`pid` =m2.`id` and p.`type`='menu'
+        </where>
+            order by m1.`id`,m2.`id`
     </select>
 
 </mapper>

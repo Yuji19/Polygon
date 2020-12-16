@@ -3,13 +3,17 @@ package com.yuji.polygon.controller;
 import com.yuji.polygon.config.MySessionManage;
 import com.yuji.polygon.entity.Employee;
 import com.yuji.polygon.entity.Menu;
+import com.yuji.polygon.entity.Operation;
 import com.yuji.polygon.entity.Page;
 import com.yuji.polygon.service.EmployeeService;
 import com.yuji.polygon.service.MenuService;
+import com.yuji.polygon.service.OperationService;
 import com.yuji.polygon.utils.ConstantValue;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @className: EmployeeController
@@ -36,10 +41,16 @@ import java.util.*;
 public class EmployeeController {
 
     @Autowired
+    RoleHierarchy roleHierarchy;
+
+    @Autowired
     EmployeeService employeeService;
 
     @Autowired
     MenuService menuService;
+
+    @Autowired
+    OperationService operationService;
 
     @Autowired
     MySessionManage sessionManage;
@@ -47,7 +58,7 @@ public class EmployeeController {
     @Autowired
     SessionRegistry sessionRegistry;
 
-    @PostMapping("/add")
+    @PostMapping("/add/one")
     public String addEmployee(@Valid Employee employee, int[] rids){
         int result = employeeService.insertEmployee(employee,rids);
         return result > 0 ? ConstantValue.ADD_SUCCESS : ConstantValue.ADD_FAILURE;
@@ -55,7 +66,6 @@ public class EmployeeController {
 
     @GetMapping("/add/{eid}/{rids}")
     public String addEmployeeRole(@PathVariable int eid, @PathVariable int[] rids){
-        System.out.println("add role");
         int result = employeeService.insertEmpolyeeRole(eid,rids);
         if (result > 0){
             updateAuthentication(eid);
@@ -117,12 +127,18 @@ public class EmployeeController {
         Map<String,Object> map = new HashMap<>(4);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Employee employee = (Employee) authentication.getPrincipal();
-        Collection<SimpleGrantedAuthority> collection = (Collection<SimpleGrantedAuthority>) authentication.getAuthorities();
+        //获取角色 包括继承的角色
+        Collection<? extends GrantedAuthority> authorities = roleHierarchy.getReachableGrantedAuthorities(authentication.getAuthorities());
+        String[] roleNames;
+        List<String> temp = authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
+        roleNames = temp.toArray(new String[temp.size()]);
         List<String> permissions = new ArrayList<>();
-        for (SimpleGrantedAuthority authority : collection){
-            permissions.add(authority.getAuthority());
-        }
-        List<Menu> menus = menuService.getMenuByEmployeeId(employee.getId());
+        List<Operation> operations = operationService.getOperationByRoleNames(roleNames);
+        temp.clear();
+        temp = operations.stream().map(Operation::getName).collect(Collectors.toList());
+        permissions.addAll(temp);
+
+        List<Menu> menus = menuService.getMenuByRoleNames(roleNames);
         map.put("employee",employee);
         map.put("permissions",permissions);
         map.put("menus",menus);

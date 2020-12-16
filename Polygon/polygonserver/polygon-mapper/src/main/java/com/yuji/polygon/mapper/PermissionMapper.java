@@ -3,7 +3,7 @@ package com.yuji.polygon.mapper;
 import com.yuji.polygon.entity.Permission;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.List;
+
 
 /**
  * @className: PermissionMapper
@@ -15,7 +15,7 @@ import java.util.List;
 @Mapper
 public interface PermissionMapper {
 
-    List<Permission> getPermissionByRoleId(int rid);
+    int insertPermission(Permission permission);
 
-    List<Permission> getAllPermissionByRole();
+    int deletePermissionById(int id);
 }

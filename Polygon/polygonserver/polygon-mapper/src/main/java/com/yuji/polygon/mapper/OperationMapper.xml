@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuji.polygon.mapper.OperationMapper">
+
+
+    <insert id="insertOperation"  useGeneratedKeys="true">
+        insert into poly_operation values (#{name},#{nameZh},#{url},#{gmtCreate},#{gmtModified})
+    </insert>
+
+    <delete id="deleteOperationById">
+        delete from poly_operation where id=#{id}
+    </delete>
+
+    <select id="getAllOperation" resultType="com.yuji.polygon.entity.Operation">
+        select distinct
+            o.*
+        from
+            poly_operation o,
+            poly_permission p,
+            poly_role r,
+            poly_role_permission rp
+        where
+            r.`id`=rp.`rid` and rp.`pid`=p.`id` and p.`pid`=o.`id` and p.`type`='operation'
+    </select>
+
+    <select id="getOperationByRid" resultType="com.yuji.polygon.entity.Operation">
+        select distinct
+            o.*
+        from
+            poly_operation o,
+            poly_permission p,
+            poly_role r,
+            poly_role_permission rp
+        where
+            r.`id`=#{rid} and r.`id`=rp.`rid` and rp.`pid`=p.`id` and p.`pid`=o.`id` and p.`type`='operation'
+    </select>
+
+    <select id="getOperationByRoleNames" resultType="com.yuji.polygon.entity.Operation">
+        select distinct
+            o.*
+        from
+            poly_operation o,
+            poly_permission p,
+            poly_role r,
+            poly_role_permission rp
+        <where>
+            r.`name` in
+            <foreach collection="roleNames" item="roleName" open="(" separator="," close=")">
+                #{roleName}
+            </foreach>
+            and r.`id`=rp.`rid`
+            and rp.`pid`=p.`id`
+            and p.`pid`=o.`id`
+            and p.`type`='operation'
+        </where>
+
+    </select>
+
+
+</mapper>

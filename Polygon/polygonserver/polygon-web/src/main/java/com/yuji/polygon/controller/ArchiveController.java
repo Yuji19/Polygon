@@ -31,7 +31,7 @@ public class ArchiveController {
         return archiveService.ListArchive(archive,pageNum,pageSize);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/add/one")
     public String insert(@Valid Archive archive, MultipartFile file){
         int result = archiveService.insertArchive(archive, file);
         return result > 0 ? ConstantValue.ADD_SUCCESS : ConstantValue.ADD_FAILURE;
@@ -42,7 +42,7 @@ public class ArchiveController {
         archiveService.downloadArchive(fileNo, response);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/update/one")
     public String update(@RequestBody @Valid Archive archive){
         int result = archiveService.updateArchive(archive);
         return result > 0 ? ConstantValue.UPDATE_SUCCESS : ConstantValue.UPDATE_FAILURE;

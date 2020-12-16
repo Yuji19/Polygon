@@ -1,22 +1,22 @@
 package com.yuji.polygon.entity;
 
-import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.List;
 
 /**
- * @className: Permission
+ * @className: Operation
  * @description: TODO
  * @author: yuji
- * @create: 2020-11-13 15:43:00
+ * @create: 2020-12-15 14:48:23
  */
-public class Permission {
+public class Operation {
 
     private int id;
 
-    private int pid;
+    private String name;
 
-    private String type;
+    private String name_zh;
+
+    private String url;
 
     private Date gmtCreate;
 
@@ -30,20 +30,28 @@ public class Permission {
         this.id = id;
     }
 
-    public int getPid() {
-        return pid;
+    public String getName() {
+        return name;
     }
 
-    public void setPid(int pid) {
-        this.pid = pid;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getType() {
-        return type;
+    public String getName_zh() {
+        return name_zh;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setName_zh(String name_zh) {
+        this.name_zh = name_zh;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Date getGmtCreate() {

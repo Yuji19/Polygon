@@ -24,24 +24,24 @@ public class FileSignController {
     @Autowired
     FileSignService fileSignService;
 
-    @PostMapping("/add")
-    public String addFlowSignFlow(@Valid FileSign fileSign, String[] eNo,String[] eName, MultipartFile file){
-        if (eNo.length < ConstantValue.FILE_SING_AUDIT_LENGTH || eName.length < ConstantValue.FILE_SING_AUDIT_LENGTH){
+    @PostMapping("/add/one")
+    public String addFlowSignFlow(@Valid FileSign fileSign, String[] eNo, MultipartFile file){
+        if (eNo.length < ConstantValue.FILE_SING_AUDIT_LENGTH ){
             throw new APIException(ResultCode.VALIDATE_FAILED.getCode(),"签审者不足");
         }
-        int result = fileSignService.addFlowSignFlow(fileSign,eNo,eName,file);
+        int result = fileSignService.addFlowSignFlow(fileSign,eNo,file);
         return result > 0 ? ConstantValue.ADD_SUCCESS : ConstantValue.ADD_FAILURE;
     }
 
-    @PutMapping("/update")
-    public String updateFileSignFlow(@RequestBody @Valid Audit audit){
-        int result = fileSignService.updateFileSignFlow(audit);
+    @PutMapping("/update/one")
+    public String updateFileSignFlow(@RequestBody @Valid Approve approve){
+        int result = fileSignService.updateFileSignFlow(approve);
         return result > 0 ? ConstantValue.UPDATE_SUCCESS : ConstantValue.UPDATE_FAILURE;
     }
 
     @GetMapping("/query/page")
-    public Page getFileSignPage(FileSign fileSign, int currentPageNumber, int pageSize){
-        return fileSignService.getFileSignPage(fileSign,currentPageNumber,pageSize);
+    public Page getFileSignPage(FileSign fileSign, int pageNum, int pageSize){
+        return fileSignService.getFileSignPage(fileSign,pageNum,pageSize);
     }
 
     @GetMapping("/download/{id}")

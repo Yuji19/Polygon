@@ -10,9 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @className: LeaveSerice
@@ -37,7 +35,7 @@ public class LeaveService {
     FlowLineService flowLineService;
 
     @Autowired
-    AuditServie auditServie;
+    ApproveService approveService;
 
     @Autowired
     EmployeeService employeeService;
@@ -69,8 +67,8 @@ public class LeaveService {
 
         //创建流程节点
         FlowNode firstNode = new FlowNode();
-        firstNode.setEmployeeNo(employees.get(0).getNo());
-        firstNode.setEmployeeName(employees.get(0).getName());
+        firstNode.setApproveNo(employees.get(0).getNo());
+        firstNode.setApproveName(employees.get(0).getName());
         firstNode.setFlowNo(flow.getFlowNo());
         firstNode.setFlowNodeName(ConstantValue.LEAVE_ONE_AUDIT);
         firstNode.setGmtCreate(CommonUtil.getNowTime());
@@ -78,8 +76,8 @@ public class LeaveService {
         flowNodeService.insertFlowNode(firstNode);
 
         FlowNode secondNode = new FlowNode();
-        secondNode.setEmployeeNo(employees.get(1).getNo());
-        secondNode.setEmployeeName(employees.get(1).getName());
+        secondNode.setApproveNo(employees.get(1).getNo());
+        secondNode.setApproveName(employees.get(1).getName());
         secondNode.setFlowNo(flow.getFlowNo());
         secondNode.setFlowNodeName(ConstantValue.LEAVE_TWO_AUDIT);
         secondNode.setGmtCreate(CommonUtil.getNowTime());
@@ -116,37 +114,37 @@ public class LeaveService {
 
 
         //为每个节点创建审批记录
-        Audit firstAudit = new Audit();
-        firstAudit.setBusinessNo(leave.getId());
-        firstAudit.setEmployeeNo(firstNode.getEmployeeNo());
-        firstAudit.setEmployeeName(firstNode.getEmployeeName());
-        firstAudit.setFlowNodeNo(firstNode.getId());
-        auditServie.insertAudit(firstAudit);
+        Approve firstApprove = new Approve();
+        firstApprove.setBusinessNo(leave.getId());
+        firstApprove.setApproveNo(firstNode.getApproveNo());
+        firstApprove.setApproveName(firstNode.getApproveName());
+        firstApprove.setFlowNodeNo(firstNode.getId());
+        approveService.insertApprove(firstApprove);
 
 
-        Audit secondAudit = new Audit();
-        secondAudit.setBusinessNo(leave.getId());
-        secondAudit.setEmployeeNo(secondNode.getEmployeeNo());
-        secondAudit.setEmployeeName(secondNode.getEmployeeName());
-        secondAudit.setFlowNodeNo(secondNode.getId());
-        auditServie.insertAudit(secondAudit);
+        Approve secondApprove = new Approve();
+        secondApprove.setBusinessNo(leave.getId());
+        secondApprove.setApproveNo(secondNode.getApproveNo());
+        secondApprove.setApproveName(secondNode.getApproveName());
+        secondApprove.setFlowNodeNo(secondNode.getId());
+        approveService.insertApprove(secondApprove);
 
         return 1;
     }
 
 
     @Transactional(rollbackFor = Exception.class)
-    public int updateLeaveFlow(Audit audit) {
+    public int updateLeaveFlow(Approve approve) {
 
-        audit.setAuditDate(new Date());
-        auditServie.updateAudit(audit);
+        approve.setApproveDate(new Date());
+        approveService.updateApprove(approve);
 
         //获取请假单
-        Leave leave = leaveMapper.getLeaveById(audit.getBusinessNo());
+        Leave leave = leaveMapper.getLeaveById(approve.getBusinessNo());
         //获取流程线
         FlowLine flowLine = flowLineService.findFlowLineByPreNode(leave.getCurrentNode());
 
-        if (flowLine == null || audit.getAuditState() == -1) {
+        if (flowLine == null || approve.getApproveState() == -1) {
             //已到流程的终点，设置节点为0，流程结束
             leave.setCurrentNode(0);
             leave.setFlowState(1);
@@ -165,10 +163,10 @@ public class LeaveService {
         return leaveMapper.getLeaveById(id);
     }
 
-    public Page<Leave> getLeavePage(Leave leave, int currentPageNumber, int pageSize) {
-        int startIndex = (currentPageNumber - 1) * pageSize;
+    public Page<Leave> getLeavePage(Leave leave, int pageNum, int pageSize) {
+        int startIndex = (pageNum - 1) * pageSize;
         int totalCount = leaveMapper.countTotal(leave);
-        Page page = new Page(currentPageNumber, totalCount);
+        Page page = new Page(pageNum, totalCount);
 
         List<Leave> records = leaveMapper.listLeave(leave,startIndex,pageSize);
         page.setRecords(records);
@@ -182,7 +180,7 @@ public class LeaveService {
         flowService.deleteFlowByFlowNo(flowNo);
         flowNodeService.deleteFlowNodeByFlowNo(flowNo);
         flowLineService.deleteFlowLineByFlowNo(flowNo);
-        auditServie.deleteAuditByBusinessNo(id);
+        approveService.deleteApproveByBusinessNo(id);
 
         return 1;
     }

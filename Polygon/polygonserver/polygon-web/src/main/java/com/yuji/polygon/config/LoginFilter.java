@@ -51,16 +51,16 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
                 checkVerifyCode(verifyCode,code);
             }
 
-            //usernameParamenter默认值是username  要在SecurityConfig中设置为employeeNo
-            String employeeNo = (String)requestData.get(getUsernameParameter());
+            //usernameParamenter默认值是username  要在SecurityConfig中设置为no
+            String no = (String)requestData.get(getUsernameParameter());
             String password = (String)requestData.get(getPasswordParameter());
-            if (employeeNo == null){
-                employeeNo = "";
+            if (no == null){
+                no = "";
             }
             if (password == null){
                 password = "";
             }
-            employeeNo = employeeNo.trim();
+            no = no.trim();
 
             /**
              * UsernamePasswordAuthenticationToke实现了Authenication接口，封装用户名和密码
@@ -68,11 +68,11 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
              * 将employeeNo赋值到了principal ，而将password赋值到了credentials
              */
             UsernamePasswordAuthenticationToken authRequest =
-                    new UsernamePasswordAuthenticationToken(employeeNo,password);
+                    new UsernamePasswordAuthenticationToken(no,password);
             //将来自HTTP请求中的参数按照预先约定放入赋值给Authentication指定属性
             setDetails(request,authRequest);
             Employee principal = new Employee();
-            principal.setEmployeeNo(employeeNo);
+            principal.setNo(no);
             //账号密码验证通过后，注册session
             sessionRegistry.registerNewSession(request.getSession(true).getId(),principal);
             return this.getAuthenticationManager().authenticate(authRequest);

@@ -23,7 +23,7 @@ public class DepartmentController {
     @Autowired
     DepartmentService departmentService;
 
-    @PostMapping("/add")
+    @PostMapping("/add/one")
     public String addDepartment(@RequestBody @Valid Department department){
         int result = departmentService.insertDepartment(department);
         return result > 0 ? ConstantValue.ADD_SUCCESS : ConstantValue.ADD_FAILURE;
@@ -45,7 +45,7 @@ public class DepartmentController {
         return result > 0 ? ConstantValue.DELETE_SUCCESS : ConstantValue.DELETE_FAILURE;
     }
 
-    @PutMapping("/update")
+    @PutMapping("/update/one")
     public String updateDepartment(@RequestBody @Valid Department department){
         int result = departmentService.updateDepartment(department);
         return result > 0 ? ConstantValue.UPDATE_SUCCESS : ConstantValue.UPDATE_FAILURE;

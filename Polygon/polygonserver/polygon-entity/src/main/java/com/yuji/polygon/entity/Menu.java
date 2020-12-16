@@ -1,5 +1,6 @@
 package com.yuji.polygon.entity;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,6 +22,10 @@ public class Menu {
     private Meta meta;
 
     private int parentId;
+
+    private Date gmtCreate;
+
+    private Date gmtModified;
 
     private List<Menu> children;
 
@@ -71,6 +76,22 @@ public class Menu {
 
     public void setParentId(int parentId) {
         this.parentId = parentId;
+    }
+
+    public Date getGmtCreate() {
+        return gmtCreate;
+    }
+
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
+    }
+
+    public Date getGmtModified() {
+        return gmtModified;
+    }
+
+    public void setGmtModified(Date gmtModified) {
+        this.gmtModified = gmtModified;
     }
 
     public List<Menu> getChildren() {

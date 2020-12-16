@@ -13,9 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -44,10 +42,18 @@ public class FileSignService {
     FlowLineService flowLineService;
 
     @Autowired
-    AuditServie auditServie;
+    ApproveService approveService;
+
+    @Autowired
+    EmployeeService employeeService;
 
     @Transactional(rollbackFor = Exception.class)
-    public int addFlowSignFlow(FileSign fileSign,String[] eNo,String[] eName, MultipartFile file) {
+    public int addFlowSignFlow(FileSign fileSign,String[] eNo, MultipartFile file) {
+
+        List<Employee> employees = employeeService.getEmployeeByNos(eNo);
+        if (employees.size() != ConstantValue.LEAVE_AUDIT_LENGTH){
+            return 0;
+        }
         //创建流程
         Flow flow = new Flow();
         flow.setFlowNo(CommonUtil.randomUid(12));
@@ -60,8 +66,8 @@ public class FileSignService {
 
         //创建流程节点
         FlowNode firstNode = new FlowNode();
-        firstNode.setEmployeeNo(eNo[0]);
-        firstNode.setEmployeeName(eName[0]);
+        firstNode.setApproveNo(employees.get(0).getNo());
+        firstNode.setApproveName(employees.get(0).getName());
         firstNode.setFlowNo(flow.getFlowNo());
         firstNode.setFlowNodeName(ConstantValue.FILE_SIGN_ONE_AUDIT);
         firstNode.setGmtCreate(CommonUtil.getNowTime());
@@ -69,8 +75,8 @@ public class FileSignService {
         flowNodeService.insertFlowNode(firstNode);
 
         FlowNode secondNode = new FlowNode();
-        secondNode.setEmployeeNo(eNo[1]);
-        secondNode.setEmployeeName(eName[1]);
+        secondNode.setApproveNo(employees.get(1).getNo());
+        secondNode.setApproveName(employees.get(1).getName());
         secondNode.setFlowNo(flow.getFlowNo());
         secondNode.setFlowNodeName(ConstantValue.FILE_SING_THREE_AUDIT);
         secondNode.setGmtCreate(CommonUtil.getNowTime());
@@ -78,8 +84,8 @@ public class FileSignService {
         flowNodeService.insertFlowNode(secondNode);
 
         FlowNode thirdNode = new FlowNode();
-        thirdNode.setEmployeeNo(eNo[2]);
-        thirdNode.setEmployeeName(eName[2]);
+        thirdNode.setApproveNo(employees.get(2).getNo());
+        thirdNode.setApproveName(employees.get(2).getName());
         thirdNode.setFlowNo(flow.getFlowNo());
         thirdNode.setFlowNodeName(ConstantValue.FILE_SING_TWO_AUDIT);
         thirdNode.setGmtCreate(CommonUtil.getNowTime());
@@ -128,42 +134,42 @@ public class FileSignService {
 
 
         //为每个节点创建审批记录
-        Audit firstAudit = new Audit();
-        firstAudit.setBusinessNo(fileSign.getId());
-        firstAudit.setEmployeeNo(firstNode.getEmployeeNo());
-        firstAudit.setEmployeeName(firstNode.getEmployeeName());
-        firstAudit.setFlowNodeNo(firstNode.getId());
-        auditServie.insertAudit(firstAudit);
+        Approve firstApprove = new Approve();
+        firstApprove.setBusinessNo(fileSign.getId());
+        firstApprove.setApproveNo(firstNode.getApproveNo());
+        firstApprove.setApproveName(firstNode.getApproveName());
+        firstApprove.setFlowNodeNo(firstNode.getId());
+        approveService.insertApprove(firstApprove);
 
 
-        Audit secondAudit = new Audit();
-        secondAudit.setBusinessNo(fileSign.getId());
-        secondAudit.setEmployeeNo(secondNode.getEmployeeNo());
-        secondAudit.setEmployeeName(secondNode.getEmployeeName());
-        secondAudit.setFlowNodeNo(secondNode.getId());
-        auditServie.insertAudit(secondAudit);
+        Approve secondApprove = new Approve();
+        secondApprove.setBusinessNo(fileSign.getId());
+        secondApprove.setApproveNo(secondNode.getApproveNo());
+        secondApprove.setApproveName(secondNode.getApproveName());
+        secondApprove.setFlowNodeNo(secondNode.getId());
+        approveService.insertApprove(secondApprove);
 
-        Audit thirdAudit = new Audit();
-        thirdAudit.setBusinessNo(fileSign.getId());
-        thirdAudit.setEmployeeNo(thirdNode.getEmployeeNo());
-        thirdAudit.setEmployeeName(thirdNode.getEmployeeName());
-        thirdAudit.setFlowNodeNo(thirdNode.getId());
-        auditServie.insertAudit(thirdAudit);
+        Approve thirdApprove = new Approve();
+        thirdApprove.setBusinessNo(fileSign.getId());
+        thirdApprove.setApproveNo(thirdNode.getApproveNo());
+        thirdApprove.setApproveName(thirdNode.getApproveName());
+        thirdApprove.setFlowNodeNo(thirdNode.getId());
+        approveService.insertApprove(thirdApprove);
 
         return 1;
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public int updateFileSignFlow(Audit audit) {
-        audit.setAuditDate(CommonUtil.getNowTime());
-        auditServie.updateAudit(audit);
+    public int updateFileSignFlow(Approve approve) {
+        approve.setApproveDate(CommonUtil.getNowTime());
+        approveService.updateApprove(approve);
 
         //获取请假单
-        FileSign fileSign = fileSignMapper.getFileSignById(audit.getBusinessNo());
+        FileSign fileSign = fileSignMapper.getFileSignById(approve.getBusinessNo());
         //获取流程线
         FlowLine flowLine = flowLineService.findFlowLineByPreNode(fileSign.getCurrentNode());
 
-        if (flowLine == null || audit.getAuditState() == -1) {
+        if (flowLine == null || approve.getApproveState() == -1) {
             //已到流程的终点，设置节点为0，流程结束
             fileSign.setCurrentNode(0);
             fileSign.setFlowState(1);
@@ -181,10 +187,10 @@ public class FileSignService {
         return fileSignMapper.getFileSignById(id);
     }
 
-    public Page<FileSign> getFileSignPage(FileSign fileSign, int currentPageNumber, int pageSize) {
-        int startIndex = (currentPageNumber - 1) * pageSize;
+    public Page<FileSign> getFileSignPage(FileSign fileSign, int pageNum, int pageSize) {
+        int startIndex = (pageNum - 1) * pageSize;
         int totalCount = fileSignMapper.countTotal(fileSign);
-        Page page = new Page(currentPageNumber, totalCount);
+        Page page = new Page(pageNum, totalCount);
 
         List<FileSign> records = fileSignMapper.listFileSign(fileSign,startIndex,pageSize);
         page.setRecords(records);
@@ -206,7 +212,7 @@ public class FileSignService {
         flowService.deleteFlowByFlowNo(flowNo);
         flowNodeService.deleteFlowNodeByFlowNo(flowNo);
         flowLineService.deleteFlowLineByFlowNo(flowNo);
-        auditServie.deleteAuditByBusinessNo(id);
+        approveService.deleteApproveByBusinessNo(id);
         return 1;
     }
 }

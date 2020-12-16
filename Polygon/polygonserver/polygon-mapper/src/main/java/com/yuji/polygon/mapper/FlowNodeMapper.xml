@@ -8,8 +8,8 @@
         <id column="id" property="id"/>
         <result column="flow_no" property="flowNo"/>
         <result column="flow_node_name" property="flowNodeName"/>
-        <result column="employee_no" property="employeeNo"/>
-        <result column="employee_name" property="employeeName"/>
+        <result column="approve_no" property="approveNo"/>
+        <result column="approve_name" property="approveName"/>
         <result column="gmt_create" property="gmtCreate"/>
         <result column="gmt_modified" property="gmtModified"/>
 
@@ -19,8 +19,8 @@
 
     <insert id="insertFlowNode" parameterType="com.yuji.polygon.entity.FlowNode" useGeneratedKeys="true"
             keyProperty="id">
-        insert into poly_flow_node set flow_no=#{flowNo}, flow_node_name=#{flowNodeName}, employee_no=#{employeeNo} ,
-        employee_name=#{employeeName}, gmt_create=#{gmtCreate}, gmt_modified=#{gmtModified}
+        insert into poly_flow_node set flow_no=#{flowNo}, flow_node_name=#{flowNodeName}, approve_no=#{approveNo} ,
+        approve_name=#{approveName}, gmt_create=#{gmtCreate}, gmt_modified=#{gmtModified}
     </insert>
 
 

@@ -2,7 +2,7 @@ package com.yuji.polygon.service;
 
 import com.yuji.polygon.entity.Permission;
 import com.yuji.polygon.mapper.PermissionMapper;
-import com.yuji.polygon.mapper.PermissionMenuMapper;
+import com.yuji.polygon.mapper.OperationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,15 +21,12 @@ public class PermissionService {
     @Autowired
     PermissionMapper permissionMapper;
 
-    @Autowired
-    PermissionMenuMapper permissionMenuMapper;
-
-    public List<Permission> getPermissionByRoleId(int rid){
-        return permissionMapper.getPermissionByRoleId(rid);
+    public int insertPermission(Permission permission){
+        return permissionMapper.insertPermission(permission);
     }
 
-    public List<Permission> getAllPermissionByRole(){
-        return permissionMapper.getAllPermissionByRole();
+    public int deletePermissionById(int id){
+        return deletePermissionById(id);
     }
 
 }

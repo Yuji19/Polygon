@@ -1,7 +1,9 @@
 package com.yuji.polygon.config;
 
 import com.yuji.polygon.entity.Menu;
+import com.yuji.polygon.entity.Operation;
 import com.yuji.polygon.entity.Permission;
+import com.yuji.polygon.service.OperationService;
 import com.yuji.polygon.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
@@ -24,35 +26,21 @@ import java.util.*;
 public class CustomFilterInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
     @Autowired
-    PermissionService permissionService;
+    OperationService operationService;
 
     AntPathMatcher antPathMatcher = new AntPathMatcher();
 
     @Override
     public Collection<ConfigAttribute> getAttributes(Object obj) throws IllegalArgumentException {
         String requestUrl = ((FilterInvocation) obj).getRequestUrl();
-        //根据角色获取操作权限和菜单权限
-        List<Permission> permissions = permissionService.getAllPermissionByRole();
-        Set<String> own = new HashSet<>();
-        for (int i = 0; i < permissions.size(); i++){
-            Permission permission = permissions.get(i);
-            List<Menu> menus = permission.getMenus();
-            for (Menu menu : menus){
-                //匹配菜单权限
-                if (antPathMatcher.match(menu.getMeta().getUrl()+"/**",requestUrl)){
-                    //匹配操作权限
-                    if (requestUrl.contains(permission.getName())){
-                        //菜单权限+操作权限 exp: employee_add 或 employee_add_all
-                        own.add(menu.getMeta().getUrl().substring(1)+"_"+permission.getName());
-                    }
-                    break;
-                }
-            }
-        }
+        //根据角色获取操作权限
+        List<Operation> operations = operationService.getAllOperation();
 
-        //判断own是否有元素，确定请求需不需要权限
-        if (own != null && own.size() > 0){
-            return SecurityConfig.createList(own.toArray(new String[own.size()]));
+        for (Operation operation : operations){
+            //匹配访问权限
+            if (antPathMatcher.match(operation.getUrl(),requestUrl)){
+                return SecurityConfig.createList(operation.getName());
+            }
         }
 
         return SecurityConfig.createList("ROLE_LOGIN");

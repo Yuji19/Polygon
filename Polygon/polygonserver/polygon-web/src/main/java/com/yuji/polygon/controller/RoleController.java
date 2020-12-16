@@ -25,7 +25,7 @@ public class RoleController {
     @Autowired
     RoleService roleService;
 
-    @PostMapping("/add")
+    @PostMapping("/add/one")
     public String addRole(@RequestBody @Valid RolePermDTO rolePermDTO){
         int result = roleService.insertRole(rolePermDTO.getRole(), rolePermDTO.getPermissions());
         return result > 0 ? ConstantValue.ADD_SUCCESS : ConstantValue.ADD_FAILURE;

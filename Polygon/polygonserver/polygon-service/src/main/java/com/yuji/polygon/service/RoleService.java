@@ -4,7 +4,7 @@ import com.yuji.polygon.entity.Menu;
 import com.yuji.polygon.entity.Page;
 import com.yuji.polygon.entity.Permission;
 import com.yuji.polygon.entity.Role;
-import com.yuji.polygon.mapper.PermissionMenuMapper;
+import com.yuji.polygon.mapper.OperationMapper;
 import com.yuji.polygon.mapper.RoleMapper;
 import com.yuji.polygon.mapper.RolePermissionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class RoleService {
     PermissionService permissionService;
 
     @Autowired
-    PermissionMenuMapper permissionMenuMapper;
+    OperationMapper permissionMenuMapper;
 
     /**
      * 查询员工所拥有的角色
@@ -53,7 +53,7 @@ public class RoleService {
      */
     @Transactional(rollbackFor = Exception.class)
     public int insertRole(Role role, List<Permission> permissions){
-
+        role.setName("ROLE_"+role.getName());
         role.setGmtCreate(new Date());
         role.setGmtModified(new Date());
         int result1 = roleMapper.insertRole(role);
@@ -62,21 +62,11 @@ public class RoleService {
         for (int i = 0; i < permissions.size(); i++){
             Permission permission = permissions.get(i);
             pids[i] = permission.getId();
-            List<Menu> menus = permission.getMenus();
-            int[] mids = new int[menus.size()];
-            for (int j = 0; j < menus.size(); j++){
-                mids[j] = menus.get(j).getId();
-            }
-            if (mids.length > 0){
-                result2 = permissionMenuMapper.insertPermissionMenu(pids[i],mids);
-            }
-
         }
-        int result3 = 0;
         if (pids.length > 0){
-            result3 = rolePermissionMapper.insertRolePermission(role.getId(),pids);
+            result2 = rolePermissionMapper.insertRolePermission(role.getId(),pids);
         }
-        return (result1 > 0 && result2 > 0 && result3 > 0) ? 1 : 0;
+        return (result1 > 0 && result2 > 0 ) ? 1 : 0;
     }
 
     public int deleteRoleById(int[] rids){
@@ -114,7 +104,7 @@ public class RoleService {
         int startIndex = (pageNum-1)*pageSize;
         int totalCount = roleMapper.countTotalRole(nameZh);
         List<Role> records = roleMapper.getRolePage(nameZh,startIndex,pageSize);
-        return new Page(pageNum,pageSize,records);
+        return new Page(pageNum,totalCount,records);
     }
 
     public List<Role> getAllRole(){

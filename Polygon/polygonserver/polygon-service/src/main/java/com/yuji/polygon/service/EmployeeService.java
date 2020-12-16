@@ -5,8 +5,10 @@ import com.yuji.polygon.mapper.EmployeeMapper;
 import com.yuji.polygon.mapper.EmployeeRoleMapper;
 import com.yuji.polygon.utils.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.session.SessionRegistry;
@@ -36,7 +38,7 @@ public class EmployeeService implements UserDetailsService {
     RoleService roleService;
 
     @Autowired
-    PermissionService permissionService;
+    OperationService operationService;
 
     @Autowired
     EmployeeRoleMapper employeeRoleMapper;
@@ -51,24 +53,9 @@ public class EmployeeService implements UserDetailsService {
         if (employee == null){
             throw new UsernameNotFoundException(String.format("No user found with username: %s", employeeNo));
         }
-        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+
         List<Role> roles = roleService.getRoleByEmployeeId(employee.getId());
         employee.setRoles(roles);
-        for (Role role : roles){
-            //根据角色查找权限
-            List<Permission> permissions = permissionService.getPermissionByRoleId(role.getId());
-            for (Permission permission : permissions){
-                List<Menu> menus = permission.getMenus();
-                for (Menu menu : menus){
-                    //菜单权限+操作权限 exp: employee_add
-                    String own = menu.getMeta().getUrl().substring(1)+"_"+permission.getName();
-                    authorities.add(new SimpleGrantedAuthority(own));
-                }
-
-            }
-
-        }
-        employee.setAuthorities(authorities);
         return employee;
     }
 

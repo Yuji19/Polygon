@@ -28,18 +28,12 @@ class PolygonWebApplicationTests {
 
     @Test
     void contextLoads() {
-        List<Permission> permissions = permissionService.getAllPermissionByRole();
-        for (Permission permission : permissions){
-            System.out.println(permission);
-        }
+
     }
 
     @Test
     void testPermission(){
-        List<Permission> permissions = permissionService.getPermissionByRoleId(1);
-        for (Permission permission : permissions){
-            System.out.println(permission);
-        }
+
     }
 
     @Test

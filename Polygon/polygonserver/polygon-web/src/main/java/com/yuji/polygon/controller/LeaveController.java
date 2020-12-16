@@ -22,7 +22,7 @@ public class LeaveController {
     @Autowired
     LeaveService leaveSerice;
 
-    @PostMapping("/add")
+    @PostMapping("/add/one")
     public String addLeaveFlow(@Valid Leave leave, String[] eNo){
         if (eNo.length < ConstantValue.LEAVE_AUDIT_LENGTH ){
             throw new APIException(ResultCode.VALIDATE_FAILED.getCode(),"签审者不足");
@@ -31,15 +31,15 @@ public class LeaveController {
         return result > 0 ? ConstantValue.ADD_SUCCESS : ConstantValue.ADD_FAILURE;
     }
 
-    @PutMapping("/update")
-    public String updateLeaveFlow(@RequestBody @Valid Audit audit){
-        int result = leaveSerice.updateLeaveFlow(audit);
+    @PutMapping("/update/one")
+    public String updateLeaveFlow(@RequestBody @Valid Approve approve){
+        int result = leaveSerice.updateLeaveFlow(approve);
         return result > 0 ? ConstantValue.UPDATE_SUCCESS : ConstantValue.UPDATE_FAILURE;
     }
 
     @GetMapping("/query/page")
-    public Page getLeavePage(Leave leave, int currentPageNumber, int pageSize){
-        return leaveSerice.getLeavePage(leave,currentPageNumber,pageSize);
+    public Page getLeavePage(Leave leave, int pageNum, int pageSize){
+        return leaveSerice.getLeavePage(leave,pageNum,pageSize);
     }
 
     @DeleteMapping("/delete/{id}")

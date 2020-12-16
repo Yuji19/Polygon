@@ -7,7 +7,7 @@
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <label class="user-avatar">{{employee ? employee.employeeName : null}}</label>
+          <label class="user-avatar">{{employee ? employee.name : null}}</label>
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
@@ -31,11 +31,11 @@
     <el-dialog title="个人中心" :show-close="false" :close-on-click-modal="false" :visible.sync="dialogVisible">
       <div>
         <label>员工编号: </label>
-        <span>{{employee.employeeNo}}</span>
+        <span>{{employee.no}}</span>
       </div>
       <div>
         <label>员工姓名: </label>
-        <span>{{employee.employeeName}}</span>
+        <span>{{employee.name}}</span>
       </div>
       <div>
         <label>所属部门</label>

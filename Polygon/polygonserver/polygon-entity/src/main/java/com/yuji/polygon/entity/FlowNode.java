@@ -20,10 +20,10 @@ public class FlowNode {
     private String flowNodeName;
 
     @NotNull(message = "审批者员工编号不能为空")
-    private String employeeNo;
+    private String approveNo;
 
     @NotNull(message = "审批者姓名不能为空")
-    private String employeeName;
+    private String approveName;
 
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss",timezone = "Asia/Shanghai")
     private Date gmtCreate;
@@ -55,20 +55,20 @@ public class FlowNode {
         this.flowNodeName = flowNodeName;
     }
 
-    public String getEmployeeNo() {
-        return employeeNo;
+    public String getApproveNo() {
+        return approveNo;
     }
 
-    public void setEmployeeNo(String employeeNo) {
-        this.employeeNo = employeeNo;
+    public void setApproveNo(String approveNo) {
+        this.approveNo = approveNo;
     }
 
-    public String getEmployeeName() {
-        return employeeName;
+    public String getApproveName() {
+        return approveName;
     }
 
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
+    public void setApproveName(String approveName) {
+        this.approveName = approveName;
     }
 
     public Date getGmtCreate() {

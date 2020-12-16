@@ -6,15 +6,15 @@
         <h3 class="title">Login Form</h3>
       </div>
 
-      <el-form-item prop="employeeNo">
+      <el-form-item prop="no">
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
         <el-input
-          ref="employeeNo"
-          v-model="loginForm.employeeNo"
-          placeholder="EmployeeNo"
-          name="employeeNo"
+          ref="no"
+          v-model="loginForm.no"
+          placeholder="No"
+          name="no"
           type="text"
           tabindex="1"
           auto-complete="on"
@@ -70,12 +70,12 @@ export default {
     }
     return {
       loginForm: {
-        employeeNo: 'GREE1002',
+        no: 'GREE1003',
         password: '123456',
         code:''
       },
       loginRules: {
-        employeeNo: [{ required: true, trigger: 'blur'}],
+        no: [{ required: true, trigger: 'blur'}],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
       loading: false,

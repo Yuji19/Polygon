@@ -3,11 +3,15 @@ package com.yuji.polygon.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yuji.polygon.entity.ResultCode;
 import com.yuji.polygon.entity.ResultVO;
+import com.yuji.polygon.entity.Role;
 import com.yuji.polygon.service.EmployeeService;
+import com.yuji.polygon.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.authentication.*;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -25,6 +29,7 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.PrintWriter;
+import java.util.List;
 
 /**
  * @className: WebSecurityConfig
@@ -38,6 +43,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     EmployeeService employeeService;
+
+    @Autowired
+    RoleService roleService;
 
     /**
      * 自定义的过滤请求访问权限源
@@ -75,6 +83,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         ServletListenerRegistrationBean<HttpSessionEventPublisher> registration = new ServletListenerRegistrationBean<>();
         registration.setListener(new HttpSessionEventPublisher());
         return registration;
+    }
+
+    /**
+     * 角色继承
+     * @return
+     */
+    @Bean
+    RoleHierarchy roleHierarchy() {
+        List<Role> roles = roleService.getAllRole();
+        RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
+        String hierarchy = "";
+        for (Role role : roles){
+            if (!"ROLE_employee".equals(role.getName()) && !"".equals(role.getName())){
+                hierarchy+=role.getName()+" > ROLE_employee \n ";
+            }
+
+        }
+        roleHierarchy.setHierarchy(hierarchy);
+        return roleHierarchy;
     }
 
     @Bean
