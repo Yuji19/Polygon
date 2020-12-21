@@ -33,6 +33,13 @@ export function getList(data){
   })
 }
 
+export function getListByRoleAndDept(params) {
+  return request({
+    url: `/employee/fetch/${params.rid}/${params.deptId}`,
+    method: 'get'
+  })
+}
+
 export function addInfo(data) {
   return request({
     url: '/employee/add',

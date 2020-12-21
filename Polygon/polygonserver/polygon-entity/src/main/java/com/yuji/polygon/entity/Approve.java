@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
- * @className: Audit
+ * @className: Approve
  * @description: 审批记录
  * @author: yuji
  * @create: 2020-10-28 18:46:00
