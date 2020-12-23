@@ -53,20 +53,8 @@
         </el-table-column>
       </el-table>
 
-      <el-form :model="updateForm" :rules="rules" ref="updateForm">
-        <el-form-item label="审批意见" prop="approveInfo">
-          <el-input v-model="updateForm.approveInfo"></el-input>
-        </el-form-item>
-        <el-form-item label="审批结果" prop="approveState">
-            <el-radio v-model="updateForm.approveState" label="1">同意</el-radio>
-            <el-radio v-model="updateForm.approveState" label="-1">驳回</el-radio>
-        </el-form-item>
-        
-      </el-form>
-
       <div slot="footer" class="dialog-footer">
-        <el-button @click="resetUpdateForm('updateForm')">取 消</el-button>
-        <el-button type="primary" @click="onSubmitApprove('updateForm')">保 存</el-button>
+        <el-button @click="dialogVisible = false">确定</el-button>
       </div>
     </el-dialog>
 
@@ -121,8 +109,7 @@
      
       <el-table-column label="操作"  align="center">
         <template slot-scope="scope">
-          <el-button type="primary" size="mini" v-permission="['leave_update']"    @click="showApproveVisible(scope.row)">修改</el-button>
-          <el-button type="danger" size="mini" v-permission="['leave_delete']" @click="handleDelete(scope.row)">删除</el-button>
+          <el-button type="primary" size="mini"    @click="showApproveVisible(scope.row)">查看</el-button>
         </template>
       </el-table-column>
       
@@ -143,7 +130,7 @@
 <script>
 
   import { mapGetters } from 'vuex'
-  import { getLeave, getLeaveFlowPage, update } from '@/api/leave'
+  import { getLeave, getMineLeaveFlowPage} from '@/api/leave'
   import { getApproveList } from '@/api/approve'
 
   export default {
@@ -155,39 +142,22 @@
         totalCount: 0,
         form:{
           flowNo: '',
-          approveNo: '',
+          employeeNo: '',
           pageNum: 1,
           pageSize: 10
         },
         dialogVisible: false,
-        rules: {
-          approveInfo: [
-            {required: true,message: '请输入审批意见', trigger: 'blur'}
-          ],
-          approveState: [
-            {required: true, message: '请选择审批状态', trigger: 'blur'}
-          ]
+        leave: {
+          id: 0,
+          employeeNo: '',
+          employeeName: '',
+          type: '',
+          reason: '',
+          startDate: '',
+          endDate: ''
         },
-        updateForm: {
-          flowNo: '',
-          businessNo: '',
-          flowNodeNo: '',
-          approveNo: '',
-          approveName: '',
-          approveInfo: '',
-          approveState: ''
-          },
-          leave: {
-            id: 0,
-            employeeNo: '',
-            employeeName: '',
-            type: '',
-            reason: '',
-            startDate: '',
-            endDate: ''
-          },
-          approves: []
-        }
+        approves: []
+      }
     },
     computed: {
       ...mapGetters([
@@ -201,8 +171,8 @@
     methods: {
       fetchData() {
         this.listLoading = true
-        this.form.approveNo = this.employee.no
-        getLeaveFlowPage(this.form).then(response => {
+        this.form.employeeNo = this.employee.no
+        getMineLeaveFlowPage(this.form).then(response => {
           this.list = response.data.records
           this.totalCount = response.data.totalCount
           this.listLoading = false
@@ -216,12 +186,6 @@
         this.fetchData()
       },
       showApproveVisible(row){
-        //重新指向一个新的引用,避免和row共享同一内存区域
-        //this.row = Object.assign({}, row)
-        this.updateForm.flowNodeNo = row.flowNodeNo
-        this.updateForm.flowNo = row.flowNo
-        this.updateForm.approveNo = this.employee.no
-        this.updateForm.approveName = this.employee.name
         getLeave(row.businessNo).then(resp => {
           this.leave = resp.data
         })
@@ -229,24 +193,6 @@
           this.approves = resp.data
         })
         this.dialogVisible = true
-      },
-      onSubmitApprove(updateForm){
-        this.updateForm.businessNo = this.leave.id
-        this.$refs[updateForm].validate((valid) => {
-            if (valid) {
-              update(this.updateForm).then(resp => {
-                this.fetchData()
-                this.dialogVisible = false
-              })
-            }
-        })
-      },
-      resetUpdateForm(updateForm){
-        this.dialogVisible = false
-        this.$refs[updateForm].resetFields()
-      },
-      handleDelete(row){
-        
       }
     }
   }

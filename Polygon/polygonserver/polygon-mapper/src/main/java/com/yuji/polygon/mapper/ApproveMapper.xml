@@ -4,23 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yuji.polygon.mapper.ApproveMapper">
 
-    <resultMap id="BaseResultMap" type="com.yuji.polygon.entity.Approve">
-        <id column="id" property="id"/>
-        <result column="business_no" property="businessNo"/>
-        <result column="flow_node_no" property="flowNodeNo"/>
-        <result column="approve_no" property="approveNo"/>
-        <result column="approve_name" property="approveName"/>
-        <result column="approve_info" property="approveInfo"/>
-        <result column="approve_state" property="approveState"/>
-        <result column="approve_date" property="approveDate"/>
-
-
-    </resultMap>
-
 
     <insert id="insertApprove" parameterType="com.yuji.polygon.entity.Approve" useGeneratedKeys="true" keyProperty="id">
-        insert into poly_approve set business_no=#{businessNo}, flow_node_no=#{flowNodeNo}, approve_no=#{approveNo},
-        approve_name=#{approveName}, approve_info=#{approveInfo}, approve_state=#{approveState}, approve_date=#{approveDate}
+        insert into poly_approve set flow_no=#{flowNo}, business_no=#{businessNo}, flow_node_no=#{flowNodeNo},
+        approve_no=#{approveNo},approve_name=#{approveName}, approve_info=#{approveInfo}, approve_state=#{approveState}, approve_date=#{approveDate}
     </insert>
 
 
@@ -36,8 +23,60 @@
         where flow_node_no = #{flowNodeNo}
     </update>
 
-    <select id="findApproveByApproveNo" resultType="com.yuji.polygon.entity.Approve">
-        select * from poly_approve where approve_no = #{approveNo}
+    <select id="getApproveByApproveNo" resultType="com.yuji.polygon.entity.ApproveVO">
+        select
+            a.`id` as id,
+            a.`flow_no` as flowNo,
+            a.`business_no` ,
+            a.`flow_node_no`,
+            a.`approve_no`,
+            a.`approve_name`,
+            a.`approve_info`,
+            a.`approve_date`,
+            fn.`flow_node_name`,
+            case a.`approve_state`
+                when 0 then
+                    '未审批'
+                when 1 then
+                    '同意'
+                when -1 then
+                    '驳回'
+            end
+                approveState
+        from
+            poly_approve a,
+            poly_flow_node fn
+        where
+            a.`approve_no` = #{approveNo}
+            and a.`flow_node_no`=fn.`id`
+    </select>
+    
+    <select id="getApproveByFlowNo" resultType="com.yuji.polygon.entity.ApproveVO">
+        select
+            a.`id` as id,
+            a.`flow_no` as flowNo,
+            a.`business_no` ,
+            a.`flow_node_no`,
+            a.`approve_no`,
+            a.`approve_name`,
+            a.`approve_info`,
+            a.`approve_date`,
+            fn.`flow_node_name`,
+            case a.`approve_state`
+                when 0 then
+                    '未审批'
+                when 1 then
+                    '同意'
+                when -1 then
+                    '驳回'
+            end
+                approveState
+        from
+            poly_approve a,
+            poly_flow_node fn
+        where
+            a.`flow_no` = #{flowNo}
+            and a.`flow_node_no`=fn.`id`
     </select>
 
     <delete id="deleteApproveByBusinessNo">

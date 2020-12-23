@@ -2,6 +2,7 @@ package com.yuji.polygon.mapper;
 
 import com.yuji.polygon.entity.FlowNode;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @interface: FlowNodeMapper
@@ -15,7 +16,10 @@ public interface FlowNodeMapper {
 
     int insertFlowNode(FlowNode flowNode);
 
-    FlowNode findFlowNodeById(int id);
+    FlowNode getFlowNodeById(int id);
+
+    FlowNode getFlowNodeByFlowNoAndFlowNodeName(@Param("flowNo") String flowNo,
+                                                @Param("flowNodeName") String flowNodeName);
 
     int deleteFlowNodeByFlowNo(String flowNo);
 }

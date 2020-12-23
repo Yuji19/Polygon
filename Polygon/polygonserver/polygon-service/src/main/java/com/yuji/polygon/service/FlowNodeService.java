@@ -22,8 +22,12 @@ public class FlowNodeService {
         return flowNodeMapper.insertFlowNode(flowNode);
     }
 
-    public FlowNode findFlowNodeById(int id) {
-        return flowNodeMapper.findFlowNodeById(id);
+    public FlowNode getFlowNodeById(int id) {
+        return flowNodeMapper.getFlowNodeById(id);
+    }
+
+    public FlowNode getFlowNodeByFlowNoAndFlowNodeName(String flowNo, String flowNodeName){
+        return flowNodeMapper.getFlowNodeByFlowNoAndFlowNodeName(flowNo,flowNodeName);
     }
 
     public int deleteFlowNodeByFlowNo(String flowNo) {

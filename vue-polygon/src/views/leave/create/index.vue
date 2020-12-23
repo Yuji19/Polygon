@@ -104,13 +104,13 @@
     },
     methods: {
       fetchDirectors(){
-        let params={ rid: 14, deptId: this.employee.departmentId }
+        let params={ rid: 13, deptId: this.employee.departmentId }
         getListByRoleAndDept(params).then(resp => {
           this.directors = resp.data
         })
       },
       fetchMinisters(){
-        let params={ rid: 15, deptId: this.employee.departmentId }
+        let params={ rid: 14, deptId: this.employee.departmentId }
         getListByRoleAndDept(params).then(resp => {
           this.ministers = resp.data
         })
@@ -121,7 +121,7 @@
             this.form.startDate = this.date[0]
             this.form.endDate = this.date[1]
             addLeave(this.form).then(resp => {
-              this.$router.push({ path: '/approve'})
+              this.$router.push({ path: '/leave/mine'})
             })
           }
         })

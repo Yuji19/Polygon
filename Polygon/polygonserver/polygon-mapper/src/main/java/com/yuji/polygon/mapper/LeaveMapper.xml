@@ -23,8 +23,7 @@
 
     <insert id="insertLeave" parameterType="com.yuji.polygon.entity.Leave" useGeneratedKeys="true" keyProperty="id">
         insert into poly_leave set employee_no=#{employeeNo}, employee_name=#{employeeName}, type=#{type},
-        reason=#{reason}
-        ,start_date=#{startDate}, end_date=#{endDate}, flow_no=#{flowNo}, flow_state=#{flowState},
+        reason=#{reason},start_date=#{startDate}, end_date=#{endDate}, flow_no=#{flowNo}, flow_state=#{flowState},
         current_node=#{currentNode}, gmt_create=#{gmtCreate}, gmt_modified=#{gmtModified}
     </insert>
 
@@ -45,7 +44,7 @@
         select * from poly_leave where id = #{id}
     </select>
 
-    <select id="countTotal" parameterType="com.yuji.polygon.entity.Leave">
+    <select id="countTotal" parameterType="com.yuji.polygon.entity.Leave" resultType="java.lang.Integer" >
         select count(*) from poly_leave
         <where>
             <if test="id &gt; 0">
@@ -66,7 +65,7 @@
         </where>
     </select>
 
-    <select id="listLeave" parameterType="java.util.Map" resultType="com.yuji.polygon.entity.Leave">
+    <select id="getLeavePage" parameterType="java.util.Map" resultType="com.yuji.polygon.entity.Leave">
         select * from poly_leave
         <where>
             <if test="leave != null">
@@ -94,5 +93,109 @@
     <delete id="deleteLeaveById">
         delete from poly_leave where id = #{id}
     </delete>
+
+    <select id="countTotalLeaveFlow" resultType="java.lang.Integer">
+        select
+            count(*)
+        from
+            poly_flow f,
+            poly_leave l,
+            poly_flow_node fn
+        <where>
+            <if test="flowNo != null and flowNo != ''">
+                f.`flow_no`=#{flowNo}
+            </if>
+            <if test="approveNo != null and approveNo != '' ">
+                and fn.`approve_no`=#{approveNo}
+            </if>
+            and f.`flow_no` = fn.`flow_no`
+            and fn.`flow_no` = l.`flow_no`
+            and l.`current_node`=fn.`id`
+
+        </where>
+    </select>
+
+    <select id="getLeaveFlowPage" resultType="com.yuji.polygon.entity.FlowVO">
+        select
+            f.`flow_no`,
+            f.`flow_name`,
+            l.`id` as businessNo,
+            l.`employee_name` as creator,
+            l.`gmt_create`,
+            fn.`id` as flowNodeNo,
+            fn.`flow_node_name`,
+            fn.`approve_name`,
+            if(l.`flow_state` &lt; 1,"审批中","审批结束") as flowState
+        from
+            poly_flow f,
+            poly_leave l,
+            poly_flow_node fn
+        <where>
+            <if test="flowNo != null and flowNo != '' ">
+                f.`flow_no`=#{flowNo}
+            </if>
+            <if test="approveNo != null and approveNo != '' ">
+                and fn.`approve_no`=#{approveNo}
+            </if>
+            and f.`flow_no` = fn.`flow_no`
+            and fn.`flow_no` = l.`flow_no`
+            and l.`current_node`=fn.`id`
+
+        </where>
+        limit #{startIndex},#{pageSize}
+
+    </select>
+
+    <select id="countTotalMineLeaveFlow" resultType="java.lang.Integer">
+        select
+            count(*)
+        from
+            poly_flow f,
+            poly_leave l,
+            poly_flow_node fn
+        <where>
+            <if test="flowNo != null and flowNo != ''">
+                f.`flow_no`=#{flowNo}
+            </if>
+            <if test="employeeNo != null and employeeNo != '' ">
+                and l.`employee_no`=#{employeeNo}
+            </if>
+            and f.`flow_no` = fn.`flow_no`
+            and fn.`flow_no` = l.`flow_no`
+            and l.`current_node`=fn.`id`
+
+        </where>
+    </select>
+
+    <select id="getMineLeaveFlowPage" resultType="com.yuji.polygon.entity.FlowVO">
+        select
+            f.`flow_no`,
+            f.`flow_name`,
+            l.`id` as businessNo,
+            l.`employee_name` as creator,
+            l.`gmt_create`,
+            fn.`id` as flowNodeNo,
+            fn.`flow_node_name`,
+            fn.`approve_name`,
+            if(l.`flow_state` &lt; 1,"审批中","审批结束") as flowState
+        from
+            poly_flow f,
+            poly_leave l,
+            poly_flow_node fn
+        <where>
+            <if test="flowNo != null and flowNo != '' ">
+                f.`flow_no`=#{flowNo}
+            </if>
+            <if test="employeeNo != null and employeeNo != '' ">
+                and l.`employee_no`=#{employeeNo}
+            </if>
+            and f.`flow_no` = fn.`flow_no`
+            and fn.`flow_no` = l.`flow_no`
+            and l.`current_node`=fn.`id`
+
+        </where>
+        limit #{startIndex},#{pageSize}
+
+    </select>
 
 </mapper>

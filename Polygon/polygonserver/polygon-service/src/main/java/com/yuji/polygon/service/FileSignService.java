@@ -138,6 +138,7 @@ public class FileSignService {
         firstApprove.setBusinessNo(fileSign.getId());
         firstApprove.setApproveNo(firstNode.getApproveNo());
         firstApprove.setApproveName(firstNode.getApproveName());
+        firstApprove.setApproveState(0);
         firstApprove.setFlowNodeNo(firstNode.getId());
         approveService.insertApprove(firstApprove);
 
@@ -146,6 +147,7 @@ public class FileSignService {
         secondApprove.setBusinessNo(fileSign.getId());
         secondApprove.setApproveNo(secondNode.getApproveNo());
         secondApprove.setApproveName(secondNode.getApproveName());
+        secondApprove.setApproveState(0);
         secondApprove.setFlowNodeNo(secondNode.getId());
         approveService.insertApprove(secondApprove);
 
@@ -153,6 +155,7 @@ public class FileSignService {
         thirdApprove.setBusinessNo(fileSign.getId());
         thirdApprove.setApproveNo(thirdNode.getApproveNo());
         thirdApprove.setApproveName(thirdNode.getApproveName());
+        thirdApprove.setApproveState(0);
         thirdApprove.setFlowNodeNo(thirdNode.getId());
         approveService.insertApprove(thirdApprove);
 

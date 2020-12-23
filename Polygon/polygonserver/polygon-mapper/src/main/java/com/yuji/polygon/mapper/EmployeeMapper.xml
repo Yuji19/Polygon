@@ -130,6 +130,22 @@
 
     </select>
 
+    <select id="getEmployeeByRoleAndDept" resultMap="BaseResultMap">
+       select
+            e.*,
+            r.`id` as rid,
+            r.`name` as rname,
+            r.`name_zh`,
+            r.`gmt_create`,
+            r.`gmt_modified`
+        from
+            poly_employee e,
+            poly_employee_role er,
+            poly_role r
+        where
+            e.`id`=er.`eid` and er.`rid`=r.`id` and r.`id` = #{rid} and e.`department_id`=#{deptId}
+    </select>
+
     <delete id="deleteEmployeeById">
         delete
             poly_employee,

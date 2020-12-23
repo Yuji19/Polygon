@@ -1,9 +1,12 @@
 package com.yuji.polygon.service;
 
 import com.yuji.polygon.entity.Approve;
+import com.yuji.polygon.entity.ApproveVO;
 import com.yuji.polygon.mapper.ApproveMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @className: AuditServie
@@ -29,8 +32,12 @@ public class ApproveService {
     }
 
 
-    public Approve findApproveByApproveNo(String approveNo) {
-        return approveMapper.findApproveByApproveNo(approveNo);
+    public ApproveVO getApproveByApproveNo(String approveNo) {
+        return approveMapper.getApproveByApproveNo(approveNo);
+    }
+
+    public List<ApproveVO> getApproveByFlowNo(String flowNo){
+        return approveMapper.getApproveByFlowNo(flowNo);
     }
 
     public int deleteApproveByBusinessNo(int businessNo) {

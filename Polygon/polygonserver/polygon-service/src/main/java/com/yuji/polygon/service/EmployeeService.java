@@ -148,6 +148,9 @@ public class EmployeeService implements UserDetailsService {
         return employeeMapper.getEmployeeByEid(eid);
     }
 
+    public List<Employee> getEmployeeByRoleAndDept(int rid, int deptId){
+        return employeeMapper.getEmployeeByRoleAndDept(rid,deptId);
+    }
 
     /**
      * 分页查询

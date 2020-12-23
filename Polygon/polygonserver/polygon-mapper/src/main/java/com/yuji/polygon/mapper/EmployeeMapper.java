@@ -21,7 +21,7 @@ public interface EmployeeMapper {
 
     Employee getEmployeeByNo(String no);
 
-    List<Employee> getEmployeeByNos(String[] nos);
+    List<Employee> getEmployeeByNos(@Param("nos") String[] nos);
     
     Employee getEmployeeByEid(int eid);
 
@@ -29,6 +29,8 @@ public interface EmployeeMapper {
 
     List<Employee> getAllEmployee(@Param("employee") Employee employee,
                                   @Param("startIndex") int startIndex, @Param("pageSize") int pageSize);
+
+    List<Employee> getEmployeeByRoleAndDept(@Param("rid") int rid, @Param("deptId") int deptId);
 
     int deleteEmployeeById(int id);
 

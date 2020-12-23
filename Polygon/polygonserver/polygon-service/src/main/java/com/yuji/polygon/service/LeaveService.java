@@ -84,6 +84,15 @@ public class LeaveService {
         secondNode.setGmtModified(CommonUtil.getNowTime());
         flowNodeService.insertFlowNode(secondNode);
 
+        FlowNode endNode = new FlowNode();
+        endNode.setApproveNo(leave.getEmployeeNo());
+        endNode.setApproveName(leave.getEmployeeName());
+        endNode.setFlowNo(flow.getFlowNo());
+        endNode.setFlowNodeName(ConstantValue.END_NODE);
+        endNode.setGmtCreate(new Date());
+        endNode.setGmtModified(new Date());
+        flowNodeService.insertFlowNode(endNode);
+
 
         //创建流程线
         FlowLine firstLine = new FlowLine();
@@ -103,6 +112,14 @@ public class LeaveService {
         secondLine.setGmtModified(CommonUtil.getNowTime());
         flowLineService.insertFlowLine(secondLine);
 
+        FlowLine thirdLine = new FlowLine();
+        thirdLine.setFlowNo(flow.getFlowNo());
+        thirdLine.setPreNode(secondNode.getId());
+        thirdLine.setNextNode(endNode.getId());
+        thirdLine.setGmtCreate(new Date());
+        thirdLine.setGmtModified(new Date());
+        flowLineService.insertFlowLine(thirdLine);
+
 
         //创建请假单
         leave.setFlowNo(flow.getFlowNo());
@@ -115,17 +132,21 @@ public class LeaveService {
 
         //为每个节点创建审批记录
         Approve firstApprove = new Approve();
+        firstApprove.setFlowNo(flow.getFlowNo());
         firstApprove.setBusinessNo(leave.getId());
         firstApprove.setApproveNo(firstNode.getApproveNo());
         firstApprove.setApproveName(firstNode.getApproveName());
+        firstApprove.setApproveState(0);
         firstApprove.setFlowNodeNo(firstNode.getId());
         approveService.insertApprove(firstApprove);
 
 
         Approve secondApprove = new Approve();
+        secondApprove.setFlowNo(flow.getFlowNo());
         secondApprove.setBusinessNo(leave.getId());
         secondApprove.setApproveNo(secondNode.getApproveNo());
         secondApprove.setApproveName(secondNode.getApproveName());
+        secondApprove.setApproveState(0);
         secondApprove.setFlowNodeNo(secondNode.getId());
         approveService.insertApprove(secondApprove);
 
@@ -143,12 +164,25 @@ public class LeaveService {
         Leave leave = leaveMapper.getLeaveById(approve.getBusinessNo());
         //获取流程线
         FlowLine flowLine = flowLineService.findFlowLineByPreNode(leave.getCurrentNode());
+        if (flowLine == null){
+            throw new APIException("流程节点缺失");
+        }
+        //获取终点节点
+        FlowNode endNode = flowNodeService.getFlowNodeByFlowNoAndFlowNodeName(leave.getFlowNo(),ConstantValue.END_NODE);
+        if (endNode == null){
+            throw new APIException("流程终点缺失");
+        }
 
-        if (flowLine == null || approve.getApproveState() == -1) {
-            //已到流程的终点，设置节点为0，流程结束
-            leave.setCurrentNode(0);
+        //驳回
+        if (approve.getApproveState() == -1) {
+            //已到流程的终点，流程结束
+            leave.setCurrentNode(endNode.getId());
             leave.setFlowState(1);
         } else {
+            //下一个节点为流程终点
+            if (flowLine.getNextNode() == endNode.getId()){
+                leave.setFlowState(1);
+            }
             //设置为下一个节点
             leave.setCurrentNode(flowLine.getNextNode());
         }
@@ -168,7 +202,25 @@ public class LeaveService {
         int totalCount = leaveMapper.countTotal(leave);
         Page page = new Page(pageNum, totalCount);
 
-        List<Leave> records = leaveMapper.listLeave(leave,startIndex,pageSize);
+        List<Leave> records = leaveMapper.getLeavePage(leave,startIndex,pageSize);
+        page.setRecords(records);
+        return page;
+    }
+
+    public Page<FlowVO> getLeaveFlowPage(String flowNo, String approveNo, int pageNum, int pageSize){
+        int startIndex = (pageNum - 1) * pageSize;
+        int totalCount = leaveMapper.countTotalLeaveFlow(flowNo,approveNo);
+        Page page = new Page(pageNum, totalCount);
+        List<FlowVO> records = leaveMapper.getLeaveFlowPage(flowNo,approveNo,startIndex,pageSize);
+        page.setRecords(records);
+        return page;
+    }
+
+    public Page<FlowVO> getMineLeaveFlowPage(String flowNo, String employeeNo, int pageNum, int pageSize){
+        int startIndex = (pageNum - 1) * pageSize;
+        int totalCount = leaveMapper.countTotalMineLeaveFlow(flowNo,employeeNo);
+        Page page = new Page(pageNum, totalCount);
+        List<FlowVO> records = leaveMapper.getMineLeaveFlowPage(flowNo,employeeNo,startIndex,pageSize);
         page.setRecords(records);
         return page;
     }

@@ -31,19 +31,35 @@ public class LeaveController {
         return result > 0 ? ConstantValue.ADD_SUCCESS : ConstantValue.ADD_FAILURE;
     }
 
-    @PutMapping("/update/one")
+    @PutMapping("/update/leaveFlow")
     public String updateLeaveFlow(@RequestBody @Valid Approve approve){
         int result = leaveSerice.updateLeaveFlow(approve);
         return result > 0 ? ConstantValue.UPDATE_SUCCESS : ConstantValue.UPDATE_FAILURE;
     }
 
-    @GetMapping("/query/page")
-    public Page getLeavePage(Leave leave, int pageNum, int pageSize){
+    @PutMapping("/query/page/leave")
+    public Page getLeavePage(Leave leave, Integer pageNum, Integer pageSize){
         return leaveSerice.getLeavePage(leave,pageNum,pageSize);
     }
 
+    @PutMapping("/query/page/leaveFlow")
+    public Page getLeaveFlowPage(String flowNo,String approveNo,Integer pageNum, Integer pageSize){
+        return leaveSerice.getLeaveFlowPage(flowNo, approveNo, pageNum, pageSize);
+    }
+
+    @PutMapping("/query/page/mine")
+    public Page getMineLeaveFlowPage(String flowNo,String employeeNo,Integer pageNum, Integer pageSize){
+        return leaveSerice.getMineLeaveFlowPage(flowNo, employeeNo, pageNum, pageSize);
+    }
+
+    @GetMapping("/query/{id}")
+    public Leave getLeaveById(@PathVariable("id") Integer id){
+        return leaveSerice.getLeaveById(id);
+    }
+
+
     @DeleteMapping("/delete/{id}")
-    public String deleteLeaveFlow(@PathVariable int id){
+    public String deleteLeaveFlow(@PathVariable Integer id){
         int result = leaveSerice.deleteLeaveFlow(id);
         return result > 0 ? ConstantValue.DELETE_SUCCESS : ConstantValue.DELETE_FAILURE;
     }

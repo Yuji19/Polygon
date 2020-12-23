@@ -118,6 +118,17 @@ public class EmployeeController {
     }
 
     /**
+     * 获取审批人员，该访问不需要权限
+     * @param rid
+     * @param deptId
+     * @return
+     */
+    @GetMapping("/fetch/{rid}/{deptId}")
+    public List<Employee> getEmployeeByRoleAndDept(@PathVariable("rid") Integer rid, @PathVariable("deptId") Integer deptId){
+        return employeeService.getEmployeeByRoleAndDept(rid,deptId);
+    }
+
+    /**
      * 获取当前用户，该访问不需要权限，所以不加/query
      * @param 
      * @return

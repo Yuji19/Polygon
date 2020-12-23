@@ -2,37 +2,33 @@ package com.yuji.polygon.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
- * @className: Approve
- * @description: 审批记录
+ * @className: ApproveVO
+ * @description: TODO
  * @author: yuji
- * @create: 2020-10-28 18:46:00
+ * @create: 2020-12-22 19:26:49
  */
-public class Approve {
+public class ApproveVO {
 
     private int id;
 
     private String flowNo;
 
-    private int businessNo;
+    private int businessNO;
 
-    @NotNull(message = "流程节点编号不能为空")
     private int flowNodeNo;
 
-    @NotNull(message = "审批者员工编号不能为空")
+    private String flowNodeName;
+
     private String approveNo;
 
-    @NotNull(message = "审批者员工编号不能为空")
     private String approveName;
 
     private String approveInfo;
 
-    @NotNull(message = "审批状态不能为空")
-    private int approveState;
+    private String approveState;
 
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss",timezone = "Asia/Shanghai")
     private Date approveDate;
@@ -53,12 +49,12 @@ public class Approve {
         this.flowNo = flowNo;
     }
 
-    public int getBusinessNo() {
-        return businessNo;
+    public int getBusinessNO() {
+        return businessNO;
     }
 
-    public void setBusinessNo(int businessNo) {
-        this.businessNo = businessNo;
+    public void setBusinessNO(int businessNO) {
+        this.businessNO = businessNO;
     }
 
     public int getFlowNodeNo() {
@@ -67,6 +63,14 @@ public class Approve {
 
     public void setFlowNodeNo(int flowNodeNo) {
         this.flowNodeNo = flowNodeNo;
+    }
+
+    public String getFlowNodeName() {
+        return flowNodeName;
+    }
+
+    public void setFlowNodeName(String flowNodeName) {
+        this.flowNodeName = flowNodeName;
     }
 
     public String getApproveNo() {
@@ -93,11 +97,11 @@ public class Approve {
         this.approveInfo = approveInfo;
     }
 
-    public int getApproveState() {
+    public String getApproveState() {
         return approveState;
     }
 
-    public void setApproveState(int approveState) {
+    public void setApproveState(String approveState) {
         this.approveState = approveState;
     }
 
