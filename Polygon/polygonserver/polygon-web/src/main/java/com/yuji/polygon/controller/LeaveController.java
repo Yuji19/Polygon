@@ -37,11 +37,6 @@ public class LeaveController {
         return result > 0 ? ConstantValue.UPDATE_SUCCESS : ConstantValue.UPDATE_FAILURE;
     }
 
-    @PutMapping("/query/page/leave")
-    public Page getLeavePage(Leave leave, Integer pageNum, Integer pageSize){
-        return leaveSerice.getLeavePage(leave,pageNum,pageSize);
-    }
-
     @PutMapping("/query/page/leaveFlow")
     public Page getLeaveFlowPage(String flowNo,String approveNo,Integer pageNum, Integer pageSize){
         return leaveSerice.getLeaveFlowPage(flowNo, approveNo, pageNum, pageSize);

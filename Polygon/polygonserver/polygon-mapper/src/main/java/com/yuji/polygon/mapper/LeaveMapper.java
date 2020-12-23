@@ -23,11 +23,6 @@ public interface LeaveMapper {
 
     Leave getLeaveById(int id);
 
-    int countTotal(Leave leave);
-
-    List<Leave> getLeavePage(@Param("leave") Leave leave, @Param("startIndex") int startIndex,
-                          @Param("pageSize") int pageSize);
-
     int deleteLeaveById(int id);
 
     int countTotalLeaveFlow(@Param("flowNo") String flowNo, @Param("approveNo") String approveNo);

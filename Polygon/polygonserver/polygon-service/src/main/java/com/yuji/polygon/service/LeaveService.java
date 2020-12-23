@@ -42,6 +42,7 @@ public class LeaveService {
 
     /**
      * Spring框架的事务管理默认地只在发生不受控异常（RuntimeException和Error）时才进行事务回滚
+     * 创建流程
      * @param leave
      * @param eNo
      * @return
@@ -153,7 +154,11 @@ public class LeaveService {
         return 1;
     }
 
-
+    /**
+     * 审批，流程更新
+     * @param approve
+     * @return
+     */
     @Transactional(rollbackFor = Exception.class)
     public int updateLeaveFlow(Approve approve) {
 
@@ -197,16 +202,14 @@ public class LeaveService {
         return leaveMapper.getLeaveById(id);
     }
 
-    public Page<Leave> getLeavePage(Leave leave, int pageNum, int pageSize) {
-        int startIndex = (pageNum - 1) * pageSize;
-        int totalCount = leaveMapper.countTotal(leave);
-        Page page = new Page(pageNum, totalCount);
-
-        List<Leave> records = leaveMapper.getLeavePage(leave,startIndex,pageSize);
-        page.setRecords(records);
-        return page;
-    }
-
+    /**
+     * 待审批列表
+     * @param flowNo
+     * @param approveNo
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     public Page<FlowVO> getLeaveFlowPage(String flowNo, String approveNo, int pageNum, int pageSize){
         int startIndex = (pageNum - 1) * pageSize;
         int totalCount = leaveMapper.countTotalLeaveFlow(flowNo,approveNo);
@@ -216,6 +219,14 @@ public class LeaveService {
         return page;
     }
 
+    /**
+     * 我的申请列表
+     * @param flowNo
+     * @param employeeNo
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     public Page<FlowVO> getMineLeaveFlowPage(String flowNo, String employeeNo, int pageNum, int pageSize){
         int startIndex = (pageNum - 1) * pageSize;
         int totalCount = leaveMapper.countTotalMineLeaveFlow(flowNo,employeeNo);
