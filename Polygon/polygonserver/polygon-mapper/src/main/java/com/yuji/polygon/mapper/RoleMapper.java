@@ -20,11 +20,13 @@ public interface RoleMapper {
 
     List<Role> getRoleByEmployeeId(int eid);
 
-    int countTotalRole(String nameZh);
+    int countTotalRole(String name);
 
-    List<Role> getRolePage(String nameZh, int startIndex, int pageSize);
+    List<Role> getRolePage(@Param("name") String name, @Param("startIndex") int startIndex, @Param("pageSize") int pageSize);
 
     List<Role> getAllRole();
 
     int deleteRoleById(@Param("ids") int[] ids);
+
+    int updateRoleBase(Role role);
 }

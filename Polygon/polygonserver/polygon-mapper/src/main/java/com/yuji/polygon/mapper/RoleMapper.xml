@@ -4,18 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yuji.polygon.mapper.RoleMapper">
 
-    <resultMap id="BaseResultMap" type="com.yuji.polygon.entity.Role">
-        <id column="id" property="id"/>
-        <result column="name" property="name"/>
-        <result column="name_zh" property="nameZh" />
-    </resultMap>
 
-
-    <insert id="insertRole" parameterType="java.lang.String" useGeneratedKeys="true" keyProperty="id">
-        insert into poly_role(name,name_zh) values (#{name},#{nameZh})
+    <insert id="insertRole" parameterType="com.yuji.polygon.entity.Role" useGeneratedKeys="true" keyProperty="id">
+        insert into poly_role(name,name_zh,gmt_create,gmt_modified)
+        values (#{name},#{nameZh},#{gmtCreate},#{gmtModified})
     </insert>
 
-    <select id="getRoleByEmployeeId"  resultMap="BaseResultMap">
+    <select id="getRoleByEmployeeId"  resultType="com.yuji.polygon.entity.Role">
        select
             r.*
        from
@@ -30,27 +25,29 @@
         from
             poly_role
         <where>
-            <if test="nameZh != null">
-                name_zh like concat('%',#{nameZh},'')
+            <if test="name != null and name != ''">
+                name like concat('%',#{name},'')
+                or name_zh like concat('%',#{name},'')
             </if>
         </where>
     </select>
 
     <!-- 分页查询 -->
-    <select id="getRolePage" resultMap="BaseResultMap">
+    <select id="getRolePage" resultType="com.yuji.polygon.entity.Role">
         select
             *
         from
             poly_role
         <where>
-            <if test="nameZh != null">
-                name_zh like concat('%',#{nameZh},'')
+            <if test="name != null and name != ''">
+                name like concat('%',#{name},'')
+                or name_zh like concat('%',#{name},'')
             </if>
         </where>
         limit #{startIndex},#{pageSize}
     </select>
 
-    <select id="getAllRole" resultMap="BaseResultMap">
+    <select id="getAllRole" resultType="com.yuji.polygon.entity.Role">
         select * from poly_role
     </select>
 
@@ -72,6 +69,18 @@
 
     </delete>
 
+    <update id="updateRoleBase" parameterType="com.yuji.polygon.entity.Role">
+        update poly_role
+        <set>
+            <if test="name != null and name != ''">
+                name=#{name},
+            </if>
+            <if test="nameZh != null and nameZh != ''">
+                name_zh=#{nameZh}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
 
 
 </mapper>

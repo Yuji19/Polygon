@@ -4,6 +4,31 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yuji.polygon.mapper.PermissionMapper">
 
+    <resultMap id="BaseResultMap1" type="com.yuji.polygon.entity.Permission">
+        <id column="id" property="id" />
+        <result column="pid" property="pid" />
+        <result column="type" property="type" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
+        <association property="operation" javaType="com.yuji.polygon.entity.Operation">
+            <result column="oid" property="id" />
+            <result column="name" property="name" />
+            <result column="name_zh" property="nameZh" />
+        </association>
+    </resultMap>
+
+    <resultMap id="BaseResultMap2" type="com.yuji.polygon.entity.Permission">
+        <id column="id" property="id" />
+        <result column="pid" property="pid" />
+        <result column="type" property="type" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
+        <association property="menu" javaType="com.yuji.polygon.entity.Menu">
+            <result column="mid" property="id" />
+            <result column="name" property="name" />
+        </association>
+    </resultMap>
+
 
     <insert id="insertPermission" parameterType="com.yuji.polygon.entity.Permission" useGeneratedKeys="true" keyProperty="id">
         insert into poly_permission (pid,type,gmt_create,gmt_modified) values (#{pid},#{type},#{gmtCreate},#{gmtModified})
@@ -13,5 +38,63 @@
     <delete id="deletePermissionById">
         delete from poly_permission where id=#{id}
     </delete>
+
+    <select id="getPermissionOfOperation" resultMap="BaseResultMap1">
+        select
+            p.*,
+            o.`id` as oid,
+            o.`name`,
+            o.`name_zh`
+        from
+            poly_permission p,
+            poly_operation o
+        where
+            p.`pid`=o.`id` and p.`type`="operation"
+    </select>
+
+    <select id="getPermissionOfOperationByRid" resultMap="BaseResultMap1">
+        select
+            p.*,
+            o.`id` as oid,
+            o.`name`,
+            o.`name_zh`
+        from
+            poly_permission p,
+            poly_operation o,
+            poly_role_permission rp
+        where
+            rp.`rid`=#{rid}
+            and rp.`pid`=p.`id`
+            and p.`pid`=o.`id`
+            and p.`type`="operation"
+    </select>
+
+    <select id="getPermissionOfMenu" resultMap="BaseResultMap2">
+        select
+            p.*,
+            m.`id` as mid,
+            m.`name`
+        from
+            poly_permission p,
+            poly_menu m
+        where
+            p.`pid`=m.`id` and p.`type`="menu"
+    </select>
+
+    <select id="getPermissionOfMenuByRid" resultMap="BaseResultMap2">
+        select
+            p.*,
+            m.`id` as mid,
+            m.`name`
+        from
+            poly_permission p,
+            poly_menu m,
+            poly_role_permission rp
+        where
+            rp.`rid`=#{rid}
+            and rp.`pid`=p.`id`
+            and p.`pid`=m.`id`
+            and p.`type`="menu"
+    </select>
 
 </mapper>

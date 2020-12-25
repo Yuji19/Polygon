@@ -29,4 +29,20 @@ public class PermissionService {
         return deletePermissionById(id);
     }
 
+    public List<Permission> getPermissionOfOperation(){
+        return permissionMapper.getPermissionOfOperation();
+    }
+
+    public List<Permission> getPermissionOfOperationByRid(int rid){
+        return permissionMapper.getPermissionOfOperationByRid(rid);
+    }
+
+    public List<Permission> getPermissionOfMenu(){
+        return permissionMapper.getPermissionOfMenu();
+    }
+
+    public List<Permission> getPermissionOfMenuByRid(int rid){
+        return permissionMapper.getPermissionOfMenuByRid(rid);
+    }
+
 }

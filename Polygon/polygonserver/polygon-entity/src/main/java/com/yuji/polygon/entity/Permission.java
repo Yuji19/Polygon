@@ -1,8 +1,6 @@
 package com.yuji.polygon.entity;
 
-import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @className: Permission
@@ -21,6 +19,10 @@ public class Permission {
     private Date gmtCreate;
 
     private Date gmtModified;
+
+    private Operation operation;
+
+    private Menu menu;
 
     public int getId() {
         return id;
@@ -60,5 +62,21 @@ public class Permission {
 
     public void setGmtModified(Date gmtModified) {
         this.gmtModified = gmtModified;
+    }
+
+    public Operation getOperation() {
+        return operation;
+    }
+
+    public void setOperation(Operation operation) {
+        this.operation = operation;
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
     }
 }

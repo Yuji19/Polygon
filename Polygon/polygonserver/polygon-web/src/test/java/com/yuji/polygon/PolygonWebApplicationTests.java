@@ -39,7 +39,7 @@ class PolygonWebApplicationTests {
     @Test
     void testAddEmployee(){
         Employee employee = new Employee();
-        employee.setNo("GREE1001");
+        employee.setNo("G1001");
         employee.setName("员工3");
         employee.setEnabled(false);
         employee.setPassword("123456");
@@ -90,7 +90,7 @@ class PolygonWebApplicationTests {
     @Test
     void testGetAllEmployee(){
         Employee employee = new Employee();
-        employee.setNo("GREE1002");
+        employee.setNo("G1002");
         Page page = employeeService.getAllEmployee(employee,1,10);
         System.out.println(page);
     }

@@ -48,21 +48,16 @@ public class RoleService {
     /**
      * 增加角色
      * @param role
-     * @param permissions
+     * @param pids
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public int insertRole(Role role, List<Permission> permissions){
+    public int insertRole(Role role, int[] pids){
         role.setName("ROLE_"+role.getName());
         role.setGmtCreate(new Date());
         role.setGmtModified(new Date());
         int result1 = roleMapper.insertRole(role);
         int result2 = 0;
-        int[] pids = new int[permissions.size()];
-        for (int i = 0; i < permissions.size(); i++){
-            Permission permission = permissions.get(i);
-            pids[i] = permission.getId();
-        }
         if (pids.length > 0){
             result2 = rolePermissionMapper.insertRolePermission(role.getId(),pids);
         }
@@ -93,17 +88,21 @@ public class RoleService {
         return rolePermissionMapper.deleteRolePermissionByRidAndPid(rid,pids);
     }
 
+    public int updateRoleBase(Role role){
+        return roleMapper.updateRoleBase(role);
+    }
+
     /**
      * 分页查询
-     * @param nameZh
+     * @param name
      * @param pageNum
      * @param pageSize
      * @return
      */
-    public Page<Role> getRolePage(String nameZh, int pageNum, int pageSize){
+    public Page<Role> getRolePage(String name, int pageNum, int pageSize){
         int startIndex = (pageNum-1)*pageSize;
-        int totalCount = roleMapper.countTotalRole(nameZh);
-        List<Role> records = roleMapper.getRolePage(nameZh,startIndex,pageSize);
+        int totalCount = roleMapper.countTotalRole(name);
+        List<Role> records = roleMapper.getRolePage(name,startIndex,pageSize);
         return new Page(pageNum,totalCount,records);
     }
 
