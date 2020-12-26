@@ -73,6 +73,14 @@ public class Employee implements UserDetails {
         this.mail = mail;
     }
 
+    public int getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
+    }
+
     public List<Role> getRoles() {
         return roles;
     }
@@ -158,14 +166,6 @@ public class Employee implements UserDetails {
 
     public void setEnabled(boolean enabled){
         this.enabled = enabled;
-    }
-
-    public int getDepartmentId() {
-        return departmentId;
-    }
-
-    public void setDepartmentId(int departmentId) {
-        this.departmentId = departmentId;
     }
 
 }

@@ -12,10 +12,7 @@
         <result column="parent_id" property="parentId"/>
         <association property="meta" javaType="com.yuji.polygon.entity.Meta">
             <result column="title" property="title" />
-            <result column="url" property="url" />
             <result column="icon" property="icon"/>
-            <result column="keep_alive" property="keepAlive" />
-            <result column="require_auth" property="requireAuth" />
         </association>
 
     </resultMap>
@@ -29,10 +26,7 @@
             <result column="parent_id2" property="parentId"/>
             <association property="meta" javaType="com.yuji.polygon.entity.Meta">
                 <result column="title2" property="title" />
-                <result column="url2" property="url" />
                 <result column="icon2" property="icon"/>
-                <result column="keep_alive2" property="keepAlive" />
-                <result column="require_auth2" property="requireAuth" />
             </association>
         </collection>
     </resultMap>
@@ -51,8 +45,8 @@
     </resultMap>
 
     <insert id="insertMenu" parameterType="com.yuji.polygon.entity.Menu" useGeneratedKeys="true" keyProperty="id">
-        insert into poly_menu (name,icon,path,component,title,url,keep_alive,require_auth,parent_id)
-        values (#{name},#{icon},#{path},#{component},#{title},#{url},#{keepAlive},#{requireAuth},#{parentId})
+        insert into poly_menu (name,icon,path,component,title,parent_id)
+        values (#{name},#{icon},#{path},#{component},#{title},#{parentId})
     </insert>
 
     <select id="getMenuByEmployeeId" resultMap="MenuResult">
@@ -64,10 +58,7 @@
             m2.`icon` as icon2,
             m2.`component` as component2,
             m2.`parent_id` as parentId2,
-            m2.`title` as title2,
-            m2.`url` as url2,
-            m2.`keep_alive` as keepAlive2,
-            m2.`require_auth` as requireAuth2
+            m2.`title` as title2
         from
             poly_menu m1,
             poly_menu m2,
@@ -106,10 +97,7 @@
             m2.`icon` as icon2,
             m2.`component` as component2,
             m2.`parent_id` as parentId2,
-            m2.`title` as title2,
-            m2.`url` as url2,
-            m2.`keep_alive` as keepAlive2,
-            m2.`require_auth` as requireAuth2
+            m2.`title` as title2
         from
             poly_menu m1,
             poly_menu m2,

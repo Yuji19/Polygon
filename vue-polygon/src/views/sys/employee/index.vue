@@ -8,7 +8,7 @@
         <el-input v-model="form.name" ></el-input>
       </el-form-item>
       <el-form-item label="所属部门">
-        <el-select v-model="form.departmentId" placeholder="请选择部门">
+        <el-select v-model="form.departmentId" clearable placeholder="请选择部门">
             <el-option v-for="item in departments" :label="item.name" :value="item.id"></el-option>
           </el-select>
       </el-form-item>
@@ -55,7 +55,7 @@
     >
       <el-table-column align="center" label="ID" width="95">
         <template slot-scope="scope">
-          {{ scope.$index }}
+          {{ scope.$index+1 }}
         </template>
       </el-table-column>
       <el-table-column label="员工编号" width="150" >
@@ -70,12 +70,19 @@
       </el-table-column>
       <el-table-column label="所属部门" width="110" align="center">
         <template slot-scope="scope">
-          {{ scope.row.departmentId }}
+          {{ scope.row.departmentName }}
         </template>
       </el-table-column>
-      <el-table-column label="状态" width="110" align="center">
+      <el-table-column label="状态" width="150" align="center">
         <template slot-scope="scope">
-          {{ scope.row.enabled }}
+          <el-switch
+            v-model="scope.row.enabled"
+            active-text="启用"
+            active-color="#13ce66"
+            :disabled="$_hasPermission('employee_update')"
+            @change="handleEnabledChange(scope.row)"
+            inactive-text="禁用" style="font-size: 12px">
+          </el-switch>
         </template>
       </el-table-column>
       <el-table-column label="角色" width="110" align="center">
@@ -147,7 +154,7 @@
 <script>
 
   import { mapGetters } from 'vuex'
-  import { getList, addInfo ,updateInfo, addEmployeeRole, deleteEmployeeRole } from '@/api/employee'
+  import { getList, addInfo ,updateInfo, updateEnabled, addEmployeeRole, deleteEmployeeRole } from '@/api/employee'
   import { getAllDepartment } from '@/api/department'
   import { getAllRole } from '@/api/role'
 
@@ -161,7 +168,7 @@
         form:{
           no: "",
           name: "",
-          departmentId: 0,
+          departmentId: null,
           pageNum: 1,
           pageSize: 10
         },
@@ -202,20 +209,23 @@
     methods: {
       fetchData() {
         this.listLoading = true
-        getList(this.form).then(response => {
-          this.list = response.data.records
-          this.totalCount = response.data.totalCount
+        getList(this.form).then(resp => {
+          this.list = resp.data.records
+          this.totalCount = resp.data.totalCount
           this.listLoading = false
+          if (this.form.departmentId == 0) {
+            this.form.departmentId = ""
+          }
         })
       },
       fetchDepartments(){
-        getAllDepartment().then(response => {
-          this.departments = response.data
+        getAllDepartment().then(resp => {
+          this.departments = resp.data
         })
       },
       fetchRoles(){
-        getAllRole().then(response => {
-          this.roles = response.data
+        getAllRole().then(resp => {
+          this.roles = resp.data
         })
       },
       handleCurrentChange(pageNum){
@@ -223,12 +233,15 @@
         this.fetchData()
       },
       onSubmit(){
+        if (this.form.departmentId == "") {
+          this.form.departmentId = 0
+        }
         this.fetchData()
       },
       onSubmitEmployee(addForm){
         this.$refs[addForm].validate((valid) => {
           if (valid) {
-            addInfo(this.addForm).then(response => {
+            addInfo(this.addForm).then(resp => {
                this.dialogVisible = false
                //刷新
                this.fetchData()
@@ -283,7 +296,7 @@
             eid: this.row.id
           }
           //add
-          addEmployeeRole(params).then(response => {
+          addEmployeeRole(params).then(resp => {
              if (delRids.length < 1){
                 this.roleVisible = false
                 this.rids = []
@@ -310,7 +323,7 @@
             eid: this.row.id
           }
           //delete
-          deleteEmployeeRole(params).then(response => {
+          deleteEmployeeRole(params).then(resp => {
               this.roleVisible = false
               this.rids = []
               if (this.row.id === this.employee.id) {
@@ -343,7 +356,7 @@
         this.$refs[updateForm].validate((valid) => {
           if (valid) {
             delete this.updateForm.roles
-            updateInfo(this.updateForm).then(response => {
+            updateInfo(this.updateForm).then(resp => {
                this.baseVisible = false
                //刷新
                this.fetchData()
@@ -354,6 +367,12 @@
       resetUpdateForm(updateForm){
         this.baseVisible = false
         this.$refs[updateForm].resetFields()
+      },
+      handleEnabledChange(row){
+        let params = {id:row.id, enabled:row.enabled}
+        updateEnabled(params).then(resp => {
+
+        })
       }
     }
   }

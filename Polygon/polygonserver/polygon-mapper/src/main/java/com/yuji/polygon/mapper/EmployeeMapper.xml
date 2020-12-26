@@ -23,6 +23,26 @@
         </collection>
     </resultMap>
 
+    <resultMap id="BaseResultMapVO" type="com.yuji.polygon.entity.EmployeeVO">
+        <id column="id" property="id"/>
+        <result column="no" property="no" />
+        <result column="name" property="name"/>
+        <result column="password" property="password" />
+        <result column="mail" property="mail" />
+        <result column="enabled" property="enabled" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
+        <result column="department_id" property="departmentId" />
+        <result column="department_name" property="departmentName" />
+        <collection property="roles" ofType="com.yuji.polygon.entity.Role" >
+            <result column="rid" property="id" />
+            <result column="name" property="name" />
+            <result column="name_zh" property="nameZh" />
+            <result column="gmt_create" property="gmtCreate" />
+            <result column="gmt_modified" property="gmtModified" />
+        </collection>
+    </resultMap>
+
 
     <insert id="insertEmployee" parameterType="com.yuji.polygon.entity.Employee" useGeneratedKeys="true" keyProperty="id">
         insert into poly_employee(no, name, password, mail, department_id, enabled, gmt_create, gmt_modified)
@@ -40,9 +60,10 @@
        from
             poly_employee e,
             poly_employee_role er,
-            poly_role r
+            poly_role r,
+            poly_department d
        where
-           e.`no`=#{no} and e.`id` = er.`eid` and er.`rid` = r.`id`
+           e.`no`=#{no} and e.`id` = er.`eid` and er.`rid` = r.`id` and e.`department_id`=d.`id`
     </select>
 
     <select id="getEmployeeByNos"  resultMap="BaseResultMap">
@@ -56,9 +77,10 @@
        from
             poly_employee e,
             poly_employee_role er,
-            poly_role r
+            poly_role r,
+            poly_department d
        where
-            e.`id` = er.`eid` and er.`rid` = r.`id` and e.`no` in
+            e.`id` = er.`eid` and er.`rid` = r.`id` and e.`department_id`=d.`id` and e.`no` in
             <foreach collection="nos" item="no" open="(" separator="," close=")">
                 #{no}
             </foreach>
@@ -75,9 +97,10 @@
        from
             poly_employee e,
             poly_employee_role er,
-            poly_role r
+            poly_role r,
+            poly_department d
        where
-            e.`id`=#{eid} and e.`id` = er.`eid` and er.`rid` = r.`id`
+            e.`id`=#{eid} and e.`id` = er.`eid` and er.`rid` = r.`id` and e.`deparment_id`=d.`id`
     </select>
     
     <select id="countTotalEmployee" resultType="java.lang.Integer" >
@@ -99,9 +122,10 @@
     </select>
 
     <!-- 分页查询 -->
-    <select id="getAllEmployee" resultMap="BaseResultMap" >
+    <select id="getAllEmployee" resultMap="BaseResultMapVO" >
         select
             e.*,
+            d.`name` as department_name,
             r.`id` as rid,
             r.`name`,
             r.`name_zh`,
@@ -110,10 +134,10 @@
         from
             poly_employee e,
             poly_employee_role er,
-            poly_role r
-
+            poly_role r,
+            poly_department d
         <where>
-            e.`id` = er.`eid` and er.`rid` = r.`id`
+            e.`id` = er.`eid` and er.`rid` = r.`id` and e.`department_id`=d.`id`
             <if test="employee != null"></if>
                 <if test="employee.no != null and employee.no != '' ">
                     and no = #{employee.no}
@@ -130,9 +154,10 @@
 
     </select>
 
-    <select id="getEmployeeByRoleAndDept" resultMap="BaseResultMap">
+    <select id="getEmployeeByRoleAndDept" resultMap="BaseResultMapVO">
        select
             e.*,
+            d.`name` as department_name,
             r.`id` as rid,
             r.`name` as rname,
             r.`name_zh`,
@@ -141,9 +166,14 @@
         from
             poly_employee e,
             poly_employee_role er,
-            poly_role r
+            poly_role r,
+            poly_department d
         where
-            e.`id`=er.`eid` and er.`rid`=r.`id` and r.`id` = #{rid} and e.`department_id`=#{deptId}
+            e.`id`=er.`eid`
+            and er.`rid`=r.`id`
+            and r.`id` = #{rid}
+            and e.`department_id`=#{deptId}
+            and e.`department_id`=d.`id`
     </select>
 
     <delete id="deleteEmployeeById">
@@ -171,8 +201,8 @@
             <if test="mail != null">
                 mail = #{mail},
             </if>
-            <if test="departmentId &gt; 0">
-                department_id = #{departmentId},
+            <if test="department.id &gt; 0">
+                department_id = #{department.id},
             </if>
             <if test="enabled != null">
                 enabled = #{enabled},
@@ -189,6 +219,19 @@
         <set>
             <if test="password != null">
                 password = #{password},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="updateEnabled">
+        update poly_employee
+        <set>
+            <if test="enabled != null">
+                enabled = #{enabled},
             </if>
             <if test="gmtModified != null">
                 gmt_modified = #{gmtModified}

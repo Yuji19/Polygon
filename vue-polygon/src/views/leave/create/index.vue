@@ -30,13 +30,13 @@
             </el-date-picker>
         </el-form-item>
         
-        <el-form-item label="主任审批">
-          <el-select v-model="form.eNo[0]"  placeholder="请选择">
+        <el-form-item label="主任审批" prop="eNo">
+          <el-select v-model="form.eNo1"  placeholder="请选择">
             <el-option v-for="item in directors" :label="item.name" :value="item.no"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="部长审批">
-          <el-select v-model="form.eNo[1]"  placeholder="请选择">
+        <el-form-item label="部长审批" prop="eNo">
+          <el-select v-model="form.eNo2"  placeholder="请选择">
             <el-option v-for="item in ministers" :label="item.name" :value="item.no"></el-option>
           </el-select>
         </el-form-item>
@@ -65,8 +65,10 @@
           reason: '',
           startDate: null,
           endDate: null,
-          eNo: ["",""]
+          eNo: []
         },
+        eNo1: [],
+        eNo2: [],
         date: [],
         directors: [],
         ministers: [],
@@ -120,6 +122,7 @@
           if (valid) {
             this.form.startDate = this.date[0]
             this.form.endDate = this.date[1]
+            this.form.eNo = this.eNo1.concat(this.eNo2)
             addLeave(this.form).then(resp => {
               this.$router.push({ path: '/leave/mine'})
             })

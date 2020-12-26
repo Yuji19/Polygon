@@ -70,7 +70,7 @@ export default {
     }
     return {
       loginForm: {
-        no: 'GREE1003',
+        no: 'yg1003',
         password: '123456',
         code:''
       },

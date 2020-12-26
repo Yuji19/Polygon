@@ -5,6 +5,7 @@ import com.yuji.polygon.mapper.EmployeeMapper;
 import com.yuji.polygon.mapper.EmployeeRoleMapper;
 import com.yuji.polygon.utils.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -46,6 +47,9 @@ public class EmployeeService implements UserDetailsService {
     @Autowired
     SessionRegistry sessionRegistry;
 
+    @Value("${custom.initial-password}")
+    private String initialPassword;
+
 
     @Override
     public UserDetails loadUserByUsername(String employeeNo) throws UsernameNotFoundException {
@@ -68,8 +72,9 @@ public class EmployeeService implements UserDetailsService {
      */
     @Transactional(rollbackFor = Exception.class)
     public int insertEmployee(Employee employee,int[] rids){
-        //默认员工密码为123456
-        employee.setPassword("123456");
+
+        employee.setPassword(initialPassword);
+        employee.setEnabled(true);
         employee.setGmtCreate(new Date());
         employee.setGmtModified(new Date());
         int result1 = employeeMapper.insertEmployee(employee);
@@ -125,11 +130,20 @@ public class EmployeeService implements UserDetailsService {
 
     }
 
+    /**
+     * 修改密码
+     * @param id
+     * @param password
+     * @return
+     */
     public int updatePassword(int id, String password){
-        //可加密...
+        //可在此添加加密...
         return employeeMapper.updatePassword(id,password,new Date());
     }
 
+    public int updateEnabled(int id, boolean enabled){
+        return employeeMapper.updateEnabled(id,enabled,new Date());
+    }
 
     /**
      * 根据员工编号获取员工
@@ -148,7 +162,7 @@ public class EmployeeService implements UserDetailsService {
         return employeeMapper.getEmployeeByEid(eid);
     }
 
-    public List<Employee> getEmployeeByRoleAndDept(int rid, int deptId){
+    public List<EmployeeVO> getEmployeeByRoleAndDept(int rid, int deptId){
         return employeeMapper.getEmployeeByRoleAndDept(rid,deptId);
     }
 
@@ -162,7 +176,7 @@ public class EmployeeService implements UserDetailsService {
     public Page<Employee> getAllEmployee(Employee employee, int pageNum, int pageSize){
         int startIndex = (pageNum-1)*pageSize;
         int totalCount = employeeMapper.countTotalEmployee(employee);
-        List<Employee> records = employeeMapper.getAllEmployee(employee,startIndex,pageSize);
+        List<EmployeeVO> records = employeeMapper.getAllEmployee(employee,startIndex,pageSize);
         return new Page(pageNum,totalCount,records);
     }
 }

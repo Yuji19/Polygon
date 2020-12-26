@@ -1,6 +1,7 @@
 package com.yuji.polygon.mapper;
 
 import com.yuji.polygon.entity.Employee;
+import com.yuji.polygon.entity.EmployeeVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,14 +28,16 @@ public interface EmployeeMapper {
 
     int countTotalEmployee(Employee employee);
 
-    List<Employee> getAllEmployee(@Param("employee") Employee employee,
+    List<EmployeeVO> getAllEmployee(@Param("employee") Employee employee,
                                   @Param("startIndex") int startIndex, @Param("pageSize") int pageSize);
 
-    List<Employee> getEmployeeByRoleAndDept(@Param("rid") int rid, @Param("deptId") int deptId);
+    List<EmployeeVO> getEmployeeByRoleAndDept(@Param("rid") int rid, @Param("deptId") int deptId);
 
     int deleteEmployeeById(int id);
 
     int updateEmployee(Employee employee);
 
     int updatePassword(int id, String password, Date gmtModified);
+
+    int updateEnabled(int id, boolean enabled, Date gmtModified);
 }

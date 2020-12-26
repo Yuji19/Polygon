@@ -38,8 +38,8 @@
         <span>{{employee.name}}</span>
       </div>
       <div>
-        <label>所属部门</label>
-        <span>{{employee.departmentId}}</span>
+        <label>所属部门：</label>
+        <span>{{employee.departmentName}}</span>
       </div>
       <div>
         <label>拥有角色: </label>

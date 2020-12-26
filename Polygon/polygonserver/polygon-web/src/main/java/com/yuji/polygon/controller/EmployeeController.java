@@ -1,14 +1,13 @@
 package com.yuji.polygon.controller;
 
 import com.yuji.polygon.config.MySessionManage;
-import com.yuji.polygon.entity.Employee;
-import com.yuji.polygon.entity.Menu;
-import com.yuji.polygon.entity.Operation;
-import com.yuji.polygon.entity.Page;
+import com.yuji.polygon.entity.*;
+import com.yuji.polygon.service.DepartmentService;
 import com.yuji.polygon.service.EmployeeService;
 import com.yuji.polygon.service.MenuService;
 import com.yuji.polygon.service.OperationService;
 import com.yuji.polygon.utils.ConstantValue;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -45,6 +44,9 @@ public class EmployeeController {
 
     @Autowired
     EmployeeService employeeService;
+
+    @Autowired
+    DepartmentService departmentService;
 
     @Autowired
     MenuService menuService;
@@ -106,7 +108,17 @@ public class EmployeeController {
     public String updatePassword(Integer id, String password){
         int result = employeeService.updatePassword(id,password);
         if (result > 0){
-            //剔除用户
+            //可进行剔除用户
+            return ConstantValue.UPDATE_SUCCESS;
+        }
+        return ConstantValue.UPDATE_FAILURE;
+    }
+
+    @PutMapping("/update/enabled")
+    public String updateEnabled(Integer id, Boolean enabled){
+        int result = employeeService.updateEnabled(id,enabled);
+        if (result > 0){
+            //可进行剔除用户
             return ConstantValue.UPDATE_SUCCESS;
         }
         return ConstantValue.UPDATE_FAILURE;
@@ -124,7 +136,7 @@ public class EmployeeController {
      * @return
      */
     @GetMapping("/fetch/{rid}/{deptId}")
-    public List<Employee> getEmployeeByRoleAndDept(@PathVariable("rid") Integer rid, @PathVariable("deptId") Integer deptId){
+    public List<EmployeeVO> getEmployeeByRoleAndDept(@PathVariable("rid") Integer rid, @PathVariable("deptId") Integer deptId){
         return employeeService.getEmployeeByRoleAndDept(rid,deptId);
     }
 
@@ -138,6 +150,10 @@ public class EmployeeController {
         Map<String,Object> map = new HashMap<>(4);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Employee employee = (Employee) authentication.getPrincipal();
+        EmployeeVO employeeVO = new EmployeeVO();
+        BeanUtils.copyProperties(employee,employeeVO);
+        String departmentName = departmentService.getDepartmentById(employee.getDepartmentId()).getName();
+        employeeVO.setDepartmentName(departmentName);
         //获取角色 包括继承的角色
         Collection<? extends GrantedAuthority> authorities = roleHierarchy.getReachableGrantedAuthorities(authentication.getAuthorities());
         String[] roleNames;
@@ -150,7 +166,7 @@ public class EmployeeController {
         permissions.addAll(temp);
 
         List<Menu> menus = menuService.getMenuByRoleNames(roleNames);
-        map.put("employee",employee);
+        map.put("employee",employeeVO);
         map.put("permissions",permissions);
         map.put("menus",menus);
         return map;

@@ -17,6 +17,7 @@ server:
 
 custom:
   path: D:/polygon
+  initial-password: '{noop}123456'
 
 mybatis:
   config-location: classpath:/mybatis-config.xml

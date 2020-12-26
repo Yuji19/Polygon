@@ -42,7 +42,7 @@ export function getListByRoleAndDept(params) {
 
 export function addInfo(data) {
   return request({
-    url: '/employee/add',
+    url: '/employee/add/one',
     method: 'post',
     data: data,
     transformRequest: [function (data) {
@@ -69,6 +69,24 @@ export function updateInfo(data) {
 export function updatePassword(data){
   return request({
     url: '/employee/update/password',
+    method: 'put',
+    data: data,
+    transformRequest: [function (data) {
+            let ret = '';
+            for (let i in data) {
+                ret += encodeURIComponent(i) + '=' + encodeURIComponent(data[i]) + '&'
+            }
+            return ret;
+        }],
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  })
+}
+
+export function updateEnabled(data){
+  return request({
+    url: '/employee/update/enabled',
     method: 'put',
     data: data,
     transformRequest: [function (data) {

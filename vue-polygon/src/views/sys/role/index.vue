@@ -47,25 +47,25 @@
     >
       <el-table-column align="center" label="ID" width="95">
         <template slot-scope="scope">
-          {{ scope.$index }}
+          {{ scope.$index+1 }}
         </template>
       </el-table-column>
-      <el-table-column label="角色名称" width="110" align="center">
+      <el-table-column label="角色名称" width="150" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.name }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="角色中文名称" width="110" align="center">
+      <el-table-column label="角色中文名称" width="150" align="center">
         <template slot-scope="scope">
           {{ scope.row.nameZh }}
         </template>
       </el-table-column>
-      <el-table-column label="创建时间" width="110" align="center">
+      <el-table-column label="创建时间" width="180" align="center">
         <template slot-scope="scope">
           {{ scope.row.gmtCreate }}
         </template>
       </el-table-column>
-      <el-table-column label="修改时间" width="110" align="center">
+      <el-table-column label="修改时间" width="180" align="center">
         <template slot-scope="scope">
           {{ scope.row.gmtModified }}
         </template>
