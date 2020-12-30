@@ -17,7 +17,7 @@
         <el-form-item label="理由" prop="reason">
             <el-input type="textarea" v-model="form.reason"></el-input>
         </el-form-item>
-        <el-form-item label="" prop="date">
+        <el-form-item label="" >
             <el-date-picker
               v-model="date"
               type="datetimerange"
@@ -30,12 +30,12 @@
             </el-date-picker>
         </el-form-item>
         
-        <el-form-item label="主任审批" prop="eNo">
+        <el-form-item label="主任审批" prop="eNo" >
           <el-select v-model="form.eNo1"  placeholder="请选择">
             <el-option v-for="item in directors" :label="item.name" :value="item.no"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="部长审批" prop="eNo">
+        <el-form-item label="部长审批" prop="eNo" >
           <el-select v-model="form.eNo2"  placeholder="请选择">
             <el-option v-for="item in ministers" :label="item.name" :value="item.no"></el-option>
           </el-select>
@@ -67,8 +67,8 @@
           endDate: null,
           eNo: []
         },
-        eNo1: [],
-        eNo2: [],
+        eNo1: '',
+        eNo2: '',
         date: [],
         directors: [],
         ministers: [],
@@ -118,11 +118,12 @@
         })
       },
       onSubmit(form){
+        this.form.startDate = this.date[0]
+        this.form.endDate = this.date[1]
+        this.form.eNo.push(this.eNo1)
+        this.form.eNo.push(this.eNo2)
         this.$refs[form].validate((valid) => {
           if (valid) {
-            this.form.startDate = this.date[0]
-            this.form.endDate = this.date[1]
-            this.form.eNo = this.eNo1.concat(this.eNo2)
             addLeave(this.form).then(resp => {
               this.$router.push({ path: '/leave/mine'})
             })
