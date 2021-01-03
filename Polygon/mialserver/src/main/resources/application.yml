@@ -1,0 +1,20 @@
+server:
+  port: 8083
+
+spring:
+  mail:
+    host: stmp.163.com
+    protocol: stmp
+    default-encoding: UTF-8
+    password:
+    username:
+    port: 587
+    from: 'xxxxxx'
+  rabbitmq:
+    host: 127.0.0.1
+    username: guest
+    password: guest
+    listener:
+      simple:
+        acknowledge-mode: manual
+        prefetch: 100

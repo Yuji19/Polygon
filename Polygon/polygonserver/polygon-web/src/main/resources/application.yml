@@ -9,6 +9,10 @@ spring:
     multipart:
       max-file-size: 30MB
       max-request-size: 60MB
+  rabbitmq:
+    username: guest
+    password: guest
+    host: 127.0.0.1
 
 
 server:
