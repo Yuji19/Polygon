@@ -13,6 +13,8 @@ spring:
     username: guest
     password: guest
     host: 127.0.0.1
+    publisher-returns: true
+    port: 5672
 
 
 server:

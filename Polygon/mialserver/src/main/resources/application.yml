@@ -14,7 +14,9 @@ spring:
     host: 127.0.0.1
     username: guest
     password: guest
+    port: 5672
     listener:
       simple:
+        #消费者消费消息成功以后需手动进行签收
         acknowledge-mode: manual
         prefetch: 100

@@ -1,18 +1,23 @@
 package com.yuji.polygon;
 
 import com.yuji.polygon.entity.Employee;
+import com.yuji.polygon.entity.MailConstants;
 import com.yuji.polygon.entity.Page;
 import com.yuji.polygon.entity.Permission;
 import com.yuji.polygon.service.EmployeeService;
 import com.yuji.polygon.service.PermissionService;
 import com.yuji.polygon.service.RoleService;
 import org.junit.jupiter.api.Test;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.AntPathMatcher;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @SpringBootTest
 class PolygonWebApplicationTests {
@@ -93,5 +98,16 @@ class PolygonWebApplicationTests {
         employee.setNo("G1002");
         Page page = employeeService.getAllEmployee(employee,1,10);
         System.out.println(page);
+    }
+
+    @Autowired
+    RabbitTemplate rabbitTemplate;
+    
+    @Test
+    void testSend(){
+        Map<String,Object> obj = new HashMap<>();
+
+        rabbitTemplate.convertAndSend(MailConstants.MAIL_EXCHANGE_NAME,
+                MailConstants.MAIL_ROUTING_KEY_NAME,obj,new CorrelationData("uuuururrr"));
     }
 }

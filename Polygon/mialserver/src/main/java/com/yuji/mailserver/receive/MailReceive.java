@@ -34,18 +34,20 @@ public class MailReceive {
 
     @RabbitListener(queues = MailConstants.MAIL_QUEUE_NAME)
     public void handler(Message message, Channel channel) throws IOException {
+        System.out.println("接收到消息");
         Map obj = (Map) message.getPayload();
         MessageHeaders headers = message.getHeaders();
+        //代表了 RabbitMQ 向Channel 投递的这条消息的唯一标识 ID，是一个单调递增的正整数，delivery tag 的范围仅限于 Channel
         Long tag = (Long) headers.get(AmqpHeaders.DELIVERY_TAG);
-        SimpleMailMessage mail = new SimpleMailMessage();
-        mail.setFrom(from);
-        mail.setTo((String) obj.get("to"));
-        mail.setCc((String) obj.get("cc"));
-        mail.setSubject("流程签审提醒");
-        String content = obj.get("name")+":\n"+"你有一个流程"+obj.get("flowNo")+"待签审，请点击进入\n"
-                +"链接";
-        mail.setText(content);
-        javaMailSender.send(mail);
+//        SimpleMailMessage mail = new SimpleMailMessage();
+//        mail.setFrom(from);
+//        mail.setTo((String) obj.get("to"));
+//        mail.setCc((String) obj.get("cc"));
+//        mail.setSubject("流程签审提醒");
+//        String content = obj.get("name")+":\n"+"你有一个流程"+obj.get("flowNo")+"待签审，请点击进入\n"
+//                +"链接";
+//        mail.setText(content);
+//        javaMailSender.send(mail);
         //消息已被消费
         channel.basicAck(tag,false);
     }
