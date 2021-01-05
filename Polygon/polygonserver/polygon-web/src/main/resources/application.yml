@@ -13,7 +13,10 @@ spring:
     username: guest
     password: guest
     host: 127.0.0.1
+    #开启发送失败退回
     publisher-returns: true
+    #开启发送确认
+    publisher-confirm-type: correlated
     port: 5672
 
 

@@ -23,30 +23,10 @@ public class MailServerApplication {
         SpringApplication.run(MailServerApplication.class, args);
     }
 
-    /**
-     * 创建队列
-     * @return
-     */
+
     @Bean
-    Queue queue() {
+    Queue mailQueue() {
         return new Queue(MailConstants.MAIL_QUEUE_NAME);
     }
 
-    /**
-     * 创建交换机
-     * @return
-     */
-    @Bean
-    DirectExchange directExchange(){
-        return new DirectExchange(MailConstants.MAIL_EXCHANGE_NAME);
-    }
-
-    /**
-     * 队列绑定交换机
-     * @return
-     */
-    @Bean
-    Binding bindingQueue(){
-        return BindingBuilder.bind(queue()).to(directExchange()).with(MailConstants.MAIL_ROUTING_KEY_NAME);
-    }
 }

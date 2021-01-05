@@ -18,7 +18,7 @@
 
     <modules>
         <module>polygonserver</module>
-        <module>mialserver</module>
+        <module>mailserver</module>
     </modules>
 
 </project>
