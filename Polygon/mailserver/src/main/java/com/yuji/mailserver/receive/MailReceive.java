@@ -46,8 +46,8 @@ public class MailReceive {
             mail.setFrom(from);
             mail.setTo((String) obj.get("to"));
             mail.setCc((String) obj.get("cc"));
-            mail.setSubject("流程签审提醒");
-            String content = obj.get("name")+":\n"+"你有一个流程"+obj.get("flowNo")+"待签审，请点击进入\n"
+            mail.setSubject("流程提醒");
+            String content = obj.get("name")+":\n"+"  流程"+obj.get("flowNo")+"已到你处，请点击进入\n"
                     +"链接";
             mail.setText(content);
             javaMailSender.send(mail);

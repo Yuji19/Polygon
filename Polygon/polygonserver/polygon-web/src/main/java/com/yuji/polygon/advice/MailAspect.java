@@ -79,9 +79,19 @@ public class MailAspect {
             Object[] paramValues = joinPoint.getArgs();
             Approve approve = (Approve) paramValues[0];
             Leave leave = leaveService.getLeaveById(approve.getBusinessNo());
-            //获取下一个审批人
+            //获取当前节点
             FlowNode flowNode = flowNodeService.getFlowNodeById(leave.getCurrentNode());
-            //邮件内容
+            //获取审批人
+            Employee employee = employeeService.getEmployeeByNo(flowNode.getApproveNo());
+            //获取申请人
+            Employee creator = employeeService.getEmployeeByNo(leave.getEmployeeNo());
+            Map<String, Object> mail = new HashMap<>();
+            mail.put("to", employee.getMail());
+            mail.put("name", employee.getName());
+            mail.put("cc", creator.getMail());
+            mail.put("flowNo", leave.getFlowNo());
+            rabbitTemplate.convertAndSend(MailConstants.MAIL_EXCHANGE_NAME, MailConstants.MAIL_ROUTING_KEY_NAME,
+                    mail, new CorrelationData(leave.getFlowNo()));
         }
 
 

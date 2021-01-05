@@ -3,13 +3,21 @@ server:
 
 spring:
   mail:
-    host: stmp.163.com
-    protocol: stmp
+    host: smtp.163.com
+    protocol: smtps
     default-encoding: UTF-8
-    password:
-    username:
-    port: 587
-    from: 'xxxxxx'
+    password: AXUBECLAOYRFPTWG
+    username: m13422557077@163.com
+    port: 465
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+    from: 'm13422557077@163.com'
+
   rabbitmq:
     host: 127.0.0.1
     username: guest
