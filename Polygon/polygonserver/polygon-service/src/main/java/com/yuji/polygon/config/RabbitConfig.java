@@ -42,7 +42,7 @@ public class RabbitConfig {
         }  );
 
         /**
-         * Mandatory:交换器无法根据自身类型和路由键找到一个符合条件的队列时的处理方式
+         * Mandatory:交换机无法根据自身类型和路由键找到一个符合条件的队列时的处理方式
          * true: RabbitMQ会调用Basic.Return命令将消息返回给生产者,即调用returnCallback
          * false: RabbitMQ直接丢弃消息
          */
@@ -68,7 +68,7 @@ public class RabbitConfig {
 
     @Bean
     DirectExchange mailExchange(){
-        return new DirectExchange(MailConstants.MAIL_EXCHANGE_NAME);
+        return new DirectExchange(MailConstants.MAIL_EXCHANGE_NAME,true,false);
     }
 
     @Bean
