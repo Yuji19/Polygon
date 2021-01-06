@@ -16,7 +16,7 @@ spring:
           starttls:
             enable: true
             required: true
-    from: 'm13422557077@163.com'
+    from: ''
 
   rabbitmq:
     host: 127.0.0.1
