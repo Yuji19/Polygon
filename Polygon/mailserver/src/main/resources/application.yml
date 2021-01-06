@@ -6,8 +6,8 @@ spring:
     host: smtp.163.com
     protocol: smtps
     default-encoding: UTF-8
-    password: AXUBECLAOYRFPTWG
-    username: m13422557077@163.com
+    password:
+    username: 
     port: 465
     properties:
       mail:
