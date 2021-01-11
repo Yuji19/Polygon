@@ -3,6 +3,8 @@ package com.yuji.polygon.service;
 import com.yuji.polygon.entity.Menu;
 import com.yuji.polygon.mapper.MenuMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.List;
  */
 
 @Service
+@CacheConfig(cacheNames = "menus_cache")
 public class MenuService {
 
     @Autowired
@@ -24,18 +27,22 @@ public class MenuService {
         return menuMapper.getMenuByEmployeeId(eid);
     }
 
+    @Cacheable
     public List<Menu> getAllMenuWithPermission(){
         return menuMapper.getAllMenuWithPermission();
     }
 
+    @Cacheable(key = "rid")
     public List<Menu> getMenuWithPermissionByRoleId(int rid){
         return menuMapper.getMenuWithPermissionByRoleId(rid);
     }
 
+    @Cacheable
     public List<Menu> getAllMenu(){
         return menuMapper.getAllMenu();
     }
 
+    @Cacheable(key = "'MenuService.getMenuByRoleNames_'+#roleNames")
     public List<Menu> getMenuByRoleNames(String[] roleNames){
         return menuMapper.getMenuByRoleNames(roleNames);
     }

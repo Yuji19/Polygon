@@ -18,6 +18,13 @@ spring:
     #开启发送确认
     publisher-confirm-type: correlated
     port: 5672
+  redis:
+    host: 127.0.0.1
+    database: 0
+    port: 6379
+    password: 123456
+  cache:
+    cache-names: department_cache,menu_cache
 
 
 server:
