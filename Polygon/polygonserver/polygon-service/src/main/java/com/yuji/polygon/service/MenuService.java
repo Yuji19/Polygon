@@ -27,17 +27,14 @@ public class MenuService {
         return menuMapper.getMenuByEmployeeId(eid);
     }
 
-    @Cacheable
     public List<Menu> getAllMenuWithPermission(){
         return menuMapper.getAllMenuWithPermission();
     }
 
-    @Cacheable(key = "rid")
     public List<Menu> getMenuWithPermissionByRoleId(int rid){
         return menuMapper.getMenuWithPermissionByRoleId(rid);
     }
 
-    @Cacheable
     public List<Menu> getAllMenu(){
         return menuMapper.getAllMenu();
     }

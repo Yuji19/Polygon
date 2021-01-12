@@ -4,6 +4,7 @@ import com.yuji.polygon.entity.Employee;
 import com.yuji.polygon.entity.MailConstants;
 import com.yuji.polygon.entity.Page;
 import com.yuji.polygon.entity.Permission;
+import com.yuji.polygon.service.DepartmentService;
 import com.yuji.polygon.service.EmployeeService;
 import com.yuji.polygon.service.PermissionService;
 import com.yuji.polygon.service.RoleService;
@@ -30,6 +31,9 @@ class PolygonWebApplicationTests {
 
     @Autowired
     RoleService roleService;
+
+    @Autowired
+    DepartmentService departmentService;
 
     @Test
     void contextLoads() {
@@ -109,5 +113,22 @@ class PolygonWebApplicationTests {
 
         rabbitTemplate.convertAndSend(MailConstants.MAIL_EXCHANGE_NAME,
                 MailConstants.MAIL_ROUTING_KEY_NAME,obj,new CorrelationData("uuuururrr"));
+    }
+    
+    @Test
+    void testCache(){
+        for (int i = 0; i < 2; i++){
+            //employeeService.getEmployeeByNo("yg1003");
+            //employeeService.getAllEmployee(new Employee(),1,10);
+
+        }
+        employeeService.getAllEmployee(new Employee(),1,10);
+//        Employee employee = new Employee();
+//        employee.setNo("yg1009");
+//        employee.setName("员工9");
+//        employee.setDepartmentId(1);
+//        int[] rids = {12};
+//        employeeService.insertEmployee(employee,rids);
+        //employeeService.deleteEmployeeById(12);
     }
 }

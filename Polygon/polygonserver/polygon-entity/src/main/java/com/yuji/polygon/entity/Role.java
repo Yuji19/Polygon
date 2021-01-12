@@ -4,6 +4,7 @@ package com.yuji.polygon.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Date;
  * @author: yuji
  * @create: 2020-11-10 19:09:00
  */
-public class Role {
+public class Role implements Serializable {
 
     private int id;
 

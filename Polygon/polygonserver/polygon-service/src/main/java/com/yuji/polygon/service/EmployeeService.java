@@ -6,6 +6,7 @@ import com.yuji.polygon.mapper.EmployeeRoleMapper;
 import com.yuji.polygon.utils.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.*;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -71,6 +72,7 @@ public class EmployeeService implements UserDetailsService {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
+    @CacheEvict(value = "employee_page_cache",allEntries = true)
     public int insertEmployee(Employee employee,int[] rids){
 
         employee.setPassword(initialPassword);
@@ -88,6 +90,7 @@ public class EmployeeService implements UserDetailsService {
      * @param id
      * @return
      */
+    @Caching(evict = {@CacheEvict(value ="employee_cache" ,key = "'EmployeeService.getEmployeeByEid_'+#id"),@CacheEvict(value ="employee_page_cache" ,allEntries = true)})
     public int deleteEmployeeById(int id){
         return employeeMapper.deleteEmployeeById(id);
     }
@@ -98,6 +101,7 @@ public class EmployeeService implements UserDetailsService {
      * @param rids
      * @return
      */
+    @CachePut(value = "employee_cache" ,key = "'EmployeeService.getEmployeeByEid_'+#eid")
     public int insertEmpolyeeRole(int eid, int[] rids){
         return employeeRoleMapper.insertEmployeeRole(eid,rids);
     }
@@ -108,6 +112,7 @@ public class EmployeeService implements UserDetailsService {
      * @param rids
      * @return
      */
+    @CachePut(value ="employee_cache" ,key = "'EmployeeService.getEmployeeByEid_'+#eid")
     public int deleteEmpolyeeRole(int eid, int[] rids){
         return employeeRoleMapper.deleteEmployeeRole(eid,rids);
     }
@@ -117,6 +122,7 @@ public class EmployeeService implements UserDetailsService {
      * @param employee
      * @return
      */
+    @Caching(put = {@CachePut(value = "employee_cache" ,key = "'EmployeeService.getEmployeeByNo_'+#employee.no"),@CachePut(value = "employee_cache" ,key = "'EmployeeService.getEmployeeByEid_'+#employee.id")})
     public int updateEmployee(Employee employee){
         employee.setGmtModified(new Date());
         Employee principal = (Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -136,11 +142,13 @@ public class EmployeeService implements UserDetailsService {
      * @param password
      * @return
      */
+    @CachePut(value = "employee_cache" ,key = "'EmployeeService.getEmployeeByEid_'+#id")
     public int updatePassword(int id, String password){
         //可在此添加加密...
         return employeeMapper.updatePassword(id,password,new Date());
     }
 
+    @CachePut(value = "employee_cache" ,key = "'EmployeeService.getEmployeeByEid_'+#id")
     public int updateEnabled(int id, boolean enabled){
         return employeeMapper.updateEnabled(id,enabled,new Date());
     }
@@ -150,18 +158,22 @@ public class EmployeeService implements UserDetailsService {
      * @param no
      * @return
      */
+    @Cacheable(value = "employee_cache" ,key = "'EmployeeService.getEmployeeByNo_'+#no")
     public Employee getEmployeeByNo(String no){
         return employeeMapper.getEmployeeByNo(no);
     }
 
+    @Cacheable(value = "employee_cache" ,key = "'EmolyeeService.getEmployeeByNos_'+#nos")
     public List<Employee> getEmployeeByNos(String[] nos){
         return employeeMapper.getEmployeeByNos(nos);
     }
 
+    @Cacheable(value = "employee_cache" ,key = "'EmployeeService.getEmployeeByEid_'+#eid")
     public Employee getEmployeeByEid(int eid){
         return employeeMapper.getEmployeeByEid(eid);
     }
 
+    @Cacheable(value = "employee_page_cache" ,key = "'EmployeeService.getEmployeeByRoleAndDept_'+#rid+#deptId")
     public List<EmployeeVO> getEmployeeByRoleAndDept(int rid, int deptId){
         return employeeMapper.getEmployeeByRoleAndDept(rid,deptId);
     }
@@ -173,6 +185,7 @@ public class EmployeeService implements UserDetailsService {
      * @param pageSize
      * @return
      */
+    @Cacheable(value = "employee_page_cache", key = "'EmployeeService.getAllEmployee_'+#employee+#pageNum+#pageSize")
     public Page<Employee> getAllEmployee(Employee employee, int pageNum, int pageSize){
         int startIndex = (pageNum-1)*pageSize;
         int totalCount = employeeMapper.countTotalEmployee(employee);

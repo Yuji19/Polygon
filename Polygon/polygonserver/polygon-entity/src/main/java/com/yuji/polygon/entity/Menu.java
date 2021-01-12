@@ -1,5 +1,6 @@
 package com.yuji.polygon.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * @author: yuji
  * @create: 2020-11-10 19:14:00
  */
-public class Menu {
+public class Menu implements Serializable {
 
     private int id;
 

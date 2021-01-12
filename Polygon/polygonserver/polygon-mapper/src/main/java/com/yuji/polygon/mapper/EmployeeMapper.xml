@@ -183,7 +183,7 @@
         from
             poly_employee left join poly_employee_role on poly_employee.`id`=poly_employee_role.`eid`
         where
-            id = #{id}
+            poly_employee.id = #{id}
     </delete>
 
     <update id="updateEmployee">

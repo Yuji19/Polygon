@@ -1,5 +1,6 @@
 package com.yuji.polygon.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Date;
  * @author: yuji
  * @create: 2020-11-17 10:34:00
  */
-public class Department {
+public class Department implements Serializable {
 
     private int id;
 

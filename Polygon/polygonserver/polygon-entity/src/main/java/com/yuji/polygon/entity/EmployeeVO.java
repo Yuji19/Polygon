@@ -2,7 +2,7 @@ package com.yuji.polygon.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
  * @author: yuji
  * @create: 2020-12-26 10:18:05
  */
-public class EmployeeVO {
+public class EmployeeVO implements Serializable {
 
     private int id;
 

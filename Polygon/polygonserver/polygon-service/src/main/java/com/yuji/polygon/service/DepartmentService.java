@@ -24,7 +24,7 @@ public class DepartmentService {
     DepartmentMapper departmentMapper;
 
 
-    @CacheEvict(key = "DepartmentService.getAllDepartment")
+    @CacheEvict(key = "'DepartmentService.getAllDepartment'")
     public int insertDepartment(Department department){
         return departmentMapper.insertDepartment(department);
     }
@@ -34,12 +34,12 @@ public class DepartmentService {
         return departmentMapper.getDepartmentById(id);
     }
 
-    @Cacheable(key = "DepartmentService.getAllDepartment")
+    @Cacheable(key = "'DepartmentService.getAllDepartment'")
     public List<Department> getAllDepartment(){
         return departmentMapper.getAllDepartment();
     }
 
-    @Caching(evict = {@CacheEvict(key="DepartmentService.getAllDepartment"),@CacheEvict(key="'DepartmentService.getDepartmentById_'+#id")})
+    @Caching(evict = {@CacheEvict(key="'DepartmentService.getAllDepartment'"),@CacheEvict(key="'DepartmentService.getDepartmentById_'+#id")})
     public int deleteDepartmentById(int id){
         return departmentMapper.deleteDepartmentById(id);
     }
