@@ -4,6 +4,7 @@ package com.yuji.polygon.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 
 
@@ -14,7 +15,7 @@ import java.util.Date;
  * @create: 2020-08-04 17:25
  */
 
-public class Archive {
+public class Archive implements Serializable {
     private int id;
 
     @NotNull(message = "文档编号不能为空")

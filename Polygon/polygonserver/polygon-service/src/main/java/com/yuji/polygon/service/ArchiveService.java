@@ -8,6 +8,8 @@ import com.yuji.polygon.mapper.ArchiveMapper;
 import com.yuji.polygon.utils.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,6 +34,7 @@ public class ArchiveService {
     String customPath;
 
     @Transactional(rollbackFor = Exception.class)
+    @CacheEvict(allEntries = true)
     public int insertArchive(Archive archive, MultipartFile file) {
         Archive oldArchive = archiveMapper.getArchiveByFileNo(archive.getFileNo());
         Optional.ofNullable(oldArchive)
@@ -92,8 +95,9 @@ public class ArchiveService {
 
     }
 
-
-    public Page<Archive> ListArchive(Archive archive, Integer pageNum, Integer pageSize) {
+    @Transactional(rollbackFor = Exception.class)
+    @Cacheable(key = "'ArchiveService.getAllArchive_'+#achive+#pageNum+#pageSize")
+    public Page<Archive> getAllArchive(Archive archive, Integer pageNum, Integer pageSize) {
         int startIndex = (pageNum-1)*pageSize;
         //总记录数
         int totalCount = archiveMapper.countTotal(archive);
@@ -163,6 +167,7 @@ public class ArchiveService {
     }
 
 
+    @CacheEvict(allEntries = true)
     public int deleteArchive(Long[] aids) {
         return archiveMapper.deleteArchiveById(aids);
     }

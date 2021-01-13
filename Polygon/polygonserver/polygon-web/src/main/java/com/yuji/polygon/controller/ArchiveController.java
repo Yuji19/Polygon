@@ -27,8 +27,8 @@ public class ArchiveController {
     ArchiveService archiveService;
 
     @PutMapping("/query/page")
-    public Page<Archive> listArchive(Archive archive, Integer pageNum, Integer pageSize){
-        return archiveService.ListArchive(archive,pageNum,pageSize);
+    public Page<Archive> getAllArchive(Archive archive, Integer pageNum, Integer pageSize){
+        return archiveService.getAllArchive(archive,pageNum,pageSize);
     }
 
     @PostMapping("/add/one")
