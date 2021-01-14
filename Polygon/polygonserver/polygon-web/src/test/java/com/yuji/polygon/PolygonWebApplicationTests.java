@@ -1,13 +1,7 @@
 package com.yuji.polygon;
 
-import com.yuji.polygon.entity.Employee;
-import com.yuji.polygon.entity.MailConstants;
-import com.yuji.polygon.entity.Page;
-import com.yuji.polygon.entity.Permission;
-import com.yuji.polygon.service.DepartmentService;
-import com.yuji.polygon.service.EmployeeService;
-import com.yuji.polygon.service.PermissionService;
-import com.yuji.polygon.service.RoleService;
+import com.yuji.polygon.entity.*;
+import com.yuji.polygon.service.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -34,6 +28,9 @@ class PolygonWebApplicationTests {
 
     @Autowired
     DepartmentService departmentService;
+
+    @Autowired
+    ArchiveService archiveService;
 
     @Test
     void contextLoads() {
@@ -119,10 +116,11 @@ class PolygonWebApplicationTests {
     void testCache(){
         for (int i = 0; i < 2; i++){
             //employeeService.getEmployeeByNo("yg1003");
-            //employeeService.getAllEmployee(new Employee(),1,10);
+            Page<Employee> result = employeeService.getAllEmployee(new Employee(),1,10);
+            System.out.println("count == "+result.getTotalCount());
 
         }
-        employeeService.getAllEmployee(new Employee(),1,10);
+        //employeeService.getAllEmployee(new Employee(),1,10);
 //        Employee employee = new Employee();
 //        employee.setNo("yg1009");
 //        employee.setName("员工9");
@@ -130,5 +128,25 @@ class PolygonWebApplicationTests {
 //        int[] rids = {12};
 //        employeeService.insertEmployee(employee,rids);
         //employeeService.deleteEmployeeById(12);
+    }
+
+    @Test
+    void testCache2(){
+        for (int i = 0; i < 2; i++){
+            archiveService.getAllArchive(new Archive(),1,10);
+        }
+    }
+
+    @Test
+    void testCache3(){
+//        for (int i = 0; i < 2; i++){
+//            roleService.getAllRole();
+//        }
+//        Role role = new Role();
+//        role.setName("测试1");
+//        int[] pids = {13};
+//        roleService.insertRole(role,pids);
+        roleService.getAllRole();
+        //roleService.deleteRoleById(new int[]{15});
     }
 }

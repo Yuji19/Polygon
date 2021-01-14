@@ -2,6 +2,7 @@ package com.yuji.polygon.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Date;
  * @author: yuji
  * @create: 2020-12-22 19:26:49
  */
-public class ApproveVO {
+public class ApproveVO implements Serializable {
 
     private int id;
 

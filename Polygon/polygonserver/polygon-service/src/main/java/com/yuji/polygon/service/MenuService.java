@@ -39,7 +39,7 @@ public class MenuService {
         return menuMapper.getAllMenu();
     }
 
-    @Cacheable(key = "'MenuService.getMenuByRoleNames_'+#roleNames")
+    @Cacheable
     public List<Menu> getMenuByRoleNames(String[] roleNames){
         return menuMapper.getMenuByRoleNames(roleNames);
     }

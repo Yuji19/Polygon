@@ -8,8 +8,10 @@ import com.yuji.polygon.mapper.ArchiveMapper;
 import com.yuji.polygon.utils.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,6 +27,7 @@ import java.util.*;
  */
 
 @Service
+@CacheConfig(cacheNames = "archive_cache")
 public class ArchiveService {
 
     @Autowired
@@ -96,8 +99,8 @@ public class ArchiveService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    @Cacheable(key = "'ArchiveService.getAllArchive_'+#achive+#pageNum+#pageSize")
-    public Page<Archive> getAllArchive(Archive archive, Integer pageNum, Integer pageSize) {
+    @Cacheable(key = "'ArchiveService.getAllArchive_'+#archive.fileNo+#p1+#p2")
+    public Page<Archive> getAllArchive(Archive archive, int pageNum, int pageSize) {
         int startIndex = (pageNum-1)*pageSize;
         //总记录数
         int totalCount = archiveMapper.countTotal(archive);

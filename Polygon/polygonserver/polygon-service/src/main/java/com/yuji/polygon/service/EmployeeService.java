@@ -185,7 +185,8 @@ public class EmployeeService implements UserDetailsService {
      * @param pageSize
      * @return
      */
-    @Cacheable(value = "employee_page_cache", key = "'EmployeeService.getAllEmployee_'+#employee+#pageNum+#pageSize")
+    @Transactional(rollbackFor = Exception.class)
+    @Cacheable(value = "employee_page_cache", key = "'EmployeeService.getAllEmployee_'+#p0+#p1+#p2")
     public Page<Employee> getAllEmployee(Employee employee, int pageNum, int pageSize){
         int startIndex = (pageNum-1)*pageSize;
         int totalCount = employeeMapper.countTotalEmployee(employee);

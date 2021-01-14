@@ -8,6 +8,10 @@ import com.yuji.polygon.mapper.OperationMapper;
 import com.yuji.polygon.mapper.RoleMapper;
 import com.yuji.polygon.mapper.RolePermissionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +26,7 @@ import java.util.List;
  */
 
 @Service
+@CacheConfig(cacheNames = "role_cache")
 public class RoleService {
 
     @Autowired
@@ -41,6 +46,7 @@ public class RoleService {
      * @param eid
      * @return
      */
+    @Cacheable
     public List<Role> getRoleByEmployeeId(int eid){
         return roleMapper.getRoleByEmployeeId(eid);
     }
@@ -52,6 +58,7 @@ public class RoleService {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
+    @CacheEvict(allEntries = true)
     public int insertRole(Role role, int[] pids){
         role.setName("ROLE_"+role.getName());
         role.setGmtCreate(new Date());
@@ -64,6 +71,7 @@ public class RoleService {
         return (result1 > 0 && result2 > 0 ) ? 1 : 0;
     }
 
+    @CacheEvict(allEntries = true)
     public int deleteRoleById(int[] rids){
         return roleMapper.deleteRoleById(rids);
     }
@@ -88,6 +96,7 @@ public class RoleService {
         return rolePermissionMapper.deleteRolePermissionByRidAndPid(rid,pids);
     }
 
+    @CacheEvict(allEntries = true)
     public int updateRoleBase(Role role){
         return roleMapper.updateRoleBase(role);
     }
@@ -99,6 +108,7 @@ public class RoleService {
      * @param pageSize
      * @return
      */
+    @Cacheable
     public Page<Role> getRolePage(String name, int pageNum, int pageSize){
         int startIndex = (pageNum-1)*pageSize;
         int totalCount = roleMapper.countTotalRole(name);
@@ -106,6 +116,7 @@ public class RoleService {
         return new Page(pageNum,totalCount,records);
     }
 
+    @Cacheable
     public List<Role> getAllRole(){
         return roleMapper.getAllRole();
     }

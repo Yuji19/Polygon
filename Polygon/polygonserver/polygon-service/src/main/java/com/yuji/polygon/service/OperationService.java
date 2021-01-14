@@ -3,6 +3,8 @@ package com.yuji.polygon.service;
 import com.yuji.polygon.entity.Operation;
 import com.yuji.polygon.mapper.OperationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.List;
  */
 
 @Service
+@CacheConfig(cacheNames = "operation_cache")
 public class OperationService {
 
     @Autowired
@@ -28,6 +31,7 @@ public class OperationService {
         return operationMapper.deleteOperationById(id);
     }
 
+    @Cacheable
     public List<Operation> getAllOperation(){
         return operationMapper.getAllOperation();
     }
@@ -36,6 +40,7 @@ public class OperationService {
         return operationMapper.getOperationByRid(rid);
     }
 
+    @Cacheable
     public List<Operation> getOperationByRoleNames(String[] roleNames) {
         return  operationMapper.getOperationByRoleNames(roleNames);
     }

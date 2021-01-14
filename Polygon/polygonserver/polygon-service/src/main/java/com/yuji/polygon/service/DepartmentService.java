@@ -44,7 +44,7 @@ public class DepartmentService {
         return departmentMapper.deleteDepartmentById(id);
     }
 
-    @CachePut(key = "'DepartmentService.updateDepartment_'+department")
+    @CachePut(key = "'DepartmentService.updateDepartment_'+#department")
     public int updateDepartment(Department department){
         department.setGmtModified(new Date());
         return departmentMapper.updateDepartment(department);
