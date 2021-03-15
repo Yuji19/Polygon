@@ -8,7 +8,6 @@
         <groupId>com.yuji</groupId>
         <artifactId>polygon</artifactId>
         <version>0.0.1</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>groupId</groupId>
     <artifactId>mailserver</artifactId>

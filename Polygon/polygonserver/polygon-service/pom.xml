@@ -4,9 +4,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.yuji</groupId>
-        <artifactId>polygon</artifactId>
+        <artifactId>polygonserver</artifactId>
         <version>0.0.1</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.yuji</groupId>
     <artifactId>polygon-service</artifactId>
